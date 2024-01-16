@@ -16,6 +16,7 @@ import {
   export function AuthContextProvider({ children }) {
       const [isAuthenticated, setIsAuthenticated] = useState(() => window.localStorage.getItem('token'));
       const [role, setRole] = useState(null); // Nuevo estado para almacenar el rol
+      const [token, setToken] = useState(null); // Nuevo estado para almacenar el token
     
       const login = useCallback(function (email, password) {
         var usuario = {
@@ -35,6 +36,7 @@ import {
             var requestRole = 'api/Usuarios/PerfilUsuario';
             var urlRole = api + requestRole;
             var token = localStorage.getItem("token");
+            setToken(response.data.response);
             console.log(token);
             axios.get(urlRole,  {
               headers: {
@@ -57,6 +59,7 @@ import {
         window.localStorage.removeItem('role'); // Limpiar el rol al cerrar sesión
         setIsAuthenticated(false);
         setRole(null); // Reiniciar el estado del rol
+        setToken(null); // Reiniciar el estado del rol
       }, []);
     
       const value = useMemo(
@@ -65,8 +68,9 @@ import {
           logout,
           isAuthenticated,
           role,
+          token
         }),
-        [isAuthenticated, login, logout, role]
+        [isAuthenticated, login, logout, role, token]
       );
     
       return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

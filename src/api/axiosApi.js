@@ -1,31 +1,25 @@
-// import axios from 'axios';
+// createCharla: async (charlaData) => {
+//   try {
+//     const { role } = useContext(AuthContext); // Obtener el rol del contexto
+//     // Haz algo con el rol si es necesario
+//     console.log('User Role:', role);
 
-// const axiosInstance = axios.create({
-//   baseURL: 'https://apitechriders.azurewebsites.net',
-// });
-
-// const axiosApi = {
-//   getCharlas: async () => {
-//     const response = await axiosInstance.get('/api/Charlas');
+//     const response = await axios.post(`${API_URL}/api/Charlas`, charlaData);
 //     return response.data;
-//   },
-//   getComentarios: async () => {
-//     // const response = axiosInstance.get('/api/ValoracionesCharlas');
-//     var request = 'api/valoracionescharlas';
-//     var api = 'https://apitechriders.azurewebsites.net/';
-//     var url = api + request;
-//     axios.get(url).then((response) => {
-//       return response.data;
-//     });
-//   },
-// };
-
-// export default axiosApi; 
+//   } catch (error) {
+//     console.error('Error creating charla:', error);
+//     throw error;
+//   }
+// },
 import axios from 'axios';
+import { useContext } from 'react';
+import { AuthContext } from '../contexts/authContext';
+import { Navigate } from 'react-router-dom';
 
 const API_URL = 'https://apitechriders.azurewebsites.net';
 
 const axiosApi = {
+  
   auth: {
     login: async (email, password) => {
       try {
@@ -70,7 +64,31 @@ const axiosApi = {
         throw error;
       }
     }
-  }
+  },
+  usuarios:{
+    getUsuarios: async () => {
+      const { token } = localStorage.getItem('token');
+
+      try {
+        const response = await axios.get(`${API_URL}/api/Usuarios`, {
+          headers: {
+            Authorization: `Bearer ${token}`, // Agregar el token a los encabezados
+          },
+        });
+        return response.data;
+      } catch (error) {
+        console.error('Error getting usuarios:', error);
+
+        // Si la respuesta es 401, redirigir a la página de inicio de sesión
+        if (error.response && error.response.status === 401) {
+          console.log('Unauthorized access. Redirecting to login...');
+          return <Navigate to="/login" />;// Volvemos al login si el token no funciona
+        }
+
+        throw error;
+      }
+    },
+  },
 };
 
 export default axiosApi;
