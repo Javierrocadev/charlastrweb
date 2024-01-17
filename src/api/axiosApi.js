@@ -76,6 +76,17 @@ const axiosApi = {
       }
     }
   },
+  empresasCentros: {
+    getEmpresasCentros: async () => {
+      try {
+        const response = await axios.get(`${API_URL}/api/EmpresasCentros`);
+        return response.data;
+      } catch (error) {
+        console.error('Error getting EmpresasCentros:', error);
+        throw error;
+      }
+    }
+  },
   tecnologias: {
     getTecnologias: async () => {
       try {
