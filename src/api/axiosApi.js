@@ -65,6 +65,39 @@ const axiosApi = {
       }
     }
   },
+  provincias: {
+    getProvincias: async () => {
+      try {
+        const response = await axios.get(`${API_URL}/api/Provincias`);
+        return response.data;
+      } catch (error) {
+        console.error('Error getting provincias:', error);
+        throw error;
+      }
+    }
+  },
+  tecnologias: {
+    getTecnologias: async () => {
+      try {
+        const response = await axios.get(`${API_URL}/api/Tecnologias`);
+        return response.data;
+      } catch (error) {
+        console.error('Error getting provincias:', error);
+        throw error;
+      }
+    }
+  },
+  tecnologiasCharlas: {
+    getTecnologiasCharlas: async () => {
+      try {
+        const response = await axios.get(`${API_URL}/api/TecnologiasCharlas`);
+        return response.data;
+      } catch (error) {
+        console.error('Error getting provincias:', error);
+        throw error;
+      }
+    }
+  },
   usuarios:{
     getUsuarios: async () => {
       const { token } = localStorage.getItem('token');
