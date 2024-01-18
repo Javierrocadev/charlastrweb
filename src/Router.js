@@ -12,6 +12,7 @@ import Layout from "./components/layout/Layout";
 // paginas para usuarios normales
 import Home from "./components/views/user/Home";
 import Login from "./components/views/user/Login";
+import RegistroUsuario from "./components/views/user/RegistroUsuario";
 import Empresas from "./components/views/user/Empresas";
 import QuienesSomos from "./components/views/user/QuienesSomos";
 import Centros from "./components/views/user/Centros";
@@ -43,6 +44,7 @@ const App = () => {
         <Layout>
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/registro" element={<RegistroUsuario />} />
             <Route path="/comentarios" element={<Comentarios />} />
             <Route path="/empresas" element={<Empresas />} />
             <Route path="/centros" element={<Centros />} />

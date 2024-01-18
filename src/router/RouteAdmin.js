@@ -7,7 +7,7 @@ const RouteAdmin = ({ path, component }) => {
   const { isAuthenticated, role } = useContext(AuthContext);
 
   const handleRouteAccess = () => {
-    if (!isAuthenticated) {
+    if (isAuthenticated==false) {
       // Navigate to login page if user is not authenticated
       return <Navigate to="/login" />;
     }

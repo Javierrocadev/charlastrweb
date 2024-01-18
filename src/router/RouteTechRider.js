@@ -9,7 +9,7 @@ const RouteTechRider = ({ path, component }) => {
   const handleRouteAccess = () => {
     if (!isAuthenticated) {
       // Navigate to login page if user is not authenticated
-      return <Navigate to="/login" />;
+      return <Navigate to="/403" />;
     }
 
     // Check if user has the required role for the route

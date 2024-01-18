@@ -46,7 +46,8 @@ import {
               console.log(roleResponse.data.idRole);
               window.localStorage.setItem('role', roleResponse.data.idRole);
               setRole(roleResponse.data.idRole);
-              setIsAuthenticated(true);
+              
+              window.location.href = "/";
             });
           } else {
             // Manejo de errores si no se inicia sesión correctamente
@@ -60,6 +61,8 @@ import {
         setIsAuthenticated(false);
         setRole(null); // Reiniciar el estado del rol
         setToken(null); // Reiniciar el estado del rol
+        console.log("todo cerrado");
+        window.location.href = "/";
       }, []);
     
       const value = useMemo(

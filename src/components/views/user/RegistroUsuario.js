@@ -4,11 +4,11 @@ import { Link } from "react-router-dom";
 import logoTajamar from "../../../assets/images/LogoTajamar.png";
 import heroImg from "../../../assets/images/HeroImg.jpeg";
 
-// import FormRepresentante from "./formularios/FormRepresentante"
-// import FormTechRiders from "./formularios/FormTechRiders";
-// import FormCentros from "./formularios/FormCentro";
+import FormRepresentante from "./formularios/FormRepresentante"
+import FormTechRiders from "./formularios/FormTechRiders";
+import FormCentros from "./formularios/FormCentro";
 
-const HomeAdmin = () => {
+const RegistroUsuario = () => {
     const [formulario, setFormulario] = useState(null);
 
     const handleFormularioClick = (tipoUsuario) => {
@@ -270,9 +270,9 @@ const HomeAdmin = () => {
       {formulario && (
         <section className="text-gray-600 p-4 body-font mt-12">
           <div className="container  bg-accent-100 shadow-sm shadow-[#00000050] px-10 sm:px-5 py-12 mx-auto flex justify-center rounded-xl">
-            {/* {formulario === "TechRiders" && <FormTechRiders />}
+            {formulario === "TechRiders" && <FormTechRiders />}
             {formulario === "Empresas" && <FormRepresentante />}
-            {formulario === "CentroEducativo" && <FormCentros />} */}
+            {formulario === "CentroEducativo" && <FormCentros />}
             {/* ... otros formularios ... */}
           </div>
         </section>
@@ -281,4 +281,4 @@ const HomeAdmin = () => {
   );
 };
 
-export default HomeAdmin;
+export default RegistroUsuario;

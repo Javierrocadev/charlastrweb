@@ -15,7 +15,7 @@ const Navbar = () => {
         class="max-w-screen-xl w-full mx-auto px-4 flex flex-wrap basis-full items-center justify-between "
         aria-label="Global"
       >
-        <Link class="custom:order-1 flex-none text-xl font-semibold dark:text-text-100">
+        <Link to={"/"} class="custom:order-1 flex-none text-xl font-semibold dark:text-text-100">
           <img src={logoTr} class="h-8 me-3 invert" alt="logo Tech Riders" />
         </Link>
         <div class="custom:order-3 flex items-center gap-x-2">
@@ -25,12 +25,12 @@ const Navbar = () => {
           >
             Iniciar Sesión
           </Link>
-          <button
-            type="button"
+          <Link
+            to={"/registro"}
             class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-accent-200 bg-accent-200 text-white shadow-sm hover:bg-accent-100 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
           >
             Registrarse
-          </button>
+          </Link>
           <button
             type="button"
             class="duration-300 custom:hidden hs-collapse-toggle p-2.5 inline-flex justify-center items-center gap-x-2 rounded-lg border border-bg-300 bg-bg-100 text-text-200 shadow-sm hover:bg-bg-200 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
@@ -83,24 +83,7 @@ const Navbar = () => {
             >
               Charlas
             </Link>
-            <Link
-              class="font-medium hover:text-accent-200 text-text-200  dark:text-text-100 dark:hover:text-text-200 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
-              to={"/empresas"}
-            >
-              Empresas
-            </Link>
-            <Link
-              class="font-medium hover:text-accent-200 text-text-200  dark:text-text-100 dark:hover:text-text-200 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
-              to={"/centros"}
-            >
-              Centros
-            </Link>
-            <Link
-              class="font-medium hover:text-accent-200 text-text-200  dark:text-text-100 dark:hover:text-text-200 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
-              to={"/"}
-            >
-              Tech Riders
-            </Link>
+         
 
             <Link
               class="font-medium hover:text-accent-200 text-text-200  dark:text-text-100 dark:hover:text-text-200 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
@@ -122,7 +105,7 @@ const Navbar = () => {
         class="max-w-screen-xl w-full mx-auto px-4 flex flex-wrap basis-full items-center justify-between "
         aria-label="Global"
       >
-        <Link class="custom:order-1 flex-none text-xl font-semibold dark:text-text-100">
+        <Link to={"/"} class="custom:order-1 flex-none text-xl font-semibold dark:text-text-100">
           <img src={logoTr} class="h-8 me-3 invert" alt="logo Tech Riders" />
         </Link>
         <div class="custom:order-3 flex items-center gap-x-2">
@@ -224,7 +207,7 @@ const Navbar = () => {
       class="max-w-screen-xl w-full mx-auto px-4 flex flex-wrap basis-full items-center justify-between "
       aria-label="Global"
     >
-      <Link class="custom:order-1 flex-none text-xl font-semibold dark:text-text-100">
+      <Link to={"/"} class="custom:order-1 flex-none text-xl font-semibold dark:text-text-100">
         <img src={logoTr} class="h-8 me-3 invert" alt="logo Tech Riders" />
       </Link>
       <div class="custom:order-3 flex items-center gap-x-2">
@@ -234,12 +217,12 @@ const Navbar = () => {
         >
           Iniciar Sesión
         </Link>
-        <button
-          type="button"
+        <Link
+          to={"/registro"}
           class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-accent-200 bg-accent-200 text-white shadow-sm hover:bg-accent-100 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
         >
           Registrarse
-        </button>
+        </Link>
         <button
           type="button"
           class="duration-300 custom:hidden hs-collapse-toggle p-2.5 inline-flex justify-center items-center gap-x-2 rounded-lg border border-bg-300 bg-bg-100 text-text-200 shadow-sm hover:bg-bg-200 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"

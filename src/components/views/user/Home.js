@@ -70,7 +70,7 @@ const Home = () => {
   return (
     <main>
       {/* no borrar */}
-      <div class="hs-accordion-group hidden">
+      <div class="hs-accordion-group hidden ">
         <div class="hs-accordion active" id="hs-basic-heading-one">
           <button
             class="hs-accordion-toggle hs-accordion-active:text-blue-600 py-3 inline-flex items-center gap-x-3 w-full font-semibold text-start text-gray-800 hover:text-gray-500 rounded-lg disabled:opacity-50 disabled:pointer-events-none dark:hs-accordion-active:text-blue-500 dark:text-gray-200 dark:hover:text-gray-400 dark:focus:outline-none dark:focus:text-gray-400"

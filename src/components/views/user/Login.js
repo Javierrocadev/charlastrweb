@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import { Link, Navigate } from "react-router-dom";
+
 import { AuthContext } from "../../../contexts/authContext";
 
 import logo from "../../../assets/images/LogoTechRiders.png";
@@ -7,11 +8,31 @@ const Login = () => {
   const { isAuthenticated, login, logout, role } = useContext(AuthContext);
 
   const handleSubmit = (e) => {
+
     e.preventDefault();
     const email = e.target.elements.email.value;
     const password = e.target.elements.password.value;
 
     login(email, password);
+
+
+  switch (role) {
+    case 1:
+      // Redirect to admin page
+      window.location.href = "/admin";
+      break;
+    case 2:
+      // Redirect to speaker page
+      window.location.href = "/admin";
+      break;
+    case 3:
+      // Redirect to guest page
+      window.location.href = "/admin";
+      break;
+    default:
+      // Redirect to login page
+      window.location.href = "/";
+  }
 
   };
 
@@ -105,6 +126,12 @@ const Login = () => {
             >
               ¡Regístrate!
             </Link>
+            <button
+              to={logout}
+              class="py-2 px-3 text-center justify-center inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-bg-300 bg-bg-100 text-text-200 shadow-sm duration-300 hover:bg-bg-200 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
+            >
+              log out!
+            </button>
           </div>
         </div>
       </div>
