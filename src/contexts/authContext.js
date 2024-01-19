@@ -4,6 +4,7 @@ import {
     useContext,
     useMemo,
     useState,
+    useEffect
   } from "react";
   import PropTypes from "prop-types";
   import axios from "axios";
@@ -17,7 +18,14 @@ import {
       const [isAuthenticated, setIsAuthenticated] = useState(() => window.localStorage.getItem('token'));
       const [role, setRole] = useState(null); // Nuevo estado para almacenar el rol
       const [token, setToken] = useState(null); // Nuevo estado para almacenar el token
+      const [redirectTo, setRedirectTo] = useState(null);
+
+      useEffect(() => {
+        // Este efecto se ejecuta cada vez que 'role' se actualiza
+        console.log("Nuevo valor de 'role':", role);
+      }, [role]); // La dependencia de 'role' asegura que el efecto se ejecute cuando 'role' cambie
     
+
       const login = useCallback(function (email, password) {
         var usuario = {
           email: email,
@@ -27,7 +35,7 @@ import {
         var api = 'https://apitechriders.azurewebsites.net/';
         var url = api + request;
         axios.post(url, usuario).then((response) => {
-          console.log(response.data);
+          
           if (response.data) {
             window.localStorage.setItem("token", response.data.response);
             setIsAuthenticated(true);
@@ -45,15 +53,20 @@ import {
             }).then((roleResponse) => {
               console.log(roleResponse.data.idRole);
               window.localStorage.setItem('role', roleResponse.data.idRole);
+              console.log("localstorage "+roleResponse.data.idRole)
               setRole(roleResponse.data.idRole);
-              
-              window.location.href = "/";
+
+              console.log("DDespues de hacer setRole"+role);
+              console.log(roleResponse.data.idRole);
+              return (roleResponse.data.idRole);
+
+         
             });
           } else {
             // Manejo de errores si no se inicia sesión correctamente
           }
         });
-      }, []);
+      }, [role]);
     
       const logout = useCallback(function () {
         window.localStorage.removeItem('token');
@@ -62,7 +75,6 @@ import {
         setRole(null); // Reiniciar el estado del rol
         setToken(null); // Reiniciar el estado del rol
         console.log("todo cerrado");
-        window.location.href = "/";
       }, []);
     
       const value = useMemo(

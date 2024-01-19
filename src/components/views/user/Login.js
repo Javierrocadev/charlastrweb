@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext ,useEffect  } from "react";
 import { Link, Navigate } from "react-router-dom";
 
 import { AuthContext } from "../../../contexts/authContext";
@@ -6,7 +6,7 @@ import { AuthContext } from "../../../contexts/authContext";
 import logo from "../../../assets/images/LogoTechRiders.png";
 const Login = () => {
   const { isAuthenticated, login, logout, role } = useContext(AuthContext);
-
+  const [redirectPath, setRedirectPath] = useState(null);
   const handleSubmit = (e) => {
 
     e.preventDefault();
@@ -14,27 +14,36 @@ const Login = () => {
     const password = e.target.elements.password.value;
 
     login(email, password);
+    
+    
+  };
+  useEffect(() => {
+    if (role !== null) {
+      switch (role) {
+        case 1:
+          setRedirectPath("/admin");
+          break;
+        case 2:
+          setRedirectPath("/profesor");
+          break;
+        case 3:
+          setRedirectPath("/tr");
+          break;
+        case 4:
+          setRedirectPath("/representante");
+          break;
+        default:
+          // Handle default case
+          break;
+      }
+    }
+  }, [role]);
 
-
-  switch (role) {
-    case 1:
-      // Redirect to admin page
-      window.location.href = "/admin";
-      break;
-    case 2:
-      // Redirect to speaker page
-      window.location.href = "/admin";
-      break;
-    case 3:
-      // Redirect to guest page
-      window.location.href = "/admin";
-      break;
-    default:
-      // Redirect to login page
-      window.location.href = "/";
+  if (redirectPath) {
+    // Use Navigate to redirect and maintain state
+    return <Navigate to={redirectPath} />;
   }
 
-  };
 
   return (
     // <div className="login-container">
@@ -127,11 +136,12 @@ const Login = () => {
               ¡Regístrate!
             </Link>
             <button
-              to={logout}
-              class="py-2 px-3 text-center justify-center inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-bg-300 bg-bg-100 text-text-200 shadow-sm duration-300 hover:bg-bg-200 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
-            >
-              log out!
-            </button>
+            type="button"
+            onClick={logout}
+            class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-red-600 bg-red-600 text-white shadow-sm hover:bg-red-800 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
+          >
+            Cerrar Sesión
+          </button>
           </div>
         </div>
       </div>

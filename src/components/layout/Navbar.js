@@ -165,34 +165,23 @@ const Navbar = () => {
             {/* <Link class="font-medium text-primary-100 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200" href="#" aria-current="page">Charlas</Link> */}
             <Link
               class="font-medium hover:text-accent-200 text-accent-200 underline underline-offset-4  dark:text-text-100 dark:hover:text-text-200 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
-              to={"/"}
+              to={"/admin"}
             >
               Charlas
             </Link>
-            <Link
-              class="font-medium hover:text-accent-200 text-text-200  dark:text-text-100 dark:hover:text-text-200 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
-              to={"/empresas"}
-            >
-              Empresas
-            </Link>
-            <Link
-              class="font-medium hover:text-accent-200 text-text-200  dark:text-text-100 dark:hover:text-text-200 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
-              to={"/centros"}
-            >
-              Centros
-            </Link>
-            <Link
-              class="font-medium hover:text-accent-200 text-text-200  dark:text-text-100 dark:hover:text-text-200 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
-              to={"/"}
-            >
-              Tech Riders
-            </Link>
+
 
             <Link
               class="font-medium hover:text-accent-200 text-text-200  dark:text-text-100 dark:hover:text-text-200 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
-              to={"/quienessomos"}
+              to={"/ejemplo"}
             >
-              ¿Quiénes somos?
+              ejemplo
+            </Link>
+            <Link
+              class="font-medium hover:text-accent-200 text-text-200  dark:text-text-100 dark:hover:text-text-200 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
+              to={"/vertr"}
+            >
+              Tech Riders
             </Link>
           </div>
         </div>
@@ -300,6 +289,13 @@ const Navbar = () => {
           >
             ¿Quiénes somos?
           </Link>
+          <button
+            type="button"
+            onClick={logout}
+            class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-red-600 bg-red-600 text-white shadow-sm hover:bg-red-800 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
+          >
+            Cerrar Sesión
+          </button>
         </div>
       </div>
     </nav>
