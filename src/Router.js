@@ -21,7 +21,9 @@ import Comentarios from "./components/views/user/Comentarios";
 //admin pages
 import HomeAdmin from "./components/views/admin/HomeAdmin";
 import EjemploAdmin from "./components/views/admin/EjemploAdmin";
+import VerEmpresasCentroAdmin from "./components/views/admin/VerEmpresasCentroAdmin";
 import VerTechRidersAdmin from "./components/views/admin/VerTechRidersAdmin";
+import VerCharlasAdmin from "./components/views/admin/VerCharlasAdmin";
 //representantes pages
 import HomeRepresentante from "./components/views/representante/HomeRepresentante";
 //tech riders pages
@@ -61,6 +63,17 @@ const App = () => {
             <Route
               path="/admin"
               element={<RouteAdmin path="/admin" component={<HomeAdmin />} />}
+              
+            />
+            <Route
+              path="/vercharlas"
+              element={<RouteAdmin path="/vercharlas" component={<VerCharlasAdmin />} />}
+              
+            />
+             <Route
+              path="/verempresascentro"
+              element={<RouteAdmin path="/verempresascentro" component={< VerEmpresasCentroAdmin/>} />}
+              
             />
             <Route
               path="/ejemplo"

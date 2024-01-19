@@ -52,6 +52,42 @@ const axiosApi = {
         throw error;
       }
     },
+    eliminarCharla: async (idCharla) => {
+
+      try {
+        var token = localStorage.getItem("token");
+      console.log(token);
+      var requestTipoTecnologia = "api/tecnologiascharlas/deletebyidcharla/" + idCharla;
+      var requestCharlas = "api/charlas/" + idCharla;
+      var api = "https://apitechriders.azurewebsites.net/";
+      var urlTipoTecnologia = api  + requestTipoTecnologia
+      var urlcharla = api + requestCharlas;
+  
+      console.log(urlTipoTecnologia)
+      console.log(urlcharla)
+  
+      axios.delete(urlTipoTecnologia,{
+          headers: {
+            "Content-type": "application/json",
+            Authorization: `Bearer ${token}`
+          }
+        }).then(response => {
+          axios.delete(urlcharla,{
+            headers: {
+              "Content-type": "application/json",
+              Authorization: `Bearer ${token}`
+            }
+          }).then(response => {
+            window.location.reload()
+            alert("Charla Eliminada")
+          });
+        });
+      } catch (error) {
+        console.error('Error creating charla:', error);
+        throw error;
+      }
+     
+    }
   },
   ValoracionesCharlas: {
     getValoracionesCharlas: async () => {
