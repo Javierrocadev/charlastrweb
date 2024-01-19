@@ -15,11 +15,28 @@ import {
   
   
   export function AuthContextProvider({ children }) {
-      const [isAuthenticated, setIsAuthenticated] = useState(() => window.localStorage.getItem('token'));
-      const [role, setRole] = useState(null); // Nuevo estado para almacenar el rol
-      const [token, setToken] = useState(null); // Nuevo estado para almacenar el token
-      const [redirectTo, setRedirectTo] = useState(null);
+      // const [isAuthenticated, setIsAuthenticated] = useState(() => window.localStorage.getItem('token'));
+      // const [role, setRole] = useState(null); // Nuevo estado para almacenar el rol
+      // const [token, setToken] = useState(null); // Nuevo estado para almacenar el token
+      // const [redirectTo, setRedirectTo] = useState(null);
 
+      // useEffect(() => {
+      //   // Este efecto se ejecuta cada vez que 'role' se actualiza
+      //   console.log("Nuevo valor de 'role':", role);
+      // }, [role]); // La dependencia de 'role' asegura que el efecto se ejecute cuando 'role' cambie
+      const [isAuthenticated, setIsAuthenticated] = useState(() => {
+        const storedToken = window.localStorage.getItem('token');
+        return !!storedToken; // Convertir a booleano
+      });
+      const [role, setRole] = useState(() => {
+        const storedRole = window.localStorage.getItem('role');
+        return storedRole !== null ? parseInt(storedRole, 10) : null; // Convertir a entero
+      });
+      const [token, setToken] = useState(null);
+      const [redirectTo, setRedirectTo] = useState(null);
+    
+      // ...
+    
       useEffect(() => {
         // Este efecto se ejecuta cada vez que 'role' se actualiza
         console.log("Nuevo valor de 'role':", role);

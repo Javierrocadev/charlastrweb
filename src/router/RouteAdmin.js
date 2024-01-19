@@ -43,6 +43,8 @@ const RouteAdmin = ({ path, component }) => {
 
   useEffect(() => {
     const handleRouteAccess = () => {
+      // const token = localStorage.getItem('token');
+      // const role = localStorage.getItem('role');
       if (role === null || !isAuthenticated) {
         // Navigate to the login page if the user is not authenticated or the role is null
         setRedirectPath("/login");
