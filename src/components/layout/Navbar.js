@@ -183,6 +183,18 @@ const Navbar = () => {
             >
               Tech Riders
             </Link>
+            <Link
+              class="font-medium hover:text-accent-200 text-text-200  dark:text-text-100 dark:hover:text-text-200 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
+              to={"/verempresascentro"}
+            >
+              Empresas-Centros
+            </Link>
+            <Link
+              class="font-medium hover:text-accent-200 text-text-200  dark:text-text-100 dark:hover:text-text-200 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
+              to={"/vercharlas"}
+            >
+            Ver Charlas
+            </Link>
           </div>
         </div>
       </nav>
