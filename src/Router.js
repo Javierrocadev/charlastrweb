@@ -33,6 +33,7 @@ import RouteAdmin from "./router/RouteAdmin";
 import RouteRepresentante from "./router/RouteRepresentante";
 import RouteTechRider from "./router/RouteTechRider";
 import RouteProfesor from "./router/RouteProfesor";
+import VistaProfesores from "./components/views/admin/VistaProfesores";
 //   import RouteTr from "./components/RouteTr";
 
 // Agregar el código de refresco aquí
@@ -69,6 +70,10 @@ const App = () => {
               path="/vertr"
               element={<RouteAdmin path="/ejemplo" component={<VerTechRidersAdmin />} />}
             />
+                        <Route
+              path="/vistaprofesores"
+              element={<RouteAdmin path="/vistaprofesores" component={<VistaProfesores />} />}
+            />
             {/* rutas de tr */}
             <Route
               path="/tr"
@@ -83,6 +88,10 @@ const App = () => {
             <Route
               path="/profesor"
               element={<RouteProfesor path="/profesor" component={<HomeProfesor />} />}
+            />
+              <Route
+              path="/profesor"
+              element={<RouteProfesor path="/vercursocentro" component={<HomeProfesor />} />}
             />
             <Route path="/login" element={<Login />} />
             <Route path="/403" element={<NoAutorizado />} />
