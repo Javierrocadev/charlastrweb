@@ -24,6 +24,8 @@ import EjemploAdmin from "./components/views/admin/EjemploAdmin";
 import VerEmpresasCentroAdmin from "./components/views/admin/VerEmpresasCentroAdmin";
 import VerTechRidersAdmin from "./components/views/admin/VerTechRidersAdmin";
 import VerCharlasAdmin from "./components/views/admin/VerCharlasAdmin";
+import NotificacionesAdmin from "./components/views/admin/NotificacionesAdmin"
+import AñadirTecnologia from "./components/views/admin/AñadirTecnologia";
 //representantes pages
 import HomeRepresentante from "./components/views/representante/HomeRepresentante";
 //tech riders pages
@@ -71,6 +73,11 @@ const App = () => {
               
             />
              <Route
+              path="/notificacionesadmin"
+              element={<RouteAdmin path="/notificacionesadmin" component={<NotificacionesAdmin />} />}
+              
+            />
+             <Route
               path="/verempresascentro"
               element={<RouteAdmin path="/verempresascentro" component={< VerEmpresasCentroAdmin/>} />}
               
@@ -82,6 +89,10 @@ const App = () => {
             <Route
               path="/vertr"
               element={<RouteAdmin path="/ejemplo" component={<VerTechRidersAdmin />} />}
+            />
+            <Route
+              path="/añadirtecnologia"
+              element={<RouteAdmin path="/añadirtecnologia" component={<AñadirTecnologia />} />}
             />
                         <Route
               path="/vistaprofesores"

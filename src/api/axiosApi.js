@@ -121,7 +121,42 @@ const axiosApi = {
         throw error;
       }
     },
+
+    updateEstadoCentroEmpresa: async (id, estado) => {
+      console.log(id);
+      console.log(estado);
+
+      try {
+        const token = localStorage.getItem("token");
+
+        console.log("token de axios: " + token);
+        const response = await axios.put(
+          "https://apitechriders.azurewebsites.net/api/empresascentros/updateEstadoempresacentro/" +
+            id +
+            "/" +
+            estado,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        console.log("API Response:", response);
+        return response.data;
+      } catch (error) {
+        console.error("Error getting usuarios:", error);
+
+        // Si la respuesta es 401, redirigir a la página de inicio de sesión
+        if (error.response && error.response.status === 401) {
+          console.log("Unauthorized access. Redirecting to login...");
+          return <Navigate to="/login" />; // Volvemos al login si el token no funciona
+        }
+
+        throw error;
+      }
+    },
   },
+
   tecnologias: {
     getTecnologias: async () => {
       try {
@@ -132,7 +167,69 @@ const axiosApi = {
         throw error;
       }
     },
+    postTecnologia : async(nombreTecnologia)=>{
+      try {
+        var token = localStorage.getItem("token");
+      
+        var idtecnologia = 0;
+        var nombre = nombreTecnologia;
+        var idtipotecnologia = 3;
+      
+        var newTecnologia = {
+          idTecnologia: idtecnologia,
+          nombreTecnologia: nombre,
+          idTipoTecnologia: idtipotecnologia,
+        };
+      
+        console.log(newTecnologia);
+        console.log(token);
+        var request = "api/tecnologias";
+        var api = "https://apitechriders.azurewebsites.net/";
+        var url = api + request;
+        console.log(url);
+        axios.post(url, newTecnologia, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          })
+          .then((response) => {
+            console.log(response);
+            window.location.reload();
+            alert("Tecnologia Añadida");
+          });
+      } catch (error) {
+        console.error("Error getting provincias:", error);
+        throw error;
+      }
+    },
+
+    eliminarTecnologia: async (idtecnologia) => {
+      try {
+        const token = localStorage.getItem("token");
+        console.log("token de axios: " + token);
+        const response = await axios.delete(`${API_URL}/api/Tecnologias/` + idtecnologia, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        console.log("API Response:", response);
+        return response.data;
+      } catch (error) {
+        console.error("Error getting usuarios:", error);
+    
+        // Si la respuesta es 401, redirigir a la página de inicio de sesión
+        if (error.response && error.response.status === 401) {
+          console.log("Unauthorized access. Redirecting to login...");
+          return <Navigate to="/login" />; // Volvemos al login si el token no funciona
+        }
+    
+        throw error;
+      }
+    }
+    
   },
+
+ 
   tecnologiasCharlas: {
     getTecnologiasCharlas: async () => {
       try {
@@ -236,6 +333,36 @@ const axiosApi = {
       }
     },
   },
+  roles: {
+    getRoles: async () => {
+      try {
+        const token = localStorage.getItem("token");
+
+        console.log("token de axios: " + token);
+        const response = await axios.get(
+          `${API_URL}/api/Roles`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        console.log("API Response:", response);
+        return response.data;
+      } catch (error) {
+        console.error("Error getting usuarios:", error);
+
+        // Si la respuesta es 401, redirigir a la página de inicio de sesión
+        if (error.response && error.response.status === 401) {
+          console.log("Unauthorized access. Redirecting to login...");
+          return <Navigate to="/login" />; // Volvemos al login si el token no funciona
+        }
+
+        throw error;
+      }
+    },
+  },
 };
+
 
 export default axiosApi;
