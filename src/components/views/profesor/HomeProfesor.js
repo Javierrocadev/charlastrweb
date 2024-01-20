@@ -24,6 +24,8 @@ const HomeProfesor = () => {
 
     const [usuarioResponse, setUsuarioResponse] = useState([]);
     const [provinciasResponse, setProvinciasResponse] = useState([]);
+    const [empresaCentroResponse, setEmpresaCentroResponse] = useState([]);
+
     const [newPassword, setNewPassword] = useState("");
     const [newNombre, setNewNombre] = useState("");
     const [newApellidos, setNewApellidos] = useState("");
@@ -120,6 +122,10 @@ const estado = parseInt(e.target.elements.estado.value, 10);
           console.log("Charlas responseProvincias:", responseProvincias);
           setProvinciasResponse(responseProvincias);
 
+          const responseEmpresaCentro = await axiosApi.empresasCentros.getEmpresasCentros();
+          console.log("Charlas responseEmpresaCentro:", responseEmpresaCentro);
+          setEmpresaCentroResponse(responseEmpresaCentro);
+
         } catch (error) {
           console.error("Error:", error);
         }
@@ -140,6 +146,12 @@ const estado = parseInt(e.target.elements.estado.value, 10);
       (p) => p.idProvincia === idProvincia
     );
     return provincia ? provincia.nombreProvincia : "Desconocido";
+  };
+ const getCentroNombre = (idEmpresaCentro) => {
+    const empresaCentro = empresaCentroResponse.find(
+      (p) => p.idEmpresaCentro === idEmpresaCentro
+    );
+    return empresaCentro ? empresaCentro.nombre : "Desconocido";
   };
 
   return (
@@ -232,7 +244,7 @@ const estado = parseInt(e.target.elements.estado.value, 10);
         <div class="sm:col-span-9">
           <div class="space-y-2">
 
-            <input   onChange={(e) => setNewPassword(e.target.value)} type="text" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 " placeholder={usuarioResponse.password}/>
+            <input    type="text" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 "  placeholder={getCentroNombre(usuarioResponse.idEmpresaCentro)} disabled/>
           </div>
         </div>
         <div class="sm:col-span-3">
@@ -311,5 +323,3 @@ const estado = parseInt(e.target.elements.estado.value, 10);
 };
 
 export default HomeProfesor;
-
-

@@ -424,6 +424,27 @@ const axiosApi = {
         throw error;
       }
     },
+    putUsuarios: async (updateData) => {
+      console.log(updateData);
+      try {
+        const token = localStorage.getItem("token");
+        const response = await axios.put(
+          `${API_URL}/api/Usuarios`,
+          updateData,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        return response.data;
+      } catch (error) {
+        console.error("Error updating user:", error);
+        throw error;
+      }
+    },
+    
   },
 
   profesores: {
