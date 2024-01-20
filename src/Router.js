@@ -31,6 +31,7 @@ import HomeRepresentante from "./components/views/representante/HomeRepresentant
 //tech riders pages
 import HomeTechRiders from "./components/views/tr/HomeTechRiders";
 import MisCharlasTr from "./components/views/tr/MisCharlasTr";
+import CharlasDisponibles from "./components/views/tr/CharlasDisponibles"
 // centro/profesor pages
 import HomeProfesor from "./components/views/profesor/HomeProfesor";
 import InscripcionCentro from "./components/views/profesor/InscripcionCentro";
@@ -112,6 +113,10 @@ const App = () => {
              <Route
               path="/charlastechrider"
               element={<RouteTechRider path="/charlastechrider" component={<MisCharlasTr />} />}
+            /> CharlasDisponibles
+              <Route
+              path="/charlasdisponibles"
+              element={<RouteTechRider path="/charlasdisponibles" component={<CharlasDisponibles />} />}
             />
             {/* rutas de representantes/empresas */}
             <Route

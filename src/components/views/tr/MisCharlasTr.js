@@ -10,18 +10,8 @@ const MisCharlasTr = () => {
   const [tecnologiasResponse, setTecnologiasResponse] = useState([]);
   const [tecnologiasCharlasResponse, setTecnologiasCharlasResponse] = useState([]);
   const [perfilResponse, setPerfilResponse] = useState([]);
-  const handleEliminarCharla = async (idCharla) => {
-    try {
-      await axiosApi.charlas.eliminarCharla(idCharla);
-      console.log('Charla eliminada con éxito');
-      // Puedes realizar alguna acción adicional después de eliminar la charla
-    } catch (error) {
-      console.error('Error al intentar eliminar la charla:', error);
-      // Puedes manejar el error de alguna manera, por ejemplo, mostrar un mensaje al usuario
-    }
-  };
-
-
+  const [charlasTrResponse, setCharlasTrResponse] = useState([]);
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -32,6 +22,11 @@ const MisCharlasTr = () => {
         const perfilResponse = await axiosApi.usuarios.getPerfilUsuario();
         console.log("perfil usuario response:", perfilResponse);
         setPerfilResponse(perfilResponse);
+
+        const charlasTrResponse = await axiosApi.techriders.getcharlastechrider(perfilResponse.idUsuario);
+        console.log("Charlas response:", charlasTrResponse);
+        setCharlasTrResponse(charlasTrResponse);
+
 
         const responseProvincias = await axiosApi.provincias.getProvincias();
         console.log("Charlas responseProvincias:", responseProvincias);
@@ -242,13 +237,13 @@ const MisCharlasTr = () => {
    
       <section>
         <h2 class="text-3xl text-center text-gray-800 font-bold lg:text-4xl dark:text-white">
-          Nuestras charlas
+        TODAS MIS CHARLAS
         </h2>
         <p class="mt-3 mb-8 text-center text-gray-800 dark:text-gray-400">
          TODAS MIS CHARLAS
         </p>
         <ul class="hs-accordion-group">
-          {axiosApi.techriders.getcharlastechrider(perfilResponse.idUsuario).map((charla) => (
+          {charlasTrResponse.map((charla) => (
             <li
               key={charla.idCharla}
               className="hs-accordion active bg-white border -mt-px first:rounded-t-lg last:rounded-b-lg dark:bg-gray-800 dark:border-gray-700"
@@ -320,23 +315,6 @@ const MisCharlasTr = () => {
                         </p>
                       </div>
 
-                      <div class="hidden sm:block sm:shrink-0">
-                        {(() => {
-                          switch (charla.acreditacionLinkedIn) {
-                            case null:
-                              return <></>;
-                            default:
-                              return (
-                                <a href={charla.acreditacionLinkedIn}>
-                                  <img
-                                    alt="imagen tech riders"
-                                    class="h-16 w-16 bg-accent-200 rounded-lg object-cover shadow-sm"
-                                  />
-                                </a>
-                              );
-                          }
-                        })()}
-                      </div>
                     </div>
 
                     <div class="mt-4">
