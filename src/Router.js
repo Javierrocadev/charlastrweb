@@ -30,12 +30,17 @@ import HomeRepresentante from "./components/views/representante/HomeRepresentant
 import HomeTechRiders from "./components/views/tr/HomeTechRiders";
 // centro/profesor pages
 import HomeProfesor from "./components/views/profesor/HomeProfesor";
+import InscripcionCentro from "./components/views/profesor/InscripcionCentro";
 
 import RouteAdmin from "./router/RouteAdmin";
 import RouteRepresentante from "./router/RouteRepresentante";
 import RouteTechRider from "./router/RouteTechRider";
 import RouteProfesor from "./router/RouteProfesor";
 import VistaProfesores from "./components/views/admin/VistaProfesores";
+import VistaCursosCentrto from "./components/views/profesor/VerCursoCentro";
+import VistaCharlasCentrto from "./components/views/profesor/VerCharlasCentro";
+import InscripcionEmpresa from "./components/views/representante/InscripcionEmpresa";
+import VistaTechridersEmpresa from "./components/views/representante/vistaTREmpresa";
 //   import RouteTr from "./components/RouteTr";
 
 // Agregar el código de refresco aquí
@@ -83,7 +88,7 @@ const App = () => {
               path="/vertr"
               element={<RouteAdmin path="/ejemplo" component={<VerTechRidersAdmin />} />}
             />
-                        <Route
+              <Route
               path="/vistaprofesores"
               element={<RouteAdmin path="/vistaprofesores" component={<VistaProfesores />} />}
             />
@@ -97,14 +102,33 @@ const App = () => {
               path="/representante"
               element={<RouteRepresentante path="/representante" component={<HomeRepresentante />} />}
             />
+            <Route path="/vistatrempresa"
+            element={<RouteRepresentante path="/vistatrempresa" component={<VistaTechridersEmpresa/>} />}
+            />
+            <Route path="/inscripcionempresa"
+            element={<RouteRepresentante path="/inscripcionempresa" component={<InscripcionEmpresa/>} />}
+            />
+            <Route path="/propuestatecnologias"
+            element={<RouteRepresentante path="/propuestatecnologias" component={<HomeRepresentante></HomeRepresentante>} />}
+            />
             {/* rutas de profesor/centro */}
             <Route
               path="/profesor"
               element={<RouteProfesor path="/profesor" component={<HomeProfesor />} />}
             />
               <Route
-              path="/profesor"
-              element={<RouteProfesor path="/vercursocentro" component={<HomeProfesor />} />}
+              path="/vercursocentro"
+              element={<RouteProfesor path="/vercursocentro" component={<VistaCursosCentrto />} />}
+            />
+            <Route
+              path="/vercharlasocentro"
+              element={<RouteProfesor path="/vercharlasocentro" component={<VistaCharlasCentrto />} />}
+            />
+            <Route path="/inscripcioncentro"
+            element={<RouteProfesor path="/inscripcioncentro" component={<InscripcionCentro/>} />}/>
+
+          <Route path="/propuestatecnologias"
+            element={<RouteProfesor path="/propuestatecnologias" component={<HomeProfesor></HomeProfesor>} />}
             />
             <Route path="/login" element={<Login />} />
             <Route path="/403" element={<NoAutorizado />} />

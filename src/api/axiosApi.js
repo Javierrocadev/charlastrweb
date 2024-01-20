@@ -45,7 +45,13 @@ const axiosApi = {
     },
     createCharla: async (charlaData) => {
       try {
-        const response = await axios.post(`${API_URL}/api/Charlas`, charlaData);
+        var token = localStorage.getItem("token");
+
+        const response = await axios.post(
+          `${API_URL}/api/Charlas`,
+          charlaData,
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
         return response.data;
       } catch (error) {
         console.error("Error creating charla:", error);
@@ -53,41 +59,44 @@ const axiosApi = {
       }
     },
     eliminarCharla: async (idCharla) => {
-
       try {
         var token = localStorage.getItem("token");
-      console.log(token);
-      var requestTipoTecnologia = "api/tecnologiascharlas/deletebyidcharla/" + idCharla;
-      var requestCharlas = "api/charlas/" + idCharla;
-      var api = "https://apitechriders.azurewebsites.net/";
-      var urlTipoTecnologia = api  + requestTipoTecnologia
-      var urlcharla = api + requestCharlas;
-  
-      console.log(urlTipoTecnologia)
-      console.log(urlcharla)
-  
-      axios.delete(urlTipoTecnologia,{
-          headers: {
-            "Content-type": "application/json",
-            Authorization: `Bearer ${token}`
-          }
-        }).then(response => {
-          axios.delete(urlcharla,{
+        console.log(token);
+        var requestTipoTecnologia =
+          "api/tecnologiascharlas/deletebyidcharla/" + idCharla;
+        var requestCharlas = "api/charlas/" + idCharla;
+        var api = "https://apitechriders.azurewebsites.net/";
+        var urlTipoTecnologia = api + requestTipoTecnologia;
+        var urlcharla = api + requestCharlas;
+
+        console.log(urlTipoTecnologia);
+        console.log(urlcharla);
+
+        axios
+          .delete(urlTipoTecnologia, {
             headers: {
               "Content-type": "application/json",
-              Authorization: `Bearer ${token}`
-            }
-          }).then(response => {
-            window.location.reload()
-            alert("Charla Eliminada")
+              Authorization: `Bearer ${token}`,
+            },
+          })
+          .then((response) => {
+            axios
+              .delete(urlcharla, {
+                headers: {
+                  "Content-type": "application/json",
+                  Authorization: `Bearer ${token}`,
+                },
+              })
+              .then((response) => {
+                window.location.reload();
+                alert("Charla Eliminada");
+              });
           });
-        });
       } catch (error) {
-        console.error('Error creating charla:', error);
+        console.error("Error creating charla:", error);
         throw error;
       }
-     
-    }
+    },
   },
   ValoracionesCharlas: {
     getValoracionesCharlas: async () => {
@@ -118,6 +127,91 @@ const axiosApi = {
         return response.data;
       } catch (error) {
         console.error("Error getting EmpresasCentros:", error);
+        throw error;
+      }
+    },
+    getTipoEmpresa: async () => {
+      try {
+        const response = await axios.get(`${API_URL}/api/tipoEmpresa`);
+        return response.data;
+      } catch (error) {
+        console.error("Error getting EmpresasCentros:", error);
+        throw error;
+      }
+    },
+    insertarEmpresaCentro: async (empresaCentroData) => {
+      try {
+        var token = localStorage.getItem("token");
+
+        const response = await axios.post(
+          `${API_URL}/api/empresascentros`,
+          empresaCentroData,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        return response.data;
+      } catch (error) {
+        console.log(error);
+        throw error;
+      }
+    },
+
+    modificarEstadoEmpresaCentro: async (idEmpresaCentro, idEstado) => {
+      try {
+        var token = localStorage.getItem("token");
+
+        const response = await axios.put(
+          `${API_URL}/api/EmpresasCentros/UpdateEstadoEmpresaCentro/${idEmpresaCentro}/${idEstado}`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+        return response.data;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+    modificarEmpresaCentro: async (empresaCentroData) => {
+      try {
+        var token = localStorage.getItem("token");
+
+        const response = await axios.put(
+          `${API_URL}/api/EmpresasCentros`,
+          empresaCentroData,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        return response.data;
+      } catch (error) {
+        console.log(error);
+        throw error;
+      }
+    },
+
+    eliminarEmpresaCentro: async (idEmpresaCentro) => {
+      try {
+        var token = localStorage.getItem("token");
+
+        const response = await axios.delete(
+          `${API_URL}/api/EmpresasCentros/${idEmpresaCentro}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        return response.data;
+      } catch (error) {
+        console.log(error);
         throw error;
       }
     },
@@ -213,14 +307,11 @@ const axiosApi = {
         const token = localStorage.getItem("token");
 
         console.log("token de axios: " + token);
-        const response = await axios.get(
-          `${API_URL}/api/Usuarios`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const response = await axios.get(`${API_URL}/api/Usuarios`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         console.log("API Response:", response);
         return response.data;
       } catch (error) {
@@ -233,6 +324,125 @@ const axiosApi = {
         }
 
         throw error;
+      }
+    },
+  },
+
+  centros: {
+    getCursosByCentro: async () => {
+      try {
+        const token = localStorage.getItem("token");
+
+        const responseUsuario = await axios.get(
+          `${API_URL}/api/Usuarios/PerfilUsuario`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        let idUsuario = responseUsuario.data.idUsuario;
+        const responseCursos = await axios.get(
+          `${API_URL}/api/QueryTools/FindCursosProfesor/${idUsuario}`
+        );
+
+        return responseCursos.data;
+      } catch (error) {
+        console.log("Error: ", error);
+      }
+    },
+
+    getCentroById: async (idCentro) => {
+      try {
+        const token = localStorage.getItem("token");
+
+        const centroresponse = await axios.get(
+          `${API_URL}/api/EmpresasCentros/${idCentro}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        return centroresponse.data;
+      } catch (error) {
+        console.log("Error: ", error);
+      }
+    },
+  },
+  empresas: {
+    getCharlasByEmpresa: async () => {
+      try {
+        const token = localStorage.getItem("token");
+
+        const responseUsuario = await axios.get(
+          `${API_URL}/api/Usuarios/PerfilUsuario`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        console.log(responseUsuario);
+
+        const response = await axios.get(
+          `${API_URL}/api/QueryTools/CharlasEmpresas`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+
+        return response.data;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+    getTRByEmpresa: async () => {
+      try {
+        const token = localStorage.getItem("token");
+
+        const responseUsuario = await axios.get(
+          `${API_URL}/api/Usuarios/PerfilUsuario`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        const idEmpresaCentro = responseUsuario.data.idEmpresaCentro;
+        console.log(idEmpresaCentro);
+
+        const response = await axios.get(
+          `${API_URL}/api/QueryTools/FindTechRidersEnEmpresa/${idEmpresaCentro}`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+
+        return response.data;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+    getCharlasTrEmpresa: async (idTr) => {
+      try {
+        const token = localStorage.getItem("token");
+        const response = await axios.get(
+          `${API_URL}/api/QueryTools/CharlasTechRider?idtechrider=${idTr}`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+
+        return response.data;
+      } catch (error) {
+        console.log(error);
       }
     },
   },
