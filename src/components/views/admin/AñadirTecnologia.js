@@ -2,13 +2,35 @@ import React, { useState, useEffect, useRef } from "react";
 import axiosApi from "../../../api/axiosApi";
 import { Link } from "react-router-dom";
 
-const VerEmpresasCentroAdmin = () => {
+const AñadirTecnologia = () => {
     const [formulario, setFormulario] = useState(null);
+    const [nombreTecnologia, setNombreTecnologia] = useState("");
+    
 
     const handleFormularioClick = (tipoUsuario) => {
       setFormulario(tipoUsuario);
     };
+    
+    const handleNombreChange = (e) => {
+        setNombreTecnologia(e.target.value);
+      };
+      const handleSubmit = (e) => {
+        e.preventDefault();
+        // Llamar al método en otro componente y pasar el valor del input
+       axiosApi.tecnologias.postTecnologia(nombreTecnologia);
+      };
 
+      const handleEliminarClick = async (idtecnologia) => {
+        try {
+          const response = await axiosApi.tecnologias.eliminarTecnologia(idtecnologia);
+          console.log("Eliminar Tecnologia Response:", response);
+          // Vuelve a cargar las tecnologías después de eliminar
+          const nuevasTecnologiasResponse = await axiosApi.tecnologias.getTecnologias();
+          setTecnologiasResponse(nuevasTecnologiasResponse);
+        } catch (error) {
+          console.error("Error al eliminar tecnología:", error);
+        }
+      };
 
   const [charlasResponse, setCharlasResponse] = useState([]);
   const [provinciasResponse, setProvinciasResponse] = useState([]);
@@ -21,15 +43,11 @@ const VerEmpresasCentroAdmin = () => {
   useEffect(() => {
     const fetchData = async () => {
         try {
-            const centroEmpresaResponse = await axiosApi.empresasCentros.getEmpresasCentros();
-            setEmpresasCentrosResponse(centroEmpresaResponse);
-            console.log("empresas:", centroEmpresaResponse);
-            console.log(centroEmpresaResponse)
 
-            const responseUsuarios = await axiosApi.usuarios.getUsuarios();
-            console.log("Users:", responseUsuarios);
-            SetUsuariosResponse(responseUsuarios);
-          
+            const tecnologiasResponse = await axiosApi.tecnologias.getTecnologias();
+        console.log("Charlas response:", tecnologiasResponse);
+        setTecnologiasResponse(tecnologiasResponse);
+        
             setLoading(false);
           } catch (error) {
             console.error("Error:", error);
@@ -41,13 +59,6 @@ const VerEmpresasCentroAdmin = () => {
 
     fetchData();
   }, []);
-  const getRepresentantesEmpresas = (idEmpresaCentro) => {
-    const nombreRepresentante = usuariosResponse.find(
-      (p) => p.idEmpresaCentro === idEmpresaCentro && p.idEmpresaCentro ===4
-    );
-    return nombreRepresentante ? nombreRepresentante.nombre : "Desconocido";
-  };
-
 
   return (
     <main>
@@ -71,7 +82,13 @@ const VerEmpresasCentroAdmin = () => {
               </div>
             </div>
             {/* <!-- End Input --> */}
-
+            <div>
+            <button
+                type="button"
+                class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-green-600 bg-green-600 text-white shadow-sm hover:bg-green-800 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200">
+                Añadir Nueva
+            </button>
+            </div>
             <div class="sm:col-span-2 md:grow">
               <div class="flex justify-end gap-x-2">
              
@@ -106,7 +123,32 @@ const VerEmpresasCentroAdmin = () => {
           </div>
           {/* <!-- End Header --> */}
 
+              {/* <!-- Añadir nueva tecnologia --> */}
+              <div>
+            <form style={{ margin: "20px" }}>
+                <div className="form-group">
+                    <label htmlFor="nombre">Nombre De La Nueva Tecnologia: </label>
+                    <input
+              type="text"
+              className="form-control"
+              id="nombre"
+              style={{ margin: "30px", border: "1px solid black" }}
+              value={nombreTecnologia}
+              onChange={handleNombreChange}/>  
+                
+            </div>
+
+                <button  onClick={handleSubmit}  style={{backgroundColor: "green", color:"white", fontWeight:"bold", border: '5px solid green',}}>Añadir Tecnologia</button>
+            </form>
+            </div>
+
           {/* <!-- Table --> */}
+          <div style={{ display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column" }}>
+            <hr />
+            <br />
+            <h1 style={{ textAlign: "center", color:"white" ,marginBottom:"10px"}}>TECNOLOGIAS DISPONIBLES</h1>
+            </div>
+
           <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
             <thead class="bg-gray-50 dark:bg-slate-800">
               <tr>
@@ -115,7 +157,7 @@ const VerEmpresasCentroAdmin = () => {
                 <th scope="col" class="px-6 py-3 text-start">
                   <div class="flex items-center gap-x-2">
                     <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
-                      Nombre/Apellidos
+                      Nombre
                     </span>
                   </div>
                 </th>
@@ -123,37 +165,14 @@ const VerEmpresasCentroAdmin = () => {
                 <th scope="col" class="px-6 py-3 text-start">
                   <div class="flex items-center gap-x-2">
                     <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
-                      Correo
+                      Tipo
                     </span>
                   </div>
                 </th>
                 <th scope="col" class="px-6 py-3 text-start">
                   <div class="flex items-center gap-x-2">
                     <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
-                      Telefono
-                    </span>
-                  </div>
-                </th>
-
-                <th scope="col" class="px-6 py-3 text-start">
-                  <div class="flex items-center gap-x-2">
-                    <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
-                      LinkedIn
-                    </span>
-                  </div>
-                </th>
-
-                <th scope="col" class="px-6 py-3 text-start">
-                  <div class="flex items-center gap-x-2">
-                    <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
-                      Status
-                    </span>
-                  </div>
-                </th>
-                <th scope="col" class="px-6 py-3 text-start">
-                  <div class="flex items-center gap-x-2">
-                    <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
-                      Alta/Baja
+                    Acciones
                     </span>
                   </div>
                 </th>
@@ -161,40 +180,51 @@ const VerEmpresasCentroAdmin = () => {
             </thead>
 
             <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
-            {centroEmpresaResponse.map((centro, index)=>(
+            {tecnologiasResponse.map((tecnologia, index)=>(
               <tr key={index} class="bg-white hover:bg-gray-50 dark:bg-slate-900 dark:hover:bg-slate-800">
                  <td class="h-px w-px whitespace-nowrap align-top">
                   <div class="block p-6" >
                     <div class="flex items-center gap-x-3">
                       {/* <div class="inline-block h-[2.375rem] w-[2.375rem] bg-accent-100 rounded-full" src="" alt=""></div> */}
                       <div class="grow">
-                      <span class="block text-sm font-semibold text-gray-800 dark:text-gray-200">{centro.nombre}</span>
-                     <span class="block text-sm text-gray-500">{centro.direccion}</span>
-                        <span>{getRepresentantesEmpresas(centro.idEmpresaCentro)}</span> 
-
-                        <span class="block text-sm text-gray-500">{centro.direccion}</span>
-                        <div>
-                          <button
-                              type="button"
-                              onClick={() =>axiosApi.empresasCentros.updateEstadoCentroEmpresa(centro.idEmpresaCentro,0)}
-                              class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-green-600 bg-green-600 text-white shadow-sm hover:bg-green-800 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
-                            >
-                              Desactivar
-                            </button>                   
-                         </div>
+                      <span class="block text-sm font-semibold text-gray-800 dark:text-gray-200">{tecnologia.nombreTecnologia}</span>
                       </div>
                     </div>
                   </div>
-                  
                 </td>
-                
+
+                <td class="h-px w-px whitespace-nowrap align-top">
+                  <div class="block p-6" >
+                    <div class="flex items-center gap-x-3">
+                      {/* <div class="inline-block h-[2.375rem] w-[2.375rem] bg-accent-100 rounded-full" src="" alt=""></div> */}
+                      <div class="grow">
+                        <span class="block text-sm text-gray-500">{tecnologia.idTipoTecnologia}</span>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+
+                <td class="h-px w-px whitespace-nowrap align-top">
+                  <div class="block p-6" >
+                    <div class="flex items-center gap-x-3">
+                      {/* <div class="inline-block h-[2.375rem] w-[2.375rem] bg-accent-100 rounded-full" src="" alt=""></div> */}
+                      <div class="grow">
+                      <button
+                            type="button"
+                            class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-green-600 bg-green-600 text-white shadow-sm hover:bg-green-800 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
+                            onClick={() => handleEliminarClick(tecnologia.idTecnologia)}>
+                            Eliminar Tecnologia
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </td>
               </tr>
-              
-            ))}
+)) }
 
             </tbody>
           </table>
-          {/* <!-- End Table --> */}
+                    {/* <!-- End Table --> */}
 
           {/* <!-- Footer --> */}
           <div class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-t border-gray-200 dark:border-gray-700">
@@ -226,4 +256,4 @@ const VerEmpresasCentroAdmin = () => {
   );
 };
 
-export default VerEmpresasCentroAdmin;
+export default AñadirTecnologia;
