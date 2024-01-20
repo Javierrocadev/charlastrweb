@@ -4,6 +4,7 @@ import {
     useContext,
     useMemo,
     useState,
+    useEffect
   } from "react";
   import PropTypes from "prop-types";
   import axios from "axios";
@@ -14,9 +15,34 @@ import {
   
   
   export function AuthContextProvider({ children }) {
-      const [isAuthenticated, setIsAuthenticated] = useState(() => window.localStorage.getItem('token'));
-      const [role, setRole] = useState(null); // Nuevo estado para almacenar el rol
+      // const [isAuthenticated, setIsAuthenticated] = useState(() => window.localStorage.getItem('token'));
+      // const [role, setRole] = useState(null); // Nuevo estado para almacenar el rol
+      // const [token, setToken] = useState(null); // Nuevo estado para almacenar el token
+      // const [redirectTo, setRedirectTo] = useState(null);
+
+      // useEffect(() => {
+      //   // Este efecto se ejecuta cada vez que 'role' se actualiza
+      //   console.log("Nuevo valor de 'role':", role);
+      // }, [role]); // La dependencia de 'role' asegura que el efecto se ejecute cuando 'role' cambie
+      const [isAuthenticated, setIsAuthenticated] = useState(() => {
+        const storedToken = window.localStorage.getItem('token');
+        return !!storedToken; // Convertir a booleano
+      });
+      const [role, setRole] = useState(() => {
+        const storedRole = window.localStorage.getItem('role');
+        return storedRole !== null ? parseInt(storedRole, 10) : null; // Convertir a entero
+      });
+      const [token, setToken] = useState(null);
+      const [redirectTo, setRedirectTo] = useState(null);
     
+      // ...
+    
+      useEffect(() => {
+        // Este efecto se ejecuta cada vez que 'role' se actualiza
+        console.log("Nuevo valor de 'role':", role);
+      }, [role]); // La dependencia de 'role' asegura que el efecto se ejecute cuando 'role' cambie
+    
+
       const login = useCallback(function (email, password) {
         var usuario = {
           email: email,
@@ -26,7 +52,7 @@ import {
         var api = 'https://apitechriders.azurewebsites.net/';
         var url = api + request;
         axios.post(url, usuario).then((response) => {
-          console.log(response.data);
+          
           if (response.data) {
             window.localStorage.setItem("token", response.data.response);
             setIsAuthenticated(true);
@@ -35,6 +61,7 @@ import {
             var requestRole = 'api/Usuarios/PerfilUsuario';
             var urlRole = api + requestRole;
             var token = localStorage.getItem("token");
+            setToken(response.data.response);
             console.log(token);
             axios.get(urlRole,  {
               headers: {
@@ -43,20 +70,28 @@ import {
             }).then((roleResponse) => {
               console.log(roleResponse.data.idRole);
               window.localStorage.setItem('role', roleResponse.data.idRole);
+              console.log("localstorage "+roleResponse.data.idRole)
               setRole(roleResponse.data.idRole);
-              setIsAuthenticated(true);
+
+              console.log("DDespues de hacer setRole"+role);
+              console.log(roleResponse.data.idRole);
+              return (roleResponse.data.idRole);
+
+         
             });
           } else {
             // Manejo de errores si no se inicia sesión correctamente
           }
         });
-      }, []);
+      }, [role]);
     
       const logout = useCallback(function () {
         window.localStorage.removeItem('token');
         window.localStorage.removeItem('role'); // Limpiar el rol al cerrar sesión
         setIsAuthenticated(false);
         setRole(null); // Reiniciar el estado del rol
+        setToken(null); // Reiniciar el estado del rol
+        console.log("todo cerrado");
       }, []);
     
       const value = useMemo(
@@ -65,8 +100,9 @@ import {
           logout,
           isAuthenticated,
           role,
+          token
         }),
-        [isAuthenticated, login, logout, role]
+        [isAuthenticated, login, logout, role, token]
       );
     
       return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

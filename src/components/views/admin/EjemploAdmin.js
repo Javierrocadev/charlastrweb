@@ -8,7 +8,7 @@ import heroImg from "../../../assets/images/HeroImg.jpeg";
 // import FormTechRiders from "./formularios/FormTechRiders";
 // import FormCentros from "./formularios/FormCentro";
 
-const HomeTechRiders = () => {
+const EjemploAdmin = () => {
     const [formulario, setFormulario] = useState(null);
 
     const handleFormularioClick = (tipoUsuario) => {
@@ -39,10 +39,10 @@ const HomeTechRiders = () => {
        <section class="text-gray-600 body-font mt-6">
         <div class="flex flex-wrap w-full mb-12 flex-col items-center text-center">
           <h2 class="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-900">
-            Tech Riders home
+            eejmplo
           </h2>
           <p class="lg:w-1/2 w-full leading-relaxed text-gray-500">
-            tr
+            dddddddddd
           </p>
         </div>
        
@@ -52,4 +52,4 @@ const HomeTechRiders = () => {
   );
 };
 
-export default HomeTechRiders;
+export default EjemploAdmin;

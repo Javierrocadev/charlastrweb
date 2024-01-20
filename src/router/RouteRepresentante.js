@@ -1,28 +1,38 @@
-import React from 'react';
-import { useContext } from 'react';
-import { AuthContext } from '../contexts/authContext';
-import { Navigate } from 'react-router-dom'; 
+import React, { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../contexts/authContext";
+import { Navigate } from "react-router-dom";
 
 const RouteRepresentante = ({ path, component }) => {
   const { isAuthenticated, role } = useContext(AuthContext);
+  const [redirectTo, setRedirectTo] = useState(null);
 
-  const handleRouteAccess = () => {
-    if (!isAuthenticated) {
-      // Navigate to login page if user is not authenticated
-      return <Navigate to="/login" />;
-    }
+  useEffect(() => {
+    const handleRouteAccess = () => {
+      console.log(role);
+      if (role === null) {
+        // Navigate to a 403 page if the user doesn't have the required role
+        setRedirectTo("/login");
+      }
+       else if (!isAuthenticated) {
+        // Navigate to the login page if the user is not authenticated
+        setRedirectTo("/login");
+      } 
+      else if (role !== 4) {
+        // Navigate to a 403 page if the user doesn't have the required role
+        setRedirectTo("/403");
+      }
+    };
 
-    // Check if user has the required role for the route
-    if (role !== 2) {
-      // Navigate to a 403 page if user doesn't have the required role
-      return <Navigate to="/403" />;
-    }
+    handleRouteAccess();
+  }, [isAuthenticated, role]);
 
-    // Allow access to the route if user is authenticated and has the required role
-    return component;
-  };
+  if (redirectTo) {
+    // If 'redirectTo' is set, navigate to the specified route
+    return <Navigate to={redirectTo} />;
+  }
 
-  return handleRouteAccess();
+  // If no redirection is needed, render the component
+  return component;
 };
 
 export default RouteRepresentante;

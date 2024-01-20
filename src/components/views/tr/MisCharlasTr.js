@@ -4,13 +4,22 @@ import { Link } from "react-router-dom";
 import logoTajamar from "../../../assets/images/LogoTajamar.png";
 import heroImg from "../../../assets/images/HeroImg.jpeg";
 
-const Home = () => {
+const MisCharlasTr = () => {
   const [charlasResponse, setCharlasResponse] = useState([]);
   const [provinciasResponse, setProvinciasResponse] = useState([]);
   const [tecnologiasResponse, setTecnologiasResponse] = useState([]);
-  const [tecnologiasCharlasResponse, setTecnologiasCharlasResponse] = useState(
-    []
-  );
+  const [tecnologiasCharlasResponse, setTecnologiasCharlasResponse] = useState([]);
+  const handleEliminarCharla = async (idCharla) => {
+    try {
+      await axiosApi.charlas.eliminarCharla(idCharla);
+      console.log('Charla eliminada con éxito');
+      // Puedes realizar alguna acción adicional después de eliminar la charla
+    } catch (error) {
+      console.error('Error al intentar eliminar la charla:', error);
+      // Puedes manejar el error de alguna manera, por ejemplo, mostrar un mensaje al usuario
+    }
+  };
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -225,58 +234,13 @@ const Home = () => {
         </div>
       </div>
 
-      <section class="text-gray-600 body-font ">
-        <div class="container mx-auto flex px-5 sm:py-24 py-8 md:flex-row flex-col items-center">
-          <div class="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
-            <h1 class="title-font text-7xl  mb-4 font-bold text-gray-900">
-              Tech Riders
-            </h1>
-
-            <p class="mb-4 leading-relaxed text-xl ">
-              Conectando Futuros: Charlas Tecnológicas para la Excelencia en la
-              Formación Profesional.
-            </p>
-            <div class="flex gap-2 justify-center items-center">
-              {/* <a href="/origen" class="ml-4 shrink-0 inline-flex text-gray-700 border-2 border-primary-500 bg-neutral-50  py-2 px-6 focus:outline-none hover:bg-neutral-100 rounded text-lg">
-                  Sobre nosotros
-                </a> */}
-              <Link
-                to={"/login"}
-                class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-accent-200 bg-accent-200 text-white shadow-sm hover:bg-accent-100 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
-              >
-                Iniciar sesion
-              </Link>
-              <Link
-                to={"/login"}
-                class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-bg-300 bg-bg-100 text-text-200 shadow-sm duration-300 hover:bg-bg-200 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
-              >
-                ¿Quiénes somos?
-              </Link>
-            </div>
-          </div>
-          <div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6 relative ">
-          
-            <img
-              class="object-cover object-center  bg-slate-100 rounded"
-              alt="hero"
-              src={heroImg}
-            />
-            <img
-              class="object-cover object-center rounded absolute -bottom-12 -right-1 [filter:_invert(50%);] "
-              alt="hero"
-              src={logoTajamar}
-            />
-          </div>
-        </div>
-      </section>
-
+   
       <section>
         <h2 class="text-3xl text-center text-gray-800 font-bold lg:text-4xl dark:text-white">
           Nuestras charlas
         </h2>
         <p class="mt-3 mb-8 text-center text-gray-800 dark:text-gray-400">
-          Explora nuestras charlas y si quieres, solicita una, ¡TOTALMENTE
-          gratis!
+         TODAS MIS CHARLAS
         </p>
         <ul class="hs-accordion-group">
           {charlasResponse.map((charla) => (
@@ -320,12 +284,6 @@ const Home = () => {
                     <path d="M5 12h14" />
                   </svg>
                   {charla.descripcion}
-                </button>
-                <button
-                  type="button"
-                  class="py-2 px-3 m-2 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-accent-200 bg-accent-200 text-white shadow-sm hover:bg-accent-100 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
-                >
-                  Solicitar charla
                 </button>
               </div>
 
@@ -450,4 +408,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default MisCharlasTr;

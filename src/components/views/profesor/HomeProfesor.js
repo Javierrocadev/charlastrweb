@@ -17,7 +17,7 @@ const AlertaDenegada = () => (
     <p>Error</p>
   </div>
 );
-const HomeAdmin = () => {
+const HomeProfesor = () => {
 
   const [mostrarAlerta, setMostrarAlerta] = useState(false);
   const [mostrarAlertaDenegada, setMostrarAlertaDenegada] = useState(false);
@@ -149,7 +149,7 @@ const estado = parseInt(e.target.elements.estado.value, 10);
   <div class="bg-white rounded-xl shadow p-4 sm:p-7 dark:bg-slate-900">
     <div class="mb-8">
       <h2 class="text-xl font-bold text-gray-800 dark:text-gray-200">
-        Perfil Administrador
+        Perfil Profesor
       </h2>
       <p class="text-sm text-gray-600 dark:text-gray-400">
         Tus datos
@@ -225,6 +225,18 @@ const estado = parseInt(e.target.elements.estado.value, 10);
   
         <div class="sm:col-span-3">
           <label for="af-account-password" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-gray-200">
+            Centro
+          </label>
+        </div>
+  
+        <div class="sm:col-span-9">
+          <div class="space-y-2">
+
+            <input   onChange={(e) => setNewPassword(e.target.value)} type="text" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 " placeholder={usuarioResponse.password}/>
+          </div>
+        </div>
+        <div class="sm:col-span-3">
+          <label for="af-account-password" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-gray-200">
             Password
           </label>
         </div>
@@ -298,6 +310,6 @@ const estado = parseInt(e.target.elements.estado.value, 10);
   );
 };
 
-export default HomeAdmin;
+export default HomeProfesor;
 
 
