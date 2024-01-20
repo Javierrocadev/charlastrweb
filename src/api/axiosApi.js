@@ -172,6 +172,33 @@ const axiosApi = {
         throw error;
       }
     },
+    getPerfilUsuario: async () => {
+      try {
+        const token = localStorage.getItem("token");
+
+        console.log("token de axios: " + token);
+        const response = await axios.get(
+          "https://apitechriders.azurewebsites.net/api/usuarios/PerfilUsuario",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+        console.log("API Response usuario:", response.data);
+        return response.data;
+      } catch (error) {
+        console.error("Error getting usuarios:", error);
+
+        // Si la respuesta es 401, redirigir a la página de inicio de sesión
+        if (error.response && error.response.status === 401) {
+          console.log("Unauthorized access. Redirecting to login...");
+          return <Navigate to="/login" />; // Volvemos al login si el token no funciona
+        }
+
+        throw error;
+      }
+    },
     updateEstadoUsuario: async (id, estado) => {
       console.log(id);
       console.log(estado);
@@ -205,6 +232,27 @@ const axiosApi = {
         throw error;
       }
     },
+    putUsuarios: async (updateData) => {
+      console.log(updateData);
+      try {
+        const token = localStorage.getItem("token");
+        const response = await axios.put(
+          `${API_URL}/api/Usuarios`,
+          updateData,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        return response.data;
+      } catch (error) {
+        console.error("Error updating user:", error);
+        throw error;
+      }
+    },
+    
   },
 
   profesores: {
