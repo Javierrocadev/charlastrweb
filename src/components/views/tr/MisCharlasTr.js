@@ -9,6 +9,7 @@ const MisCharlasTr = () => {
   const [provinciasResponse, setProvinciasResponse] = useState([]);
   const [tecnologiasResponse, setTecnologiasResponse] = useState([]);
   const [tecnologiasCharlasResponse, setTecnologiasCharlasResponse] = useState([]);
+  const [perfilResponse, setPerfilResponse] = useState([]);
   const handleEliminarCharla = async (idCharla) => {
     try {
       await axiosApi.charlas.eliminarCharla(idCharla);
@@ -27,6 +28,10 @@ const MisCharlasTr = () => {
         const response = await axiosApi.charlas.getCharlas();
         console.log("Charlas response:", response);
         setCharlasResponse(response);
+
+        const perfilResponse = await axiosApi.usuarios.getPerfilUsuario();
+        console.log("perfil usuario response:", perfilResponse);
+        setPerfilResponse(perfilResponse);
 
         const responseProvincias = await axiosApi.provincias.getProvincias();
         console.log("Charlas responseProvincias:", responseProvincias);
@@ -243,7 +248,7 @@ const MisCharlasTr = () => {
          TODAS MIS CHARLAS
         </p>
         <ul class="hs-accordion-group">
-          {charlasResponse.map((charla) => (
+          {axiosApi.techriders.getcharlastechrider(perfilResponse.idUsuario).map((charla) => (
             <li
               key={charla.idCharla}
               className="hs-accordion active bg-white border -mt-px first:rounded-t-lg last:rounded-b-lg dark:bg-gray-800 dark:border-gray-700"
