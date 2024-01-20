@@ -7,9 +7,21 @@ import heroImg from "../../../assets/images/HeroImg.jpeg";
 // import FormRepresentante from "./formularios/FormRepresentante"
 // import FormTechRiders from "./formularios/FormTechRiders";
 // import FormCentros from "./formularios/FormCentro";
-
+const AlertaExitosa = () => (
+  <div className="absolute animate-bounce bg-teal-50 border-t-2 border-teal-500 rounded-lg p-4 dark:bg-teal-800/30" role="alert">
+    <p>Actualizado correctamente</p>
+  </div>
+);
+const AlertaDenegada = () => (
+  <div className="absolute animate-bounce bg-teal-50 border-t-2 border-red-500 rounded-lg p-4 dark:bg-teal-800/30" role="alert">
+    <p>Error</p>
+  </div>
+);
 const HomeAdmin = () => {
- 
+
+  const [mostrarAlerta, setMostrarAlerta] = useState(false);
+  const [mostrarAlertaDenegada, setMostrarAlertaDenegada] = useState(false);
+
     const [usuarioResponse, setUsuarioResponse] = useState([]);
     const [provinciasResponse, setProvinciasResponse] = useState([]);
     const [newPassword, setNewPassword] = useState("");
@@ -19,7 +31,7 @@ const HomeAdmin = () => {
     const [newTelefono, setNewTelefono] = useState("");
     const [newLinkedin, setNewLinkedin] = useState("");
     const [newProvincia, setNewProvincia] = useState("");
-    const handleSubmit = (e) => {
+    const handleSubmit = async  (e) => {
 console.log("funcion")
       e.preventDefault();
       const datoUsuarioAntes = usuarioResponse
@@ -74,16 +86,30 @@ const estado = parseInt(e.target.elements.estado.value, 10);
   console.log(updateData);
 
   
-    //Llamar a la función de actualización
+  try {
+    // Llamar a la función de actualización
     const responsePut =  axiosApi.usuarios.putUsuarios(updateData);
     console.log("Actualización exitosa:", responsePut);
 
- 
+    if (responsePut) {
+      // Mostrar la AlertaExitosa
+      setMostrarAlerta(true);
+    } else {
+      // Mostrar la AlertaDenegada
+      setMostrarAlertaDenegada(true);
+    }
+  } catch (error) {
+    // En caso de error, también puedes mostrar la AlertaDenegada
+    console.error("Error en la actualización:", error);
+    setMostrarAlertaDenegada(true);
+  }
+
+    
 };
 
 
-
     useEffect(() => {
+      
       const fetchData = async () => {
         try {
           const response = await axiosApi.usuarios.getPerfilUsuario();
@@ -100,7 +126,15 @@ const estado = parseInt(e.target.elements.estado.value, 10);
       };
   
       fetchData();
-    }, []);
+      const timeoutId = setTimeout(() => {
+        setMostrarAlerta(false);
+      }, 4000);
+    
+      return () => {
+        // Limpiar el temporizador al desmontar el componente
+        clearTimeout(timeoutId);
+      };
+    }, [mostrarAlerta]);
  const getProvinciaNombre = (idProvincia) => {
     const provincia = provinciasResponse.find(
       (p) => p.idProvincia === idProvincia
@@ -115,7 +149,7 @@ const estado = parseInt(e.target.elements.estado.value, 10);
   <div class="bg-white rounded-xl shadow p-4 sm:p-7 dark:bg-slate-900">
     <div class="mb-8">
       <h2 class="text-xl font-bold text-gray-800 dark:text-gray-200">
-        Perfil
+        Perfil Administrador
       </h2>
       <p class="text-sm text-gray-600 dark:text-gray-400">
         Tus datos
@@ -165,8 +199,8 @@ const estado = parseInt(e.target.elements.estado.value, 10);
   
         <div class="sm:col-span-9">
           <div class="sm:flex">
-            <input id="af-account-full-name" type="text" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 "onChange={(e) => setNewNombre(e.target.value)} placeholder={usuarioResponse.nombre}/>
-            <input type="text" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 " onChange={(e) => setNewApellidos(e.target.value)} placeholder={usuarioResponse.apellidos}/>
+            <input id="af-account-full-name" type="text" class="py-3 px-4 sm:mb-0 mb-4 block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 "onChange={(e) => setNewNombre(e.target.value)} placeholder={usuarioResponse.nombre}/>
+            <input type="text" class="py-3 px-4  block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 " onChange={(e) => setNewApellidos(e.target.value)} placeholder={usuarioResponse.apellidos}/>
           </div>
         </div>
   
@@ -186,7 +220,7 @@ const estado = parseInt(e.target.elements.estado.value, 10);
         </div>
   
         <div class="sm:col-span-9">
-          <input  type="text" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 " placeholder={usuarioResponse.linkedIn} />
+          <input  type="text" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 "  onChange={(e) => setNewLinkedin(e.target.value)} placeholder={usuarioResponse.linkedIn} />
         </div>
   
         <div class="sm:col-span-3">
@@ -204,7 +238,7 @@ const estado = parseInt(e.target.elements.estado.value, 10);
   
         <div class="sm:col-span-3">
           <div class="inline-block">
-            <label for="af-account-phone" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-gray-200">
+            <label for="af-account-phone" class="inline-block text-sm  text-gray-800 mt-2.5 dark:text-gray-200">
               Telefono
             </label>
             
@@ -212,8 +246,8 @@ const estado = parseInt(e.target.elements.estado.value, 10);
         </div>
   
         <div class="sm:col-span-9">
-          <div class="sm:flex">
-            <input id="af-account-phone" type="text" class="py-3 mr-4 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 " onChange={(e) => setNewTelefono(e.target.value)} placeholder={usuarioResponse.telefono}/>
+          <div class="sm:flex ">
+            <input id="af-account-phone" type="text" class="py-3 mr-4 sm:mb-0 mb-4 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 " onChange={(e) => setNewTelefono(e.target.value)} placeholder={usuarioResponse.telefono}/>
             <select onChange={(e) => setNewProvincia(e.target.value)} class="py-2 px-3 pe-9 block w-full sm:w-auto border-gray-200 shadow-sm -mt-px -ms-px rounded sm:mt-0 sm:first:ms-0  text-sm relative focus:z-10  focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 ">
              
                 {provinciasResponse.map((provincia) => (
@@ -257,7 +291,8 @@ const estado = parseInt(e.target.elements.estado.value, 10);
  
 
 
-
+ {mostrarAlerta && <AlertaExitosa />}
+ {mostrarAlertaDenegada && <AlertaDenegada />}
 
     </main>
   );

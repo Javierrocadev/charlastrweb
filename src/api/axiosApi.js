@@ -211,7 +211,7 @@ const axiosApi = {
           "https://apitechriders.azurewebsites.net/api/usuarios/updateEstadoUsuario/" +
             id +
             "/" +
-            estado,
+            estado,{},
           {
             headers: {
               Authorization: `Bearer ${token}`,
