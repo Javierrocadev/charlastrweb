@@ -363,7 +363,6 @@ const axiosApi = {
         throw error;
       }
     },
-<<<<<<< HEAD
     getPerfilUsuario: async () => {
       try {
         const token = localStorage.getItem("token");
@@ -391,9 +390,7 @@ const axiosApi = {
         throw error;
       }
     },
-=======
 
->>>>>>> 32c67c5c1a28a00e76e6cc7832f98839d83f31ab
     updateEstadoUsuario: async (id, estado) => {
       console.log(id);
       console.log(estado);
@@ -407,8 +404,6 @@ const axiosApi = {
             id +
             "/" +
             estado,{},
-<<<<<<< HEAD
-=======
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -584,7 +579,6 @@ const axiosApi = {
         console.log("token de axios: " + token);
         const response = await axios.get(
           `${API_URL}/api/Roles`,
->>>>>>> 32c67c5c1a28a00e76e6cc7832f98839d83f31ab
           {
             headers: {
               Authorization: `Bearer ${token}`,
