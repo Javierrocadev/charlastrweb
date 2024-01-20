@@ -228,7 +228,7 @@ const axiosApi = {
           "https://apitechriders.azurewebsites.net/api/empresascentros/updateEstadoempresacentro/" +
             id +
             "/" +
-            estado,
+            estado,{},
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -373,8 +373,10 @@ const axiosApi = {
     
         console.log("token de axios: " + token);
         const response = await axios.put(
-          "https://apitechriders.azurewebsites.net/api/usuarios/updateEstadoUsuario/" + id + "/" + estado,
-          {},
+          "https://apitechriders.azurewebsites.net/api/usuarios/updateEstadoUsuario/" +
+            id +
+            "/" +
+            estado,{},
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -550,6 +552,35 @@ const axiosApi = {
         console.log("token de axios: " + token);
         const response = await axios.get(
           `${API_URL}/api/Roles`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        console.log("API Response:", response);
+        return response.data;
+      } catch (error) {
+        console.error("Error getting usuarios:", error);
+
+        // Si la respuesta es 401, redirigir a la página de inicio de sesión
+        if (error.response && error.response.status === 401) {
+          console.log("Unauthorized access. Redirecting to login...");
+          return <Navigate to="/login" />; // Volvemos al login si el token no funciona
+        }
+
+        throw error;
+      }
+    },
+  },
+  techriders: {
+    getcharlastechrider: async (idtechrider) => {
+      try {
+        const token = localStorage.getItem("token");
+
+        console.log("token de axios: " + token);
+        const response = await axios.get(
+          `${API_URL}/api/QueryTools/CharlasTechRider/`+idtechrider,
           {
             headers: {
               Authorization: `Bearer ${token}`,

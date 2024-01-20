@@ -30,6 +30,7 @@ import AñadirTecnologia from "./components/views/admin/AñadirTecnologia";
 import HomeRepresentante from "./components/views/representante/HomeRepresentante";
 //tech riders pages
 import HomeTechRiders from "./components/views/tr/HomeTechRiders";
+import MisCharlasTr from "./components/views/tr/MisCharlasTr";
 // centro/profesor pages
 import HomeProfesor from "./components/views/profesor/HomeProfesor";
 import InscripcionCentro from "./components/views/profesor/InscripcionCentro";
@@ -107,6 +108,10 @@ const App = () => {
             <Route
               path="/tr"
               element={<RouteTechRider path="/tr" component={<HomeTechRiders />} />}
+            /> 
+             <Route
+              path="/charlastechrider"
+              element={<RouteTechRider path="/charlastechrider" component={<MisCharlasTr />} />}
             />
             {/* rutas de representantes/empresas */}
             <Route

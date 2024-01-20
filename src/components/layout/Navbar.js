@@ -618,24 +618,10 @@ const Navbar = () => {
           <div class="flex flex-col gap-5 mt-5 custom:flex-row custom:items-center custom:mt-0 custom:ps-5">
             {/* <Link class="font-medium text-primary-100 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200" href="#" aria-current="page">Charlas</Link> */}
             <Link
-              class="font-medium hover:text-accent-200 text-accent-200 underline underline-offset-4  dark:text-text-100 dark:hover:text-text-200 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
-              to={"/admin"}
-            >
-              Charlas
-            </Link>
-
-
-            <Link
               class="font-medium hover:text-accent-200 text-text-200  dark:text-text-100 dark:hover:text-text-200 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
-              to={"/ejemplo"}
+              to={"/charlastechrider"}
             >
-              ejemplo
-            </Link>
-            <Link
-              class="font-medium hover:text-accent-200 text-text-200  dark:text-text-100 dark:hover:text-text-200 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
-              to={"/vertr"}
-            >
-              Tech Riders
+              Mis Charlas
             </Link>
             <Link
               class="font-medium hover:text-accent-200 text-text-200  dark:text-text-100 dark:hover:text-text-200 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
@@ -648,12 +634,6 @@ const Navbar = () => {
               to={"/vercharlas"}
             >
             Ver Charlas
-            </Link>
-            <Link
-              class="font-medium hover:text-accent-200 text-text-200  dark:text-text-100 dark:hover:text-text-200 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
-              to={"/vistaprofesores"}
-            >
-              Profesores
             </Link>
           </div>
         </div>
