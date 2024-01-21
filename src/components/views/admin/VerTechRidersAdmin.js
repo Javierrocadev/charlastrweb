@@ -39,11 +39,6 @@ const VerTechRidersAdmin = () => {
   return (
    <main>
         <div>
-            <div>
-                <NavLink to={"/"}><button style={{backgroundColor: "green", color:"white", fontWeight:"bold", border: '5px solid green',}}>Ver todas las empresas/centros</button></NavLink> 
-                <br />
-                <NavLink to={"/"}><button style={{backgroundColor: "blue", color:"white", fontWeight:"bold", border: '5px solid blue',}}>Ver Notificaciones de alta</button></NavLink> 
-            </div>
             <div style={{textAlign:"center"}}>
                  <h1>LISTADO DE TODOS LOS TECHRIDERS</h1>
             </div>
@@ -240,7 +235,7 @@ const VerTechRidersAdmin = () => {
 ) : (
     <button
     type="button"
-    onClick={() =>axiosApi.usuarios.updateEstadoUsuario(usuario.idUsuario,0)}
+    onClick={() =>axiosApi.usuarios.updateEstadoUsuario(usuario.idUsuario,1)}
     class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-green-600 bg-green-600 text-white shadow-sm hover:bg-green-800 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
   >
     Activar
@@ -282,44 +277,7 @@ const VerTechRidersAdmin = () => {
     </div>
   </div>
   {/* <!-- End Card --> */}
-</div>
-
-
-
-
-
-
-
-
-
-
-          
-            {usuariosResponse.filter((usuario) => usuario.idRole === 3).map((usuario)=>(
-                  
-                       
-                            <div  style={{ border: "1px solid black", padding: "10px", marginBottom: "10px", overflow: "auto"}}>
-                                <h1>Nombre: {usuario.nombre} </h1>
-                                <h2>Apellidos: {usuario.apellidos}</h2>
-                                <h3>Email: {usuario.email} </h3>
-                                <h3>Telefono: {usuario.telefono}</h3>
-                                <h4>Linkedin: {usuario.linkedin} </h4>
-                                <h4>Password: {usuario.password} </h4>
-                                <h4>IdProvincia: {usuario.idProvincia}</h4>
-                                {usuario.estado === 1 ? (
-                                    <h4>Estado: ALTA</h4>
-                                     ) : (
-                                    <h4>Estado: BAJA</h4>
-                                    )}
-
-                                <div style={{float:"right"}}>
-                                <button onClick={() => this.cambiarEstado(usuario.idUsuario, usuario.estado)} style={{backgroundColor: "green", color:"white", fontWeight:"bold", border: '5px solid green'}}>Dar de Baja usuario</button>
-                                </div>
-                            </div>
-                        
-                    
-                  
-            ))
-            }
+</div>    
            </div>
    </main>
   );

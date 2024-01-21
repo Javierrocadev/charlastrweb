@@ -8,10 +8,12 @@ const VerCharlasAdmin = () => {
   const [charlasResponse, setCharlasResponse] = useState([]);
   const [provinciasResponse, setProvinciasResponse] = useState([]);
   const [tecnologiasResponse, setTecnologiasResponse] = useState([]);
+  const [valoracionesResponse, setValoracionesResponse] = useState([]);
   const [tecnologiasCharlasResponse, setTecnologiasCharlasResponse] = useState([]);
+  
   const handleEliminarCharla = async (idCharla) => {
     try {
-      await axiosApi.charlas.eliminarCharla(idCharla);
+    await axiosApi.charlas.eliminarCharla(idCharla);
       console.log('Charla eliminada con éxito');
       // Puedes realizar alguna acción adicional después de eliminar la charla
     } catch (error) {
@@ -19,7 +21,17 @@ const VerCharlasAdmin = () => {
       // Puedes manejar el error de alguna manera, por ejemplo, mostrar un mensaje al usuario
     }
   };
-
+  const handleValoracionesCharla = async (idCharla) => {
+    try {
+      const valoraciones = await axiosApi.ValoracionesCharlas.getValoracionesById(idCharla);
+      console.log(valoraciones); // Verifica que los datos de las valoraciones se impriman correctamente en la consola
+      // Puedes realizar alguna acción adicional después de obtener las valoraciones
+    } catch (error) {
+      console.error('Error al intentar obtener las valoraciones:', error);
+      // Puedes manejar el error de alguna manera, por ejemplo, mostrar un mensaje al usuario
+    }
+  };
+  
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,10 +39,15 @@ const VerCharlasAdmin = () => {
         const response = await axiosApi.charlas.getCharlas();
         console.log("Charlas response:", response);
         setCharlasResponse(response);
+        
 
         const responseProvincias = await axiosApi.provincias.getProvincias();
         console.log("Charlas responseProvincias:", responseProvincias);
         setProvinciasResponse(responseProvincias);
+
+        const valoracionesResponse = await axiosApi.ValoracionesCharlas.getValoracionesById();
+        console.log("Valoraciones charla:", valoracionesResponse);
+        setValoracionesResponse(valoracionesResponse);
 
         const responseTecnologias = await axiosApi.tecnologias.getTecnologias();
         console.log("Charlas responseTecnologias:", responseTecnologias);
@@ -292,6 +309,13 @@ const VerCharlasAdmin = () => {
                 >
                  Eliminar Charla
                 </button>
+                <button
+                type="button"
+                 onClick={() => handleValoracionesCharla(charla.idCharla)}
+                class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-green-600 bg-red-600 text-white shadow-sm hover:bg-green-800 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
+              >
+                Ver Valoraciones de la charla
+              </button>
               </div>
 
               <div
@@ -319,6 +343,7 @@ const VerCharlasAdmin = () => {
                           <span class="text-sm m-1 font-medium p-2 rounded-xl bg-bg-300 text-gray-600">
                             {charla.turno}
                           </span>
+                          
                         </p>
                       </div>
 
@@ -403,6 +428,18 @@ const VerCharlasAdmin = () => {
                         </dt>
                         {/* <dd class="text-xs text-gray-500">{charla.turno}</dd> */}
                       </div>
+                      {/* {valoraciones !== null && (
+                        <div>
+                          <h2>Valoraciones de la charla</h2>
+                          {valoraciones.map((valoracion, index) => {
+                            return (
+                              <div key={index}>
+                                <p>{valoracion.comentario}</p>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      )}  */}
                     </dl>
                   </div>
                 </div>

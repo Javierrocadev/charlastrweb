@@ -97,6 +97,75 @@ const axiosApi = {
         throw error;
       }
     },
+
+    anularCharla: async (idcharla)=>{
+      try {
+      var token = localStorage.getItem("token")
+  
+     var idtechrider = 0;
+     var idestadocharla = 1
+     var request = "api/charlas/AsociarTechriderCharla/" + idtechrider+"/"+idcharla ;
+     var api = "https://apitechriders.azurewebsites.net/" 
+      var url = api + request
+      console.log(url)
+      axios.put(url,{},{
+         headers: {
+           Authorization: `Bearer ${token}`
+         }
+         }).then(response=>{
+          var request = "api/charlas/UpdateEstadoCharla/"+idcharla+"/"+idestadocharla;
+          var api = "https://apitechriders.azurewebsites.net/" 
+          var url = api + request
+          console.log(url)
+          axios.put(url,{},{
+             headers: {
+                 Authorization: `Bearer ${token}`
+               }
+          })
+          window.location.reload();
+          alert("Charla Anulada");
+       })
+      } catch (error) {
+        console.error("Error Anulando charla:", error);
+        throw error;
+      }
+    },
+    
+    aceptarCharla: async (idTechrider,idCharla)=>{
+      try {
+        var token = localStorage.getItem("token")
+    
+       var idtechrider = idTechrider;
+       var idcharla = idCharla
+       var idestadocharla = 4
+       console.log(idtechrider,idcharla)
+
+       var request = "api/charlas/AsociarTechriderCharla/" + idtechrider+"/"+idcharla ;
+       var api = "https://apitechriders.azurewebsites.net/" 
+        var url = api + request
+        console.log(url)
+        axios.put(url,{},{
+           headers: {
+             Authorization: `Bearer ${token}`
+           }
+           }).then(response=>{
+            var request = "api/charlas/UpdateEstadoCharla/"+idcharla+"/"+idestadocharla;
+            var api = "https://apitechriders.azurewebsites.net/" 
+            var url = api + request
+            console.log(url)
+            axios.put(url,{},{
+               headers: {
+                   Authorization: `Bearer ${token}`
+                 }
+            })
+            window.location.reload();
+            alert("Charla Anulada");
+         })
+        } catch (error) {
+          console.error("Error Anulando charla:", error);
+          throw error;
+        }
+    }
   },
   ValoracionesCharlas: {
     getValoracionesCharlas: async () => {
@@ -108,6 +177,17 @@ const axiosApi = {
         throw error;
       }
     },
+    getValoracionesById: async (idcharla)=>{
+      try {
+        console.log("edadfa"+ idcharla)
+        const response = await axios.get(`${API_URL}/api/ValoracionesCharlas/valoraciones/` + idcharla);
+        console.log(response.data)
+        return response.data;
+      } catch (error) {
+        console.error("Error getting charlas:", error);
+        throw error;
+      }
+    }
   },
   provincias: {
     getProvincias: async () => {
@@ -209,7 +289,10 @@ const axiosApi = {
             },
           }
         );
+        window.location.reload();
+        alert("Empresa-Centro Eliminada");
         return response.data;
+        
       } catch (error) {
         console.log(error);
         throw error;
@@ -236,6 +319,12 @@ const axiosApi = {
           }
         );
         console.log("API Response:", response);
+        window.location.reload();
+        if(estado===0){
+          alert("Centro dado de baja")
+        }else{
+          alert("Centro dado de alta")
+        }
         return response.data;
       } catch (error) {
         console.error("Error getting usuarios:", error);
@@ -411,7 +500,14 @@ const axiosApi = {
           }
         );
         console.log("API Response:", response);
+        window.location.reload();
+        if(estado===0){
+          alert("Usuario dado de baja")
+        }else{
+          alert("Usuario dado de alta")
+        }
         return response.data;
+      
       } catch (error) {
         console.error("Error updating usuario estado:", error);
     
@@ -494,6 +590,16 @@ const axiosApi = {
         return centroresponse.data;
       } catch (error) {
         console.log("Error: ", error);
+      }
+    },
+
+    getCursos: async () => {
+      try {
+        const response = await axios.get(`${API_URL}/api/Cursos`);
+        return response.data;
+      } catch (error) {
+        console.error("Error getting provincias:", error);
+        throw error;
       }
     },
   },
