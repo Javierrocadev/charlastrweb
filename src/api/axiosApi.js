@@ -539,6 +539,14 @@ const axiosApi = {
         console.log(error);
       }
     },
+    getCursos: async ()=>{
+      try{
+        const responseCursos = await axios.get(`${API_URL}/api/Cursos`);
+        return responseCursos.data;
+      }catch(error){
+        console.log(error);
+      }
+    }
   },
   empresas: {
     getCharlasByEmpresa: async () => {

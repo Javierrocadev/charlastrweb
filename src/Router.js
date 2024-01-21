@@ -47,6 +47,7 @@ import InscripcionEmpresa from "./components/views/representante/InscripcionEmpr
 import VistaTechridersEmpresa from "./components/views/representante/vistaTREmpresa";
 import PerfilEmpresa from "./components/views/representante/PerfilEmpresa";
 import PerfilCentro from "./components/views/profesor/PerfilCentro";
+import FormularioCharla from "./components/views/user/formularios/FormularioCharla";
 //   import RouteTr from "./components/RouteTr";
 
 // Agregar el código de refresco aquí
@@ -71,6 +72,7 @@ const App = () => {
             <Route path="/centros" element={<Centros />} />
             <Route path="/quienessomos" element={<QuienesSomos />} />
             <Route path="/calendario" element={<CharlasCalendario />} />
+            <Route path="/formulariosolicitudcharla" element={<FormularioCharla />} />
 
             {/* rutas de admin */}
             <Route
