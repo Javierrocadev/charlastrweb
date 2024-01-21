@@ -97,6 +97,15 @@ const axiosApi = {
         throw error;
       }
     },
+
+    getEstadoCharlas: async () => {
+      try {
+        const response = await axios.get(`${API_URL}/api/EstadosCharlas`);
+        return response.data;
+      } catch (error) {
+        console.log(error);
+      }
+    },
   },
   ValoracionesCharlas: {
     getValoracionesCharlas: async () => {
@@ -228,7 +237,8 @@ const axiosApi = {
           "https://apitechriders.azurewebsites.net/api/empresascentros/updateEstadoempresacentro/" +
             id +
             "/" +
-            estado,{},
+            estado,
+          {},
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -261,27 +271,28 @@ const axiosApi = {
         throw error;
       }
     },
-    postTecnologia : async(nombreTecnologia)=>{
+    postTecnologia: async (nombreTecnologia) => {
       try {
         var token = localStorage.getItem("token");
-      
+
         var idtecnologia = 0;
         var nombre = nombreTecnologia;
         var idtipotecnologia = 3;
-      
+
         var newTecnologia = {
           idTecnologia: idtecnologia,
           nombreTecnologia: nombre,
           idTipoTecnologia: idtipotecnologia,
         };
-      
+
         console.log(newTecnologia);
         console.log(token);
         var request = "api/tecnologias";
         var api = "https://apitechriders.azurewebsites.net/";
         var url = api + request;
         console.log(url);
-        axios.post(url, newTecnologia, {
+        axios
+          .post(url, newTecnologia, {
             headers: {
               Authorization: `Bearer ${token}`,
             },
@@ -301,29 +312,30 @@ const axiosApi = {
       try {
         const token = localStorage.getItem("token");
         console.log("token de axios: " + token);
-        const response = await axios.delete(`${API_URL}/api/Tecnologias/` + idtecnologia, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const response = await axios.delete(
+          `${API_URL}/api/Tecnologias/` + idtecnologia,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
         console.log("API Response:", response);
         return response.data;
       } catch (error) {
         console.error("Error getting usuarios:", error);
-    
+
         // Si la respuesta es 401, redirigir a la página de inicio de sesión
         if (error.response && error.response.status === 401) {
           console.log("Unauthorized access. Redirecting to login...");
           return <Navigate to="/login" />; // Volvemos al login si el token no funciona
         }
-    
+
         throw error;
       }
-    }
-    
+    },
   },
 
- 
   tecnologiasCharlas: {
     getTecnologiasCharlas: async () => {
       try {
@@ -375,7 +387,7 @@ const axiosApi = {
               Authorization: `Bearer ${token}`,
             },
           }
-        )
+        );
         console.log("API Response usuario:", response.data);
         return response.data;
       } catch (error) {
@@ -394,16 +406,17 @@ const axiosApi = {
     updateEstadoUsuario: async (id, estado) => {
       console.log(id);
       console.log(estado);
-    
+
       try {
         const token = localStorage.getItem("token");
-    
+
         console.log("token de axios: " + token);
         const response = await axios.put(
           "https://apitechriders.azurewebsites.net/api/usuarios/updateEstadoUsuario/" +
             id +
             "/" +
-            estado,{},
+            estado,
+          {},
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -414,13 +427,13 @@ const axiosApi = {
         return response.data;
       } catch (error) {
         console.error("Error updating usuario estado:", error);
-    
+
         // Si la respuesta es 401, redirigir a la página de inicio de sesión
         if (error.response && error.response.status === 401) {
           console.log("Unauthorized access. Redirecting to login...");
           return <Navigate to="/login" />; // Volvemos al login si el token no funciona
         }
-    
+
         throw error;
       }
     },
@@ -444,7 +457,6 @@ const axiosApi = {
         throw error;
       }
     },
-    
   },
 
   profesores: {
@@ -515,6 +527,16 @@ const axiosApi = {
         return centroresponse.data;
       } catch (error) {
         console.log("Error: ", error);
+      }
+    },
+    getPosiblesCharlasCentro: async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const response = await axios.get(`${API_URL}/api/Charlas`);
+
+        return response.data;
+      } catch (error) {
+        console.log(error);
       }
     },
   },
@@ -598,14 +620,11 @@ const axiosApi = {
         const token = localStorage.getItem("token");
 
         console.log("token de axios: " + token);
-        const response = await axios.get(
-          `${API_URL}/api/Roles`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const response = await axios.get(`${API_URL}/api/Roles`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         console.log("API Response:", response);
         return response.data;
       } catch (error) {
@@ -640,7 +659,6 @@ const axiosApi = {
         throw error;
       }
     },
-    
   },
   techriders: {
     getcharlastechrider: async (idtechrider) => {
@@ -649,7 +667,7 @@ const axiosApi = {
 
         console.log("token de axios: " + token);
         const response = await axios.get(
-          `${API_URL}/api/QueryTools/CharlasTechRider/`+idtechrider,
+          `${API_URL}/api/QueryTools/CharlasTechRider/` + idtechrider,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -672,6 +690,5 @@ const axiosApi = {
     },
   },
 };
-
 
 export default axiosApi;

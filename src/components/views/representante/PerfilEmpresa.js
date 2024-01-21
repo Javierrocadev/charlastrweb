@@ -23,7 +23,7 @@ const AlertaDenegada = () => (
     <p>Error</p>
   </div>
 );
-const HomeProfesor = () => {
+const PerfilEmpresa = () => {
   const [mostrarAlerta, setMostrarAlerta] = useState(false);
   const [mostrarAlertaDenegada, setMostrarAlertaDenegada] = useState(false);
 
@@ -444,4 +444,4 @@ const HomeProfesor = () => {
   );
 };
 
-export default HomeProfesor;
+export default PerfilEmpresa;

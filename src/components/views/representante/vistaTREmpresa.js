@@ -50,6 +50,8 @@ const VistaTechridersEmpresa = () => {
           {loading ? (
             // Render a loading indicator or message while data is being fetched
             <p>Loading...</p>
+          ) : charlas.length === 0 ? (
+            <p>No tiene charlas asignado.</p>
           ) : (
             charlas.map((ch, index) => (
               <div
@@ -150,12 +152,12 @@ const VistaTechridersEmpresa = () => {
               </div>
             </div>
 
-            <div className="absolute top-5 right-10">
+            <div className="absolute top-5 right-10 flex items-center">
+              
               <button
-                className="w-6 h-6 hover:scale-125 transition-transform cursor-pointer"
+                className="w-6 h-6 hover:scale-125 transition-transform cursor-pointer "
                 onClick={() => handleClickTr(tr)}
               >
-                ver charlas
                 <svg
                   className="text-gray-800 dark:text-white"
                   aria-hidden="true"
