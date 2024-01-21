@@ -74,16 +74,16 @@ const CalendarComponent = ({ charlas }) => {
   };
 
   return (
-    <div className="calendar-container flex flex-row gap-4 bg-accent-100 p-4 border border-bg-300 rounded">
+    <div className="calendar-container md:flex-row flex flex-col   gap-4 bg-accent-100 p-4 border border-bg-300 rounded">
       <Calendar
         onChange={setDate}
         value={date}
-        className="rounded h-[325px] flex flex-col justify-evenly  bg-green-100 border-none text-accent-100 flex flex-col"
+        className="rounded h-[325px] px-4 flex flex-col m-auto md:min-w-0 justify-evenly  bg-green-100 border-none text-accent-100 flex flex-col"
         calendarClassName="bg-green-100"
         tileContent={tileContent}
       />
       {charlasEnDia.length === 0 ? (
-        <p className="text-accent-200 w-full  font-bold text-xl rounded border border-gray-400 flex justify-center items-center bg-white">No hay charlas en este día.</p>
+        <p className="text-accent-200 w-full  font-bold text-xl rounded border sm:h-auto h-64 border-gray-400 flex justify-center items-center bg-white">No hay charlas en este día.</p>
       ) : (
         <ul className="w-full list-none p-0">
           {charlasEnDia.map((charla) => (
