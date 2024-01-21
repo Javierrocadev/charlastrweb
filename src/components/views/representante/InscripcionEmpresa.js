@@ -62,9 +62,9 @@ const InscripcionEmpresa = () => {
 
       //console.log(centroJSON);
 
-      const responseCentro = await axiosApi.empresasCentros.insertarEmpresaCentro(centroJSON);
+      const responseCentro =
+        await axiosApi.empresasCentros.insertarEmpresaCentro(centroJSON);
       console.log("Centro insertado: ", responseCentro.data);
-
     } catch (error) {
       console.log(error);
     }
@@ -191,19 +191,18 @@ const InscripcionEmpresa = () => {
               value={provincia}
               required
               className="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer"
-            onChange={handleInputChangeProvincia}
+              onChange={handleInputChangeProvincia}
             >
               <option selected disabled>
                 Elige la provincia
               </option>
-              {
-                provincias.map((provincias, index) => {
-                  return (
-                    <option key={index} value={provincias.idProvincia}>
-                      {provincias.nombreProvincia}
-                    </option>
-                  );
-                })}
+              {provincias.map((provincias, index) => {
+                return (
+                  <option key={index} value={provincias.idProvincia}>
+                    {provincias.nombreProvincia}
+                  </option>
+                );
+              })}
             </select>
           </div>
         </div>
@@ -231,27 +230,29 @@ const InscripcionEmpresa = () => {
               value={tipoEmpresa}
               required
               className="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer"
-             onChange={handleInputChangeTipoEmpresa}
+              onChange={handleInputChangeTipoEmpresa}
             >
               <option selected disabled>
                 Elige el tipo de empresa
               </option>
 
-              {
-              tipoEmpresas.map((tipo, index) => {
-                  return (
-                    <option key={index} value={tipo.idTipoEmpresa}>
-                      {tipo.descripcion}
-                    </option>
-                  );
-                })}
+              {tipoEmpresas.map((tipo, index) => {
+                return (
+                  <option key={index} value={tipo.idTipoEmpresa}>
+                    {tipo.descripcion}
+                  </option>
+                );
+              })}
             </select>
           </div>
         </div>
         <div className="text-center">
           <button
             type="submit"
-            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full max-w-xl px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            className="w-full max-w-xl px-5 py-2.5 text-center             
+            bg-gray-950  hover:bg-gray-800 transition-colors
+          text-white font-semibold rounded 
+          focus:outline-none focus:shadow-outline"
           >
             Enviar
           </button>

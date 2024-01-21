@@ -45,6 +45,8 @@ import VistaCursosCentrto from "./components/views/profesor/VerCursoCentro";
 import VistaCharlasCentrto from "./components/views/profesor/VerCharlasCentro";
 import InscripcionEmpresa from "./components/views/representante/InscripcionEmpresa";
 import VistaTechridersEmpresa from "./components/views/representante/vistaTREmpresa";
+import PerfilEmpresa from "./components/views/representante/PerfilEmpresa";
+import PerfilCentro from "./components/views/profesor/PerfilCentro";
 //   import RouteTr from "./components/RouteTr";
 
 // Agregar el código de refresco aquí
@@ -130,6 +132,9 @@ const App = () => {
             <Route path="/propuestatecnologias"
             element={<RouteRepresentante path="/propuestatecnologias" component={<HomeRepresentante></HomeRepresentante>} />}
             />
+            <Route path="/perfilempresa"
+            element={<RouteRepresentante path="/perfilempresa" component={<PerfilEmpresa></PerfilEmpresa>} />}
+            />
             {/* rutas de profesor/centro */}
             <Route
               path="/profesor"
@@ -146,9 +151,13 @@ const App = () => {
             <Route path="/inscripcioncentro"
             element={<RouteProfesor path="/inscripcioncentro" component={<InscripcionCentro/>} />}/>
 
-          <Route path="/propuestatecnologias"
+            <Route path="/propuestatecnologias"
             element={<RouteProfesor path="/propuestatecnologias" component={<HomeProfesor></HomeProfesor>} />}
             />
+            <Route path="/perfilcentro"
+            element={<RouteProfesor path="/perfilcentro" component={<PerfilCentro></PerfilCentro>} />}
+            />
+
             <Route path="/login" element={<Login />} />
             <Route path="/403" element={<NoAutorizado />} />
           </Routes>
