@@ -343,7 +343,7 @@ const HomeProfesor = () => {
           />
           <button
             type="submit"
-            className="mt-4 bg-black text-white py-2 px-4 rounded hover:bg-gray-900"
+            className="py-2 mt-4 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-accent-200 bg-accent-200 text-white shadow-sm hover:bg-accent-100 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
           >
             Enviar Mensaje
           </button>
@@ -362,7 +362,7 @@ const HomeProfesor = () => {
             className="relative md:max-w-full mx-auto p-6 mb-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
           >
             <p className="mb-4 text-lg font-semibold text-gray-900 dark:text-white">
-              <span className="text-indigo-500">Curso: </span>
+              <span className="text-accent-200">Curso: </span>
               {curso.descripcionCurso} {"(" + curso.nombreCurso + ")"}
             </p>
             <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4">
@@ -456,8 +456,8 @@ const HomeProfesor = () => {
                   <button
                     className={`${
                       selectedComponent === "perfil"
-                        ? "bg-black text-white"
-                        : "active  text-gray-800"
+                        ? "bg-accent-200 text-white"
+                        : "active  text-accent-200"
                     } inline-block p-4 border-b-2 border-transparent rounded-t-sm focus:outline-none`}
                     onClick={() => handleComponentChange("perfil")}
                   >
@@ -468,8 +468,8 @@ const HomeProfesor = () => {
                   <button
                     className={`${
                       selectedComponent === "contacto"
-                        ? "bg-black text-white"
-                        : "active text-gray-800"
+                        ? "bg-accent-200 text-white"
+                        : "active text-accent-200"
                     } inline-block p-4 border-b-2 border-transparent rounded-t-sm focus:outline-none`}
                     onClick={() => handleComponentChange("contacto")}
                   >
@@ -480,8 +480,8 @@ const HomeProfesor = () => {
                   <button
                     className={`${
                       selectedComponent === "alumnos"
-                        ? "bg-black text-white"
-                        : "active text-gray-800"
+                        ? "bg-accent-200 text-white"
+                        : "active text-accent-200"
                     } inline-block p-4 border-b-2 border-transparent rounded-t-sm focus:outline-none`}
                     onClick={() => handleComponentChange("alumnos")}
                   >

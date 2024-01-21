@@ -88,28 +88,23 @@ const InscripcionCentro = () => {
   }, []);
 
   return (
-    <section className="container mx-auto">
+    <section className="container bg-white rounded py-4 mx-auto">
       <form className="max-w-full m-5" onSubmit={insertarCentro}>
-        <h2 className="text-center text-4xl text-gray-500 bg-transparent mb-5">
-          Inscriba su centro
-        </h2>
+      <h2 class="text-xl font-bold mb-4 text-gray-800 dark:text-gray-200">
+        Inscribe tu centro
+      </h2>
         <div className="relative z-0 w-full mb-5 group">
           <input
             type="text"
             name="nombre"
             id="nombre"
             value={nombre}
-            className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-            placeholder=" "
+            className="py-2 px-3 pe-11 block w-full border-gray-200 shadow text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
+            placeholder="nombre "
             required
             onChange={handleInputChangeNombre}
           />
-          <label
-            htmlFor="nombre"
-            className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-          >
-            nombre
-          </label>
+         
         </div>
         <div className="relative z-0 w-full mb-5 group">
           <input
@@ -117,17 +112,12 @@ const InscripcionCentro = () => {
             name="direccion"
             id="direccion"
             value={direccion}
-            className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-            placeholder=" "
+            className="py-2 px-3 pe-11 block w-full border-gray-200 shadow text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
+            placeholder="direccion "
             required
             onChange={handleInputChangeDireccion}
           />
-          <label
-            htmlFor="direccion"
-            className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-          >
-            Dirección
-          </label>
+        
         </div>
         <div className="relative z-0 w-full mb-5 group">
           <input
@@ -136,17 +126,12 @@ const InscripcionCentro = () => {
             name="telefono"
             id="telefono"
             value={telefono}
-            className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-            placeholder=" "
+            className="py-2 px-3 pe-11 block w-full border-gray-200 shadow text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
+            placeholder=" telefono "
             required
             onChange={handleInputChangeTelefono}
           />
-          <label
-            htmlFor="telefono"
-            className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-          >
-            telefono
-          </label>
+         
         </div>
         <div className="relative z-0 w-full mb-5 group">
           <input
@@ -154,17 +139,12 @@ const InscripcionCentro = () => {
             name="persona_contacto"
             id="persona_contacto"
             value={personaContacto}
-            className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-            placeholder=" "
+            className="py-2 px-3 pe-11 block w-full border-gray-200 shadow text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
+            placeholder=" Persona de contacto "
             required
             onChange={handleInputChangePersonaContacto}
           />
-          <label
-            htmlFor="persona_contacto"
-            className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-          >
-            Persona de contacto
-          </label>
+         
         </div>
         <div className="grid md:grid-cols-2 md:gap-6">
           <div className="relative z-0 w-full mb-5 group">
@@ -173,24 +153,19 @@ const InscripcionCentro = () => {
               name="cif"
               id="cif"
               value={cif}
-              className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-              placeholder=" "
+              className="py-2 px-3 pe-11 block w-full border-gray-200 shadow text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
+              placeholder="CIF "
               required
               onChange={handleInputChangeCief}
             />
-            <label
-              htmlFor="cif"
-              className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-            >
-              CIF
-            </label>
+            
           </div>
           <div className="relative z-0 w-full mb-5 group">
             <select
               id="provincias"
               value={provincia}
               required
-              className="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer"
+              className="py-2 px-3 pe-11 block w-full border-gray-200 shadow text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
             onChange={handleInputChangeProvincia}
             >
               <option selected disabled>
@@ -214,23 +189,18 @@ const InscripcionCentro = () => {
               name="razon_social"
               id="razon_social"
               value={razonSocial}
-              className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-              placeholder=" "
+              className="py-2 px-3 pe-11 block w-full border-gray-200 shadow text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
+              placeholder="razón social "
               onChange={handleInputChangeRazonSocial}
             />
-            <label
-              htmlFor="razon_social"
-              className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-            >
-              razon social
-            </label>
+           
           </div>
           <div className="relative z-0 w-full mb-5 group">
             <select
               id="tiposEmpresas"
               value={tipoEmpresa}
               required
-              className="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer"
+              className="py-2 px-3 pe-11 block w-full border-gray-200 shadow text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
              onChange={handleInputChangeTipoEmpresa}
             >
               <option selected disabled>
@@ -251,12 +221,9 @@ const InscripcionCentro = () => {
         <div className="text-center">
           <button
             type="submit"
-            className="w-full max-w-xl px-5 py-2.5 text-center             
-            bg-gray-950  hover:bg-gray-800 transition-colors
-          text-white font-semibold rounded 
-          focus:outline-none focus:shadow-outline"
+            className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-accent-200 bg-accent-200 text-white shadow-sm hover:bg-accent-100 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
           >
-            Enviar
+            Inscribir centro
           </button>
         </div>
       </form>

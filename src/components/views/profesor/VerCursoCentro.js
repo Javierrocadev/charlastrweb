@@ -60,7 +60,7 @@ const VistaCursosCentrto = () => {
             className="relative md:max-w-full mx-auto p-6 mb-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
           >
             <p className="mb-4 text-lg font-semibold text-gray-900 dark:text-white">
-              <span className="text-indigo-500">Curso: </span>
+              <span className="text-accent-200">Curso: </span>
               {" " + curso.nombreCurso} {"(" + curso.descripcionCurso + ")"}
             </p>
             <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4">

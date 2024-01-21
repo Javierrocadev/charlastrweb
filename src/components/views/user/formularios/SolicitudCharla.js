@@ -167,9 +167,7 @@ const SolicitudCharla = (props) => {
         </div>
         <button
           onClick={() => insertarCharla()}
-          className="bg-gray-950  hover:bg-gray-800 transition-colors
-          text-white font-semibold py-2 px-4 rounded 
-          focus:outline-none focus:shadow-outline"
+          className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-accent-200 bg-accent-200 text-white shadow-sm hover:bg-accent-100 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
         >
           Enviar solicitar
         </button>

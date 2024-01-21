@@ -59,7 +59,7 @@ const VistaTechridersEmpresa = () => {
                 className="relative md:max-w-full mx-auto p-6 mb-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
               >
                 <p className="mb-4 text-lg font-semibold text-gray-900 dark:text-white">
-                  <span className="text-indigo-500">Descripcion: </span>
+                  <span className="text-accent-200">Descripcion: </span>
                   {" " + ch.descripcionCharla}
                 </p>
                 <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4">
@@ -116,7 +116,7 @@ const VistaTechridersEmpresa = () => {
             className="relative md:max-w-full mx-auto p-6 mb-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
           >
             <p className="mb-4 text-lg font-semibold text-gray-900 dark:text-white">
-              <span className="text-indigo-500">Tech Rider: </span>
+              <span className="text-accent-200">Tech Rider: </span>
               {" " + tr.techRider}
             </p>
             <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4">
