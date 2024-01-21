@@ -18,6 +18,7 @@ import QuienesSomos from "./components/views/user/QuienesSomos";
 import Centros from "./components/views/user/Centros";
 import NoAutorizado from "./components/views/user/NoAutorizado";
 import Comentarios from "./components/views/user/Comentarios";
+import CharlasCalendario from "./components/views/user/CharlasCalendario";
 //admin pages
 import HomeAdmin from "./components/views/admin/HomeAdmin";
 import EjemploAdmin from "./components/views/admin/EjemploAdmin";
@@ -67,6 +68,8 @@ const App = () => {
             <Route path="/empresas" element={<Empresas />} />
             <Route path="/centros" element={<Centros />} />
             <Route path="/quienessomos" element={<QuienesSomos />} />
+            <Route path="/calendario" element={<CharlasCalendario />} />
+
             {/* rutas de admin */}
             <Route
               path="/admin"
