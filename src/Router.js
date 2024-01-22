@@ -18,6 +18,7 @@ import QuienesSomos from "./components/views/user/QuienesSomos";
 import Centros from "./components/views/user/Centros";
 import NoAutorizado from "./components/views/user/NoAutorizado";
 import Comentarios from "./components/views/user/Comentarios";
+import CharlasCalendario from "./components/views/user/CharlasCalendario";
 //admin pages
 import HomeAdmin from "./components/views/admin/HomeAdmin";
 import EjemploAdmin from "./components/views/admin/EjemploAdmin";
@@ -45,6 +46,9 @@ import VistaCursosCentrto from "./components/views/profesor/VerCursoCentro";
 import VistaCharlasCentrto from "./components/views/profesor/VerCharlasCentro";
 import InscripcionEmpresa from "./components/views/representante/InscripcionEmpresa";
 import VistaTechridersEmpresa from "./components/views/representante/vistaTREmpresa";
+import PerfilEmpresa from "./components/views/representante/PerfilEmpresa";
+import PerfilCentro from "./components/views/profesor/PerfilCentro";
+import FormularioCharla from "./components/views/user/formularios/FormularioCharla";
 //   import RouteTr from "./components/RouteTr";
 
 // Agregar el código de refresco aquí
@@ -68,6 +72,9 @@ const App = () => {
             <Route path="/empresas" element={<Empresas />} />
             <Route path="/centros" element={<Centros />} />
             <Route path="/quienessomos" element={<QuienesSomos />} />
+            <Route path="/calendario" element={<CharlasCalendario />} />
+            <Route path="/formulariosolicitudcharla" element={<FormularioCharla />} />
+
             {/* rutas de admin */}
             <Route
               path="/admin"
@@ -132,6 +139,9 @@ const App = () => {
             <Route path="/propuestatecnologias"
             element={<RouteRepresentante path="/propuestatecnologias" component={<HomeRepresentante></HomeRepresentante>} />}
             />
+            <Route path="/perfilempresa"
+            element={<RouteRepresentante path="/perfilempresa" component={<PerfilEmpresa></PerfilEmpresa>} />}
+            />
             {/* rutas de profesor/centro */}
             <Route
               path="/profesor"
@@ -148,9 +158,13 @@ const App = () => {
             <Route path="/inscripcioncentro"
             element={<RouteProfesor path="/inscripcioncentro" component={<InscripcionCentro/>} />}/>
 
-          <Route path="/propuestatecnologias"
+            <Route path="/propuestatecnologias"
             element={<RouteProfesor path="/propuestatecnologias" component={<HomeProfesor></HomeProfesor>} />}
             />
+            <Route path="/perfilcentro"
+            element={<RouteProfesor path="/perfilcentro" component={<PerfilCentro></PerfilCentro>} />}
+            />
+
             <Route path="/login" element={<Login />} />
             <Route path="/403" element={<NoAutorizado />} />
           </Routes>

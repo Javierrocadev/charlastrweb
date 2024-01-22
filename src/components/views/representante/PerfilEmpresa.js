@@ -23,14 +23,13 @@ const AlertaDenegada = () => (
     <p>Error</p>
   </div>
 );
-const HomeProfesor = () => {
+const PerfilEmpresa = () => {
   const [mostrarAlerta, setMostrarAlerta] = useState(false);
   const [mostrarAlertaDenegada, setMostrarAlertaDenegada] = useState(false);
 
   const [usuarioResponse, setUsuarioResponse] = useState([]);
   const [provinciasResponse, setProvinciasResponse] = useState([]);
   const [empresaCentroResponse, setEmpresaCentroResponse] = useState([]);
-  const [cursosProfesor, setCursosProfesor] = useState([]);
 
   const [newPassword, setNewPassword] = useState("");
   const [newNombre, setNewNombre] = useState("");
@@ -352,51 +351,6 @@ const HomeProfesor = () => {
     );
   };
 
-  const AlumnosProfesor = () => {
-    // console.log(props);
-    return (
-      <section className="pt-10">
-        {cursosProfesor.map((curso) => (
-          <div
-            key={curso.idCurso}
-            className="relative md:max-w-full mx-auto p-6 mb-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
-          >
-            <p className="mb-4 text-lg font-semibold text-gray-900 dark:text-white">
-              <span className="text-accent-200">Curso: </span>
-              {curso.descripcionCurso} {"(" + curso.nombreCurso + ")"}
-            </p>
-            <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4">
-              <div>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
-                  <span className="font-semibold">Centro: </span>
-                  {curso.centro}
-                </p>
-              </div>
-              <div>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
-                  <span className="font-semibold">Email: </span>
-                  {curso.emailProfesor}
-                </p>
-              </div>
-              <div>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
-                  <span className="font-semibold">Telefono: </span>
-                  {curso.telefonoProfesor}
-                </p>
-              </div>
-              <div>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
-                  <span className="font-semibold">Provincia: </span>
-                  {curso.provinciaCentro}
-                </p>
-              </div>
-            </div>
-          </div>
-        ))}
-      </section>
-    );
-  };
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -412,11 +366,6 @@ const HomeProfesor = () => {
           await axiosApi.empresasCentros.getEmpresasCentros();
         console.log("Charlas responseEmpresaCentro:", responseEmpresaCentro);
         setEmpresaCentroResponse(responseEmpresaCentro);
-
-        const responseAlumnosProfesor =
-          await axiosApi.centros.getCursosByCentro();
-        console.log("Cursos profesor: ", responseAlumnosProfesor);
-        setCursosProfesor(responseAlumnosProfesor);
       } catch (error) {
         console.error("Error:", error);
       }
@@ -476,18 +425,6 @@ const HomeProfesor = () => {
                     formulario contacto
                   </button>
                 </li>
-                <li className="me-2">
-                  <button
-                    className={`${
-                      selectedComponent === "alumnos"
-                        ? "bg-accent-200 text-white"
-                        : "active text-accent-200"
-                    } inline-block p-4 border-b-2 border-transparent rounded-t-sm focus:outline-none`}
-                    onClick={() => handleComponentChange("alumnos")}
-                  >
-                    ver mis cursos
-                  </button>
-                </li>
               </ul>
             </div>
 
@@ -497,7 +434,6 @@ const HomeProfesor = () => {
             {selectedComponent === "contacto" && (
               <ContactForm usuarioResponse={usuarioResponse} />
             )}
-            {selectedComponent === "alumnos" && <AlumnosProfesor />}
 
             {mostrarAlerta && <AlertaExitosa />}
             {mostrarAlertaDenegada && <AlertaDenegada />}
@@ -508,4 +444,4 @@ const HomeProfesor = () => {
   );
 };
 
-export default HomeProfesor;
+export default PerfilEmpresa;

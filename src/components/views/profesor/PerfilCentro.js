@@ -23,7 +23,7 @@ const AlertaDenegada = () => (
     <p>Error</p>
   </div>
 );
-const HomeProfesor = () => {
+const PerfilCentro = () => {
   const [mostrarAlerta, setMostrarAlerta] = useState(false);
   const [mostrarAlertaDenegada, setMostrarAlertaDenegada] = useState(false);
 
@@ -456,8 +456,8 @@ const HomeProfesor = () => {
                   <button
                     className={`${
                       selectedComponent === "perfil"
-                        ? "bg-accent-200 text-white"
-                        : "active  text-accent-200"
+                        ? "bg-accent-200  text-white"
+                        : "active  text-accent-100"
                     } inline-block p-4 border-b-2 border-transparent rounded-t-sm focus:outline-none`}
                     onClick={() => handleComponentChange("perfil")}
                   >
@@ -468,8 +468,8 @@ const HomeProfesor = () => {
                   <button
                     className={`${
                       selectedComponent === "contacto"
-                        ? "bg-accent-200 text-white"
-                        : "active text-accent-200"
+                        ? "bg-accent-200  text-white"
+                        : "active text-accent-100"
                     } inline-block p-4 border-b-2 border-transparent rounded-t-sm focus:outline-none`}
                     onClick={() => handleComponentChange("contacto")}
                   >
@@ -480,8 +480,8 @@ const HomeProfesor = () => {
                   <button
                     className={`${
                       selectedComponent === "alumnos"
-                        ? "bg-accent-200 text-white"
-                        : "active text-accent-200"
+                        ? "bg-accent-200  text-white"
+                        : "active text-accent-100"
                     } inline-block p-4 border-b-2 border-transparent rounded-t-sm focus:outline-none`}
                     onClick={() => handleComponentChange("alumnos")}
                   >
@@ -508,4 +508,4 @@ const HomeProfesor = () => {
   );
 };
 
-export default HomeProfesor;
+export default PerfilCentro;
