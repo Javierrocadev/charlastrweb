@@ -643,16 +643,6 @@ const axiosApi = {
         console.log(error);
       }
     },
-
-    getCursos: async () => {
-      try {
-        const response = await axios.get(`${API_URL}/api/Cursos`);
-        return response.data;
-      } catch (error) {
-        console.error("Error getting provincias:", error);
-        throw error;
-      }
-    },
   },
   empresas: {
     getCharlasByEmpresa: async () => {
