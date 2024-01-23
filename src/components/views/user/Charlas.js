@@ -82,23 +82,6 @@ const Home = () => {
   return (
     <main>
 
-<div>
-  <select onChange={(e) => handleProvinciaFilter(e.target.value)}>
-    <option value={null}>Todos</option>
-    {provinciasResponse.map((provincia) => (
-      <option key={provincia.idProvincia} value={provincia.idProvincia}>
-        {provincia.nombreProvincia}
-      </option>
-    ))}
-  </select>
-</div>
-
-
-<div>
-  <button className="bg-accent-200" onClick={() => handleTurnoFilter(null)}>Todos</button>
-  <button className="bg-accent-200" onClick={() => handleTurnoFilter("MAÑANA")}>Mañana</button>
-  <button className="bg-accent-200" onClick={() => handleTurnoFilter("TARDE")}>Tarde</button>
-</div>
       <section>
         <h2 class="text-3xl text-center text-gray-800 font-bold lg:text-4xl dark:text-white">
           Nuestras charlas
@@ -107,22 +90,86 @@ const Home = () => {
           Explora nuestras charlas y si quieres, solicita una, ¡TOTALMENTE
           gratis!
         </p>
+<div className="mb-8 border border-gray-200 bg-bg-100 p-2 flex flex-col gap-2 rounded">
+  
+<div >
+  <p>Provincia:</p>
+      <select onChange={(e) => handleProvinciaFilter(e.target.value)} className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600">
+        <option value={null}>Todos</option>
+        {provinciasResponse.map((provincia) => (
+          <option key={provincia.idProvincia} value={provincia.idProvincia} >
+            {provincia.nombreProvincia}
+          </option>
+        ))}
+      </select>
+    </div>
+<p>Modalidad:</p>
+    <div className="flex gap-2">
+      <label
+        className={`py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-bg-300 ${
+          selectedTurno === null ? "bg-accent-200 text-white" : "bg-bg-100"
+        } text-text-200 shadow-sm duration-300 hover:bg-bg-200 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200`}
+      >
+        <input
+          type="radio"
+          name="turno"
+          value="null"
+          checked={selectedTurno === null}
+          onChange={() => handleTurnoFilter(null)}
+        />
+        Ambos
+      </label>
+      <label
+        className={`py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-bg-300 ${
+          selectedTurno === "MAÑANA" ? "bg-accent-200 text-white" : "bg-bg-100"
+        } text-text-200 shadow-sm duration-300 hover:bg-bg-200 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200`}
+      >
+        <input
+          type="radio"
+          name="turno"
+          value="MAÑANA"
+          checked={selectedTurno === "MAÑANA"}
+          onChange={() => handleTurnoFilter("MAÑANA")}
+        />
+        Mañana
+      </label>
+      <label
+        className={`py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-bg-300 ${
+          selectedTurno === "TARDE" ? "bg-accent-200 text-white" : "bg-bg-100"
+        } text-text-200 shadow-sm duration-300 hover:bg-bg-200 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200`}
+      >
+        <input
+          type="radio"
+          name="turno"
+          value="TARDE"
+          checked={selectedTurno === "TARDE"}
+          onChange={() => handleTurnoFilter("TARDE")}
+        />
+        Tarde
+      </label>
+    </div>
+</div>
+        
         <ul class="hs-accordion-group">
         {charlasResponse
-  .filter((charla) => {
-    // Aplicar filtro por provincia
-    if (selectedProvincia !== null && selectedProvincia !== "todos" && charla.idProvincia !== parseInt(selectedProvincia)) {
-      return false;
-    }
+      .filter((charla) => {
+        // Aplicar filtro por provincia
+        if (
+          selectedProvincia !== null &&
+          selectedProvincia !== "Todos" &&
+          charla.idProvincia !== parseInt(selectedProvincia)
+        ) {
+          return false;
+        }
 
-    // Aplicar filtro por turno
-    if (selectedTurno !== null && charla.turno !== selectedTurno) {
-      return false;
-    }
+        // Aplicar filtro por turno
+        if (selectedTurno !== null && selectedTurno !== "Todos" && charla.turno !== selectedTurno) {
+          return false;
+        }
 
-    return true;
-  })
-  .map((charla) => (
+        return true;
+      })
+      .map((charla) => (
             <li
               key={charla.idCharla}
               className="hs-accordion active bg-white border -mt-px first:rounded-t-lg last:rounded-b-lg dark:bg-gray-800 dark:border-gray-700"
