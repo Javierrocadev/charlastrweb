@@ -11,6 +11,7 @@ const VerTechRidersAdmin = () => {
 
 
   const [usuariosResponse, SetUsuariosResponse] = useState([]);
+  const [centroEmpresaResponse, SetEmpresaCentroResponse] = useState([]);
 
   const handleSubmit = (e) => {
 
@@ -21,6 +22,11 @@ const VerTechRidersAdmin = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+
+        const centroEmpresaResponse =
+        await axiosApi.empresasCentros.getEmpresasCentros();
+      console.log("Centros:", centroEmpresaResponse);
+      SetEmpresaCentroResponse(centroEmpresaResponse);
 
         const responseUsuarios = await axiosApi.usuarios.getUsuarios();
         console.log("usuarios response:", responseUsuarios);
@@ -120,6 +126,14 @@ const VerTechRidersAdmin = () => {
                     </span>
                   </div>
                 </th>
+                
+                <th scope="col" class="px-6 py-3 text-start">
+                  <div class="flex items-center gap-x-2">
+                    <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
+                     Centro-Empresa
+                    </span>
+                  </div>
+                </th>
                 <th scope="col" class="px-6 py-3 text-start">
                   <div class="flex items-center gap-x-2">
                     <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
@@ -176,11 +190,33 @@ const VerTechRidersAdmin = () => {
                     </div>
                   </div>
                 </td>
-               
+                <td class="h-px w-px whitespace-nowrap align-top">
+                  {centroEmpresaResponse
+                    .filter((centro) => usuario.idEmpresaCentro === centro.idEmpresaCentro)
+                    .map((centro, index) => (
+                      <td class="h-px w-72 max-w-[2rem] align-top">
+                        <div class="block p-6">
+                          <span class="block text-sm text-gray-500">
+                            {centro.nombre}
+                          </span>
+                        </div>
+                      </td>
+                    ))}
+                  {centroEmpresaResponse
+                    .filter((centro) => usuario.idEmpresaCentro === centro.idEmpresaCentro)
+                    .length === 0 && (
+                    <td class="h-px w-72 max-w-[2rem] align-top">
+                      <div class="block p-6">
+                        <span class="block text-sm text-gray-500">
+                          Ninguna
+                        </span>
+                      </div>
+                    </td>
+                  )}
+                </td>
+
                 <td class="h-px w-72 max-w-[2rem] align-top">
                   <div class="block p-6" >
-                    
-       
                     <span class="block text-sm text-gray-500">{usuario.telefono}</span>
                   </div>
                 </td>

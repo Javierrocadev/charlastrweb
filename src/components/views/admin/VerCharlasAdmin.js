@@ -24,7 +24,8 @@ const VerCharlasAdmin = () => {
   const handleValoracionesCharla = async (idCharla) => {
     try {
       const valoraciones = await axiosApi.ValoracionesCharlas.getValoracionesById(idCharla);
-      console.log(valoraciones); // Verifica que los datos de las valoraciones se impriman correctamente en la consola
+      console.log(valoraciones);
+      return valoraciones; // Verifica que los datos de las valoraciones se impriman correctamente en la consola
       // Puedes realizar alguna acción adicional después de obtener las valoraciones
     } catch (error) {
       console.error('Error al intentar obtener las valoraciones:', error);

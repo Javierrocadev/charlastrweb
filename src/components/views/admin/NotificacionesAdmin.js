@@ -308,22 +308,30 @@ const NotificacionesAdmin = () => {
                               </div>
                             </div>
                           </td>
-                            <td class="h-px w-px whitespace-nowrap align-top">
-                            {centroEmpresaResponse
-                            .filter((centro) => usuario.idEmpresaCentro === centro.idEmpresaCentro)
-                            .map((centro, index) => (
-                              <td class="h-px w-72 max-w-[2rem] align-top">
-                                <div class="block p-6">
-                                
-                                      <span class="block text-sm text-gray-500">
-                                        {centro.nombre}
-                                      </span>
-                                   
-                                     
-                                </div>
-                              </td>
-                            ))}
-                          </td>
+                          <td class="h-px w-px whitespace-nowrap align-top">
+                  {centroEmpresaResponse
+                    .filter((centro) => usuario.idEmpresaCentro === centro.idEmpresaCentro)
+                    .map((centro, index) => (
+                      <td class="h-px w-72 max-w-[2rem] align-top">
+                        <div class="block p-6">
+                          <span class="block text-sm text-gray-500">
+                            {centro.nombre}
+                          </span>
+                        </div>
+                      </td>
+                    ))}
+                  {centroEmpresaResponse
+                    .filter((centro) => usuario.idEmpresaCentro === centro.idEmpresaCentro)
+                    .length === 0 && (
+                    <td class="h-px w-72 max-w-[2rem] align-top">
+                      <div class="block p-6">
+                        <span class="block text-sm text-gray-500">
+                          Ninguna
+                        </span>
+                      </div>
+                    </td>
+                  )}
+                </td>
                           {rolesResponse
                             .filter((rol) => usuario.idRole === rol.idRole)
                             .map((rol, index) => (
