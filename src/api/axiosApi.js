@@ -153,7 +153,7 @@ const axiosApi = {
         var token = localStorage.getItem("token");
 
         const response = await axios.post(
-          `${API_URL}/api/empresascentros`,
+          `${API_URL}/api/EmpresasCentros`,
           empresaCentroData,
           {
             headers: {
@@ -546,7 +546,25 @@ const axiosApi = {
       }catch(error){
         console.log(error);
       }
-    }
+    },
+    getCursosByProfesor: async (idProfesor) => {
+      try {
+        const token = localStorage.getItem("token");
+
+        const responseCursos = await axios.get(
+          `${API_URL}/api/QueryTools/FindCursosProfesor/${idProfesor}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        return responseCursos.data;
+      } catch (error) {
+        console.log("Error: ", error);
+      }
+    },
   },
   empresas: {
     getCharlasByEmpresa: async () => {

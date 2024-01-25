@@ -58,6 +58,7 @@ const InscripcionCentro = () => {
         idProvincia: provincia,
         razonSocial: razonSocial,
         idTipoEmpresa: tipoEmpresa,
+        estadoEmpresa: 1
       };
 
       //console.log(centroJSON);

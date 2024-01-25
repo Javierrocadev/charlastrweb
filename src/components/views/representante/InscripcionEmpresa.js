@@ -49,7 +49,7 @@ const InscripcionEmpresa = () => {
     e.preventDefault();
     try {
       var centroJSON = {
-        idEmpresaCentro: null,
+        idEmpresaCentro: 0,
         nombre: nombre,
         direccion: direccion,
         telefono: telefono,
@@ -58,13 +58,14 @@ const InscripcionEmpresa = () => {
         idProvincia: provincia,
         razonSocial: razonSocial,
         idTipoEmpresa: tipoEmpresa,
+        estadoEmpresa: 1
       };
 
-      //console.log(centroJSON);
+      console.log(centroJSON);
 
-      const responseCentro =
-        await axiosApi.empresasCentros.insertarEmpresaCentro(centroJSON);
-      console.log("Centro insertado: ", responseCentro.data);
+      // const responseCentro =
+      //   await axiosApi.empresasCentros.insertarEmpresaCentro(centroJSON);
+      // console.log("Centro insertado: ", responseCentro.data);
     } catch (error) {
       console.log(error);
     }
