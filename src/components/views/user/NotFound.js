@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import logo from "../../../assets/images/HeroImg.jpeg"
 
-const NoAutorizado = () => {
+const NotFound = () => {
   return (
     <main className='mt-8'>
 <div class="bg-white shadow rounded-xl py-6 sm:py-8 lg:py-12">
@@ -10,10 +10,10 @@ const NoAutorizado = () => {
     <div class="grid gap-8 sm:grid-cols-2">
      
       <div class="flex flex-col items-center justify-center sm:items-start md:py-24 lg:py-32">
-        <p class="mb-4 text-sm font-semibold uppercase text-red-700 md:text-base">Error 403</p>
-        <h1 class="mb-2 text-center text-2xl font-bold text-gray-800 sm:text-left md:text-3xl">Sin acceso</h1>
+        <p class="mb-4 text-sm font-semibold uppercase text-accent-200 md:text-base">Error 404</p>
+        <h1 class="mb-2 text-center text-2xl font-bold text-gray-800 sm:text-left md:text-3xl">Página no encontrada</h1>
 
-        <p class="mb-8 text-center text-gray-500 sm:text-left md:text-lg">Careces de los permisos para acceder a la siguiente página. Si crees que se trata de un error contacta con los administradores.</p>
+        <p class="mb-8 text-center text-gray-500 sm:text-left md:text-lg">La página que buscas no existe o se ha movido.</p>
 
         <Link
               to={"/"}
@@ -33,4 +33,4 @@ const NoAutorizado = () => {
   );
 };
 
-export default NoAutorizado;
+export default NotFound;

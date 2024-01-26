@@ -12,6 +12,9 @@ const Home = () => {
     []
   );
 
+  const [selectedProvincia, setSelectedProvincia] = useState(null);
+  const [selectedTurno, setSelectedTurno] = useState(null);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -67,208 +70,17 @@ const Home = () => {
     return date.toLocaleDateString("es-ES", options);
   };
 
+  const handleProvinciaFilter = (provinciaId) => {
+    setSelectedProvincia(provinciaId);
+  };
+  
+  
+  const handleTurnoFilter = (turno) => {
+    setSelectedTurno(turno);
+  };
+
   return (
     <main>
-      {/* no borrar */}
-      <div class="hs-accordion-group hidden ">
-        <div class="hs-accordion active" id="hs-basic-heading-one">
-          <button
-            class="hs-accordion-toggle hs-accordion-active:text-blue-600 py-3 inline-flex items-center gap-x-3 w-full font-semibold text-start text-gray-800 hover:text-gray-500 rounded-lg disabled:opacity-50 disabled:pointer-events-none dark:hs-accordion-active:text-blue-500 dark:text-gray-200 dark:hover:text-gray-400 dark:focus:outline-none dark:focus:text-gray-400"
-            aria-controls="hs-basic-collapse-one"
-          >
-            <svg
-              class="hs-accordion-active:hidden block w-4 h-4"
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path d="M5 12h14" />
-              <path d="M12 5v14" />
-            </svg>
-            <svg
-              class="hs-accordion-active:block hidden w-4 h-4"
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path d="M5 12h14" />
-            </svg>
-            Accordion #1
-          </button>
-          <div
-            id="hs-basic-collapse-one"
-            class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300"
-            aria-labelledby="hs-basic-heading-one"
-          >
-            <p class="text-gray-800 dark:text-gray-200">
-              <em>This is the third item's accordion body.</em> It is hidden by
-              default, until the collapse plugin adds the appropriate classes
-              that we use to style each element. These classes control the
-              overall appearance, as well as the showing and hiding via CSS
-              transitions.
-            </p>
-          </div>
-        </div>
-
-        <div class="hs-accordion" id="hs-basic-heading-two">
-          <button
-            class="hs-accordion-toggle hs-accordion-active:text-blue-600 py-3 inline-flex items-center gap-x-3 w-full font-semibold text-start text-gray-800 hover:text-gray-500 rounded-lg disabled:opacity-50 disabled:pointer-events-none dark:hs-accordion-active:text-blue-500 dark:text-gray-200 dark:hover:text-gray-400 dark:focus:outline-none dark:focus:text-gray-400"
-            aria-controls="hs-basic-collapse-two"
-          >
-            <svg
-              class="hs-accordion-active:hidden block w-4 h-4"
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path d="M5 12h14" />
-              <path d="M12 5v14" />
-            </svg>
-            <svg
-              class="hs-accordion-active:block hidden w-4 h-4"
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path d="M5 12h14" />
-            </svg>
-            Accordion #2
-          </button>
-          <div
-            id="hs-basic-collapse-two"
-            class="hs-accordion-content  w-full overflow-hidden transition-[height] duration-300"
-            aria-labelledby="hs-basic-heading-two"
-          >
-            <p class="text-gray-800 dark:text-gray-200">
-              <em>This is the third item's accordion body.</em> It is hidden by
-              default, until the collapse plugin adds the appropriate classes
-              that we use to style each element. These classes control the
-              overall appearance, as well as the showing and hiding via CSS
-              transitions.
-            </p>
-          </div>
-        </div>
-
-        <div class="hs-accordion" id="hs-basic-heading-three">
-          <button
-            class="hs-accordion-toggle hs-accordion-active:text-blue-600 py-3 inline-flex items-center gap-x-3 w-full font-semibold text-start text-gray-800 hover:text-gray-500 rounded-lg disabled:opacity-50 disabled:pointer-events-none dark:hs-accordion-active:text-blue-500 dark:text-gray-200 dark:hover:text-gray-400 dark:focus:outline-none dark:focus:text-gray-400"
-            aria-controls="hs-basic-collapse-three"
-          >
-            <svg
-              class="hs-accordion-active:hidden block w-4 h-4"
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path d="M5 12h14" />
-              <path d="M12 5v14" />
-            </svg>
-            <svg
-              class="hs-accordion-active:block hidden w-4 h-4"
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path d="M5 12h14" />
-            </svg>
-            Accordion #3
-          </button>
-          <div
-            id="hs-basic-collapse-three"
-            class="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300"
-            aria-labelledby="hs-basic-heading-three"
-          >
-            <p class="text-gray-800 dark:text-gray-200">
-              <em>This is the third item's accordion body.</em> It is hidden by
-              default, until the collapse plugin adds the appropriate classes
-              that we use to style each element. These classes control the
-              overall appearance, as well as the showing and hiding via CSS
-              transitions.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <section class="text-gray-600 body-font ">
-        <div class="container mx-auto flex px-5 sm:py-24 py-8 md:flex-row flex-col items-center">
-          <div class="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
-            <h1 class="title-font text-7xl  mb-4 font-bold text-gray-900">
-              Tech Riders
-            </h1>
-
-            <p class="mb-4 leading-relaxed text-xl ">
-              Conectando Futuros: Charlas Tecnológicas para la Excelencia en la
-              Formación Profesional.
-            </p>
-            <div class="flex gap-2 justify-center items-center">
-              {/* <a href="/origen" class="ml-4 shrink-0 inline-flex text-gray-700 border-2 border-primary-500 bg-neutral-50  py-2 px-6 focus:outline-none hover:bg-neutral-100 rounded text-lg">
-                  Sobre nosotros
-                </a> */}
-              <Link
-                to={"/login"}
-                class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-accent-200 bg-accent-200 text-white shadow-sm hover:bg-accent-100 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
-              >
-                Iniciar sesion
-              </Link>
-              <Link
-                to={"/login"}
-                class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-bg-300 bg-bg-100 text-text-200 shadow-sm duration-300 hover:bg-bg-200 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
-              >
-                ¿Quiénes somos?
-              </Link>
-            </div>
-          </div>
-          <div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6 relative ">
-          
-            <img
-              class="object-cover object-center  bg-slate-100 rounded"
-              alt="hero"
-              src={heroImg}
-            />
-            <img
-              class="object-cover object-center rounded absolute -bottom-12 -right-1 [filter:_invert(50%);] "
-              alt="hero"
-              src={logoTajamar}
-            />
-          </div>
-        </div>
-      </section>
 
       <section>
         <h2 class="text-3xl text-center text-gray-800 font-bold lg:text-4xl dark:text-white">
@@ -278,8 +90,86 @@ const Home = () => {
           Explora nuestras charlas y si quieres, solicita una, ¡TOTALMENTE
           gratis!
         </p>
+<div className="mb-8 border border-gray-200 bg-bg-100 p-2 flex flex-col gap-2 rounded">
+  
+<div >
+  <p>Provincia:</p>
+      <select onChange={(e) => handleProvinciaFilter(e.target.value)} className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600">
+        <option value={null}>Todos</option>
+        {provinciasResponse.map((provincia) => (
+          <option key={provincia.idProvincia} value={provincia.idProvincia} >
+            {provincia.nombreProvincia}
+          </option>
+        ))}
+      </select>
+    </div>
+<p>Modalidad:</p>
+    <div className="flex gap-2">
+      <label
+        className={`py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-bg-300 ${
+          selectedTurno === null ? "bg-accent-200 text-white" : "bg-bg-100"
+        } text-text-200 shadow-sm duration-300 hover:bg-bg-200 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200`}
+      >
+        <input
+          type="radio"
+          name="turno"
+          value="null"
+          checked={selectedTurno === null}
+          onChange={() => handleTurnoFilter(null)}
+        />
+        Ambos
+      </label>
+      <label
+        className={`py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-bg-300 ${
+          selectedTurno === "MAÑANA" ? "bg-accent-200 text-white" : "bg-bg-100"
+        } text-text-200 shadow-sm duration-300 hover:bg-bg-200 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200`}
+      >
+        <input
+          type="radio"
+          name="turno"
+          value="MAÑANA"
+          checked={selectedTurno === "MAÑANA"}
+          onChange={() => handleTurnoFilter("MAÑANA")}
+        />
+        Mañana
+      </label>
+      <label
+        className={`py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-bg-300 ${
+          selectedTurno === "TARDE" ? "bg-accent-200 text-white" : "bg-bg-100"
+        } text-text-200 shadow-sm duration-300 hover:bg-bg-200 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200`}
+      >
+        <input
+          type="radio"
+          name="turno"
+          value="TARDE"
+          checked={selectedTurno === "TARDE"}
+          onChange={() => handleTurnoFilter("TARDE")}
+        />
+        Tarde
+      </label>
+    </div>
+</div>
+        
         <ul class="hs-accordion-group">
-          {charlasResponse.map((charla) => (
+        {charlasResponse
+      .filter((charla) => {
+        // Aplicar filtro por provincia
+        if (
+          selectedProvincia !== null &&
+          selectedProvincia !== "Todos" &&
+          charla.idProvincia !== parseInt(selectedProvincia)
+        ) {
+          return false;
+        }
+
+        // Aplicar filtro por turno
+        if (selectedTurno !== null && selectedTurno !== "Todos" && charla.turno !== selectedTurno) {
+          return false;
+        }
+
+        return true;
+      })
+      .map((charla) => (
             <li
               key={charla.idCharla}
               className="hs-accordion active bg-white border -mt-px first:rounded-t-lg last:rounded-b-lg dark:bg-gray-800 dark:border-gray-700"
@@ -322,7 +212,7 @@ const Home = () => {
                   {charla.descripcion}
                 </button>
                 <NavLink
-                to="/login"
+                to="/formulariosolicitudcharla"
                   class="py-2 px-3 m-2 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-accent-200 bg-accent-200 text-white shadow-sm hover:bg-accent-100 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
                 >
                   Solicitar charla
