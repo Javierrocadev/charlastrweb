@@ -261,7 +261,6 @@ const estado = parseInt(e.target.elements.estado.value, 10);
          
         </div>
   
- 
       
  {/*  
         <div class="sm:col-span-3">

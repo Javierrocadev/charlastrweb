@@ -8,10 +8,12 @@ const VerCharlasAdmin = () => {
   const [charlasResponse, setCharlasResponse] = useState([]);
   const [provinciasResponse, setProvinciasResponse] = useState([]);
   const [tecnologiasResponse, setTecnologiasResponse] = useState([]);
+  const [valoracionesResponse, setValoracionesResponse] = useState([]);
   const [tecnologiasCharlasResponse, setTecnologiasCharlasResponse] = useState([]);
+  
   const handleEliminarCharla = async (idCharla) => {
     try {
-      await axiosApi.charlas.eliminarCharla(idCharla);
+    await axiosApi.charlas.eliminarCharla(idCharla);
       console.log('Charla eliminada con éxito');
       // Puedes realizar alguna acción adicional después de eliminar la charla
     } catch (error) {
@@ -27,10 +29,16 @@ const VerCharlasAdmin = () => {
         const response = await axiosApi.charlas.getCharlas();
         console.log("Charlas response:", response);
         setCharlasResponse(response);
+        
+        const valoracionesResponse = await axiosApi.ValoracionesCharlas.getValoracionesCharlas();
+        console.log("Valoraciones charla:", valoracionesResponse);
+        setValoracionesResponse(valoracionesResponse);
 
         const responseProvincias = await axiosApi.provincias.getProvincias();
         console.log("Charlas responseProvincias:", responseProvincias);
         setProvinciasResponse(responseProvincias);
+
+     
 
         const responseTecnologias = await axiosApi.tecnologias.getTecnologias();
         console.log("Charlas responseTecnologias:", responseTecnologias);
@@ -63,6 +71,9 @@ const VerCharlasAdmin = () => {
     );
     return tecnologia ? tecnologia.nombreTecnologia : "Desconocido";
   };
+
+  
+
   const getTecnologiaCharlas = (idCharla) => {
     const tecnologias = tecnologiasCharlasResponse
       .filter((tecnologia) => tecnologia.idCharla === idCharla)
@@ -319,6 +330,7 @@ const VerCharlasAdmin = () => {
                           <span class="text-sm m-1 font-medium p-2 rounded-xl bg-bg-300 text-gray-600">
                             {charla.turno}
                           </span>
+                          
                         </p>
                       </div>
 
@@ -403,6 +415,12 @@ const VerCharlasAdmin = () => {
                         </dt>
                         {/* <dd class="text-xs text-gray-500">{charla.turno}</dd> */}
                       </div>
+                        <div>
+                          <h2>Valoraciones de la charla</h2>
+                          {valoracionesResponse.filter((valoracion)=> valoracion.idCharla === charla.idCharla).map((valoracion)=>{
+                           return valoracion.comentario
+                          }) }            
+                      </div>               
                     </dl>
                   </div>
                 </div>

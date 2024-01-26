@@ -12,6 +12,7 @@ const VerEmpresasCentroAdmin = () => {
 
   const [charlasResponse, setCharlasResponse] = useState([]);
   const [provinciasResponse, setProvinciasResponse] = useState([]);
+  const [cursosResponse, setCursosResponse] = useState([]);
   const [tecnologiasResponse, setTecnologiasResponse] = useState([]);
   const [tecnologiasCharlasResponse, setTecnologiasCharlasResponse] = useState([]);
   const [centroEmpresaResponse, setEmpresasCentrosResponse] = useState([]);
@@ -29,6 +30,10 @@ const VerEmpresasCentroAdmin = () => {
             const responseUsuarios = await axiosApi.usuarios.getUsuarios();
             console.log("Users:", responseUsuarios);
             SetUsuariosResponse(responseUsuarios);
+
+            const cursosResponse = await axiosApi.centros.getCursos();
+            console.log("Cursos:", cursosResponse);
+            setCursosResponse(cursosResponse);
           
             setLoading(false);
           } catch (error) {
@@ -171,16 +176,43 @@ const VerEmpresasCentroAdmin = () => {
                       <span class="block text-sm font-semibold text-gray-800 dark:text-gray-200">{centro.nombre}</span>
                      <span class="block text-sm text-gray-500">{centro.direccion}</span>
                         <span>{getRepresentantesEmpresas(centro.idEmpresaCentro)}</span> 
-
-                        <span class="block text-sm text-gray-500">{centro.direccion}</span>
+                        {centro.idTipoEmpresa ===2 ?(
+                          <span class="block text-sm text-gray-500">Centro</span>
+                        ):(
+                          <span class="block text-sm text-gray-500">Empresa</span>
+                        )}
                         <div>
-                          <button
-                              type="button"
-                              onClick={() =>axiosApi.empresasCentros.updateEstadoCentroEmpresa(centro.idEmpresaCentro,0)}
-                              class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-green-600 bg-green-600 text-white shadow-sm hover:bg-green-800 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
-                            >
-                              Desactivar
-                            </button>                   
+                        {centro.estadoEmpresa === 1 ? (
+                    <button
+            type="button"
+            onClick={() =>axiosApi.empresasCentros.updateEstadoCentroEmpresa(centro.idEmpresaCentro,0)}
+            class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-red-600 bg-red-600 text-white shadow-sm hover:bg-red-800 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
+          >
+            Desactivar
+          </button>
+            ) : (
+                <button
+                type="button"
+                onClick={() =>axiosApi.empresasCentros.updateEstadoCentroEmpresa(centro.idEmpresaCentro,1)}
+                class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-green-600 bg-green-600 text-white shadow-sm hover:bg-green-800 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
+              >
+                Activar
+              </button>
+            )}   
+             
+            <button
+                type="button"
+                 onClick={() =>axiosApi.empresasCentros.eliminarEmpresaCentro(centro.idEmpresaCentro)}
+                class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-green-600 bg-red-600 text-white shadow-sm hover:bg-green-800 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
+              >
+                Eliminar
+              </button>
+             <h1>Cursos del centro: {centro.nombre}</h1>
+                  {cursosResponse.filter((curso)=> centro.idTipoEmpresa ===2 && centro.idEmpresaCentro===curso.idCentro).map((curso,index)=>(
+                    <div key={index}>
+                      {curso.nombreCurso}
+                    </div>
+                  ))}
                          </div>
                       </div>
                     </div>

@@ -61,6 +61,12 @@ const NotificacionesAdmin = () => {
     );
     return provincia ? provincia.nombreProvincia : "Desconocido";
   };
+
+  const [seccion, setSeccion] = useState('altauser'); // Estado para controlar la sección
+
+    const cargarDatos = (seccion) => {
+      setSeccion(seccion); // Actualiza el estado con la nueva sección
+    };
   return (
     <main>
       <section class="text-gray-600 body-font mt-6">
@@ -104,12 +110,14 @@ const NotificacionesAdmin = () => {
                   <button
                     type="button"
                     class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-green-600 bg-green-600 text-white shadow-sm hover:bg-green-800 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
+                    onClick={() => cargarDatos('altauser')}
                   >
                     Alta Usuarios
                   </button>
                   <button
                     type="button"
                     class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-green-600 bg-green-600 text-white shadow-sm hover:bg-green-800 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
+                    onClick={() => cargarDatos('altacentroempresa')}
                   >
                     Alta centro-empresa
                   </button>
@@ -200,6 +208,7 @@ const NotificacionesAdmin = () => {
                 {/* <!-- End Header --> */}
 
                 {/* <!-- Table  MOSTAR ALTA USUARIOS  --> */}
+                {seccion === 'altauser' &&(
                 <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                   <thead class="bg-gray-50 dark:bg-slate-800">
                     <tr>
@@ -215,6 +224,13 @@ const NotificacionesAdmin = () => {
                         <div class="flex items-center gap-x-2">
                           <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
                             Correo
+                          </span>
+                        </div>
+                      </th>
+                      <th scope="col" class="px-6 py-3 text-start">
+                        <div class="flex items-center gap-x-2">
+                          <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
+                            Empresa-Centro
                           </span>
                         </div>
                       </th>
@@ -292,6 +308,30 @@ const NotificacionesAdmin = () => {
                               </div>
                             </div>
                           </td>
+                          <td class="h-px w-px whitespace-nowrap align-top">
+                  {centroEmpresaResponse
+                    .filter((centro) => usuario.idEmpresaCentro === centro.idEmpresaCentro)
+                    .map((centro, index) => (
+                      <td class="h-px w-72 max-w-[2rem] align-top">
+                        <div class="block p-6">
+                          <span class="block text-sm text-gray-500">
+                            {centro.nombre}
+                          </span>
+                        </div>
+                      </td>
+                    ))}
+                  {centroEmpresaResponse
+                    .filter((centro) => usuario.idEmpresaCentro === centro.idEmpresaCentro)
+                    .length === 0 && (
+                    <td class="h-px w-72 max-w-[2rem] align-top">
+                      <div class="block p-6">
+                        <span class="block text-sm text-gray-500">
+                          Ninguna
+                        </span>
+                      </div>
+                    </td>
+                  )}
+                </td>
                           {rolesResponse
                             .filter((rol) => usuario.idRole === rol.idRole)
                             .map((rol, index) => (
@@ -357,8 +397,10 @@ const NotificacionesAdmin = () => {
                       ))}
                   </tbody>
                 </table>
+                )}
 
                 {/* <!-- Table  MOSTAR ALTA CENTROS EMPRESAS  --> */}
+                {seccion === 'altacentroempresa' &&(
                 <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                   <thead class="bg-gray-50 dark:bg-slate-800">
                     <tr>
@@ -526,6 +568,7 @@ const NotificacionesAdmin = () => {
                       ))}
                   </tbody>
                 </table>
+                )}
                 {/* <!-- End Table --> */}
 
                 {/* <!-- Footer --> */}

@@ -11,6 +11,7 @@ const VerTechRidersAdmin = () => {
 
 
   const [usuariosResponse, SetUsuariosResponse] = useState([]);
+  const [centroEmpresaResponse, SetEmpresaCentroResponse] = useState([]);
 
   const handleSubmit = (e) => {
 
@@ -21,6 +22,11 @@ const VerTechRidersAdmin = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+
+        const centroEmpresaResponse =
+        await axiosApi.empresasCentros.getEmpresasCentros();
+      console.log("Centros:", centroEmpresaResponse);
+      SetEmpresaCentroResponse(centroEmpresaResponse);
 
         const responseUsuarios = await axiosApi.usuarios.getUsuarios();
         console.log("usuarios response:", responseUsuarios);
@@ -39,11 +45,6 @@ const VerTechRidersAdmin = () => {
   return (
    <main>
         <div>
-            <div>
-                <NavLink to={"/"}><button style={{backgroundColor: "green", color:"white", fontWeight:"bold", border: '5px solid green',}}>Ver todas las empresas/centros</button></NavLink> 
-                <br />
-                <NavLink to={"/"}><button style={{backgroundColor: "blue", color:"white", fontWeight:"bold", border: '5px solid blue',}}>Ver Notificaciones de alta</button></NavLink> 
-            </div>
             <div style={{textAlign:"center"}}>
                  <h1>LISTADO DE TODOS LOS TECHRIDERS</h1>
             </div>
@@ -125,6 +126,14 @@ const VerTechRidersAdmin = () => {
                     </span>
                   </div>
                 </th>
+                
+                <th scope="col" class="px-6 py-3 text-start">
+                  <div class="flex items-center gap-x-2">
+                    <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
+                     Centro-Empresa
+                    </span>
+                  </div>
+                </th>
                 <th scope="col" class="px-6 py-3 text-start">
                   <div class="flex items-center gap-x-2">
                     <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
@@ -181,11 +190,33 @@ const VerTechRidersAdmin = () => {
                     </div>
                   </div>
                 </td>
-               
+                <td class="h-px w-px whitespace-nowrap align-top">
+                  {centroEmpresaResponse
+                    .filter((centro) => usuario.idEmpresaCentro === centro.idEmpresaCentro)
+                    .map((centro, index) => (
+                      <td class="h-px w-72 max-w-[2rem] align-top">
+                        <div class="block p-6">
+                          <span class="block text-sm text-gray-500">
+                            {centro.nombre}
+                          </span>
+                        </div>
+                      </td>
+                    ))}
+                  {centroEmpresaResponse
+                    .filter((centro) => usuario.idEmpresaCentro === centro.idEmpresaCentro)
+                    .length === 0 && (
+                    <td class="h-px w-72 max-w-[2rem] align-top">
+                      <div class="block p-6">
+                        <span class="block text-sm text-gray-500">
+                          Ninguna
+                        </span>
+                      </div>
+                    </td>
+                  )}
+                </td>
+
                 <td class="h-px w-72 max-w-[2rem] align-top">
                   <div class="block p-6" >
-                    
-       
                     <span class="block text-sm text-gray-500">{usuario.telefono}</span>
                   </div>
                 </td>
@@ -240,7 +271,7 @@ const VerTechRidersAdmin = () => {
 ) : (
     <button
     type="button"
-    onClick={() =>axiosApi.usuarios.updateEstadoUsuario(usuario.idUsuario,0)}
+    onClick={() =>axiosApi.usuarios.updateEstadoUsuario(usuario.idUsuario,1)}
     class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-green-600 bg-green-600 text-white shadow-sm hover:bg-green-800 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
   >
     Activar
@@ -282,44 +313,7 @@ const VerTechRidersAdmin = () => {
     </div>
   </div>
   {/* <!-- End Card --> */}
-</div>
-
-
-
-
-
-
-
-
-
-
-          
-            {usuariosResponse.filter((usuario) => usuario.idRole === 3).map((usuario)=>(
-                  
-                       
-                            <div  style={{ border: "1px solid black", padding: "10px", marginBottom: "10px", overflow: "auto"}}>
-                                <h1>Nombre: {usuario.nombre} </h1>
-                                <h2>Apellidos: {usuario.apellidos}</h2>
-                                <h3>Email: {usuario.email} </h3>
-                                <h3>Telefono: {usuario.telefono}</h3>
-                                <h4>Linkedin: {usuario.linkedin} </h4>
-                                <h4>Password: {usuario.password} </h4>
-                                <h4>IdProvincia: {usuario.idProvincia}</h4>
-                                {usuario.estado === 1 ? (
-                                    <h4>Estado: ALTA</h4>
-                                     ) : (
-                                    <h4>Estado: BAJA</h4>
-                                    )}
-
-                                <div style={{float:"right"}}>
-                                <button onClick={() => this.cambiarEstado(usuario.idUsuario, usuario.estado)} style={{backgroundColor: "green", color:"white", fontWeight:"bold", border: '5px solid green'}}>Dar de Baja usuario</button>
-                                </div>
-                            </div>
-                        
-                    
-                  
-            ))
-            }
+</div>    
            </div>
    </main>
   );
