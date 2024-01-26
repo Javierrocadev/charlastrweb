@@ -21,18 +21,7 @@ const VerCharlasAdmin = () => {
       // Puedes manejar el error de alguna manera, por ejemplo, mostrar un mensaje al usuario
     }
   };
-  const handleValoracionesCharla = async (idCharla) => {
-    try {
-      const valoraciones = await axiosApi.ValoracionesCharlas.getValoracionesById(idCharla);
-      console.log(valoraciones);
-      return valoraciones; // Verifica que los datos de las valoraciones se impriman correctamente en la consola
-      // Puedes realizar alguna acción adicional después de obtener las valoraciones
-    } catch (error) {
-      console.error('Error al intentar obtener las valoraciones:', error);
-      // Puedes manejar el error de alguna manera, por ejemplo, mostrar un mensaje al usuario
-    }
-  };
-  
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -41,14 +30,15 @@ const VerCharlasAdmin = () => {
         console.log("Charlas response:", response);
         setCharlasResponse(response);
         
+        const valoracionesResponse = await axiosApi.ValoracionesCharlas.getValoracionesCharlas();
+        console.log("Valoraciones charla:", valoracionesResponse);
+        setValoracionesResponse(valoracionesResponse);
 
         const responseProvincias = await axiosApi.provincias.getProvincias();
         console.log("Charlas responseProvincias:", responseProvincias);
         setProvinciasResponse(responseProvincias);
 
-        const valoracionesResponse = await axiosApi.ValoracionesCharlas.getValoracionesById();
-        console.log("Valoraciones charla:", valoracionesResponse);
-        setValoracionesResponse(valoracionesResponse);
+     
 
         const responseTecnologias = await axiosApi.tecnologias.getTecnologias();
         console.log("Charlas responseTecnologias:", responseTecnologias);
@@ -81,6 +71,9 @@ const VerCharlasAdmin = () => {
     );
     return tecnologia ? tecnologia.nombreTecnologia : "Desconocido";
   };
+
+  
+
   const getTecnologiaCharlas = (idCharla) => {
     const tecnologias = tecnologiasCharlasResponse
       .filter((tecnologia) => tecnologia.idCharla === idCharla)
@@ -310,13 +303,6 @@ const VerCharlasAdmin = () => {
                 >
                  Eliminar Charla
                 </button>
-                <button
-                type="button"
-                 onClick={() => handleValoracionesCharla(charla.idCharla)}
-                class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-green-600 bg-red-600 text-white shadow-sm hover:bg-green-800 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
-              >
-                Ver Valoraciones de la charla
-              </button>
               </div>
 
               <div
@@ -429,18 +415,12 @@ const VerCharlasAdmin = () => {
                         </dt>
                         {/* <dd class="text-xs text-gray-500">{charla.turno}</dd> */}
                       </div>
-                      {/* {valoraciones !== null && (
                         <div>
                           <h2>Valoraciones de la charla</h2>
-                          {valoraciones.map((valoracion, index) => {
-                            return (
-                              <div key={index}>
-                                <p>{valoracion.comentario}</p>
-                              </div>
-                            );
-                          })}
-                        </div>
-                      )}  */}
+                          {valoracionesResponse.filter((valoracion)=> valoracion.idCharla === charla.idCharla).map((valoracion)=>{
+                           return valoracion.comentario
+                          }) }            
+                      </div>               
                     </dl>
                   </div>
                 </div>

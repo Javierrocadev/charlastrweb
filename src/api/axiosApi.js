@@ -348,6 +348,15 @@ const axiosApi = {
         throw error;
       }
     },
+    getEmpresasCentrosporID: async (idempresacentro) => {
+      try {
+        const response = await axios.get(`${API_URL}/api/EmpresasCentros/`+idempresacentro);
+        return response.data;
+      } catch (error) {
+        console.error("Error getting EmpresasCentros:", error);
+        throw error;
+      }
+    },
   },
 
   tecnologias: {
@@ -903,31 +912,48 @@ const axiosApi = {
         throw error;
       }
     },
+    PostTecnologiasTechRider: async (idtecnologia,idtechrider) => {
+      try {
+        var token = localStorage.getItem("token");
+
+        var idTec = parseInt(idtecnologia); 
+      
+        console.log(token);
+        var request = "api/TecnologiasTechriders/insertTecnologiaTechRiders/" + idtechrider + "/" + idTec;
+      
+        var api = "https://apitechriders.azurewebsites.net/";
+        var url = api + request;
+        console.log("url" + url);
+        axios
+          .post(url,{},{
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+           
+          },)
+          .then((response) => {
+            console.log(response);
+            window.location.reload();
+            alert("Tecnologia Añadida a mis tecnologias");
+          });
+      } catch (error) {
+        console.error("Error getting provincias:", error);
+        throw error;
+      }
+    },
   },
   peticionesTecnologias: {
     PostPeticionTecnologia: async (nombreTecnologia) => {
       try {
         var token = localStorage.getItem("token");
-
-        var idPeticionTecnologia = 0;
-        var nombre = nombreTecnologia;
-        var idTipoPeticionCategoria = 4;
-
-        var newPeticionTecnologia = {
-          idPeticionTecnologia: idPeticionTecnologia,
-          nombreTecnologia: nombre,
-          idTipoPeticionCategoria: idTipoPeticionCategoria
-         
-        };
-
-        console.log(newPeticionTecnologia);
+        
         console.log(token);
-        var request = "api/PeticionesTecnologias";
+        var request = "api/PeticionesTecnologias/"+nombreTecnologia;
         var api = "https://apitechriders.azurewebsites.net/";
         var url = api + request;
         console.log(url);
         axios
-          .post(url, newPeticionTecnologia, {
+          .post(url,{},{
             headers: {
               Authorization: `Bearer ${token}`,
             },

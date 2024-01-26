@@ -524,6 +524,12 @@ const Navbar = () => {
           <div class="flex flex-col gap-5 mt-5 custom:flex-row custom:items-center custom:mt-0 custom:ps-5">
             {/* <Link class="font-medium text-primary-100 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200" href="#" aria-current="page">Charlas</Link> */}
             <Link
+                class="font-medium hover:text-accent-200 text-text-200  dark:text-text-100 dark:hover:text-text-200 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
+                to={"/tr"}
+              >
+                Perfil
+              </Link>
+            <Link
               class="font-medium hover:text-accent-200 text-text-200  dark:text-text-100 dark:hover:text-text-200 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
               to={"/charlastechrider"}
             >
