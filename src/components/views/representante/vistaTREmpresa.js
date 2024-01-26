@@ -4,11 +4,13 @@ import axiosApi from "../../../api/axiosApi";
 const VistaTechridersEmpresa = () => {
   const [techriders, setTechriders] = useState([]);
   const [selectedTr, setSelectedTr] = useState(null);
+  const [openDetail, setOpenDetail] = useState(false);
 
   const handleClickTr = (tr) => {
     setSelectedTr((prevTr) => {
       return prevTr === tr ? null : tr;
     });
+    setOpenDetail((prev) => !prev);
   };
 
   const CharlasTr = ({ isOpen, idTr }) => {
@@ -94,6 +96,30 @@ const VistaTechridersEmpresa = () => {
     );
   };
 
+  const renderIcon = () => {
+    return (
+      <svg
+        className="w-4 h-3 text-gray-800 dark:text-white"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 14 8"
+      >
+        <path
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d={
+            openDetail
+              ? "M13 7 7.674 1.3a.91.91 0 0 0-1.348 0L1 7"
+              : "m1 1 5.326 5.7a.909.909 0 0 0 1.348 0L13 1"
+          }
+        />
+      </svg>
+    );
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -153,12 +179,12 @@ const VistaTechridersEmpresa = () => {
             </div>
 
             <div className="absolute top-5 right-10 flex items-center">
-              
               <button
                 className="w-6 h-6 hover:scale-125 transition-transform cursor-pointer "
                 onClick={() => handleClickTr(tr)}
               >
-                <svg
+                {renderIcon()}
+                {/* <svg
                   className="text-gray-800 dark:text-white"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
@@ -172,7 +198,7 @@ const VistaTechridersEmpresa = () => {
                     stroke-width="2"
                     d="M5 5h9M5 9h5m8-8H2a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h4l3.5 4 3.5-4h5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1Z"
                   />
-                </svg>
+                </svg> */}
               </button>
             </div>
             <CharlasTr isOpen={selectedTr === tr} idTr={tr.idTechRider} />

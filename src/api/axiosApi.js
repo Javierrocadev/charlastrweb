@@ -689,7 +689,7 @@ const axiosApi = {
         const token = localStorage.getItem("token");
 
         const responseCursos = await axios.get(
-          `${API_URL}/api/QueryTools/FindCursosProfesor/${idProfesor}`,
+          `${API_URL}/api/QueryTools/CharlasCursosProfesor/${idProfesor}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -765,7 +765,7 @@ const axiosApi = {
       try {
         const token = localStorage.getItem("token");
         const response = await axios.get(
-          `${API_URL}/api/QueryTools/CharlasTechRider?idtechrider=${idTr}`,
+          `${API_URL}/api/QueryTools/CharlasTechRider/${idTr}`,
           {
             headers: { Authorization: `Bearer ${token}` },
           }

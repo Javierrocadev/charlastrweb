@@ -81,22 +81,16 @@ const VerProfesoresCentro = () => {
           setLoad(false);
         }
       };
-      if (isOpen && idProfesor !== undefined) {
-        fetchData();
-      }
+      fetchData();
     }, [isOpen, idProfesor]);
 
     return (
-      <div
-        className={`${
-          isOpen ? "inline-block" : "hidden"
-        }  pt-5 mt-10 border-t-2`}
-      >
+      <div className={`${isOpen ? "" : "hidden"}  pt-5 mt-10 border-t-2`}>
         <h6 className="text-lg font-medium text-gray-900">
           cursos del profesor
         </h6>
         {loading ? (
-          <Loading /> 
+          <Loading />
         ) : (
           <div className=" w-full items-center">
             {cursos.length === 0 ? (
