@@ -4,21 +4,21 @@ import logo from "../../../../assets/images/LogoTechRiders.png";
 import axiosApi from "../../../../api/axiosApi";
 
 const FormularioCharla = () => {
-  const [cursos, setCursos] = useState([]);
+  //const [cursos, setCursos] = useState([]);
   const [fechaSolicitud, setFechaSolicitud] = useState("");
   const [formulario, setFormulario] = useState({
-    idCharla: 4,
+    idCharla: 0,
     descripcion: "",
     idEstadoCharla: 2,
     fechaCharla: "",
-    observaciones: "null",
-    idTechRider: 4,
+    observaciones: null,
+    idTechRider: null,
     fechaSolicitud: "",
     turno: "",
     modalidad: "",
-    acreditacionLinkedIn: "null",
-    idCurso: 1,
-    idProvincia: 4,
+    acreditacionLinkedIn: null,
+    idCurso: 0,
+    idProvincia: 0,
   });
 
   const [loaded, setLoaded] = useState(false);
@@ -48,9 +48,9 @@ const FormularioCharla = () => {
     const fetchData = async () => {
       //setLoaded(true);
       try {
-        const reponseCursos = await axiosApi.centros.getCursos();
-        setCursos(reponseCursos);
-        //console.log(reponseCursos);
+        // const reponseCursos = await axiosApi.centros.getCursos();
+        // setCursos(reponseCursos);
+        // //console.log(reponseCursos);
 
         const date = new Date();
         const formattedDate = `${date.getFullYear()}-${(date.getMonth() + 1)

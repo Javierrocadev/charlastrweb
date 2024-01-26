@@ -50,6 +50,8 @@ import VistaTechridersEmpresa from "./components/views/representante/vistaTREmpr
 import PerfilEmpresa from "./components/views/representante/PerfilEmpresa";
 import PerfilCentro from "./components/views/profesor/PerfilCentro";
 import FormularioCharla from "./components/views/user/formularios/FormularioCharla";
+import MenuEmpresa from "./components/views/representante/MenuEmpresa";
+import VerProfesoresCentro from "./components/views/profesor/VerProfesoresCentro";
 //   import RouteTr from "./components/RouteTr";
 
 // Agregar el código de refresco aquí
@@ -129,14 +131,18 @@ const App = () => {
               path="/representante"
               element={<RouteRepresentante path="/representante" component={<HomeRepresentante />} />}
             />
+            <Route
+              path="/menuempresa"
+              element={<RouteRepresentante path="/menuempresa" component={<MenuEmpresa />} />}
+            />
             <Route path="/vistatrempresa"
             element={<RouteRepresentante path="/vistatrempresa" component={<VistaTechridersEmpresa/>} />}
             />
             <Route path="/inscripcionempresa"
             element={<RouteRepresentante path="/inscripcionempresa" component={<InscripcionEmpresa/>} />}
             />
-            <Route path="/propuestatecnologias"
-            element={<RouteRepresentante path="/propuestatecnologias" component={<HomeRepresentante></HomeRepresentante>} />}
+            <Route path="/propuestatecnologiasempresa"
+            element={<RouteRepresentante path="/propuestatecnologiasempresa" component={<HomeRepresentante/>} />}
             />
             <Route path="/perfilempresa"
             element={<RouteRepresentante path="/perfilempresa" component={<PerfilEmpresa></PerfilEmpresa>} />}
@@ -150,6 +156,10 @@ const App = () => {
               path="/vercursocentro"
               element={<RouteProfesor path="/vercursocentro" component={<VistaCursosCentrto />} />}
             />
+              <Route
+              path="/verprofesorescentro"
+              element={<RouteProfesor path="/verprofesorescentro" component={<VerProfesoresCentro />} />}
+            />
             <Route
               path="/vercharlasocentro"
               element={<RouteProfesor path="/vercharlasocentro" component={<VistaCharlasCentrto />} />}
@@ -157,12 +167,14 @@ const App = () => {
             <Route path="/inscripcioncentro"
             element={<RouteProfesor path="/inscripcioncentro" component={<InscripcionCentro/>} />}/>
 
-            <Route path="/propuestatecnologias"
-            element={<RouteProfesor path="/propuestatecnologias" component={<HomeProfesor></HomeProfesor>} />}
+            <Route path="/propuestatecnologiascentro"
+            element={<RouteProfesor path="/propuestatecnologiascentro" component={<HomeProfesor/>} />}
             />
             <Route path="/perfilcentro"
-            element={<RouteProfesor path="/perfilcentro" component={<PerfilCentro></PerfilCentro>} />}
+            element={<RouteProfesor path="/perfilcentro" component={<PerfilCentro/>} />}
             />
+            <Route path="/formulariosolicitudcharla" 
+            element={<RouteProfesor  path="/formulariosolicitudcharla" component={<FormularioCharla/>}/>} />
 
             <Route path="/login" element={<Login />} />
             <Route path="/403" element={<NoAutorizado />} />

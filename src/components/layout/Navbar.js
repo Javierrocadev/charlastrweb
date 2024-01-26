@@ -303,7 +303,7 @@ const Navbar = () => {
               {/* <Link class="font-medium text-primary-100 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200" href="#" aria-current="page">Charlas</Link> */}
               <Link
                 class="font-medium hover:text-accent-200 text-accent-200 underline underline-offset-4  dark:text-text-100 dark:hover:text-text-200 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
-                to={"/profesor"}
+                to={"/"}
               >
                 Inicio
               </Link>
@@ -334,7 +334,7 @@ const Navbar = () => {
               </Link>
               <Link
                 class="font-medium hover:text-accent-200 text-text-200  dark:text-text-100 dark:hover:text-text-200 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
-                to={"/propuestatecnologias"}
+                to={"/propuestatecnologiascentro"}
               >
                 Propuestas
               </Link>
@@ -419,17 +419,17 @@ const Navbar = () => {
               {/* <Link class="font-medium text-primary-100 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200" href="#" aria-current="page">Charlas</Link> */}
               <Link
                 class="font-medium hover:text-accent-200 text-accent-200 underline underline-offset-4  dark:text-text-100 dark:hover:text-text-200 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
-                to={"/empresa"}
+                to={"/"}
               >
                 Inicio
               </Link>
 
-              <Link
+              {/* <Link
                 class="font-medium hover:text-accent-200 text-text-200  dark:text-text-100 dark:hover:text-text-200 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
-                to={"/vercharlasoempresa"}
+                to={"/vercharlasempresa"}
               >
                 charlas
-              </Link>
+              </Link> */}
               <Link
                 class="font-medium hover:text-accent-200 text-text-200  dark:text-text-100 dark:hover:text-text-200 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
                 to={"/vistatrempresa"}
@@ -438,13 +438,13 @@ const Navbar = () => {
               </Link>
               <Link
                 class="font-medium hover:text-accent-200 text-text-200  dark:text-text-100 dark:hover:text-text-200 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
-                to={"/inscripcionempresa"}
+                to={"/menuempresa"}
               >
-                inscribir empresa
+                empresa
               </Link>
               <Link
                 class="font-medium hover:text-accent-200 text-text-200  dark:text-text-100 dark:hover:text-text-200 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
-                to={"/propuestatecnologias"}
+                to={"/propuestatecnologiasempresa"}
               >
                 Propuestas
               </Link>

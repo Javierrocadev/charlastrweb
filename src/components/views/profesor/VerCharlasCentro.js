@@ -144,6 +144,24 @@ const VistaCharlasCentrto = () => {
     );
   };
 
+  const Loading = () => {
+    const [dots, setDots] = useState("");
+
+    useEffect(() => {
+      const intervalId = setInterval(() => {
+        setDots((prevDots) => (prevDots.length < 3 ? prevDots + "." : "."));
+      }, 1000);
+
+      return () => clearInterval(intervalId);
+    }, []);
+
+    return (
+      <div>
+        <span className="ml-2">{dots}</span>
+      </div>
+    );
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -159,7 +177,11 @@ const VistaCharlasCentrto = () => {
           (chwtr) => chwtr.idTechRider != null
         );
 
-        setCharla(filteredWithTR);
+        if (!filteredWithTR.length) {
+          return <Loading />;
+        } else {
+          setCharla(filteredWithTR);
+        }
 
         const responseEstado = axiosApi.charlas.getEstadoCharlas();
         setEstadoCharla(await responseEstado);
@@ -172,74 +194,82 @@ const VistaCharlasCentrto = () => {
 
   return (
     <section className="container mx-auto">
-      <h1 className="text-center text-3xl font-semibold py-4">Posibles charlas</h1>
-      <div>
-        {charla.map((charla) => (
-          <div
-            key={charla.idCharla}
-            className="relative md:max-w-full mx-auto p-6 mb-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
-          >
-            <div className="flex items-center">
-              <div className="flex-1">
-                <p className="mb-4 text-lg font-semibold text-gray-900 dark:text-white">
-                  <span className="text-indigo-500">Descripción: </span>
-                  {charla.descripcion}
-                </p>
+      {charla.length === 0 ? (
+        <h1 className="text-center text-3xl font-semibold py-4 flex">
+          Posibles charlas
+          <span>
+            <Loading />
+          </span>
+        </h1>
+      ) : (
+        <div>
+          {charla.map((charla) => (
+            <div
+              key={charla.idCharla}
+              className="relative md:max-w-full mx-auto p-6 mb-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+            >
+              <div className="flex items-center">
+                <div className="flex-1">
+                  <p className="mb-4 text-lg font-semibold text-gray-900 dark:text-white">
+                    <span className="text-indigo-500">Descripción: </span>
+                    {charla.descripcion}
+                  </p>
+                </div>
+                <div
+                  className=" mr-5  flex items-center hover:scale-95 transition-transform cursor-pointer"
+                  onClick={() => handleClickDetailCharla(charla)}
+                >
+                  <span className="font-semibold mr-2 ">detalles</span>
+                  {renderIcon()}
+                </div>
+                <div
+                  className=" flex items-center hover:scale-95 transition-transform cursor-pointer"
+                  onClick={() => solicitarrCharlaHandleClick(charla)}
+                >
+                  <span className="font-semibold mr-2 ">Solicitar charla</span>
+                </div>
               </div>
-              <div
-                className=" mr-5  flex items-center hover:scale-95 transition-transform cursor-pointer"
-                onClick={() => handleClickDetailCharla(charla)}
-              >
-                <span className="font-semibold mr-2 ">detalles</span>
-                {renderIcon()}
+              <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4">
+                <div>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">
+                    <span className="font-semibold">Fecha: </span>
+                    {charla.fechaCharla}
+                  </p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">
+                    <span className="font-semibold">Turno: </span>
+                    {charla.turno}
+                  </p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">
+                    <span className="font-semibold">Modalidad: </span>
+                    {charla.modalidad}
+                  </p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">
+                    <span className="font-semibold">Estado: </span>
+                    {getEstadoNombre(charla.idEstadoCharla)}
+                  </p>
+                </div>
               </div>
-              <div
-                className=" flex items-center hover:scale-95 transition-transform cursor-pointer"
-                onClick={() => solicitarrCharlaHandleClick(charla)}
-              >
-                <span className="font-semibold mr-2 ">Solicitar charla</span>
-              </div>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4">
               <div>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
-                  <span className="font-semibold">Fecha: </span>
-                  {charla.fechaCharla}
-                </p>
+                <DetailForm
+                  isOpen={selected === charla}
+                  idTr={charla.idTechRider}
+                />
               </div>
-              <div>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
-                  <span className="font-semibold">Turno: </span>
-                  {charla.turno}
-                </p>
-              </div>
-              <div>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
-                  <span className="font-semibold">Modalidad: </span>
-                  {charla.modalidad}
-                </p>
-              </div>
-              <div>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
-                  <span className="font-semibold">Estado: </span>
-                  {getEstadoNombre(charla.idEstadoCharla)}
-                </p>
-              </div>
-            </div>
-            <div>
-              <DetailForm
-                isOpen={selected === charla}
-                idTr={charla.idTechRider}
+              <SolicitudCharla
+                isOpen={selectedSolicitar === charla}
+                idCurso={charla.idCurso}
+                idCentro={charla.idCentro}
               />
             </div>
-            <SolicitudCharla
-              isOpen={selectedSolicitar === charla}
-              idCurso={charla.idCurso}
-              idCentro={charla.idCentro}
-            />
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
     </section>
   );
 };
