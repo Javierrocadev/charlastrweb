@@ -21,10 +21,13 @@ const HomeTechRiders = () => {
 
   const [mostrarAlerta, setMostrarAlerta] = useState(false);
   const [mostrarAlertaDenegada, setMostrarAlertaDenegada] = useState(false);
+  const [nombreTecnologia, setNombreTecnologia] = useState("");
 
     const [usuarioResponse, setUsuarioResponse] = useState([]);
     const [provinciasResponse, setProvinciasResponse] = useState([]);
     const [empresaCentroResponse, setEmpresaCentroResponse] = useState([]);
+    const [TecnologiasIdResponse, setTecnologiasIdResponse] = useState([]);
+    const [TecnologiasResposne, setTecnologiasResponse] = useState([]);
 
     const [newPassword, setNewPassword] = useState("");
     const [newNombre, setNewNombre] = useState("");
@@ -33,8 +36,15 @@ const HomeTechRiders = () => {
     const [newTelefono, setNewTelefono] = useState("");
     const [newLinkedin, setNewLinkedin] = useState("");
     const [newProvincia, setNewProvincia] = useState("");
+
+    const [seccionVisible, setSeccionVisible] = useState(false); // Estado para controlar la visibilidad de la sección
+    const [selectedTecnologia, setSelectedTecnologia] = useState(null);
+
+  
     const handleSubmit = async  (e) => {
 console.log("funcion")
+
+
       e.preventDefault();
       const datoUsuarioAntes = usuarioResponse
       // const email = e.target.elements.email.value;
@@ -108,8 +118,27 @@ const estado = parseInt(e.target.elements.estado.value, 10);
 
     
 };
+const handleNombreChange = (e) => {
+  setNombreTecnologia(e.target.value);
+};
+const handleSubmitPeticionTecnologia = (e) => {
+  e.preventDefault();
+  // Llamar al método en otro componente y pasar el valor del input
+ axiosApi.peticionesTecnologias.PostPeticionTecnologia(nombreTecnologia);
+};
 
-
+const handleSubmitTecnologia = (e) => {
+  e.preventDefault();
+  
+  // Check if a technology is selected
+  if (selectedTecnologia) {
+    // Llamar al método en otro componente y pasar el valor del input
+    axiosApi.tecnologiasTechriders.PostTecnologiasTechRider(selectedTecnologia, usuarioResponse.idUsuario);
+  } else {
+    // Handle the case when no technology is selected
+    console.error("Please select a technology");
+  }
+};
     useEffect(() => {
       
       const fetchData = async () => {
@@ -125,6 +154,16 @@ const estado = parseInt(e.target.elements.estado.value, 10);
           const responseEmpresaCentro = await axiosApi.empresasCentros.getEmpresasCentros();
           console.log("Charlas responseEmpresaCentro:", responseEmpresaCentro);
           setEmpresaCentroResponse(responseEmpresaCentro);
+
+          
+          const TecnologiasIdResponse = await axiosApi.tecnologiasTechriders.getTecnologiasTechriders();
+          console.log("Tecnologias responseEmpresaCentro:", TecnologiasIdResponse);
+          setTecnologiasIdResponse(TecnologiasIdResponse);
+
+          
+          const TecnologiasResponse = await axiosApi.tecnologias.getTecnologias();
+          console.log("Tecnologias responseEmpresaCentro:", TecnologiasResponse);
+          setTecnologiasResponse(TecnologiasResponse);
 
         } catch (error) {
           console.error("Error:", error);
@@ -154,21 +193,48 @@ const estado = parseInt(e.target.elements.estado.value, 10);
     return empresaCentro ? empresaCentro.nombre : "Sin empresa";
   };
 
+  const [seccion, setSeccion] = useState('perfiltechrider');
+  const cargarVisible = () => { 
+    setSeccionVisible(true);
+  };
+  const cargarDatos = (seccion) => {
+    setSeccion(seccion); 
+    setSeccionVisible(false);
+  };
   return (
     <main>
         {usuarioResponse && (
   <div class="max-w-4xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
   <div class="bg-white rounded-xl shadow p-4 sm:p-7 dark:bg-slate-900">
     <div class="mb-8">
-      <h2 class="text-xl font-bold text-gray-800 dark:text-gray-200">
-        Perfil Tech Riders
-      </h2>
+    <button
+     type="button"
+     class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-green-600 bg-green-600 text-white shadow-sm hover:bg-green-800 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
+     onClick={() => cargarDatos('perfiltechrider')}
+       >
+      Perfil Tech Riders
+      </button>
       <p class="text-sm text-gray-600 dark:text-gray-400">
         Tus datos
       </p>
+      <div>
+      <button
+     type="button"
+     class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-green-600 bg-green-600 text-white shadow-sm hover:bg-green-800 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
+     onClick={() => cargarDatos('perfilempresa')}
+       >
+      Perfil Empresa
+      </button>
+      <p class="text-sm text-gray-600 dark:text-gray-400">
+        Datos de tu empresa
+      </p>
+      </div>
+     
     </div>
  
-    <form onSubmit={handleSubmit}>
+ {/* Form Perfil */}
+    {seccion === 'perfiltechrider' &&(
+   <form onSubmit={handleSubmit}>
     <input
                   type="hidden"
                   name="idUsuario"
@@ -268,6 +334,8 @@ const estado = parseInt(e.target.elements.estado.value, 10);
             
           </div>
         </div>
+
+        
   
         <div class="sm:col-span-9">
           <div class="sm:flex ">
@@ -284,9 +352,29 @@ const estado = parseInt(e.target.elements.estado.value, 10);
   
          
         </div>
-  
- 
-      
+
+        <div class="sm:col-span-3">
+          <div class="inline-block">
+            <label for="af-account-phone" class="inline-block text-sm  text-gray-800 mt-2.5 dark:text-gray-200">
+             Mis tecnologias
+            </label>
+            
+          </div>
+        </div>
+            
+            <div class="inline-block text-sm text-gray-800 mt-2.5 dark:text-gray-200">
+      {TecnologiasIdResponse.filter((tecnologiaid) => usuarioResponse.idUsuario === tecnologiaid.idUsuario)
+        .map((tecnologiaid) => {
+          return TecnologiasResposne.filter((tecnologia) => tecnologia.idTecnologia === tecnologiaid.idTecnologia)
+            .map((tecnologia) => tecnologia.nombreTecnologia);
+        })
+        .join(", ")}
+
+<button onClick={() => cargarVisible()} type="submit" class="mt-4 py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-accent-200 bg-accent-200 text-white shadow-sm hover:bg-accent-100 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200">
+          Añadir Tecnologia
+        </button>
+    </div>
+
  {/*  
         <div class="sm:col-span-3">
           <label for="af-account-bio" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-gray-200">
@@ -307,6 +395,198 @@ const estado = parseInt(e.target.elements.estado.value, 10);
         </button>
       </div>
     </form>
+    )}
+ 
+    {/* Form Datos de mi empresa */}
+    {seccion === 'perfilempresa' &&(
+    <form >
+        <input
+                      type="hidden"
+                      name="idUsuario"
+                      value={usuarioResponse.idUsuario}
+                    />
+                    <input
+                      type="hidden"
+                      name="idRole"
+                      value={usuarioResponse.idRole}
+                    />
+                    <input
+                      type="hidden"
+                      name="idEmpresaCentro"
+                      value={usuarioResponse.idEmpresaCentro}
+                    />
+                    <input
+                      type="hidden"
+                      name="estado"
+                      value={usuarioResponse.estado}
+                    />
+          <div class="grid sm:grid-cols-12 gap-2 sm:gap-6">
+      
+      
+      
+      
+            <div class="sm:col-span-3">
+              <label for="af-account-password" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-gray-200">
+                Empresa
+              </label>
+            </div>
+      
+            <div class="sm:col-span-9">
+              <div class="space-y-2">
+
+                <input    type="text" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 "  placeholder={getCentroNombre(usuarioResponse.idEmpresaCentro)} disabled/>
+              </div>
+            </div>
+            <div class="sm:col-span-3">
+              <label for="af-account-password" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-gray-200">
+                Password
+              </label>
+            </div>
+      
+            <div class="sm:col-span-3">
+              <div class="inline-block">
+                <label for="af-account-phone" class="inline-block text-sm  text-gray-800 mt-2.5 dark:text-gray-200">
+                  Telefono
+                </label>
+                
+              </div>
+            </div>
+
+            
+      
+            <div class="sm:col-span-9">
+              <div class="sm:flex ">
+                <input id="af-account-phone" type="text" class="py-3 mr-4 sm:mb-0 mb-4 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 " onChange={(e) => setNewTelefono(e.target.value)} placeholder={usuarioResponse.telefono}/>
+                <select onChange={(e) => setNewProvincia(e.target.value)} class="py-2 px-3 pe-9 block w-full sm:w-auto border-gray-200 shadow-sm -mt-px -ms-px rounded sm:mt-0 sm:first:ms-0  text-sm relative focus:z-10  focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 ">
+                
+                    {provinciasResponse.map((provincia) => (
+                    <option key={provincia.idProvincia} value={provincia.idProvincia}  selected={provincia.idProvincia === usuarioResponse.idProvincia}>
+                    {getProvinciaNombre(provincia.idProvincia)}
+                  </option>
+                  ))}
+                </select>
+              </div>
+      
+            
+            </div>
+
+            <div class="sm:col-span-3">
+              <div class="inline-block">
+                <label for="af-account-phone" class="inline-block text-sm  text-gray-800 mt-2.5 dark:text-gray-200">
+                Mis tecnologias
+                </label>
+                
+              </div>
+            </div>
+                
+            {TecnologiasIdResponse.filter((tecnologiaid) => usuarioResponse.idUsuario === tecnologiaid.idUsuario)
+            .map((tecnologiaid) => {
+              return TecnologiasResposne.filter((tecnologia) => tecnologia.idTecnologia === tecnologiaid.idTecnologia)
+                .map((tecnologia) => tecnologia.nombreTecnologia);
+            })
+            .join(", ")}
+
+                <div class="inline-block text-sm text-gray-800 mt-2.5 dark:text-gray-200">
+         
+
+    <button onClick={() => cargarDatos()} type="submit" class="mt-4 py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-accent-200 bg-accent-200 text-white shadow-sm hover:bg-accent-100 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200">
+              Añadir Tecnologia
+            </button>
+        </div>
+
+    {/*  
+            <div class="sm:col-span-3">
+              <label for="af-account-bio" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-gray-200">
+                BIO
+              </label>
+            </div>
+          
+      
+            <div class="sm:col-span-9">
+              <textarea id="af-account-bio" class="py-2 px-3 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" rows="6" placeholder="Type your message..."></textarea>
+            </div> */}
+          
+          </div>
+      
+          <div class="mt-5 flex justify-end gap-x-2">
+            <button type="submit" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-accent-200 bg-accent-200 text-white shadow-sm hover:bg-accent-100 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200">
+              Guardar cambios
+            </button>
+          </div>
+        </form>
+    )}
+ 
+    {/* Form Añadir Tecnologia   SOLO MOSTRAR AL DAR AL BOTON AÑADIR TECNOLOGIA*/}
+    {seccionVisible &&(
+    <form>
+   
+      <div class="grid sm:grid-cols-12 gap-2 sm:gap-6">
+
+
+        <div class="sm:col-span-3">
+          <label for="af-account-email" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-gray-200">
+          Selecciona una Tecnologia
+          </label>
+        </div>
+       
+        <div className="sm:col-span-3">
+        <select onChange={(e) => setSelectedTecnologia(e.target.value)} className="py-2 px-3 pe-9 block w-full sm:w-auto border-gray-200 shadow-sm -mt-px -ms-px rounded sm:mt-0 sm:first:ms-0 text-sm relative focus:z-10 focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2 ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400">
+          {TecnologiasResposne.filter((tecnologia) => {
+            // Filtro para no añadir la tecnologia que ya tiene 
+            const hasTechnology = TecnologiasIdResponse.some((techId) => techId.idTecnologia === tecnologia.idTecnologia);
+            return !hasTechnology;
+          }).map((tecnologia) => (
+            <option key={tecnologia.idTecnologia} value={tecnologia.idTecnologia}>
+              {tecnologia.nombreTecnologia}
+            </option>
+          ))}
+        </select>
+      </div>
+
+        <div class="sm:col-span-3">
+        <button  onClick={handleSubmitTecnologia} type="submit" class="mt-4 py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-accent-200 bg-accent-200 text-white shadow-sm hover:bg-accent-100 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200">
+          Añadir Tecnologia
+        </button>
+        </div>
+         
+         <div></div>
+         
+        <div class="sm:col-span-3">
+          <label for="af-account-password" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-gray-200">
+            Solicita una nueva Tecnologia
+          </label>
+        </div>
+  
+        <div class="sm:col-span-3">
+          <input
+              type="text"
+              className="form-control"
+              id="nombre"
+              style={{ margin: "30px", border: "1px solid black" }}
+              value={nombreTecnologia}
+              onChange={handleNombreChange}/>  
+        </div>
+
+        <div></div>
+        <button onClick={handleSubmitPeticionTecnologia} type="submit" class="mt-4 py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-accent-200 bg-accent-200 text-white shadow-sm hover:bg-accent-100 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200">
+          Solicitar Tecnologia
+        </button>
+
+ {/*  
+        <div class="sm:col-span-3">
+          <label for="af-account-bio" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-gray-200">
+            BIO
+          </label>
+        </div>
+       
+  
+        <div class="sm:col-span-9">
+          <textarea id="af-account-bio" class="py-2 px-3 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" rows="6" placeholder="Type your message..."></textarea>
+        </div> */}
+      
+      </div>
+    </form>
+    )}
   </div>
   
   </div> 

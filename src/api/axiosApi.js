@@ -106,6 +106,75 @@ const axiosApi = {
         console.log(error);
       }
     },
+
+    anularCharla: async (idcharla)=>{
+      try {
+      var token = localStorage.getItem("token")
+  
+     var idtechrider = 0;
+     var idestadocharla = 1
+     var request = "api/charlas/AsociarTechriderCharla/" + idtechrider+"/"+idcharla ;
+     var api = "https://apitechriders.azurewebsites.net/" 
+      var url = api + request
+      console.log(url)
+      axios.put(url,{},{
+         headers: {
+           Authorization: `Bearer ${token}`
+         }
+         }).then(response=>{
+          var request = "api/charlas/UpdateEstadoCharla/"+idcharla+"/"+idestadocharla;
+          var api = "https://apitechriders.azurewebsites.net/" 
+          var url = api + request
+          console.log(url)
+          axios.put(url,{},{
+             headers: {
+                 Authorization: `Bearer ${token}`
+               }
+          })
+          window.location.reload();
+          alert("Charla Anulada");
+       })
+      } catch (error) {
+        console.error("Error Anulando charla:", error);
+        throw error;
+      }
+    },
+    
+    aceptarCharla: async (idTechrider,idCharla)=>{
+      try {
+        var token = localStorage.getItem("token")
+    
+       var idtechrider = idTechrider;
+       var idcharla = idCharla
+       var idestadocharla = 4
+       console.log(idtechrider,idcharla)
+
+       var request = "api/charlas/AsociarTechriderCharla/" + idtechrider+"/"+idcharla ;
+       var api = "https://apitechriders.azurewebsites.net/" 
+        var url = api + request
+        console.log(url)
+        axios.put(url,{},{
+           headers: {
+             Authorization: `Bearer ${token}`
+           }
+           }).then(response=>{
+            var request = "api/charlas/UpdateEstadoCharla/"+idcharla+"/"+idestadocharla;
+            var api = "https://apitechriders.azurewebsites.net/" 
+            var url = api + request
+            console.log(url)
+            axios.put(url,{},{
+               headers: {
+                   Authorization: `Bearer ${token}`
+                 }
+            })
+            window.location.reload();
+            alert("Charla Anulada");
+         })
+        } catch (error) {
+          console.error("Error Anulando charla:", error);
+          throw error;
+        }
+    }
   },
   ValoracionesCharlas: {
     getValoracionesCharlas: async () => {
@@ -117,6 +186,17 @@ const axiosApi = {
         throw error;
       }
     },
+    getValoracionesById: async (idcharla)=>{
+      try {
+        console.log("edadfa"+ idcharla)
+        const response = await axios.get(`${API_URL}/api/ValoracionesCharlas/valoraciones/` + idcharla);
+        console.log(response.data)
+        return response.data;
+      } catch (error) {
+        console.error("Error getting charlas:", error);
+        throw error;
+      }
+    }
   },
   provincias: {
     getProvincias: async () => {
@@ -218,7 +298,10 @@ const axiosApi = {
             },
           }
         );
+        window.location.reload();
+        alert("Empresa-Centro Eliminada");
         return response.data;
+        
       } catch (error) {
         console.log(error);
         throw error;
@@ -246,6 +329,12 @@ const axiosApi = {
           }
         );
         console.log("API Response:", response);
+        window.location.reload();
+        if(estado===0){
+          alert("Centro dado de baja")
+        }else{
+          alert("Centro dado de alta")
+        }
         return response.data;
       } catch (error) {
         console.error("Error getting usuarios:", error);
@@ -256,6 +345,15 @@ const axiosApi = {
           return <Navigate to="/login" />; // Volvemos al login si el token no funciona
         }
 
+        throw error;
+      }
+    },
+    getEmpresasCentrosporID: async (idempresacentro) => {
+      try {
+        const response = await axios.get(`${API_URL}/api/EmpresasCentros/`+idempresacentro);
+        return response.data;
+      } catch (error) {
+        console.error("Error getting EmpresasCentros:", error);
         throw error;
       }
     },
@@ -304,6 +402,38 @@ const axiosApi = {
           });
       } catch (error) {
         console.error("Error getting provincias:", error);
+        throw error;
+      }
+    },
+    modificarTecnologia: async (idtecnologia,descripcion,idtipotecnologia) => {
+      try {
+        const token = localStorage.getItem("token");
+        console.log("token de axios: " + token);
+
+        var newTecnologia = {
+          idTecnologia: idtecnologia,
+          nombreTecnologia: descripcion,
+          idTipoTecnologia: idtipotecnologia,
+        };
+        const response = await axios.put(
+          `${API_URL}/api/Tecnologias/`,newTecnologia,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        console.log("API Response:", response);
+        return response.data;
+      } catch (error) {
+        console.error("Error getting usuarios:", error);
+
+        // Si la respuesta es 401, redirigir a la página de inicio de sesión
+        if (error.response && error.response.status === 401) {
+          console.log("Unauthorized access. Redirecting to login...");
+          return <Navigate to="/login" />; // Volvemos al login si el token no funciona
+        }
+
         throw error;
       }
     },
@@ -424,7 +554,14 @@ const axiosApi = {
           }
         );
         console.log("API Response:", response);
+        window.location.reload();
+        if(estado===0){
+          alert("Usuario dado de baja")
+        }else{
+          alert("Usuario dado de alta")
+        }
         return response.data;
+      
       } catch (error) {
         console.error("Error updating usuario estado:", error);
 
@@ -687,13 +824,14 @@ const axiosApi = {
     },
   },
   techriders: {
+  
     getcharlastechrider: async (idtechrider) => {
       try {
         const token = localStorage.getItem("token");
-
-        console.log("token de axios: " + token);
+        console.log("vacio" + idtechrider);
+        console.log("token de axios: " + token + "afda" +idtechrider);
         const response = await axios.get(
-          `${API_URL}/api/QueryTools/CharlasTechRider/` + idtechrider,
+          `${API_URL}/api/QueryTools/CharlasTechRider?idtechrider=` + idtechrider,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -714,7 +852,141 @@ const axiosApi = {
         throw error;
       }
     },
+    getCharlasDisponiblesTrTecnologia: async (idtechrider) => {
+      try {
+        const token = localStorage.getItem("token");
+        console.log("vacio" + idtechrider);
+        console.log("token de axios: " + token + "afda" +idtechrider);
+        const response = await axios.get(
+          `${API_URL}/api/QueryTools/findcharlaspendientestecnologiastechrider?idtechrider=`+idtechrider,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        console.log("API Responseeeee:", response);
+        return response.data;
+      } catch (error) {
+        console.error("Error getting usuarios:", error);
+
+        // Si la respuesta es 401, redirigir a la página de inicio de sesión
+        if (error.response && error.response.status === 401) {
+          console.log("Unauthorized access. Redirecting to login...");
+          return <Navigate to="/login" />; // Volvemos al login si el token no funciona
+        }
+
+        throw error;
+      }
+    },
+
+    getTecnologiasPendientesEnCharlas: async () => {
+      try {
+        const token = localStorage.getItem("token");
+
+        console.log("token de axios: " + token);
+        const response = await axios.get(`${API_URL}/api/QueryTools/TecnologiasPendientesencharlas`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        console.log("API Response:", response);
+        return response.data;
+      } catch (error) {
+        console.error("Error getting usuarios:", error);
+
+        // Si la respuesta es 401, redirigir a la página de inicio de sesión
+        if (error.response && error.response.status === 401) {
+          console.log("Unauthorized access. Redirecting to login...");
+          return <Navigate to="/login" />; // Volvemos al login si el token no funciona
+        }
+
+        throw error;
+      }
+    },
   },
+  tecnologiasTechriders: {
+    getTecnologiasTechriders: async () => {
+      try {
+        const token = localStorage.getItem("token");
+
+        console.log("token de axios: " + token);
+        const response = await axios.get(`${API_URL}/api/tecnologiastechriders`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        console.log("API Response:", response);
+        return response.data;
+      } catch (error) {
+        console.error("Error getting usuarios:", error);
+
+        // Si la respuesta es 401, redirigir a la página de inicio de sesión
+        if (error.response && error.response.status === 401) {
+          console.log("Unauthorized access. Redirecting to login...");
+          return <Navigate to="/login" />; // Volvemos al login si el token no funciona
+        }
+
+        throw error;
+      }
+    },
+    PostTecnologiasTechRider: async (idtecnologia,idtechrider) => {
+      try {
+        var token = localStorage.getItem("token");
+
+        var idTec = parseInt(idtecnologia); 
+      
+        console.log(token);
+        var request = "api/TecnologiasTechriders/insertTecnologiaTechRiders/" + idtechrider + "/" + idTec;
+      
+        var api = "https://apitechriders.azurewebsites.net/";
+        var url = api + request;
+        console.log("url" + url);
+        axios
+          .post(url,{},{
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+           
+          },)
+          .then((response) => {
+            console.log(response);
+            window.location.reload();
+            alert("Tecnologia Añadida a mis tecnologias");
+          });
+      } catch (error) {
+        console.error("Error getting provincias:", error);
+        throw error;
+      }
+    },
+  },
+  peticionesTecnologias: {
+    PostPeticionTecnologia: async (nombreTecnologia) => {
+      try {
+        var token = localStorage.getItem("token");
+
+        console.log(token);
+        var request = "api/PeticionesTecnologias/InsertPeticionTecnologia/"+nombreTecnologia;
+        var api = "https://apitechriders.azurewebsites.net/";
+        var url = api + request;
+        console.log(url);
+        axios
+          .post(url,{},{
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          })
+          .then((response) => {
+            console.log(response);
+            window.location.reload();
+            alert("Solicitud Enviada", "Sera revisada por el admin");
+          });
+      } catch (error) {
+        console.error("Error getting provincias:", error);
+        throw error;
+      }
+    },
+  }
 };
 
 export default axiosApi;
