@@ -62,6 +62,7 @@ const VerProfesoresCentro = () => {
   const CursosProfesor = ({ isOpen, idProfesor }) => {
     const [cursos, setCursos] = useState([]);
     const [load, setLoad] = useState(false);
+    //
 
     useEffect(() => {
       console.log(idProfesor);
