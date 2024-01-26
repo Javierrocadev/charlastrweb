@@ -234,7 +234,7 @@ const handleSubmitTecnologia = (e) => {
  
  {/* Form Perfil */}
     {seccion === 'perfiltechrider' &&(
-   <form onSubmit={handleSubmit}>
+   <form >
     <input
                   type="hidden"
                   name="idUsuario"
@@ -370,7 +370,7 @@ const handleSubmitTecnologia = (e) => {
         })
         .join(", ")}
 
-<button onClick={() => cargarVisible()} type="submit" class="mt-4 py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-accent-200 bg-accent-200 text-white shadow-sm hover:bg-accent-100 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200">
+   <button onClick={() => cargarVisible()} type="button" class="mt-4 py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-accent-200 bg-accent-200 text-white shadow-sm hover:bg-accent-100 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200">
           Añadir Tecnologia
         </button>
     </div>
@@ -390,7 +390,7 @@ const handleSubmitTecnologia = (e) => {
       </div>
   
       <div class="mt-5 flex justify-end gap-x-2">
-        <button type="submit" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-accent-200 bg-accent-200 text-white shadow-sm hover:bg-accent-100 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200">
+        <button onSubmit={handleSubmit} type="submit" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-accent-200 bg-accent-200 text-white shadow-sm hover:bg-accent-100 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200">
           Guardar cambios
         </button>
       </div>
