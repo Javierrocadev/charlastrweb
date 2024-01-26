@@ -946,9 +946,9 @@ const axiosApi = {
     PostPeticionTecnologia: async (nombreTecnologia) => {
       try {
         var token = localStorage.getItem("token");
-        
+
         console.log(token);
-        var request = "api/PeticionesTecnologias/"+nombreTecnologia;
+        var request = "api/PeticionesTecnologias/InsertPeticionTecnologia/"+nombreTecnologia;
         var api = "https://apitechriders.azurewebsites.net/";
         var url = api + request;
         console.log(url);
