@@ -52,6 +52,7 @@ import PerfilCentro from "./components/views/profesor/PerfilCentro";
 import FormularioCharla from "./components/views/user/formularios/FormularioCharla";
 import MenuEmpresa from "./components/views/representante/MenuEmpresa";
 import VerProfesoresCentro from "./components/views/profesor/VerProfesoresCentro";
+import MenuCentro from "./components/views/profesor/MenuCentro";
 //   import RouteTr from "./components/RouteTr";
 
 // Agregar el código de refresco aquí
@@ -151,6 +152,10 @@ const App = () => {
             <Route
               path="/profesor"
               element={<RouteProfesor path="/profesor" component={<HomeProfesor />} />}
+            />
+            <Route
+              path="/menucentro"
+              element={<RouteProfesor path="/menuempresa" component={<MenuCentro />} />}
             />
               <Route
               path="/vercursocentro"

@@ -1,42 +1,41 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import axiosApi from "../../../api/axiosApi";
 import { NavLink } from "react-router-dom";
+import CalendarComponent from "../../ui/CalendarComponent";
 
-const MenuEmpresa = () => {
-  const [empresa, setEmpresa] = useState([]);
-  const [isEmpresa, setIsEmpresa] = useState(false);
-  const [loaded, setLoaded] = useState(false);
+const MenuCentro = () => {
+  const [centro, setCentro] = useState([]);
+  const [isCentro, setIsCentro] = useState(false);
 
-  const PanelEmpresa = ({ empresa }) => {
-    console.log(empresa);
+  const PanelCentro = ({ centro }) => {
     return (
       <section className="pt-10">
-        {empresa.map((empresa, index) => (
+        {centro.map((centro, index) => (
           <div
             key={index}
             className="relative md:max-w-full mx-auto p-6 mb-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
           >
             <p className="mb-4 text-lg font-semibold text-gray-900 dark:text-white">
-              <span className="text-accent-200">Empresa: </span>
-              {empresa.nombre}
+              <span className="text-accent-200">centro: </span>
+              {centro.nombre}
             </p>
             <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4">
               <div>
                 <p className="text-sm text-gray-500 dark:text-gray-400">
                   <span className="font-semibold">Direccion: </span>
-                  {empresa.direccion}
+                  {centro.direccion}
                 </p>
               </div>
               <div>
                 <p className="text-sm text-gray-500 dark:text-gray-400">
                   <span className="font-semibold">Telefono: </span>
-                  {empresa.telefono}
+                  {centro.telefono}
                 </p>
               </div>
               <div>
                 <p className="text-sm text-gray-500 dark:text-gray-400">
                   <span className="font-semibold">Persona de contacto: </span>
-                  {empresa.personaContacto}
+                  {centro.personaContacto}
                 </p>
               </div>
             </div>
@@ -45,41 +44,63 @@ const MenuEmpresa = () => {
       </section>
     );
   };
-
   const PanelCalendario = () => {
+    const [charlas, setCharlas] = useState([]);
+
+    useEffect(() => {
+      const fechData = async () => {
+        try {
+          const responseTrCentro = await axiosApi.empresas.getTRByEmpresa();
+
+          const charlasPromises = responseTrCentro.map(async (data) => {
+            const responseCharlasCentro =
+              await axiosApi.empresas.getCharlasTrEmpresa(data.idTechRider);
+
+            const fiteredCharlas = responseCharlasCentro.filter(
+              (chTr) => chTr.idTechRider === data.idTechRider
+            );
+
+            return fiteredCharlas;
+          });
+
+          const charlasData = await Promise.all(charlasPromises);
+          setCharlas(charlasData);
+
+        } catch (error) {
+          console.log("Error al obtener charlas");
+        }
+      };
+      fechData();
+    }, []);
     return (
       <section className="border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
-      <h3 className="my-6 text-xl font-semibold text-gray-900 dark:text-white">
-        Calendario empresa
-      </h3>
-    </section>
-    )
+        <h3 className="my-6 text-xl font-semibold text-gray-900 dark:text-white">
+          Calendario centro
+        </h3>
+        <CalendarComponent charlas={charlas} />
+      </section>
+    );
   };
+
   useEffect(() => {
     const fechData = async () => {
       try {
-        const responseEmpresa =
+        const responsable = axiosApi.usuarios.getPerfilUsuario();
+        const responseCentro =
           await axiosApi.empresasCentros.getEmpresasCentros();
+        const filteredResponse = responseCentro.filter(
+          (centro) => centro.idEmpresaCentro === responsable.idEmpresaCentro
+        );
 
-        const userlogin = await axiosApi.usuarios.getPerfilUsuario();
-        //setUser(userlogin);
-
-        if (userlogin) {
-          if (responseEmpresa) {
-            const filterEmpresa = responseEmpresa.filter(
-              (emp) => emp.idEmpresaCentro === userlogin.idEmpresaCentro
-            );
-            setEmpresa(filterEmpresa);
-            setIsEmpresa(true);
-            setLoaded(true);
-          } else {
-            setLoaded(false);
-          }
-        }
+        setCentro(filteredResponse);
+        console.log(filteredResponse);
+        setIsCentro(true);
       } catch (error) {
-        console.log(error);
+      } finally {
+        setIsCentro(false);
       }
     };
+
     fechData();
   }, []);
 
@@ -87,7 +108,7 @@ const MenuEmpresa = () => {
     <section className="w-full h-[100vh] mx-auto relative">
       <div className="w-full h-full md:h-[100vh] bg-slate-300">
         <header className="bg-black w-full h-[80px] flex justify-end items-center px-5">
-          {empresa.length ? (
+          {centro.length ? (
             <div>
               <svg
                 class="w-6 h-6 text-white dark:text-white"
@@ -107,13 +128,13 @@ const MenuEmpresa = () => {
                 />
               </svg>
             </div>
-          ) : empresa.length === 0 ? (
+          ) : centro.length === 0 ? (
             <NavLink
-              to="/inscripcionempresa"
+              to="/inscripcioncentro"
               className=" text-white py-2 px-3 rounded-md flex float-end items-center space-x-2
               hover:translate-x-1 transition-all cursor-pointer"
             >
-              <span>Agregar Empresa</span>
+              <span>Agregar Centro</span>
               <svg
                 class="w-6 h-6 "
                 aria-hidden="true"
@@ -134,16 +155,18 @@ const MenuEmpresa = () => {
             <p className="hidden">Loading...</p>
           )}
         </header>
-        {isEmpresa ? (
-          <div className="w-[90%] mx-auto">
-            <PanelEmpresa empresa={empresa} />
+
+        <div className="w-[90%] mx-auto">
+          {isCentro ? (
+            <PanelCentro centro={centro} />
+          ) : centro.length === 0 ? (
             <PanelCalendario />
-          </div>
-        ) : (
-          <span className="hidden"> No hay empresa</span>
-        )}
+          ) : (
+            <span className="hidden"> No hay centro</span>
+          )}
+        </div>
       </div>
     </section>
   );
 };
-export default MenuEmpresa;
+export default MenuCentro;
