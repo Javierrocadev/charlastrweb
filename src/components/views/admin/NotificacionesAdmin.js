@@ -12,13 +12,13 @@ const NotificacionesAdmin = () => {
   const [charlasResponse, setCharlasResponse] = useState([]);
   const [provinciasResponse, setProvinciasResponse] = useState([]);
   const [tecnologiasResponse, setTecnologiasResponse] = useState([]);
-  const [tecnologiasCharlasResponse, setTecnologiasCharlasResponse] = useState(
-    []
-  );
+  const [tecnologiasCharlasResponse, setTecnologiasCharlasResponse] = useState([]);
   const [centroEmpresaResponse, setEmpresasCentrosResponse] = useState([]);
   const [usuariosResponse, SetUsuariosResponse] = useState([]);
   const [rolesResponse, SetRolesResponse] = useState([]);
+  const [peticionesResponse, SetRpeticionesResponse] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [nombreTecnologia, setNombreTecnologia] = useState("");
 
   const handleClick = async (idusuario, idestado) => {
     const responseUpdateUser = axiosApi.usuarios.updateEstadoUsuario(
@@ -27,12 +27,26 @@ const NotificacionesAdmin = () => {
     );
     console.log("Algo: ", responseUpdateUser);
   };
+
+  const handleNombreChange = (e) => {
+    setNombreTecnologia(e.target.value);
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Llamar al método en otro componente y pasar el valor del input
+   axiosApi.tecnologias.postTecnologia(nombreTecnologia);
+  };
   useEffect(() => {
     const fetchData = async () => {
       try {
         const responseUsuarios = await axiosApi.usuarios.getUsuarios();
         console.log("Users:", responseUsuarios);
         SetUsuariosResponse(responseUsuarios);
+
+        const peticionesResponse = await axiosApi.peticionesTecnologias.getPeticionesTecnologias();
+        console.log("Users:", peticionesResponse);
+        SetRpeticionesResponse(peticionesResponse);
+
 
         const centroEmpresaResponse =
           await axiosApi.empresasCentros.getEmpresasCentros();
@@ -118,6 +132,14 @@ const NotificacionesAdmin = () => {
                     type="button"
                     class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-green-600 bg-green-600 text-white shadow-sm hover:bg-green-800 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
                     onClick={() => cargarDatos('altacentroempresa')}
+                  >
+                    Alta centro-empresa
+                  </button>
+
+                  <button
+                    type="button"
+                    class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-green-600 bg-green-600 text-white shadow-sm hover:bg-green-800 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
+                    onClick={() => cargarDatos('altatecnologia')}
                   >
                     Alta centro-empresa
                   </button>
@@ -562,6 +584,55 @@ const NotificacionesAdmin = () => {
                               class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-green-600 bg-green-600 text-white shadow-sm hover:bg-green-800 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
                             >
                               Alta
+                            </button>
+                          </td>
+                        </tr>
+                      ))}
+                  </tbody>
+                </table>
+                )}
+
+                 {/* <!-- Table  MOSTAR ALTA Tecnologias  --> */}
+                 {seccion === 'altatecnologia' &&(
+                <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                  <thead class="bg-gray-50 dark:bg-slate-800">
+                    <tr>
+                      <th scope="col" class="px-6 py-3 text-start">
+                        <div class="flex items-center gap-x-2">
+                          <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
+                            Nombre
+                          </span>
+                        </div>
+                      </th>
+                    </tr>
+                  </thead>
+
+                  <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
+                    {peticionesResponse.map((peticion, index) => (
+                        <tr
+                          key={index}
+                          class="bg-white hover:bg-gray-50 dark:bg-slate-900 dark:hover:bg-slate-800"
+                        >
+                          <td class="h-px w-px whitespace-nowrap align-top">
+                            <div class="block p-6">
+                              <div class="flex items-center gap-x-3">
+                                {/* <div class="inline-block h-[2.375rem] w-[2.375rem] bg-accent-100 rounded-full" src="" alt=""></div> */}
+                                <div class="grow">
+                                  <span class="block text-sm font-semibold text-gray-800 dark:text-gray-200">
+                                    {peticion.nombreTecnologia}
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          </td>
+                          
+                          <td class="h-px w-px whitespace-nowrap align-top">
+                            <button
+                              type="button"
+                              class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-green-600 bg-green-600 text-white shadow-sm hover:bg-green-800 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
+                              onClick={handleSubmit} 
+                           >
+                              Activar
                             </button>
                           </td>
                         </tr>

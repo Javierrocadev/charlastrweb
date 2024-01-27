@@ -243,7 +243,7 @@ const MisCharlasTr = () => {
         CHARLAS QUE TENGO QUE DAR EN LOS PROXIMOS DIAS
         </p>
         <ul class="hs-accordion-group">
-          {charlasTrResponse.filter((charla)=> charla.idEstadoCharla===4).map((charla) => (
+          {charlasTrResponse.filter((charla)=> charla.idEstadoCharla===3).map((charla) => (
             <li
               key={charla.idCharla}
               className="hs-accordion active bg-white border -mt-px first:rounded-t-lg last:rounded-b-lg dark:bg-gray-800 dark:border-gray-700"

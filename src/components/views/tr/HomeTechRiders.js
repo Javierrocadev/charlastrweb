@@ -22,6 +22,7 @@ const HomeTechRiders = () => {
   const [mostrarAlerta, setMostrarAlerta] = useState(false);
   const [mostrarAlertaDenegada, setMostrarAlertaDenegada] = useState(false);
   const [nombreTecnologia, setNombreTecnologia] = useState("");
+  const [empresaTrResponse, setempresaTrResponse] = useState(null);
 
     const [usuarioResponse, setUsuarioResponse] = useState([]);
     const [provinciasResponse, setProvinciasResponse] = useState([]);
@@ -146,6 +147,10 @@ const handleSubmitTecnologia = (e) => {
           const response = await axiosApi.usuarios.getPerfilUsuario();
           console.log("perfil usuario response:", response);
           setUsuarioResponse(response);
+
+          const empresaTrResponse = await axiosApi.techriders.getEmpresaTr(usuarioResponse.idUsuario);
+          console.log("perfil usuario response:", empresaTrResponse);
+          setempresaTrResponse(empresaTrResponse);
   
           const responseProvincias = await axiosApi.provincias.getProvincias();
           console.log("Charlas responseProvincias:", responseProvincias);
@@ -421,79 +426,90 @@ const handleSubmitTecnologia = (e) => {
                       value={usuarioResponse.estado}
                     />
           <div class="grid sm:grid-cols-12 gap-2 sm:gap-6">
-      
-      
-      
-      
             <div class="sm:col-span-3">
               <label for="af-account-password" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-gray-200">
-                Empresa
+                Nombre
               </label>
             </div>
       
             <div class="sm:col-span-9">
               <div class="space-y-2">
-
                 <input    type="text" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 "  placeholder={getCentroNombre(usuarioResponse.idEmpresaCentro)} disabled/>
               </div>
             </div>
+
             <div class="sm:col-span-3">
               <label for="af-account-password" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-gray-200">
-                Password
+                Direccion
               </label>
             </div>
-      
+            
+            
+            <div class="sm:col-span-9">
+              <div class="space-y-2">
+                <input  class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 "  placeholder={getCentroNombre(usuarioResponse.idEmpresaCentro)} disabled/>
+              </div>
+            </div>
+
             <div class="sm:col-span-3">
               <div class="inline-block">
                 <label for="af-account-phone" class="inline-block text-sm  text-gray-800 mt-2.5 dark:text-gray-200">
                   Telefono
-                </label>
-                
+                </label>     
               </div>
             </div>
 
-            
-      
+            <div>
+            {empresaTrResponse.telefono}</div>
+
+            <div class="sm:col-span-3">
+              <div class="inline-block">
+                <label for="af-account-phone" class="inline-block text-sm  text-gray-800 mt-2.5 dark:text-gray-200">
+                 Persona de Contacto
+                </label>
+              </div>
+            </div>
+
+            <div></div>
+
+            <div class="sm:col-span-3">
+              <div class="inline-block">
+                <label for="af-account-phone" class="inline-block text-sm  text-gray-800 mt-2.5 dark:text-gray-200">
+                  Provincia
+                </label>         
+              </div>
+            </div>
+
             <div class="sm:col-span-9">
               <div class="sm:flex ">
                 <input id="af-account-phone" type="text" class="py-3 mr-4 sm:mb-0 mb-4 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 " onChange={(e) => setNewTelefono(e.target.value)} placeholder={usuarioResponse.telefono}/>
-                <select onChange={(e) => setNewProvincia(e.target.value)} class="py-2 px-3 pe-9 block w-full sm:w-auto border-gray-200 shadow-sm -mt-px -ms-px rounded sm:mt-0 sm:first:ms-0  text-sm relative focus:z-10  focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 ">
-                
-                    {provinciasResponse.map((provincia) => (
-                    <option key={provincia.idProvincia} value={provincia.idProvincia}  selected={provincia.idProvincia === usuarioResponse.idProvincia}>
-                    {getProvinciaNombre(provincia.idProvincia)}
-                  </option>
-                  ))}
-                </select>
-              </div>
-      
-            
+                {provinciasResponse.filter((provincia) => provincia.idProvincia === usuarioResponse.idProvincia).map((provincia) => (
+                <span key={provincia.idProvincia}>
+                  {getProvinciaNombre(provincia.idProvincia)}
+                </span>
+                ))}
+              </div>   
             </div>
 
             <div class="sm:col-span-3">
               <div class="inline-block">
                 <label for="af-account-phone" class="inline-block text-sm  text-gray-800 mt-2.5 dark:text-gray-200">
-                Mis tecnologias
+              Cif
                 </label>
-                
               </div>
             </div>
-                
-            {TecnologiasIdResponse.filter((tecnologiaid) => usuarioResponse.idUsuario === tecnologiaid.idUsuario)
-            .map((tecnologiaid) => {
-              return TecnologiasResposne.filter((tecnologia) => tecnologia.idTecnologia === tecnologiaid.idTecnologia)
-                .map((tecnologia) => tecnologia.nombreTecnologia);
-            })
-            .join(", ")}
+          
+          <div></div>
 
-                <div class="inline-block text-sm text-gray-800 mt-2.5 dark:text-gray-200">
-         
-
-    <button onClick={() => cargarDatos()} type="submit" class="mt-4 py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-accent-200 bg-accent-200 text-white shadow-sm hover:bg-accent-100 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200">
-              Añadir Tecnologia
-            </button>
-        </div>
-
+            <div class="sm:col-span-3">
+              <div class="inline-block">
+                <label for="af-account-phone" class="inline-block text-sm  text-gray-800 mt-2.5 dark:text-gray-200">
+             Razon Social
+                </label>
+              </div>
+            </div>
+            
+            <div></div>
     {/*  
             <div class="sm:col-span-3">
               <label for="af-account-bio" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-gray-200">
@@ -506,12 +522,6 @@ const handleSubmitTecnologia = (e) => {
               <textarea id="af-account-bio" class="py-2 px-3 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" rows="6" placeholder="Type your message..."></textarea>
             </div> */}
           
-          </div>
-      
-          <div class="mt-5 flex justify-end gap-x-2">
-            <button type="submit" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-accent-200 bg-accent-200 text-white shadow-sm hover:bg-accent-100 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200">
-              Guardar cambios
-            </button>
           </div>
         </form>
     )}
