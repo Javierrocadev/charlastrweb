@@ -139,6 +139,27 @@ const axiosApi = {
         throw error;
       }
     },
+    acreditarCharla: async (idcharla) => {
+      try {
+        var token = localStorage.getItem("token");
+        console.log(idcharla)
+        var idestadocharla = 6;
+        var request = "api/charlas/UpdateEstadoCharla/" + idcharla + "/" + idestadocharla;
+        var api = "https://apitechriders.azurewebsites.net/";
+        var url = api + request;
+        console.log(url);
+        await axios.put(url, {}, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+        window.location.reload();
+        alert("Charla Acreditada");
+      } catch (error) {
+        console.error("Error Acreditando charla:", error);
+        throw error;
+      }
+    },
     
     aceptarCharla: async (idTechrider,idCharla)=>{
       try {
@@ -1034,7 +1055,59 @@ const axiosApi = {
         throw error;
       }
     },
+  },
+  solicitudesAcreditacion: {
+    getSolicitudesAcreditacion: async () => {
+      try {
+        const token = localStorage.getItem("token");
+
+        console.log("token de axios: " + token);
+        const response = await axios.get(`${API_URL}/api/SolicitudAcreditacionesCharlas`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        console.log("API Response:", response);
+        return response.data;
+      } catch (error) {
+        console.error("Error getting usuarios:", error);
+
+        // Si la respuesta es 401, redirigir a la página de inicio de sesión
+        if (error.response && error.response.status === 401) {
+          console.log("Unauthorized access. Redirecting to login...");
+          return <Navigate to="/login" />; // Volvemos al login si el token no funciona
+        }
+
+        throw error;
+      }
+    },
+    PostSolicitudesAcreditacion: async (idcharla) => {
+      try {
+        var token = localStorage.getItem("token");
+
+        console.log(token);
+        var request = "api/SolicitudAcreditacionCharlas/"+idcharla;
+        var api = "https://apitechriders.azurewebsites.net/";
+        var url = api + request;
+        console.log(url);
+        axios
+          .post(url,{},{
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          })
+          .then((response) => {
+            console.log(response);
+            window.location.reload();
+            alert("Solicitud Enviada", "Sera revisada por el admin");
+          });
+      } catch (error) {
+        console.error("Error getting provincias:", error);
+        throw error;
+      }
+    },
   }
+
 };
 
 export default axiosApi;

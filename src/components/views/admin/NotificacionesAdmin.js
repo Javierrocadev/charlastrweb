@@ -17,8 +17,10 @@ const NotificacionesAdmin = () => {
   const [usuariosResponse, SetUsuariosResponse] = useState([]);
   const [rolesResponse, SetRolesResponse] = useState([]);
   const [peticionesResponse, SetRpeticionesResponse] = useState([]);
+  const [solicitudAcreditacionResponse, SetsolicitudAcreditacionResponse] = useState([]);
   const [loading, setLoading] = useState(true);
   const [nombreTecnologia, setNombreTecnologia] = useState("");
+
 
   const handleClick = async (idusuario, idestado) => {
     const responseUpdateUser = axiosApi.usuarios.updateEstadoUsuario(
@@ -36,6 +38,7 @@ const NotificacionesAdmin = () => {
     // Llamar al método en otro componente y pasar el valor del input
    axiosApi.tecnologias.postTecnologia(nombreTecnologia);
   };
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -43,10 +46,17 @@ const NotificacionesAdmin = () => {
         console.log("Users:", responseUsuarios);
         SetUsuariosResponse(responseUsuarios);
 
+        const charlasResponse = await axiosApi.charlas.getCharlas();
+        console.log("Users:", charlasResponse);
+        setCharlasResponse(charlasResponse);
+
         const peticionesResponse = await axiosApi.peticionesTecnologias.getPeticionesTecnologias();
         console.log("Users:", peticionesResponse);
         SetRpeticionesResponse(peticionesResponse);
 
+        const solicitudAcreditacionResponse = await axiosApi.solicitudesAcreditacion.getSolicitudesAcreditacion();
+        console.log("Users:", solicitudAcreditacionResponse);
+        SetsolicitudAcreditacionResponse(solicitudAcreditacionResponse);
 
         const centroEmpresaResponse =
           await axiosApi.empresasCentros.getEmpresasCentros();
@@ -74,6 +84,20 @@ const NotificacionesAdmin = () => {
       (p) => p.idProvincia === idProvincia
     );
     return provincia ? provincia.nombreProvincia : "Desconocido";
+  };
+
+  // const handleAcreditar = async (idcharla) => {
+  //   const responseAcreditarCharla =  axiosApi.charlas.acreditarCharla(idcharla);
+  //   console.log("Algo: ", responseAcreditarCharla);
+  // };
+
+  const handleAcreditar = async (idcharla) => {
+    try {
+      const responseAcreditarCharla = await axiosApi.charlas.acreditarCharla(idcharla);
+      console.log("Algo: ", responseAcreditarCharla);
+    } catch (error) {
+      console.error("Error al acreditar charla:", error);
+    }
   };
 
   const [seccion, setSeccion] = useState('altauser'); // Estado para controlar la sección
@@ -141,7 +165,15 @@ const NotificacionesAdmin = () => {
                     class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-green-600 bg-green-600 text-white shadow-sm hover:bg-green-800 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
                     onClick={() => cargarDatos('altatecnologia')}
                   >
-                    Alta centro-empresa
+                    Alta Tecnologia
+                  </button>
+                  
+                  <button
+                    type="button"
+                    class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-green-600 bg-green-600 text-white shadow-sm hover:bg-green-800 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
+                    onClick={() => cargarDatos('altaacreditacion')}
+                  >
+                    Alta Acreditacion Charla
                   </button>
 
                   <div class="sm:col-span-2 md:grow">
@@ -638,7 +670,63 @@ const NotificacionesAdmin = () => {
                         </tr>
                       ))}
                   </tbody>
-                </table>
+                </table>             
+                )}
+
+                   {/* <!-- Table  SolicitudesAcreditacionCharlas  --> */}
+                   {seccion === 'altaacreditacion' &&(
+                <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                  <thead class="bg-gray-50 dark:bg-slate-800">
+                    <tr>
+                      <th scope="col" class="px-6 py-3 text-start">
+                        <div class="flex items-center gap-x-2">
+                          <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
+                            Charla
+                          </span>
+                        </div>
+                      </th>
+                    </tr>  
+                  </thead>
+                  
+                  <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
+  {solicitudAcreditacionResponse.map((solicitud, index) => {
+    const charlaFiltrada = charlasResponse.find(charla => solicitud.idCharla === charla.idCharla);
+    return (
+      <tr
+        key={index}
+        class="bg-white hover:bg-gray-50 dark:bg-slate-900 dark:hover:bg-slate-800"
+      >
+        <td class="h-px w-px whitespace-nowrap align-top">
+          <div class="block p-6">
+            <div class="flex items-center gap-x-3">
+              <div class="grow">
+                <span class="block text-sm font-semibold text-gray-800 dark:text-gray-200">
+                  {charlaFiltrada ? charlaFiltrada.descripcion : 'Descripción no encontrada'}
+                </span>
+                {usuariosResponse.filter((usuario) => usuario.idUsuario === charlaFiltrada.idTechRider).map((usuario) => (
+                    <div key={usuario.idUsuario}>
+                      {usuario.nombre}
+                    </div>
+                  ))}
+              </div>
+            </div>
+          </div>
+        </td>
+        <td class="h-px w-px whitespace-nowrap align-top">
+          <button
+            type="button"
+            class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-green-600 bg-green-600 text-white shadow-sm hover:bg-green-800 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
+            onClick={() => handleAcreditar(solicitud.idCharla)}
+          >
+            Acreditar Charla
+          </button>
+        </td>
+      </tr>
+    );
+  })}
+</tbody>
+
+                </table>             
                 )}
                 {/* <!-- End Table --> */}
 
