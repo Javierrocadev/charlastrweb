@@ -62,14 +62,15 @@ const InscripcionCentro = () => {
         estadoEmpresa: estadoCentro,
       };
 
-      //console.log(centroJSON);
-
+      console.log(centroJSON);
       const responseCentro =
         await axiosApi.empresasCentros.insertarEmpresaCentro(centroJSON);
       //const idCentroEmpresa = JSON.parse(responseCentro.idCentroEmpresa);
+      const idCentroEmpresa = responseCentro.idEmpresaCentro;
+
       const reponsePeticion =
         await axiosApi.empresasCentros.peticionesAltaEmpresaCentro(
-          responseCentro.idEmpresaCentro
+          idCentroEmpresa
         );
       console.log("Centro insertado: ", responseCentro);
       console.log("Peticion enviada: ", reponsePeticion);
@@ -87,7 +88,7 @@ const InscripcionCentro = () => {
         const responseTiposEmpresas =
           await axiosApi.empresasCentros.getTipoEmpresa();
         setTipoEmpresas(responseTiposEmpresas);
-        setEstadoCentro(1);
+        //setEstadoCentro(1);
       } catch (error) {
         console.log(error);
       }

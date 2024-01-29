@@ -75,29 +75,39 @@ const VistaCharlasCentrto = () => {
     return estado ? estado.tipo : "Desconocido";
   };
 
-  const DetailForm = ({ isOpen, idTr, misCharlas }) => {
+  const DetailForm = ({ isOpen, ch, misCharlas }) => {
     const [tr, setTr] = useState([]);
+    const [cursos, setCursos] = useState([]);
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
       const fetchData = async () => {
         try {
           setLoading(true);
-          const charlas = misCharlas.filter((ch) => ch.idTechRider === idTr);
+          const responseTr = await axiosApi.usuarios.getUsuarios();
+          const responseCursos = await axiosApi.centros.getCursos();
 
-          const response = await axiosApi.usuarios.getUsuarios();
-
-          const tr = response.filter((tr) => {
-            if (tr.idUsuario === charlas.idTechRider) {
+          const tr = responseTr.filter((tr) => {
+            if (tr.idUsuario === ch.idTechRider) {
               return tr;
             } else {
-              return false;
+              return null;
             }
           });
 
-          setTr(tr);
-          console.log("Charlas con TR: "+charlas);
+          const cursos = responseCursos.filter((curso) => {
+            if (curso.idCurso === ch.idCurso) {
+              return curso;
+            } else {
+              return null;
+            }
+          });
 
+          console.log("Tr que ha impartido la charla: ", tr);
+          console.log("Curso al que va dirigido la charla: ", cursos);
+
+          setTr(tr);
+          setCursos(cursos);
         } catch (error) {
           console.log(error);
         } finally {
@@ -105,54 +115,89 @@ const VistaCharlasCentrto = () => {
         }
       };
       fetchData();
-    }, [misCharlas,idTr]);
+    }, [isOpen, ch, misCharlas]);
 
     return (
-      <div className={`${isOpen ? "" : "hidden"}  pt-5 mt-10 border-t-2`}>
+      <div className={`${isOpen ? "" : "hidden"} pt-5 mt-10 border-t-2`}>
         <h6 className="text-lg font-medium text-gray-900">
           Detalles de la charla
         </h6>
-        <div className=" w-full items-center">
+        <div className="w-full flex flex-col md:flex-row items-center">
           {loading ? (
             <p>Loading...</p>
-          ) : tr.length === 0 ? (
-            <p>No hay TechRiders asignado.</p>
           ) : (
-            tr.map((tr, index) => (
-              <div
-                key={index}
-                className="relative md:max-w-full mx-auto p-6 mb-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
-              >
-                <p className="mb-4 text-lg font-semibold text-gray-900 dark:text-white">
-                  <span className="text-indigo-500">Nombre: </span>
-                  {" " + tr.nombre + "  " + tr.apellidos}
-                </p>
-                <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4">
-                  <div>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">
-                      <span className="font-semibold">Email: </span>
-                      {" " + tr.email}
-                    </p>
+            <>
+              {tr.length === 0 ? (
+                <p>No hay TechRiders asignado.</p>
+              ) : (
+                tr.map((techRider, index) => (
+                  <div key={index} className="w-full h-full p-4 md:flex-1">
+                    <div
+                      className="relative md:max-w-full h-[150px] mx-auto p-6 mb-4 bg-white border 
+                    border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+                    >
+                      <p className="mb-4 text-lg font-semibold text-gray-900 dark:text-white">
+                        <span className="text-indigo-500">Rider: </span>
+                        {" " + techRider.nombre + "  " + techRider.apellidos}
+                      </p>
+                      <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4">
+                        <div>
+                          <p className="text-sm text-gray-500 dark:text-gray-400">
+                            <span className="font-semibold">Email: </span>
+                            {" " + techRider.email}
+                          </p>
+                        </div>
+                      </div>
+                      <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4">
+                        <div>
+                          <p className="text-sm text-gray-500 dark:text-gray-400">
+                            <span className="font-semibold">Linkedin: </span>
+                            {techRider.linkedIn}
+                          </p>
+                        </div>
+                      </div>
+                      <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4">
+                        <div>
+                          <p className="text-sm text-gray-500 dark:text-gray-400">
+                            <span className="font-semibold">Teléfono: </span>
+                            {techRider.telefono}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4">
-                  <div>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">
-                      <span className="font-semibold">Linkedin: </span>
-                      {tr.linkedIn}
-                    </p>
+                ))
+              )}
+
+              {cursos.length === 0 ? (
+                <p>No hay cursos asignados.</p>
+              ) : (
+                cursos.map((curso, index) => (
+                  <div
+                    key={index}
+                    className="w-full h-full p-4 md:block md:flex-1"
+                  >
+                    <div
+                      className="relative md:max-w-full h-[150px] mx-auto p-6 mb-4
+                    bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+                    >
+                      <p className="mb-4 text-lg font-semibold text-gray-900 dark:text-white">
+                        <span className="text-indigo-500">Curso: </span>
+                        {" " + curso.nombreCurso + " "}
+                      </p>
+                      <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4">
+                        <div>
+                          <p className="text-sm text-gray-500 dark:text-gray-400">
+                            <span className="font-semibold">Descripción: </span>
+                            {" " + curso.descripcion}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4">
-                  <div>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">
-                      <span className="font-semibold">Teléfono: </span>
-                      {tr.telefono}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            ))
+                ))
+              )}
+            </>
           )}
         </div>
       </div>
@@ -185,7 +230,7 @@ const VistaCharlasCentrto = () => {
           Posibles Charlas
         </h1>
         {charla.length === 0 ? (
-          <h5 className="text-center text-3xl font-semibold py-4 flex">
+          <h5 className="text-center text-2xl font-semibold py-4 flex">
             Posibles charlas
             <span>
               <Loading />
@@ -213,20 +258,6 @@ const VistaCharlasCentrto = () => {
                       Solicitar charla
                     </span>
                     <RenderIcon isSelected={selected === charla} />
-                    {/* <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke-width="1.5"
-                      stroke="currentColor"
-                      className="w-5 h-5"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M2.25 12.76c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.076-4.076a1.526 1.526 0 011.037-.443 48.282 48.282 0 005.68-.494c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z"
-                      />
-                    </svg> */}
                   </div>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4">
@@ -271,7 +302,6 @@ const VistaCharlasCentrto = () => {
   };
 
   const MisCharlas = () => {
-    
     const [select, setSelect] = useState(null);
 
     const handleClickDetailCharlaProfesor = (d) => {
@@ -280,27 +310,13 @@ const VistaCharlasCentrto = () => {
       });
     };
 
-    /*useEffect(() => {
-      const fetchData = async () => {
-        try {
-          const profesor = await axiosApi.usuarios.getPerfilUsuario();
-          const resp = await axiosApi.charlas.getCharlasByProfesor(
-            profesor.idUsuario
-          );
-          //console.log(resp)
-          setMisCharlas(resp);
-        } catch (error) {
-          console.log(error);
-        }
-      };
-      fetchData();
-    }, []);*/
     return (
       <section>
+        <h1 className="text-3xl font-bold text-center py-6"> Mis Charlas</h1>
         {misCharlas.length === 0 ? (
           <h5 className="text-center text-3xl font-semibold py-4 flex">
             Mis Charlas
-            <span>
+            <span className="text-blue-700">
               <Loading />
             </span>
           </h5>
@@ -355,7 +371,7 @@ const VistaCharlasCentrto = () => {
                 <div>
                   <DetailForm
                     isOpen={select === charla}
-                    idTr={charla.idTechRider}
+                    ch={charla}
                     misCharlas={misCharlas}
                   />
                 </div>
@@ -404,14 +420,14 @@ const VistaCharlasCentrto = () => {
 
   return (
     <section className="container mx-auto">
-      <div className="text-sm font-medium text-center text-gray-500 border-b border-gray-400 dark:text-gray-400 dark:border-gray-700">
+      <div className="text-sm font-medium text-center border-b border-blue-400">
         <ul className="flex flex-wrap -mb-px">
           <li className="me-2">
             <button
               className={`${
                 selectedComponent === "posiblescharlas"
-                  ? "bg-black  text-white"
-                  : "active  text-accent-200"
+                  ? "bg-blue-700  text-white"
+                  : "active bg-blue-400 hover:bg-blue-600  text-white"
               } inline-block p-4 border-b-2 border-transparent rounded-t-sm focus:outline-none`}
               onClick={() => handleComponentChange("posiblescharlas")}
             >
@@ -422,8 +438,8 @@ const VistaCharlasCentrto = () => {
             <button
               className={`${
                 selectedComponent === "mischarlas"
-                  ? "bg-black  text-white"
-                  : "active text-accent-200"
+                  ? "bg-blue-700 text-white"
+                  : "active bg-blue-400 hover:bg-blue-600 text-white"
               } inline-block p-4 border-b-2 border-transparent rounded-t-sm focus:outline-none`}
               onClick={() => handleComponentChange("mischarlas")}
             >
@@ -434,7 +450,7 @@ const VistaCharlasCentrto = () => {
       </div>
       <div className="pt-5">
         {selectedComponent === "posiblescharlas" && <PosiblesCharlas />}
-        {selectedComponent === "mischarlas" && <MisCharlas/>}
+        {selectedComponent === "mischarlas" && <MisCharlas />}
       </div>
     </section>
   );

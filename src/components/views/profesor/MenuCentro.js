@@ -51,20 +51,16 @@ const MenuCentro = () => {
       const fechData = async () => {
         try {
           const responseTrCentro = await axiosApi.empresas.getTRByEmpresa();
+          const mappedIds = responseTrCentro.map((tr) => tr.idTechRider);
+          const charlasResponse = await axiosApi.charlas.getCharlas();
+          const filteredChalas = charlasResponse.filter((c) =>
+            mappedIds.includes(c.idTechRider)
+          );
+          //const responseCharlas = await axiosApi.empresas.getCharlasTrEmpresa(mappedIds);
 
-          const charlasPromises = responseTrCentro.map(async (data) => {
-            const responseCharlasCentro =
-              await axiosApi.empresas.getCharlasTrEmpresa(data.idTechRider);
+          console.log("Filtered Charlas: ", filteredChalas);
 
-            const fiteredCharlas = responseCharlasCentro.filter(
-              (chTr) => chTr.idTechRider === data.idTechRider
-            );
-
-            return fiteredCharlas;
-          });
-
-          const charlasData = await Promise.all(charlasPromises);
-          setCharlas(charlasData);
+          setCharlas(filteredChalas);
         } catch (error) {
           console.log("Error al obtener charlas");
         }
@@ -119,7 +115,7 @@ const MenuCentro = () => {
           {centro.length ? (
             <div className="flex justify-between items-center p-5">
               <span className=" float-left text-2xl text-white uppercase">
-                {centro.map((centro)=>centro.nombre)}
+                {centro.map((centro) => centro.nombre)}
               </span>
               <div className="w-10 float-right">
                 <svg

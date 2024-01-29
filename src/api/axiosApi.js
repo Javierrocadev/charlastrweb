@@ -411,13 +411,13 @@ const axiosApi = {
       try {
         const token = localStorage.getItem("token");
         const response = await axios.post(
-          `${API_URL}/api/PeticionesCentroEmpresa?idcentroempresa=`,
+          `${API_URL}/api/PeticionesCentroEmpresa?`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
             },
             paramas: {
-              idCentroEmpresa: `${idCentroEmpresa}`,
+              idcentroempresa: `${idCentroEmpresa}`,
             },
           }
         );
