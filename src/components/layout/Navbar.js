@@ -365,12 +365,12 @@ const Navbar = () => {
               >
                 cursos
               </Link>
-              <Link
+              {/* <Link
                 class="font-medium hover:text-accent-200 text-text-200  dark:text-text-100 dark:hover:text-text-200 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
                 to={"/verprofesorescentro"}
               >
                 profesores
-              </Link>
+              </Link> */}
               <Link
                 class="font-medium hover:text-accent-200 text-text-200  dark:text-text-100 dark:hover:text-text-200 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
                 to={"/menucentro"}

@@ -14,6 +14,7 @@ const InscripcionCentro = () => {
   const [provincia, setProvincia] = useState([]);
   const [tipoEmpresa, setTipoEmpresa] = useState([]);
   const [razonSocial, setRazonSocial] = useState("");
+  const [estadoCentro, setEstadoCentro] = useState(0);
 
   const handleInputChangeNombre = (e) => {
     setNombre(e.target.value);
@@ -49,7 +50,7 @@ const InscripcionCentro = () => {
     e.preventDefault();
     try {
       var centroJSON = {
-        idEmpresaCentro: null,
+        idEmpresaCentro: 0,
         nombre: nombre,
         direccion: direccion,
         telefono: telefono,
@@ -58,14 +59,20 @@ const InscripcionCentro = () => {
         idProvincia: provincia,
         razonSocial: razonSocial,
         idTipoEmpresa: tipoEmpresa,
-        estadoEmpresa: 1
+        estadoEmpresa: estadoCentro,
       };
 
       //console.log(centroJSON);
 
-      const responseCentro = await axiosApi.empresasCentros.insertarEmpresaCentro(centroJSON);
-      console.log("Centro insertado: ", responseCentro.data);
-
+      const responseCentro =
+        await axiosApi.empresasCentros.insertarEmpresaCentro(centroJSON);
+      //const idCentroEmpresa = JSON.parse(responseCentro.idCentroEmpresa);
+      const reponsePeticion =
+        await axiosApi.empresasCentros.peticionesAltaEmpresaCentro(
+          responseCentro.idEmpresaCentro
+        );
+      console.log("Centro insertado: ", responseCentro);
+      console.log("Peticion enviada: ", reponsePeticion);
     } catch (error) {
       console.log(error);
     }
@@ -80,6 +87,7 @@ const InscripcionCentro = () => {
         const responseTiposEmpresas =
           await axiosApi.empresasCentros.getTipoEmpresa();
         setTipoEmpresas(responseTiposEmpresas);
+        setEstadoCentro(1);
       } catch (error) {
         console.log(error);
       }
@@ -91,9 +99,9 @@ const InscripcionCentro = () => {
   return (
     <section className="container bg-white rounded py-4 mx-auto">
       <form className="max-w-full m-5" onSubmit={insertarCentro}>
-      <h2 class="text-xl font-bold mb-4 text-gray-800 dark:text-gray-200">
-        Inscribe tu centro
-      </h2>
+        <h2 class="text-xl font-bold mb-4 text-gray-800 dark:text-gray-200">
+          Inscribe tu centro
+        </h2>
         <div className="relative z-0 w-full mb-5 group">
           <input
             type="text"
@@ -105,7 +113,6 @@ const InscripcionCentro = () => {
             required
             onChange={handleInputChangeNombre}
           />
-         
         </div>
         <div className="relative z-0 w-full mb-5 group">
           <input
@@ -118,7 +125,6 @@ const InscripcionCentro = () => {
             required
             onChange={handleInputChangeDireccion}
           />
-        
         </div>
         <div className="relative z-0 w-full mb-5 group">
           <input
@@ -132,7 +138,6 @@ const InscripcionCentro = () => {
             required
             onChange={handleInputChangeTelefono}
           />
-         
         </div>
         <div className="relative z-0 w-full mb-5 group">
           <input
@@ -145,7 +150,6 @@ const InscripcionCentro = () => {
             required
             onChange={handleInputChangePersonaContacto}
           />
-         
         </div>
         <div className="grid md:grid-cols-2 md:gap-6">
           <div className="relative z-0 w-full mb-5 group">
@@ -159,7 +163,6 @@ const InscripcionCentro = () => {
               required
               onChange={handleInputChangeCief}
             />
-            
           </div>
           <div className="relative z-0 w-full mb-5 group">
             <select
@@ -167,19 +170,18 @@ const InscripcionCentro = () => {
               value={provincia}
               required
               className="py-2 px-3 pe-11 block w-full border-gray-200 shadow text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
-            onChange={handleInputChangeProvincia}
+              onChange={handleInputChangeProvincia}
             >
               <option selected disabled>
                 Elige la provincia
               </option>
-              {
-                provincias.map((provincias, index) => {
-                  return (
-                    <option key={index} value={provincias.idProvincia}>
-                      {provincias.nombreProvincia}
-                    </option>
-                  );
-                })}
+              {provincias.map((provincias, index) => {
+                return (
+                  <option key={index} value={provincias.idProvincia}>
+                    {provincias.nombreProvincia}
+                  </option>
+                );
+              })}
             </select>
           </div>
         </div>
@@ -194,7 +196,6 @@ const InscripcionCentro = () => {
               placeholder="razón social "
               onChange={handleInputChangeRazonSocial}
             />
-           
           </div>
           <div className="relative z-0 w-full mb-5 group">
             <select
@@ -202,20 +203,19 @@ const InscripcionCentro = () => {
               value={tipoEmpresa}
               required
               className="py-2 px-3 pe-11 block w-full border-gray-200 shadow text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
-             onChange={handleInputChangeTipoEmpresa}
+              onChange={handleInputChangeTipoEmpresa}
             >
               <option selected disabled>
                 Elige el tipo de empresa
               </option>
 
-              {
-              tipoEmpresas.map((tipo, index) => {
-                  return (
-                    <option key={index} value={tipo.idTipoEmpresa}>
-                      {tipo.descripcion}
-                    </option>
-                  );
-                })}
+              {tipoEmpresas.map((tipo, index) => {
+                return (
+                  <option key={index} value={tipo.idTipoEmpresa}>
+                    {tipo.descripcion}
+                  </option>
+                );
+              })}
             </select>
           </div>
         </div>
