@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axiosApi from "../../../api/axiosApi";
 import { NavLink } from "react-router-dom";
+import CalendarComponent from "../../ui/CalendarComponent";
 
 const MenuEmpresa = () => {
   const [empresa, setEmpresa] = useState([]);
   const [isEmpresa, setIsEmpresa] = useState(false);
-  const [loaded, setLoaded] = useState(false);
 
   const PanelEmpresa = ({ empresa }) => {
     console.log(empresa);
@@ -47,13 +47,39 @@ const MenuEmpresa = () => {
   };
 
   const PanelCalendario = () => {
+    const [charlas, setCharlas] = useState([]);
+    const [loaded, setLoaded] = useState(false);
+    useEffect(() => {
+      const fechData = async () => {
+        try {
+          const responsTrEmpresa = await axiosApi.empresas.getTRByEmpresa();
+          const charlasPromises = responsTrEmpresa.map(async (data) => {
+            const resp = await axiosApi.empresas.getCharlasTrEmpresa(40); //data.idTechRider
+            //console.log("CHARLAS DE LOS TR DE LA EMPRESA: ", resp);
+            //const filteredResponse = resp.filter((chTr)=> chTr.idTechRider === data.idTechRider);
+            return resp;
+          });
+
+          setCharlas(charlasPromises);
+          setLoaded(true);
+
+          //const charlasData = await Promise.all(charlasPromises);
+          //console.log("CHARLAS DE LOS TR DE LA EMPRESA: ", charlasData);
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      fechData();
+    }, []);
+
     return (
       <section className="border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
-      <h3 className="my-6 text-xl font-semibold text-gray-900 dark:text-white">
-        Calendario empresa
-      </h3>
-    </section>
-    )
+        <h3 className="my-6 text-xl font-semibold text-gray-900 dark:text-white">
+          Calendario empresa
+        </h3>
+        <CalendarComponent charlas={charlas} />
+      </section>
+    );
   };
   useEffect(() => {
     const fechData = async () => {
@@ -71,9 +97,7 @@ const MenuEmpresa = () => {
             );
             setEmpresa(filterEmpresa);
             setIsEmpresa(true);
-            setLoaded(true);
           } else {
-            setLoaded(false);
           }
         }
       } catch (error) {

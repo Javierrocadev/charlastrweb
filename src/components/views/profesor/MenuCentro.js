@@ -16,7 +16,7 @@ const MenuCentro = () => {
             className="relative md:max-w-full mx-auto p-6 mb-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
           >
             <p className="mb-4 text-lg font-semibold text-gray-900 dark:text-white">
-              <span className="text-accent-200">centro: </span>
+              <span className="text-accent-200">Centro: </span>
               {centro.nombre}
             </p>
             <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4">
@@ -65,7 +65,6 @@ const MenuCentro = () => {
 
           const charlasData = await Promise.all(charlasPromises);
           setCharlas(charlasData);
-
         } catch (error) {
           console.log("Error al obtener charlas");
         }
@@ -85,19 +84,28 @@ const MenuCentro = () => {
   useEffect(() => {
     const fechData = async () => {
       try {
-        const responsable = axiosApi.usuarios.getPerfilUsuario();
+        const responsable = await axiosApi.usuarios.getPerfilUsuario();
+
         const responseCentro =
           await axiosApi.empresasCentros.getEmpresasCentros();
-        const filteredResponse = responseCentro.filter(
-          (centro) => centro.idEmpresaCentro === responsable.idEmpresaCentro
-        );
+        const filteredResponse = responseCentro.filter((centro) => {
+          if (centro.idEmpresaCentro === responsable.idEmpresaCentro) {
+            return centro;
+          } else {
+            return false;
+          }
+        });
 
         setCentro(filteredResponse);
-        console.log(filteredResponse);
+        // console.log(
+        //   "usuario: " +
+        //     responsable.idEmpresaCentro +
+        //     ", Centro: " +
+        //     filteredResponse
+        // );
         setIsCentro(true);
       } catch (error) {
-      } finally {
-        setIsCentro(false);
+        console.log(error);
       }
     };
 
@@ -105,28 +113,30 @@ const MenuCentro = () => {
   }, []);
 
   return (
-    <section className="w-full h-[100vh] mx-auto relative">
-      <div className="w-full h-full md:h-[100vh] bg-slate-300">
-        <header className="bg-black w-full h-[80px] flex justify-end items-center px-5">
+    <section className="w-full h-[100vh] mx-auto">
+      <div className="w-full h-full  bg-slate-100">
+        <header className="bg-black w-full h-[80px] px-5">
           {centro.length ? (
-            <div>
-              <svg
-                class="w-6 h-6 text-white dark:text-white"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M6 4h12M6 4v16M6 4H5m13 0v16m0-16h1m-1 16H6m12 
-                  0h1M6 20H5M9 7h1v1H9V7Zm5 0h1v1h-1V7Zm-5 4h1v1H9v-1Zm5 
-                  0h1v1h-1v-1Zm-3 4h2a1 1 0 0 1 1 1v4h-4v-4a1 1 0 0 1 1-1Z"
-                />
-              </svg>
+            <div className="flex justify-between items-center p-5">
+              <span className=" float-left text-2xl text-white uppercase">
+                {centro.map((centro)=>centro.nombre)}
+              </span>
+              <div className="w-10 float-right">
+                <svg
+                  class="w-full h-full text-white dark:text-white"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-width="2"
+                    d="M3 21h18M4 18h16M6 10v8m4-8v8m4-8v8m4-8v8M4 9.5v-1c0-.3.2-.6.5-.8l7-4.5a1 1 0 0 1 1 0l7 4.5c.3.2.5.5.5.8v1c0 .3-.2.5-.5.5h-15a.5.5 0 0 1-.5-.5Z"
+                  />
+                </svg>
+              </div>
             </div>
           ) : centro.length === 0 ? (
             <NavLink
@@ -156,11 +166,12 @@ const MenuCentro = () => {
           )}
         </header>
 
-        <div className="w-[90%] mx-auto">
+        <div className="relative w-[90%] h-[100%] mx-auto">
           {isCentro ? (
-            <PanelCentro centro={centro} />
-          ) : centro.length === 0 ? (
-            <PanelCalendario />
+            <div>
+              <PanelCentro centro={centro} />
+              <PanelCalendario />
+            </div>
           ) : (
             <span className="hidden"> No hay centro</span>
           )}

@@ -96,10 +96,10 @@ const VistaTechridersEmpresa = () => {
     );
   };
 
-  const renderIcon = () => {
+  const RenderIcon = ({isTrSelected}) => {
     return (
       <svg
-        className="w-4 h-3 text-gray-800 dark:text-white"
+        className={`w-4 h-4 text-green-600 ${isTrSelected ? 'text-red-400' : 'dark:text-white'}`}
         aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
@@ -111,7 +111,7 @@ const VistaTechridersEmpresa = () => {
           stroke-linejoin="round"
           stroke-width="2"
           d={
-            openDetail
+            isTrSelected
               ? "M13 7 7.674 1.3a.91.91 0 0 0-1.348 0L1 7"
               : "m1 1 5.326 5.7a.909.909 0 0 0 1.348 0L13 1"
           }
@@ -123,9 +123,14 @@ const VistaTechridersEmpresa = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        const userloged = await axiosApi.usuarios.getPerfilUsuario();
         const responseTr = await axiosApi.empresas.getTRByEmpresa();
-        setTechriders(responseTr);
-        console.log(responseTr);
+
+        const trFilter = responseTr.filter((tr)=> tr.email !== userloged.email);//tr.idTechRider //email > porque es el único campo comun
+
+        setTechriders(trFilter);
+        console.log("TR EMPRESA: ",responseTr);
+        console.log("TR EMPRESA FILTRADOS: ",trFilter);
       } catch (error) {
         console.log(error);
       }
@@ -183,22 +188,7 @@ const VistaTechridersEmpresa = () => {
                 className="w-6 h-6 hover:scale-125 transition-transform cursor-pointer "
                 onClick={() => handleClickTr(tr)}
               >
-                {renderIcon()}
-                {/* <svg
-                  className="text-gray-800 dark:text-white"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 20 18"
-                >
-                  <path
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M5 5h9M5 9h5m8-8H2a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h4l3.5 4 3.5-4h5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1Z"
-                  />
-                </svg> */}
+                <RenderIcon isTrSelected={selectedTr === tr}/>
               </button>
             </div>
             <CharlasTr isOpen={selectedTr === tr} idTr={tr.idTechRider} />
