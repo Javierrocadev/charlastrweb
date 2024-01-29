@@ -4,6 +4,7 @@ import SolicitudCharla from "../user/formularios/SolicitudCharla";
 
 const VistaCharlasCentrto = () => {
   const [charla, setCharla] = useState([]);
+  const [misCharlas, setMisCharlas] = useState([]);
   const [selected, setSelected] = useState(null);
   const [selectedSolicitar, setSelectedSolicitar] = useState(null);
   const [estadoCharla, setEstadoCharla] = useState([]);
@@ -74,7 +75,7 @@ const VistaCharlasCentrto = () => {
     return estado ? estado.tipo : "Desconocido";
   };
 
-  const DetailForm = ({ isOpen, idTr }) => {
+  const DetailForm = ({ isOpen, idTr, misCharlas }) => {
     const [tr, setTr] = useState([]);
     const [loading, setLoading] = useState(false);
 
@@ -82,7 +83,7 @@ const VistaCharlasCentrto = () => {
       const fetchData = async () => {
         try {
           setLoading(true);
-          const charlas = charla.filter((ch) => ch.idTechRider === idTr);
+          const charlas = misCharlas.filter((ch) => ch.idTechRider === idTr);
 
           const response = await axiosApi.usuarios.getUsuarios();
 
@@ -95,6 +96,8 @@ const VistaCharlasCentrto = () => {
           });
 
           setTr(tr);
+          console.log("Charlas con TR: "+charlas);
+
         } catch (error) {
           console.log(error);
         } finally {
@@ -102,7 +105,7 @@ const VistaCharlasCentrto = () => {
         }
       };
       fetchData();
-    }, [idTr]);
+    }, [misCharlas,idTr]);
 
     return (
       <div className={`${isOpen ? "" : "hidden"}  pt-5 mt-10 border-t-2`}>
@@ -268,7 +271,7 @@ const VistaCharlasCentrto = () => {
   };
 
   const MisCharlas = () => {
-    const [misCharlas, setMisCharlas] = useState([]);
+    
     const [select, setSelect] = useState(null);
 
     const handleClickDetailCharlaProfesor = (d) => {
@@ -277,7 +280,7 @@ const VistaCharlasCentrto = () => {
       });
     };
 
-    useEffect(() => {
+    /*useEffect(() => {
       const fetchData = async () => {
         try {
           const profesor = await axiosApi.usuarios.getPerfilUsuario();
@@ -291,7 +294,7 @@ const VistaCharlasCentrto = () => {
         }
       };
       fetchData();
-    }, []);
+    }, []);*/
     return (
       <section>
         {misCharlas.length === 0 ? (
@@ -353,6 +356,7 @@ const VistaCharlasCentrto = () => {
                   <DetailForm
                     isOpen={select === charla}
                     idTr={charla.idTechRider}
+                    misCharlas={misCharlas}
                   />
                 </div>
               </div>
@@ -385,6 +389,12 @@ const VistaCharlasCentrto = () => {
 
         const responseEstado = axiosApi.charlas.getEstadoCharlas();
         setEstadoCharla(await responseEstado);
+
+        const profesor = await axiosApi.usuarios.getPerfilUsuario();
+        const resp = await axiosApi.charlas.getCharlasByProfesor(
+          profesor.idUsuario
+        );
+        setMisCharlas(resp);
       } catch (error) {
         console.log(error);
       }
@@ -424,7 +434,7 @@ const VistaCharlasCentrto = () => {
       </div>
       <div className="pt-5">
         {selectedComponent === "posiblescharlas" && <PosiblesCharlas />}
-        {selectedComponent === "mischarlas" && <MisCharlas />}
+        {selectedComponent === "mischarlas" && <MisCharlas/>}
       </div>
     </section>
   );
