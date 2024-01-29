@@ -58,10 +58,20 @@ const InscripcionEmpresa = () => {
         idProvincia: provincia,
         razonSocial: razonSocial,
         idTipoEmpresa: tipoEmpresa,
-        estadoEmpresa: 1
+        estadoEmpresa: 1,
       };
 
       console.log(centroJSON);
+      const responseCentro =
+        await axiosApi.empresasCentros.insertarEmpresaCentro(centroJSON);
+      const idCentroEmpresa = responseCentro.idEmpresaCentro;
+
+      const reponsePeticion =
+        await axiosApi.empresasCentros.peticionesAltaEmpresaCentro(
+          idCentroEmpresa
+        );
+      console.log("Centro insertado: ", responseCentro);
+      console.log("Peticion enviada: ", reponsePeticion);
 
       // const responseCentro =
       //   await axiosApi.empresasCentros.insertarEmpresaCentro(centroJSON);
@@ -91,9 +101,9 @@ const InscripcionEmpresa = () => {
   return (
     <section className="container bg-white py-4 rounded mx-auto">
       <form className="max-w-full m-5" onSubmit={insertarCentro}>
-      <h2 class="text-xl font-bold mb-4 text-gray-800 dark:text-gray-200">
-        Inscribe tu centro
-      </h2>
+        <h2 class="text-xl font-bold mb-4 text-gray-800 dark:text-gray-200">
+          Inscribe tu centro
+        </h2>
         <div className="relative z-0 w-full mb-5 group">
           <input
             type="text"
@@ -105,7 +115,6 @@ const InscripcionEmpresa = () => {
             required
             onChange={handleInputChangeNombre}
           />
-     
         </div>
         <div className="relative z-0 w-full mb-5 group">
           <input
@@ -118,7 +127,6 @@ const InscripcionEmpresa = () => {
             required
             onChange={handleInputChangeDireccion}
           />
-       
         </div>
         <div className="relative z-0 w-full mb-5 group">
           <input
@@ -132,7 +140,6 @@ const InscripcionEmpresa = () => {
             required
             onChange={handleInputChangeTelefono}
           />
-         
         </div>
         <div className="relative z-0 w-full mb-5 group">
           <input
@@ -145,7 +152,6 @@ const InscripcionEmpresa = () => {
             required
             onChange={handleInputChangePersonaContacto}
           />
-          
         </div>
         <div className="grid md:grid-cols-2 md:gap-6">
           <div className="relative z-0 w-full mb-5 group">
@@ -159,7 +165,6 @@ const InscripcionEmpresa = () => {
               required
               onChange={handleInputChangeCief}
             />
-            
           </div>
           <div className="relative z-0 w-full mb-5 group">
             <select
@@ -193,7 +198,6 @@ const InscripcionEmpresa = () => {
               placeholder="Razón social "
               onChange={handleInputChangeRazonSocial}
             />
-           
           </div>
           <div className="relative z-0 w-full mb-5 group">
             <select

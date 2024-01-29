@@ -52,15 +52,22 @@ const MenuEmpresa = () => {
     useEffect(() => {
       const fechData = async () => {
         try {
-          const responsTrEmpresa = await axiosApi.empresas.getTRByEmpresa();
-          const charlasPromises = responsTrEmpresa.map(async (data) => {
-            const resp = await axiosApi.empresas.getCharlasTrEmpresa(40); //data.idTechRider
-            //console.log("CHARLAS DE LOS TR DE LA EMPRESA: ", resp);
-            //const filteredResponse = resp.filter((chTr)=> chTr.idTechRider === data.idTechRider);
-            return resp;
-          });
+          // const responsTrEmpresa = await axiosApi.empresas.getTRByEmpresa();
+          // const charlasPromises = responsTrEmpresa.map(async (data) => {
+          //   const resp = await axiosApi.empresas.getCharlasTrEmpresa(40); //data.idTechRider
+          //   console.log("CHARLAS DE LOS TR DE LA EMPRESA: ", resp);
+          //   const filteredResponse = resp.filter((chTr)=> chTr.idTechRider === data.idTechRider);
+          //   return resp;
+          // });
 
-          setCharlas(charlasPromises);
+          const responseTrCentro = await axiosApi.empresas.getTRByEmpresa();
+          const mappedIds = responseTrCentro.map((tr) => tr.idTechRider);
+          const charlasResponse = await axiosApi.charlas.getCharlas();
+          const filteredChalas = charlasResponse.filter((c) =>
+            mappedIds.includes(c.idTechRider)
+          );
+
+          setCharlas(filteredChalas);
           setLoaded(true);
 
           //const charlasData = await Promise.all(charlasPromises);
@@ -110,26 +117,31 @@ const MenuEmpresa = () => {
   return (
     <section className="w-full h-[100vh] mx-auto relative">
       <div className="w-full h-full md:h-[100vh] bg-slate-300">
-        <header className="bg-black w-full h-[80px] flex justify-end items-center px-5">
+        <header className="bg-black w-full h-[80px] px-5">
           {empresa.length ? (
-            <div>
-              <svg
-                class="w-6 h-6 text-white dark:text-white"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M6 4h12M6 4v16M6 4H5m13 0v16m0-16h1m-1 16H6m12 
+            <div className="flex justify-between items-center p-5">
+              <span className=" float-left text-2xl text-white uppercase">
+                {empresa.map((centro) => centro.nombre)}
+              </span>
+              <div className="w-10 float-right">
+                <svg
+                  class="w-6 h-6 text-white dark:text-white"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M6 4h12M6 4v16M6 4H5m13 0v16m0-16h1m-1 16H6m12 
                   0h1M6 20H5M9 7h1v1H9V7Zm5 0h1v1h-1V7Zm-5 4h1v1H9v-1Zm5 
                   0h1v1h-1v-1Zm-3 4h2a1 1 0 0 1 1 1v4h-4v-4a1 1 0 0 1 1-1Z"
-                />
-              </svg>
+                  />
+                </svg>
+              </div>
             </div>
           ) : empresa.length === 0 ? (
             <NavLink

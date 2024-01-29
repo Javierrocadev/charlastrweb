@@ -238,8 +238,8 @@ const VistaCursosCentrto = () => {
             <button
               className={`${
                 selectedComponent === "cursos"
-                  ? "bg-black  text-white"
-                  : "active  text-accent-200"
+                ? "bg-blue-700  text-white"
+                : "active bg-blue-400 hover:bg-blue-600  text-white"
               } inline-block p-4 border-b-2 border-transparent rounded-t-sm focus:outline-none`}
               onClick={() => handleComponentChange("cursos")}
             >
@@ -250,8 +250,8 @@ const VistaCursosCentrto = () => {
             <button
               className={`${
                 selectedComponent === "crearcurso"
-                  ? "bg-black  text-white"
-                  : "active text-accent-200"
+                ? "bg-blue-700  text-white"
+                : "active bg-blue-400 hover:bg-blue-600  text-white"
               } inline-block p-4 border-b-2 border-transparent rounded-t-sm focus:outline-none`}
               onClick={() => handleComponentChange("crearcurso")}
             >

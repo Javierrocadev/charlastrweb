@@ -4,16 +4,15 @@ import axiosApi from "../../../api/axiosApi";
 const VistaTechridersEmpresa = () => {
   const [techriders, setTechriders] = useState([]);
   const [selectedTr, setSelectedTr] = useState(null);
-  const [openDetail, setOpenDetail] = useState(false);
 
   const handleClickTr = (tr) => {
     setSelectedTr((prevTr) => {
       return prevTr === tr ? null : tr;
     });
-    setOpenDetail((prev) => !prev);
+    //setSelectedTr((prevTr) => (prevTr === tr ? null : tr));
   };
 
-  const CharlasTr = ({ isOpen, idTr }) => {
+  const CharlasTr = ({ isOpen, selectedTr, idTr }) => {
     const [charlas, setCharlas] = useState([]);
     const [loading, setLoading] = useState(false);
     const [callback, setCallback] = useState("");
@@ -23,8 +22,13 @@ const VistaTechridersEmpresa = () => {
         try {
           setLoading(true);
           //idTr que tiene charlas es solo el 3
-          const response = await axiosApi.empresas.getCharlasTrEmpresa(idTr);
+          //console.log(idTr);
+          console.log(selectedTr);
 
+          const response = await axiosApi.empresas.getCharlasTrEmpresa(
+            selectedTr.idTechRider
+          );
+          //console.log(response)
           if (response) {
             setCharlas(response);
           } else {
@@ -38,7 +42,7 @@ const VistaTechridersEmpresa = () => {
       };
 
       fechaData();
-    }, [idTr]);
+    }, [isOpen, selectedTr, idTr]);
 
     return (
       <div className={`${isOpen ? "" : "hidden"}  pt-5 mt-10 border-t-2`}>
@@ -50,7 +54,6 @@ const VistaTechridersEmpresa = () => {
         </span>
         <div className=" w-full items-center">
           {loading ? (
-            // Render a loading indicator or message while data is being fetched
             <p>Loading...</p>
           ) : charlas.length === 0 ? (
             <p>No tiene charlas asignado.</p>
@@ -96,10 +99,12 @@ const VistaTechridersEmpresa = () => {
     );
   };
 
-  const RenderIcon = ({isTrSelected}) => {
+  const RenderIcon = ({ isTrSelected }) => {
     return (
       <svg
-        className={`w-4 h-4 text-green-600 ${isTrSelected ? 'text-red-400' : 'dark:text-white'}`}
+        className={`w-4 h-4 text-green-600 ${
+          isTrSelected ? "text-red-400" : "dark:text-white"
+        }`}
         aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
@@ -126,11 +131,13 @@ const VistaTechridersEmpresa = () => {
         const userloged = await axiosApi.usuarios.getPerfilUsuario();
         const responseTr = await axiosApi.empresas.getTRByEmpresa();
 
-        const trFilter = responseTr.filter((tr)=> tr.email !== userloged.email);//tr.idTechRider //email > porque es el único campo comun
+        const trFilter = responseTr.filter(
+          (tr) => tr.email !== userloged.email
+        ); //tr.idTechRider //email > porque es el único campo comun
 
         setTechriders(trFilter);
-        console.log("TR EMPRESA: ",responseTr);
-        console.log("TR EMPRESA FILTRADOS: ",trFilter);
+        // console.log("TR EMPRESA: ",responseTr);
+        // console.log("TR EMPRESA FILTRADOS: ",trFilter);
       } catch (error) {
         console.log(error);
       }
@@ -188,10 +195,14 @@ const VistaTechridersEmpresa = () => {
                 className="w-6 h-6 hover:scale-125 transition-transform cursor-pointer "
                 onClick={() => handleClickTr(tr)}
               >
-                <RenderIcon isTrSelected={selectedTr === tr}/>
+                <RenderIcon isTrSelected={selectedTr === tr} />
               </button>
             </div>
-            <CharlasTr isOpen={selectedTr === tr} idTr={tr.idTechRider} />
+            <CharlasTr
+              isOpen={selectedTr === tr}
+              selectedTr={selectedTr}
+              idTr={tr}
+            />
           </div>
         ))}
       </div>
