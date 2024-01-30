@@ -529,6 +529,12 @@ const Navbar = () => {
               >
                 Perfil
               </Link>
+              <Link
+              class="font-medium hover:text-accent-200 text-text-200  dark:text-text-100 dark:hover:text-text-200 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
+              to={"/calendariotr"}
+            >
+             Calendario
+            </Link>
             <Link
               class="font-medium hover:text-accent-200 text-text-200  dark:text-text-100 dark:hover:text-text-200 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
               to={"/charlastechrider"}
@@ -553,6 +559,7 @@ const Navbar = () => {
             >
               Centros
             </Link>
+         
           </div>
         </div>
       </nav>
