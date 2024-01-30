@@ -395,6 +395,27 @@ const axiosApi = {
         throw error;
       }
     },
+
+    putResponsableEmpresa: async(idempresacentro, idresponsable)=>{
+      try{
+        const token = localStorage.getItem("token");
+        const response = await axios.put(`${API_URL}/api/usuarios/updateresponsableempresacentro/${idempresacentro}/${idresponsable}`,{},
+        {
+          headers:{
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+
+          }
+        },
+        );
+
+        return response.data;
+        
+      }catch(error){
+        console.log(error);
+      }
+    },
+
     getEmpresasCentrosporID: async (idempresacentro) => {
       try {
         const response = await axios.get(
@@ -411,15 +432,14 @@ const axiosApi = {
       try {
         const token = localStorage.getItem("token");
         const response = await axios.post(
-          `${API_URL}/api/PeticionesCentroEmpresa?`,
+          `${API_URL}/api/PeticionesCentroEmpresa?idcentroempresa=`+idCentroEmpresa,
+          {},
           {
             headers: {
               Authorization: `Bearer ${token}`,
             },
-            paramas: {
-              idcentroempresa: `${idCentroEmpresa}`,
-            },
-          }
+          },
+          
         );
 
         return response.data;

@@ -147,16 +147,12 @@ const VistaCharlasCentrto = () => {
                             {" " + techRider.email}
                           </p>
                         </div>
-                      </div>
-                      <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4">
                         <div>
                           <p className="text-sm text-gray-500 dark:text-gray-400">
                             <span className="font-semibold">Linkedin: </span>
                             {techRider.linkedIn}
                           </p>
                         </div>
-                      </div>
-                      <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4">
                         <div>
                           <p className="text-sm text-gray-500 dark:text-gray-400">
                             <span className="font-semibold">Teléfono: </span>
@@ -245,9 +241,27 @@ const VistaCharlasCentrto = () => {
               >
                 <div className="flex items-center">
                   <div className="flex-1">
-                    <p className="mb-4 text-lg font-semibold text-gray-900 dark:text-white">
+                    <p className="flex items-center gap-2 mb-4 text-lg font-semibold text-gray-900 dark:text-white">
                       <span className="text-indigo-500">Descripción: </span>
                       {charla.descripcion}
+
+                      <span>
+                        <svg
+                          class="w-8 h-8 text-gray-800 dark:text-white"
+                          aria-hidden="true"
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            stroke="currentColor"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="0.4"
+                            d="M7.6 8.5h8m-8 3.5H12m7.1-7H5c-.2 0-.5 0-.6.3-.2.1-.3.3-.3.6V15c0 .3 0 .5.3.6.1.2.4.3.6.3h4l3 4 3-4h4.1c.2 0 .5 0 .6-.3.2-.1.3-.3.3-.6V6c0-.3 0-.5-.3-.6a.9.9 0 0 0-.6-.3Z"
+                          />
+                        </svg>
+                      </span>
                     </p>
                   </div>
                   <div
@@ -329,9 +343,27 @@ const VistaCharlasCentrto = () => {
               >
                 <div className="flex items-center">
                   <div className="flex-1">
-                    <p className="mb-4 text-lg font-semibold text-gray-900 dark:text-white">
+                    <p className="flex items-center gap-2 mb-4 text-lg font-semibold text-gray-900 dark:text-white">
                       <span className="text-indigo-500">Descripción: </span>
                       {charla.descripcionCharla}
+
+                      <span>
+                        <svg
+                          class="w-8 h-8 text-gray-800 dark:text-white"
+                          aria-hidden="true"
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            stroke="currentColor"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="0.4"
+                            d="M7.6 8.5h8m-8 3.5H12m7.1-7H5c-.2 0-.5 0-.6.3-.2.1-.3.3-.3.6V15c0 .3 0 .5.3.6.1.2.4.3.6.3h4l3 4 3-4h4.1c.2 0 .5 0 .6-.3.2-.1.3-.3.3-.6V6c0-.3 0-.5-.3-.6a.9.9 0 0 0-.6-.3Z"
+                          />
+                        </svg>
+                      </span>
                     </p>
                   </div>
                   <div

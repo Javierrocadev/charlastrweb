@@ -63,16 +63,12 @@ const VistaCursosCentrto = () => {
                   {" " + curso.profesor}
                 </p>
               </div>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4">
               <div>
                 <p className="text-sm text-gray-500 dark:text-gray-400">
                   <span className="font-semibold">Centro: </span>
                   {curso.centro}
                 </p>
               </div>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4">
               <div>
                 <p className="text-sm text-gray-500 dark:text-gray-400">
                   <span className="font-semibold">Provincia: </span>
@@ -238,8 +234,8 @@ const VistaCursosCentrto = () => {
             <button
               className={`${
                 selectedComponent === "cursos"
-                ? "bg-blue-700  text-white"
-                : "active bg-blue-400 hover:bg-blue-600  text-white"
+                  ? "bg-blue-700  text-white"
+                  : "active bg-blue-400 hover:bg-blue-600  text-white"
               } inline-block p-4 border-b-2 border-transparent rounded-t-sm focus:outline-none`}
               onClick={() => handleComponentChange("cursos")}
             >
@@ -250,8 +246,8 @@ const VistaCursosCentrto = () => {
             <button
               className={`${
                 selectedComponent === "crearcurso"
-                ? "bg-blue-700  text-white"
-                : "active bg-blue-400 hover:bg-blue-600  text-white"
+                  ? "bg-blue-700  text-white"
+                  : "active bg-blue-400 hover:bg-blue-600  text-white"
               } inline-block p-4 border-b-2 border-transparent rounded-t-sm focus:outline-none`}
               onClick={() => handleComponentChange("crearcurso")}
             >
