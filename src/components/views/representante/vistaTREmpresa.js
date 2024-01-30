@@ -46,7 +46,7 @@ const VistaTechridersEmpresa = () => {
 
     return (
       <div className={`${isOpen ? "" : "hidden"}  pt-5 mt-10 border-t-2`}>
-        <h6 className="text-lg font-medium text-gray-900">
+        <h6 className="text-lg font-medium text-gray-900 float-end">
           Charlas del TechRiders
         </h6>
         <span className={`${charlas.length > 0 ? "block" : "hidden"}`}>
@@ -104,7 +104,7 @@ const VistaTechridersEmpresa = () => {
       <svg
         className={`w-4 h-4 text-green-600 ${
           isTrSelected ? "text-red-400" : "dark:text-white"
-        }`}
+        } mt-3`}
         aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
@@ -146,42 +146,52 @@ const VistaTechridersEmpresa = () => {
   }, []);
 
   return (
-    <section className="container mx-auto">
+    <section className="max-w-[80%] mx-auto">
       <div>
         {techriders.map((tr, index) => (
           <div
             key={index}
             className="relative md:max-w-full mx-auto p-6 mb-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
           >
-            <p className="mb-4 text-lg font-semibold text-gray-900 dark:text-white">
-              <span className="text-accent-200">Tech Rider: </span>
+            <p className="flex items-center gap-3 mb-4 text-lg font-semibold text-gray-900 dark:text-white">
+              <span className="text-accent-200">
+                <svg
+                  className="w-20 h-20 text-gray-800 dark:text-white"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="1"
+                    d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Zm0 0a9 9 0 0 0 5-1.5 4 4 0 0 0-4-3.5h-2a4 4 0 0 0-4 3.5 9 9 0 0 0 5 1.5Zm3-11a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                  />
+                </svg>
+              </span>
               {" " + tr.techRider}
             </p>
-            <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-3">
               <div>
                 <p className="text-sm text-gray-500 dark:text-gray-400">
                   <span className="font-semibold">Email: </span>
                   {" " + tr.email}
                 </p>
               </div>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4">
               <div>
                 <p className="text-sm text-gray-500 dark:text-gray-400">
                   <span className="font-semibold">Teléfono: </span>
                   {tr.telefonoTechRider}
                 </p>
               </div>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4">
               <div>
                 <p className="text-sm text-gray-500 dark:text-gray-400">
                   <span className="font-semibold">Linkedin: </span>
                   {tr.linkedIn}
                 </p>
               </div>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4">
               <div>
                 <p className="text-sm text-gray-500 dark:text-gray-400">
                   <span className="font-semibold">Empresa: </span>
@@ -189,14 +199,15 @@ const VistaTechridersEmpresa = () => {
                 </p>
               </div>
             </div>
-
-            <div className="absolute top-5 right-10 flex items-center">
+            <div className="absolute top-5 right-10 flex items-center hover:scale-110 transition-transform cursor-pointer">
               <button
-                className="w-6 h-6 hover:scale-125 transition-transform cursor-pointer "
+                className="mr-3"
                 onClick={() => handleClickTr(tr)}
               >
-                <RenderIcon isTrSelected={selectedTr === tr} />
+                ver sus charlas
+                
               </button>
+              <RenderIcon isTrSelected={selectedTr === tr} />
             </div>
             <CharlasTr
               isOpen={selectedTr === tr}

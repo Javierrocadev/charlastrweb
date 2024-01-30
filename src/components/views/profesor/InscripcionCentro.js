@@ -15,6 +15,11 @@ const InscripcionCentro = () => {
   const [tipoEmpresa, setTipoEmpresa] = useState([]);
   const [razonSocial, setRazonSocial] = useState("");
   const [estadoCentro, setEstadoCentro] = useState(0);
+  const [selectedComponent, setSelectedComponent] = useState("inscripcion");
+
+  const handleComponentChange = (selected) => {
+    setSelectedComponent(selected);
+  };
 
   const handleInputChangeNombre = (e) => {
     setNombre(e.target.value);
@@ -79,28 +84,10 @@ const InscripcionCentro = () => {
     }
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const responseProvincias = await axiosApi.provincias.getProvincias();
-        setProvincias(responseProvincias);
-
-        const responseTiposEmpresas =
-          await axiosApi.empresasCentros.getTipoEmpresa();
-        setTipoEmpresas(responseTiposEmpresas);
-        //setEstadoCentro(1);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  return (
-    <section className="container bg-white rounded py-4 mx-auto">
+  const FormularioInscripcion = () => {
+    return (
       <form className="max-w-full m-5" onSubmit={insertarCentro}>
-        <h2 class="text-xl font-bold mb-4 text-gray-800 dark:text-gray-200">
+        <h2 class="text-3xl font-bold mb-7 text-gray-800 dark:text-gray-200">
           Inscribe tu centro
         </h2>
         <div className="relative z-0 w-full mb-5 group">
@@ -229,6 +216,127 @@ const InscripcionCentro = () => {
           </button>
         </div>
       </form>
+    );
+  };
+  const BuscarMiCentro = () => {
+    const [centros, setCentros] = useState([]);
+    const [centrobuscado, setCentroBuscado] = useState(0);
+
+    const handleClickCentro = (centro) => {
+      //console.log(centro);
+      setCentroBuscado(centro);
+    };
+
+    const handleSubmit = async () => {
+      const responsable = await axiosApi.usuarios.getPerfilUsuario();
+      const putResponsableEmpresa =
+        axiosApi.empresasCentros.putResponsableEmpresa(
+          centrobuscado,
+          responsable.idUsuario
+        );
+      console.log(putResponsableEmpresa);
+    };
+    useEffect(() => {
+      const fechData = async () => {
+        try {
+          const resp = await axiosApi.empresasCentros.getEmpresasCentros();
+          setCentros(resp);
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      fechData();
+    }, []);
+    return (
+      <div className="w-full md:w-[95%] mx-auto p-6 bg-gray-100 shadow-md rounded-md">
+        <h1 className="text-3xl font-bold text-gray-800 mb-4">
+          Busca tu centro
+        </h1>
+        <div className="relative">
+          <label
+            htmlFor="buscar"
+            className="block text-sm font-medium text-gray-600 mb-2"
+          >
+            Selecciona tu centro
+          </label>
+          <div className="relative">
+            <select
+              id="buscar"
+              onChange={(e) => handleClickCentro(e.target.value)}
+              className="block w-full px-4 py-2 text-sm text-gray-800 border border-gray-300 rounded-md 
+              focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            >
+              {centros.map((centro) => (
+                <option
+                  value={centro.idEmpresaCentro}
+                  key={centro.idEmpresaCentro}
+                  className="py-4"
+                >
+                  {centro.nombre}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+        <div className="pt-5 flex justify-center items-center">
+          <button onClick={() => handleSubmit()} className="py-2 px-5 text-white bg-black hover:bg-gray-900">formar parte</button>
+        </div>
+      </div>
+    );
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const responseProvincias = await axiosApi.provincias.getProvincias();
+        setProvincias(responseProvincias);
+
+        const responseTiposEmpresas =
+          await axiosApi.empresasCentros.getTipoEmpresa();
+        setTipoEmpresas(responseTiposEmpresas);
+        //setEstadoCentro(1);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  return (
+    <section className="container bg-white rounded py-4 mx-auto">
+      <div className="text-sm font-medium text-center text-gray-500 border-b border-gray-400 dark:text-gray-400 dark:border-gray-700">
+        <ul className="flex flex-wrap -mb-px">
+          <li className="me-2">
+            <button
+              className={`${
+                selectedComponent === "inscripcion"
+                  ? "bg-blue-700  text-white"
+                  : "active bg-blue-400 hover:bg-blue-600  text-white"
+              } inline-block p-4 border-b-2 border-transparent rounded-t-sm focus:outline-none`}
+              onClick={() => handleComponentChange("inscripcion")}
+            >
+              inscribir centro
+            </button>
+          </li>
+          <li className="me-2">
+            <button
+              className={`${
+                selectedComponent === "buscarcentro"
+                  ? "bg-blue-700  text-white"
+                  : "active bg-blue-400 hover:bg-blue-600  text-white"
+              } inline-block p-4 border-b-2 border-transparent rounded-t-sm focus:outline-none`}
+              onClick={() => handleComponentChange("buscarcentro")}
+            >
+              buscar mi centro
+            </button>
+          </li>
+        </ul>
+      </div>
+      <div className="pt-5">
+        {selectedComponent === "inscripcion" && <FormularioInscripcion />}
+        {selectedComponent === "buscarcentro" && <BuscarMiCentro />}
+      </div>
     </section>
   );
 };
