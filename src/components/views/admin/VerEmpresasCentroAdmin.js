@@ -19,6 +19,38 @@ const VerEmpresasCentroAdmin = () => {
   const [usuariosResponse, SetUsuariosResponse] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const [nombreCurso, setNombreCurso] = useState("");
+  const [descripcion, setDescripcion] = useState("");
+  const [idCentroCurso, setIdCentroCurso] = useState(null);
+
+  
+
+  
+    const [seccionesVisibles, setSeccionesVisibles] = useState([]);
+  
+    const cargarVisible = (idCentro) => {
+      
+      if (seccionesVisibles.includes(idCentro)) {
+
+        setSeccionesVisibles(seccionesVisibles.filter((id) => id !== idCentro));
+      } else {
+        setSeccionesVisibles([...seccionesVisibles, idCentro]);
+      }
+    };
+  
+  const handleNombreChange = (e) => {
+    setNombreCurso(e.target.value);
+  };
+  const handleDescripcionChange = (e) => {
+    setDescripcion(e.target.value);
+  };
+  const handleSubmitCurso = (e) => {
+    e.preventDefault();
+    // Llamar al método en otro componente y pasar el valor del input
+    console.log(idCentroCurso,nombreCurso,descripcion)
+   axiosApi.cursos.postCurso(idCentroCurso,nombreCurso,descripcion);
+  };
+
   useEffect(() => {
     const fetchData = async () => {
         try {
@@ -207,20 +239,79 @@ const VerEmpresasCentroAdmin = () => {
               >
                 Eliminar
               </button>
-             <h1>Cursos del centro: {centro.nombre}</h1>
-                  {cursosResponse.filter((curso)=> centro.idTipoEmpresa ===2 && centro.idEmpresaCentro===curso.idCentro).map((curso,index)=>(
-                    <div key={index}>
-                      {curso.nombreCurso}
-                    </div>
-                  ))}
-                         </div>
+                {centro.idTipoEmpresa === 2 && (
+                      <div>
+                            <h1>Cursos del centro: {centro.nombre}</h1>
+                            {cursosResponse
+                              .filter((curso) => centro.idTipoEmpresa === 2 && centro.idEmpresaCentro === curso.idCentro)
+                              .map((curso, index) => (
+                                <div key={index}>
+                                  {curso.nombreCurso}
+                                </div>
+                              ))}
+
+                <button
+                type="button"
+                onClick={() => cargarVisible(centro.idEmpresaCentro)}
+                class="py-2 mt-3 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-green-600 bg-red-600 text-white shadow-sm hover:bg-green-800 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
+              >
+                Crear Curso
+              </button>
+                          </div>
+                        )}
+                       </div>
                       </div>
                     </div>
                   </div>
-                  
-                </td>
-                
-              </tr>
+                  {/* Crear Curso */}
+                  {seccionesVisibles.includes(centro.idEmpresaCentro) && centro.idTipoEmpresa === 2 && (
+                    <form>
+          
+                    <div class="grid sm:grid-cols-12 gap-2 sm:gap-6">
+              
+              
+                      <div class="sm:col-span-3">
+                        <label for="af-account-email" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-gray-200">
+                      Nombre del Curso
+                        </label>
+                      </div>
+
+                      <div class="sm:col-span-3">
+                        <input
+                            type="text"
+                            className="form-control"
+                            id="nombre"
+                            style={{ margin: "30px", border: "1px solid black" }}
+                            value={nombreCurso}
+                            onChange={handleNombreChange}/>  
+                      </div>
+
+                      <div class="sm:col-span-3">
+                        <label for="af-account-email" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-gray-200">
+                    Descripcion Del Curso
+                        </label>
+                      </div>
+                    
+                      <div class="sm:col-span-3">
+                        <input
+                            type="text"
+                            className="form-control"
+                            id="desc"
+                            style={{ margin: "30px", border: "1px solid black" }}
+                            value={descripcion}
+                            onChange={handleDescripcionChange}/>  
+                      </div>
+              
+                      <div class="sm:col-span-3">
+                      <button  onClick={handleSubmitCurso} type="submit" class="mt-4 py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-accent-200 bg-accent-200 text-white shadow-sm hover:bg-accent-100 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200">
+                        Añadir Curso
+                      </button>
+                      </div> 
+                    </div>
+                  </form>
+                )}           
+                </td>               
+              </tr>    
               
             ))}
 
@@ -228,6 +319,7 @@ const VerEmpresasCentroAdmin = () => {
           </table>
           {/* <!-- End Table --> */}
 
+       
           {/* <!-- Footer --> */}
           <div class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-t border-gray-200 dark:border-gray-700">
             

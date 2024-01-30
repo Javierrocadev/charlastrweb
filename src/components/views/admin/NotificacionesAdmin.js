@@ -14,6 +14,7 @@ const NotificacionesAdmin = () => {
   const [tecnologiasResponse, setTecnologiasResponse] = useState([]);
   const [tecnologiasCharlasResponse, setTecnologiasCharlasResponse] = useState([]);
   const [centroEmpresaResponse, setEmpresasCentrosResponse] = useState([]);
+  const [peticionCentroEmpresaResponse, setPeticionCentroEmpresaResponse] = useState([]);
   const [usuariosResponse, SetUsuariosResponse] = useState([]);
   const [rolesResponse, SetRolesResponse] = useState([]);
   const [peticionesResponse, SetRpeticionesResponse] = useState([]);
@@ -30,6 +31,29 @@ const NotificacionesAdmin = () => {
     console.log("Algo: ", responseUpdateUser);
   };
 
+  const handleAlta = async (idempresacentro,estado,idpeticion) => {
+    console.log(idempresacentro)
+    const altaEmpresaResponse = axiosApi.empresasCentros.updateEstadoCentroEmpresa(
+      idempresacentro,
+      estado
+    );
+    const eliminarPeticionResponse = await axiosApi.peticionesCentroEmpresa.deletePeticionCentroEmpresa(idpeticion)
+
+    loadPeticiones()
+    console.log("alta: ", altaEmpresaResponse);
+    console.log("eliminarPeticion", eliminarPeticionResponse)
+
+  };
+
+  const handleBaja = async (idpeticion) => {
+    const DenegadaEmpresaResponse = axiosApi.peticionesCentroEmpresa.deleteAllPeticionCategoria(
+      idpeticion
+    );
+
+    loadPeticiones()
+    console.log("Algo: ", DenegadaEmpresaResponse);
+  
+  };
   const handleNombreChange = (e) => {
     setNombreTecnologia(e.target.value);
   };
@@ -38,6 +62,18 @@ const NotificacionesAdmin = () => {
     // Llamar al método en otro componente y pasar el valor del input
    axiosApi.tecnologias.postTecnologia(nombreTecnologia);
   };
+
+  const loadPeticiones = async ()=>{
+    try{
+       const peticionCentroEmpresaResponse =
+        await axiosApi.peticionesCentroEmpresa.getPeticionesCentroEmpresa();
+      console.log("Centros:", peticionCentroEmpresaResponse);
+      setPeticionCentroEmpresaResponse(peticionCentroEmpresaResponse);
+    }catch(error){
+      console.log(error)
+    }
+   
+  }
   
   useEffect(() => {
     const fetchData = async () => {
@@ -62,6 +98,8 @@ const NotificacionesAdmin = () => {
           await axiosApi.empresasCentros.getEmpresasCentros();
         console.log("Centros:", centroEmpresaResponse);
         setEmpresasCentrosResponse(centroEmpresaResponse);
+
+        loadPeticiones()
 
         const responseRoles = await axiosApi.roles.getRoles();
         console.log("Roles:", responseRoles);
@@ -461,62 +499,60 @@ const NotificacionesAdmin = () => {
                       <th scope="col" class="px-6 py-3 text-start">
                         <div class="flex items-center gap-x-2">
                           <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
-                            Nombre
+                            ID EMPRESA
+                          </span>
+                        </div>
+                      </th>
+                      <th scope="col" class="px-6 py-3 text-start">
+                        <div class="flex items-center gap-x-2">
+                          <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
+                           DIRECCION
+                          </span>
+                        </div>
+                      </th>
+                      <th scope="col" class="px-6 py-3 text-start">
+                        <div class="flex items-center gap-x-2">
+                          <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
+                            TELEFONO
+                          </span>
+                        </div>
+                      </th>
+                      <th scope="col" class="px-6 py-3 text-start">
+                        <div class="flex items-center gap-x-2">
+                          <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
+                            PERSONA CONTACTO
+                          </span>
+                        </div>
+                      </th>
+                      <th scope="col" class="px-6 py-3 text-start">
+                        <div class="flex items-center gap-x-2">
+                          <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
+                            CIF
+                          </span>
+                        </div>
+                      </th>
+                      <th scope="col" class="px-6 py-3 text-start">
+                        <div class="flex items-center gap-x-2">
+                          <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
+                           Provincia
+                          </span>
+                        </div>
+                      </th>
+                      <th scope="col" class="px-6 py-3 text-start">
+                        <div class="flex items-center gap-x-2">
+                          <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
+                          Razon Social
+                          </span>
+                        </div>
+                      </th>
+                      <th scope="col" class="px-6 py-3 text-start">
+                        <div class="flex items-center gap-x-2">
+                          <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
+                          Tipo Empresa
                           </span>
                         </div>
                       </th>
 
-                      <th scope="col" class="px-6 py-3 text-start">
-                        <div class="flex items-center gap-x-2">
-                          <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
-                            Direccion
-                          </span>
-                        </div>
-                      </th>
-                      <th scope="col" class="px-6 py-3 text-start">
-                        <div class="flex items-center gap-x-2">
-                          <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
-                            Telefono
-                          </span>
-                        </div>
-                      </th>
-                      <th scope="col" class="px-6 py-3 text-start">
-                        <div class="flex items-center gap-x-2">
-                          <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
-                            PersonaContacto
-                          </span>
-                        </div>
-                      </th>
-
-                      <th scope="col" class="px-6 py-3 text-start">
-                        <div class="flex items-center gap-x-2">
-                          <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
-                            Cif
-                          </span>
-                        </div>
-                      </th>
-
-                      <th scope="col" class="px-6 py-3 text-start">
-                        <div class="flex items-center gap-x-2">
-                          <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
-                            Provincia
-                          </span>
-                        </div>
-                      </th>
-                      <th scope="col" class="px-6 py-3 text-start">
-                        <div class="flex items-center gap-x-2">
-                          <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
-                            Razon Social
-                          </span>
-                        </div>
-                      </th>
-                      <th scope="col" class="px-6 py-3 text-start">
-                        <div class="flex items-center gap-x-2">
-                          <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
-                            Tipo Empresa - Centro o empresa
-                          </span>
-                        </div>
-                      </th>
                       <th scope="col" class="px-6 py-3 text-start">
                         <div class="flex items-center gap-x-2">
                           <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
@@ -524,13 +560,18 @@ const NotificacionesAdmin = () => {
                           </span>
                         </div>
                       </th>
+                      <th scope="col" class="px-6 py-3 text-start">
+                        <div class="flex items-center gap-x-2">
+                          <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
+                           Denegar
+                          </span>
+                        </div>
+                      </th>
                     </tr>
                   </thead>
 
                   <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
-                    {centroEmpresaResponse
-                      .filter((centro) => centro.estadoEmpresa === 0)
-                      .map((centro, index) => (
+                    {peticionCentroEmpresaResponse.map((peticion, index) => (
                         <tr
                           key={index}
                           class="bg-white hover:bg-gray-50 dark:bg-slate-900 dark:hover:bg-slate-800"
@@ -541,13 +582,15 @@ const NotificacionesAdmin = () => {
                                 {/* <div class="inline-block h-[2.375rem] w-[2.375rem] bg-accent-100 rounded-full" src="" alt=""></div> */}
                                 <div class="grow">
                                   <span class="block text-sm font-semibold text-gray-800 dark:text-gray-200">
-                                    {centro.nombre}
+                                    {peticion.idCentroEmpresa}
                                   </span>
                                 </div>
                               </div>
                             </div>
                           </td>
-                          <td class="h-px w-px whitespace-nowrap align-top">
+                          {centroEmpresaResponse.filter((centro) => centro.idEmpresaCentro === peticion.idCentroEmpresa).map((centro) => (
+                                  <tr key={centro.id}>
+                                    <td class="h-px w-px whitespace-nowrap align-top">
                             <div class="block p-6">
                               <div class="flex items-center gap-x-4">
                                 <div>
@@ -612,12 +655,32 @@ const NotificacionesAdmin = () => {
 
                           <td class="h-px w-px whitespace-nowrap align-top">
                             <button
+                              onClick={() =>
+                                handleAlta(peticion.idCentroEmpresa,1,peticion.idPeticionCentroEmpresa)
+                              }
                               type="button"
                               class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-green-600 bg-green-600 text-white shadow-sm hover:bg-green-800 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
                             >
                               Alta
                             </button>
                           </td>
+                          <td class="h-px w-px whitespace-nowrap align-top">
+                            <button
+                            onClick={() =>
+                              handleBaja(peticion.idPeticionCentroEmpresa)
+                            }
+                              type="button"
+                              class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-green-600 bg-green-600 text-white shadow-sm hover:bg-green-800 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
+                            >
+                              Denegar
+                            </button>
+                          </td>
+                              
+                            </tr>
+                                ))}
+                          
+
+                         
                         </tr>
                       ))}
                   </tbody>

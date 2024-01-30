@@ -264,6 +264,7 @@ const axiosApi = {
           }
         );
         return response.data;
+        
       } catch (error) {
         console.log(error);
         throw error;
@@ -280,6 +281,8 @@ const axiosApi = {
             headers: { Authorization: `Bearer ${token}` },
           }
         );
+        window.location.reload();
+          alert("Empresa dada de alta");
         return response.data;
       } catch (error) {
         console.log(error);
@@ -350,7 +353,7 @@ const axiosApi = {
           }
         );
         console.log("API Response:", response);
-        window.location.reload();
+        // window.location.reload();
         if(estado===0){
           alert("Centro dado de baja")
         }else{
@@ -1086,7 +1089,7 @@ const axiosApi = {
         var token = localStorage.getItem("token");
 
         console.log(token);
-        var request = "api/SolicitudAcreditacionCharlas/"+idcharla;
+        var request = "api/SolicitudAcreditacionesCharlas?idcharla="+idcharla;
         var api = "https://apitechriders.azurewebsites.net/";
         var url = api + request;
         console.log(url);
@@ -1106,7 +1109,126 @@ const axiosApi = {
         throw error;
       }
     },
+  },
+  peticionesCentroEmpresa: {
+    getPeticionesCentroEmpresa: async () => {
+      try {
+        const token = localStorage.getItem("token");
+
+        console.log("token de axios: " + token);
+        const response = await axios.get(`${API_URL}/api/PeticionesCentroEmpresa`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        console.log("API Response:", response);
+        return response.data;
+      } catch (error) {
+        console.error("Error getting usuarios:", error);
+
+        // Si la respuesta es 401, redirigir a la página de inicio de sesión
+        if (error.response && error.response.status === 401) {
+          console.log("Unauthorized access. Redirecting to login...");
+          return <Navigate to="/login" />; // Volvemos al login si el token no funciona
+        }
+
+        throw error;
+      }
+    },
+
+  deletePeticionCentroEmpresa: async (idPeticion)=>{
+    try {
+      const token = localStorage.getItem("token");
+      console.log("token de axios: " + token);
+      const response = await axios.delete(
+        `${API_URL}/api/peticionesCentroEmpresa?idpeticion=`+ idPeticion,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log("API Response:", response);
+      return response.data;
+    } catch (error) {
+      console.error("Error getting usuarios:", error);
+
+      // Si la respuesta es 401, redirigir a la página de inicio de sesión
+      if (error.response && error.response.status === 401) {
+        console.log("Unauthorized access. Redirecting to login...");
+        return <Navigate to="/login" />; // Volvemos al login si el token no funciona
+      }
+
+      throw error;
+    }
+  },
+
+  deleteAllPeticionCategoria: async (idPeticion)=>{
+    try {
+      const token = localStorage.getItem("token");
+      console.log("token de axios: " + token);
+      const response = await axios.delete(
+        `${API_URL}/api/peticionesCentroEmpresa/DeletePeticionEmpresaAll/`+ idPeticion,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      window.location.reload();
+      alert("Peticion denegada")
+      console.log("API Response:", response);
+      return response.data;
+    } catch (error) {
+      console.error("Error getting usuarios:", error);
+
+      // Si la respuesta es 401, redirigir a la página de inicio de sesión
+      if (error.response && error.response.status === 401) {
+        console.log("Unauthorized access. Redirecting to login...");
+        return <Navigate to="/login" />; // Volvemos al login si el token no funciona
+      }
+
+      throw error;
+    }
   }
+},
+cursos:{
+  postCurso: async (idcentro,nombre,descripcion) => {
+    try {
+      var token = localStorage.getItem("token");
+
+      var idcurso = 0;
+
+      var newCurso = {
+        idCurso: idcurso,
+        idCentro: idcentro,
+        nombreCurso: nombre,
+        descripcion: descripcion
+      };
+
+      console.log(newCurso);
+      console.log(token);
+      var request = "api/cursos";
+      var api = "https://apitechriders.azurewebsites.net/";
+      var url = api + request;
+      console.log(url);
+      axios
+        .post(url, newCurso, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          console.log(response);
+          window.location.reload();
+          alert("Curso Añadido");
+        });
+    } catch (error) {
+      console.error("Error getting provincias:", error);
+      throw error;
+    }
+  },
+}
 
 };
 

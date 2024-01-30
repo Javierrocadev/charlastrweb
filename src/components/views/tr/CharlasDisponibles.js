@@ -446,7 +446,7 @@ return (
        TODAS LAS CHARLAS DISPONIBLES CON CUALQUIER TECNOLOGIA
       </p>
       <ul class="hs-accordion-group">
-        {charlasResponse.filter((charla)=> charla.idEstadoCharla ===2 && charla.idTechrider ==null).map((charla) => (
+        {charlasResponse.filter((charla)=> charla.idEstadoCharla ===2 || charla.idEstadoCharla===1  && charla.idTechrider ==null).map((charla) => (
           <li
             key={charla.idCharla}
             className="hs-accordion active bg-white border -mt-px first:rounded-t-lg last:rounded-b-lg dark:bg-gray-800 dark:border-gray-700"
