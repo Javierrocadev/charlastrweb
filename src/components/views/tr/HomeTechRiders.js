@@ -578,7 +578,7 @@ const handleSubmitTecnologia = (e) => {
             <div class="sm:col-span-3">
               <div class="inline-block">
                 <label for="af-account-phone" class="inline-block text-sm  text-gray-800 mt-2.5 dark:text-gray-200">
-             Razon Social
+             Razon Socil
                 </label>
               </div>
             </div>
