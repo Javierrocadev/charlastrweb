@@ -1,11 +1,17 @@
 import React, { useState, useEffect } from "react";
 import axiosApi from "../../../api/axiosApi";
 import SolicitudCharla from "../user/formularios/SolicitudCharla";
+import banner from "../../../assets/images/imgcurso.jpeg";
 
 const VistaCursosCentrto = () => {
   const [cursos, setCursos] = useState([]);
   const [selectedOption, setSelectedOption] = useState(null);
   const [open, setOpen] = useState(false);
+  const [selectedComponent, setSelectedComponent] = useState("cursos");
+
+  const handleComponentChange = (selected) => {
+    setSelectedComponent(selected);
+  };
 
   const handleClick = (curso) => {
     setSelectedOption((prevSelected) => {
@@ -38,21 +44,8 @@ const VistaCursosCentrto = () => {
     );
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const responseCursos = await axiosApi.centros.getCursosByCentro();
-        console.log(responseCursos);
-        setCursos(responseCursos);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
-  }, []);
-
-  return (
-    <section className="container mx-auto">
+  const Cursos = () => {
+    return (
       <div>
         {cursos.map((curso, index) => (
           <div
@@ -70,16 +63,12 @@ const VistaCursosCentrto = () => {
                   {" " + curso.profesor}
                 </p>
               </div>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4">
               <div>
                 <p className="text-sm text-gray-500 dark:text-gray-400">
                   <span className="font-semibold">Centro: </span>
                   {curso.centro}
                 </p>
               </div>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4">
               <div>
                 <p className="text-sm text-gray-500 dark:text-gray-400">
                   <span className="font-semibold">Provincia: </span>
@@ -90,7 +79,7 @@ const VistaCursosCentrto = () => {
 
             <div
               className="absolute top-5 right-10 
-              flex items-center hover:scale-110 transition-transform cursor-pointer"
+            flex items-center hover:scale-110 transition-transform cursor-pointer"
               onClick={() => handleClick(curso)}
             >
               <span className="font-semibold mr-2 ">Solicitar charla</span>
@@ -104,6 +93,172 @@ const VistaCursosCentrto = () => {
             />
           </div>
         ))}
+      </div>
+    );
+  };
+
+  const CrearCurso = () => {
+    const [idCentro, setIdCentro] = useState(0);
+    const [nombreCurso, setNombreCurso] = useState("");
+    const [descripcion, setDescripcion] = useState("");
+
+    const handleInputChangeNombre = (e) => {
+      setNombreCurso(e.target.value);
+    };
+
+    const handleInputChangeDescripcion = (e) => {
+      setDescripcion(e.target.value);
+    };
+
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      try {
+        const dataJSON = {
+          idCurso: 0,
+          idCentro: idCentro,
+          nombreCurso: nombreCurso,
+          descripcion: descripcion,
+        };
+        console.log(dataJSON);
+
+        const postCurso = axiosApi.profesores.CrearCurso(dataJSON);
+        console.log("datos del curso: ", postCurso);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const resp = await axiosApi.usuarios.getPerfilUsuario();
+          setIdCentro(resp.idEmpresaCentro);
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      fetchData();
+    }, [idCentro]);
+
+    return (
+      <section className="pt-10 px-10">
+        <div className="flex flex-col md:flex-row items-stretch justify-center gap-5">
+          <div className="bg-white text-black rounded-md shadow-md md:flex-1">
+            <header className="w-full h-20 flex justify-center items-center bg-black text-white">
+              <h2 className="text-4xl font-bold mb-4">crear un curso</h2>
+            </header>
+
+            <form onSubmit={handleSubmit} className="px-5 py-5">
+              <div className="mb-6">
+                <label
+                  htmlFor="nombre"
+                  className="block text-gray-700 text-sm font-bold mb-2"
+                >
+                  Nombre:
+                </label>
+                <input
+                  type="text"
+                  id="nombre"
+                  name="nombre"
+                  value={nombreCurso}
+                  onChange={handleInputChangeNombre}
+                  placeholder="nombre técnico"
+                  className="shadow appearance-none border rounded 
+                  md:w-full py-2 px-3 mr-10 text-gray-700 leading-tight  
+            focus:outline-none "
+                />
+              </div>
+              <div className="mb-6">
+                <label
+                  htmlFor="descripcion"
+                  className="block text-gray-700 text-sm font-bold mb-2"
+                >
+                  Descripción:
+                </label>
+                <input
+                  type="text"
+                  id="descripcion"
+                  name="descripcion"
+                  value={descripcion}
+                  onChange={handleInputChangeDescripcion}
+                  placeholder="nombre completo"
+                  className="sshadow appearance-none border rounded 
+                  md:w-full py-2 px-3 mr-10 text-gray-700 leading-tight  
+            focus:outline-none"
+                />
+              </div>
+
+              <div className="w-[100%] inline-block mx-auto px-5">
+                <button
+                  type="submit"
+                  className="w-full transition duration-300 bg-black text-white font-bold hover:bg-gray-950 py-3"
+                  //onClick={() => handleSubmit()}
+                >
+                  Crear curso
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <div className="hidden md:block md:flex-1 relative">
+            <img
+              src={banner}
+              alt="Tech riders"
+              className="w-full h-full object-cover rounded-sm shadow-md"
+            />
+            <div className="absolute inset-0 bg-black opacity-60 rounded-md"></div>
+          </div>
+        </div>
+      </section>
+    );
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const responseCursos = await axiosApi.centros.getCursosByCentro();
+        console.log(responseCursos);
+        setCursos(responseCursos);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, []);
+
+  return (
+    <section className="container mx-auto">
+      <div className="text-sm font-medium text-center text-gray-500 border-b border-gray-400 dark:text-gray-400 dark:border-gray-700">
+        <ul className="flex flex-wrap -mb-px">
+          <li className="me-2">
+            <button
+              className={`${
+                selectedComponent === "cursos"
+                  ? "bg-blue-700  text-white"
+                  : "active bg-blue-400 hover:bg-blue-600  text-white"
+              } inline-block p-4 border-b-2 border-transparent rounded-t-sm focus:outline-none`}
+              onClick={() => handleComponentChange("cursos")}
+            >
+              Cursos
+            </button>
+          </li>
+          <li className="me-2">
+            <button
+              className={`${
+                selectedComponent === "crearcurso"
+                  ? "bg-blue-700  text-white"
+                  : "active bg-blue-400 hover:bg-blue-600  text-white"
+              } inline-block p-4 border-b-2 border-transparent rounded-t-sm focus:outline-none`}
+              onClick={() => handleComponentChange("crearcurso")}
+            >
+              Crear curso
+            </button>
+          </li>
+        </ul>
+      </div>
+      <div className="pt-5">
+        {selectedComponent === "cursos" && <Cursos />}
+        {selectedComponent === "crearcurso" && <CrearCurso />}
       </div>
     </section>
   );

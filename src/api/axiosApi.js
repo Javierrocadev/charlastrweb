@@ -107,33 +107,48 @@ const axiosApi = {
       }
     },
 
-    anularCharla: async (idcharla)=>{
+    anularCharla: async (idcharla) => {
       try {
-      var token = localStorage.getItem("token")
-  
-     var idtechrider = 0;
-     var idestadocharla = 1
-     var request = "api/charlas/AsociarTechriderCharla/" + idtechrider+"/"+idcharla ;
-     var api = "https://apitechriders.azurewebsites.net/" 
-      var url = api + request
-      console.log(url)
-      axios.put(url,{},{
-         headers: {
-           Authorization: `Bearer ${token}`
-         }
-         }).then(response=>{
-          var request = "api/charlas/UpdateEstadoCharla/"+idcharla+"/"+idestadocharla;
-          var api = "https://apitechriders.azurewebsites.net/" 
-          var url = api + request
-          console.log(url)
-          axios.put(url,{},{
-             headers: {
-                 Authorization: `Bearer ${token}`
-               }
-          })
-          window.location.reload();
-          alert("Charla Anulada");
-       })
+        var token = localStorage.getItem("token");
+
+        var idtechrider = 0;
+        var idestadocharla = 1;
+        var request =
+          "api/charlas/AsociarTechriderCharla/" + idtechrider + "/" + idcharla;
+        var api = "https://apitechriders.azurewebsites.net/";
+        var url = api + request;
+        console.log(url);
+        axios
+          .put(
+            url,
+            {},
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          )
+          .then((response) => {
+            var request =
+              "api/charlas/UpdateEstadoCharla/" +
+              idcharla +
+              "/" +
+              idestadocharla;
+            var api = "https://apitechriders.azurewebsites.net/";
+            var url = api + request;
+            console.log(url);
+            axios.put(
+              url,
+              {},
+              {
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                },
+              }
+            );
+            window.location.reload();
+            alert("Charla Anulada");
+          });
       } catch (error) {
         console.error("Error Anulando charla:", error);
         throw error;
@@ -198,12 +213,28 @@ const axiosApi = {
             })
             window.location.reload();
             alert("Charla Aceptada");
-         })
-        } catch (error) {
-          console.error("Error Anulando charla:", error);
-          throw error;
-        }
-    }
+          });
+      } catch (error) {
+        console.error("Error Anulando charla:", error);
+        throw error;
+      }
+    },
+
+    getCharlasByProfesor: async (idProfesor) => {
+      try {
+        const token = localStorage.getItem("token");
+        const response = await axios.get(
+          `${API_URL}/api/QueryTools/CharlasCursosProfesor/${idProfesor}`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+
+        return response.data;
+      } catch (error) {
+        console.log(error);
+      }
+    },
   },
   ValoracionesCharlas: {
     getValoracionesCharlas: async () => {
@@ -215,17 +246,19 @@ const axiosApi = {
         throw error;
       }
     },
-    getValoracionesById: async (idcharla)=>{
+    getValoracionesById: async (idcharla) => {
       try {
-        console.log("edadfa"+ idcharla)
-        const response = await axios.get(`${API_URL}/api/ValoracionesCharlas/valoraciones/` + idcharla);
-        console.log(response.data)
+        console.log("edadfa" + idcharla);
+        const response = await axios.get(
+          `${API_URL}/api/ValoracionesCharlas/valoraciones/` + idcharla
+        );
+        console.log(response.data);
         return response.data;
       } catch (error) {
         console.error("Error getting charlas:", error);
         throw error;
       }
-    }
+    },
   },
   provincias: {
     getProvincias: async () => {
@@ -387,13 +420,56 @@ const axiosApi = {
         throw error;
       }
     },
+
+    putResponsableEmpresa: async(idempresacentro, idresponsable)=>{
+      try{
+        const token = localStorage.getItem("token");
+        const response = await axios.put(`${API_URL}/api/usuarios/updateresponsableempresacentro/${idempresacentro}/${idresponsable}`,{},
+        {
+          headers:{
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+
+          }
+        },
+        );
+
+        return response.data;
+        
+      }catch(error){
+        console.log(error);
+      }
+    },
+
     getEmpresasCentrosporID: async (idempresacentro) => {
       try {
-        const response = await axios.get(`${API_URL}/api/EmpresasCentros/`+idempresacentro);
+        const response = await axios.get(
+          `${API_URL}/api/EmpresasCentros/` + idempresacentro
+        );
         return response.data;
       } catch (error) {
         console.error("Error getting EmpresasCentros:", error);
         throw error;
+      }
+    },
+
+    peticionesAltaEmpresaCentro: async (idCentroEmpresa) => {
+      try {
+        const token = localStorage.getItem("token");
+        const response = await axios.post(
+          `${API_URL}/api/PeticionesCentroEmpresa?idcentroempresa=`+idCentroEmpresa,
+          {},
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          },
+          
+        );
+
+        return response.data;
+      } catch (error) {
+        console.log(error);
       }
     },
   },
@@ -444,7 +520,11 @@ const axiosApi = {
         throw error;
       }
     },
-    modificarTecnologia: async (idtecnologia,descripcion,idtipotecnologia) => {
+    modificarTecnologia: async (
+      idtecnologia,
+      descripcion,
+      idtipotecnologia
+    ) => {
       try {
         const token = localStorage.getItem("token");
         console.log("token de axios: " + token);
@@ -455,7 +535,8 @@ const axiosApi = {
           idTipoTecnologia: idtipotecnologia,
         };
         const response = await axios.put(
-          `${API_URL}/api/Tecnologias/`,newTecnologia,
+          `${API_URL}/api/Tecnologias/`,
+          newTecnologia,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -594,13 +675,12 @@ const axiosApi = {
         );
         console.log("API Response:", response);
         window.location.reload();
-        if(estado===0){
-          alert("Usuario dado de baja")
-        }else{
-          alert("Usuario dado de alta")
+        if (estado === 0) {
+          alert("Usuario dado de baja");
+        } else {
+          alert("Usuario dado de alta");
         }
         return response.data;
-      
       } catch (error) {
         console.error("Error updating usuario estado:", error);
 
@@ -688,6 +768,23 @@ const axiosApi = {
         throw error;
       }
     },
+
+    CrearCurso: async (dataCurso) => {
+      try {
+        var token = localStorage.getItem("token");
+
+        const response = await axios.post(`${API_URL}/api/cursos`, dataCurso, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        });
+        return response.data;
+      } catch (error) {
+        console.log(error);
+        throw error;
+      }
+    },
   },
 
   centros: {
@@ -743,11 +840,11 @@ const axiosApi = {
         console.log(error);
       }
     },
-    getCursos: async ()=>{
-      try{
+    getCursos: async () => {
+      try {
         const responseCursos = await axios.get(`${API_URL}/api/Cursos`);
         return responseCursos.data;
-      }catch(error){
+      } catch (error) {
         console.log(error);
       }
     },
@@ -756,7 +853,7 @@ const axiosApi = {
         const token = localStorage.getItem("token");
 
         const responseCursos = await axios.get(
-          `${API_URL}/api/QueryTools/FindCursosProfesor/${idProfesor}`,
+          `${API_URL}/api/QueryTools/CharlasCursosProfesor/${idProfesor}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -833,7 +930,7 @@ const axiosApi = {
       try {
         const token = localStorage.getItem("token");
         const response = await axios.get(
-          `${API_URL}/api/QueryTools/CharlasTechRider?idtechrider=${idTr}`,
+          `${API_URL}/api/QueryTools/CharlasTechRider/${idTr}`,
           {
             headers: { Authorization: `Bearer ${token}` },
           }
@@ -892,12 +989,11 @@ const axiosApi = {
     },
   },
   techriders: {
-  
     getcharlastechrider: async (idtechrider) => {
       try {
         const token = localStorage.getItem("token");
         console.log("vacio" + idtechrider);
-        console.log("token de axios: " + token + "afda" +idtechrider);
+        console.log("token de axios: " + token + "afda" + idtechrider);
         const response = await axios.get(
           `${API_URL}/api/QueryTools/CharlasTechRider/` + idtechrider,
           {
@@ -924,9 +1020,10 @@ const axiosApi = {
       try {
         const token = localStorage.getItem("token");
         console.log("vacio" + idtechrider);
-        console.log("token de axios: " + token + "afda" +idtechrider);
+        console.log("token de axios: " + token + "afda" + idtechrider);
         const response = await axios.get(
-          `${API_URL}/api/QueryTools/findcharlaspendientestecnologiastechrider?idtechrider=`+idtechrider,
+          `${API_URL}/api/QueryTools/findcharlaspendientestecnologiastechrider?idtechrider=` +
+            idtechrider,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -953,7 +1050,34 @@ const axiosApi = {
         const token = localStorage.getItem("token");
 
         console.log("token de axios: " + token);
-        const response = await axios.get(`${API_URL}/api/QueryTools/TecnologiasPendientesencharlas`, {
+        const response = await axios.get(
+          `${API_URL}/api/QueryTools/TecnologiasPendientesencharlas`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        console.log("API Response:", response);
+        return response.data;
+      } catch (error) {
+        console.error("Error getting usuarios:", error);
+
+        // Si la respuesta es 401, redirigir a la página de inicio de sesión
+        if (error.response && error.response.status === 401) {
+          console.log("Unauthorized access. Redirecting to login...");
+          return <Navigate to="/login" />; // Volvemos al login si el token no funciona
+        }
+
+        throw error;
+      }
+    },
+    getEmpresaTr: async (idtechrider) => {
+      try {
+        const token = localStorage.getItem("token");
+
+        console.log("token de axios: " + token);
+        const response = await axios.get(`${API_URL}/api/QueryTools/findempresatechrider/` +idtechrider, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -1003,11 +1127,14 @@ const axiosApi = {
         const token = localStorage.getItem("token");
 
         console.log("token de axios: " + token);
-        const response = await axios.get(`${API_URL}/api/tecnologiastechriders`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const response = await axios.get(
+          `${API_URL}/api/tecnologiastechriders`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
         console.log("API Response:", response);
         return response.data;
       } catch (error) {
@@ -1022,25 +1149,32 @@ const axiosApi = {
         throw error;
       }
     },
-    PostTecnologiasTechRider: async (idtecnologia,idtechrider) => {
+    PostTecnologiasTechRider: async (idtecnologia, idtechrider) => {
       try {
         var token = localStorage.getItem("token");
 
-        var idTec = parseInt(idtecnologia); 
-      
+        var idTec = parseInt(idtecnologia);
+
         console.log(token);
-        var request = "api/TecnologiasTechriders/insertTecnologiaTechRiders/" + idtechrider + "/" + idTec;
-      
+        var request =
+          "api/TecnologiasTechriders/insertTecnologiaTechRiders/" +
+          idtechrider +
+          "/" +
+          idTec;
+
         var api = "https://apitechriders.azurewebsites.net/";
         var url = api + request;
         console.log("url" + url);
         axios
-          .post(url,{},{
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-           
-          },)
+          .post(
+            url,
+            {},
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          )
           .then((response) => {
             console.log(response);
             window.location.reload();
@@ -1082,16 +1216,22 @@ const axiosApi = {
         var token = localStorage.getItem("token");
 
         console.log(token);
-        var request = "api/PeticionesTecnologias/InsertPeticionTecnologia/"+nombreTecnologia;
+        var request =
+          "api/PeticionesTecnologias/InsertPeticionTecnologia/" +
+          nombreTecnologia;
         var api = "https://apitechriders.azurewebsites.net/";
         var url = api + request;
         console.log(url);
         axios
-          .post(url,{},{
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          })
+          .post(
+            url,
+            {},
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          )
           .then((response) => {
             console.log(response);
             window.location.reload();
