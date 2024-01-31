@@ -24,7 +24,7 @@ const Footer = () => {
     });
   };
   return (
-    <footer className="bg-bg-100 border-t">
+    <footer className="bg-bg-100 dark:bg-primary-100 border-t">
       <div className="relative mx-auto max-w-screen-xl px-4 py-12  lg:pt-24">
         <div className="absolute end-4 top-4 sm:end-6 sm:top-6 lg:end-8 lg:top-8">
           <button

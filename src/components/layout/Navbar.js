@@ -10,7 +10,7 @@ const Navbar = () => {
   if (isAuthenticated === false) {
     // Navigate to login page if user is not authenticated
     return (
-      <header class="flex flex-wrap border-b custom:justify-start custom:flex-nowrap w-full bg-bg-100 text-text-200 py-4 dark:bg-bg-200">
+      <header class="flex flex-wrap border-b custom:justify-start custom:flex-nowrap w-full bg-bg-100 text-text-200 py-4 dark:bg-primary-100">
         <nav
           class="max-w-screen-xl w-full mx-auto px-4 flex flex-wrap basis-full items-center justify-between "
           aria-label="Global"
@@ -73,13 +73,13 @@ const Navbar = () => {
             </button>
             <Link
               to={"/login"}
-              class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-bg-300 bg-bg-100 text-text-200 shadow-sm duration-300 hover:bg-bg-200 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
+              class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-bg-300 bg-bg-100 text-text-200 shadow-sm duration-300 hover:bg-bg-200 disabled:opacity-50 disabled:pointer-events-none dark:bg-white dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
             >
               Iniciar Sesión
             </Link>
             <Link
               to={"/registro"}
-              class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-accent-200 bg-accent-200 text-white shadow-sm hover:bg-accent-100 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
+              class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-accent-200 bg-accent-200 text-white shadow-sm hover:bg-accent-100 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-primaryDark-100 dark:border-bg-200 dark:text-textDark-100 dark:hover:bg-primaryDark-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
             >
               Registrarse
             </Link>
@@ -159,7 +159,7 @@ const Navbar = () => {
   if (role === 1) {
     // Navigate to login page if user is not authenticated
     return (
-      <header class="flex flex-wrap border-b custom:justify-start custom:flex-nowrap w-full bg-bg-100 text-text-200 py-4 dark:bg-bg-200">
+      <header class="flex flex-wrap border-b custom:justify-start custom:flex-nowrap w-full bg-bg-100 text-text-200 py-4 dark:bg-primary-100">
         <nav
           class="max-w-screen-xl w-full mx-auto px-4 flex flex-wrap basis-full items-center justify-between "
           aria-label="Global"
@@ -281,7 +281,7 @@ const Navbar = () => {
   if (role === 2) {
     // Navigate to login page if user is not authenticated
     return (
-      <header class="flex flex-wrap border-b custom:justify-start custom:flex-nowrap w-full bg-bg-100 text-text-200 py-4 dark:bg-bg-200">
+      <header class="flex flex-wrap border-b custom:justify-start custom:flex-nowrap w-full bg-bg-100 text-text-200 py-4 dark:bg-primary-100">
         <nav
           class="max-w-screen-xl w-full mx-auto px-4 flex flex-wrap basis-full items-center justify-between "
           aria-label="Global"
@@ -397,7 +397,7 @@ const Navbar = () => {
   }
   if (role === 4) {
     return (
-      <header class="flex flex-wrap border-b custom:justify-start custom:flex-nowrap w-full bg-bg-100 text-text-200 py-4 dark:bg-bg-200">
+      <header class="flex flex-wrap border-b custom:justify-start custom:flex-nowrap w-full bg-bg-100 text-text-200 py-4 dark:bg-primary-100">
         <nav
           class="max-w-screen-xl w-full mx-auto px-4 flex flex-wrap basis-full items-center justify-between "
           aria-label="Global"
@@ -508,7 +508,7 @@ const Navbar = () => {
   if (role === 3) {
     // Navigate to login page if user is not authenticated
     return (
-      <header class="flex flex-wrap border-b custom:justify-start custom:flex-nowrap w-full bg-bg-100 text-text-200 py-4 dark:bg-bg-200">
+      <header class="flex flex-wrap border-b custom:justify-start custom:flex-nowrap w-full bg-bg-100 text-text-200 py-4 dark:bg-primary-100">
       <nav
         class="max-w-screen-xl w-full mx-auto px-4 flex flex-wrap basis-full items-center justify-between "
         aria-label="Global"
@@ -605,7 +605,7 @@ const Navbar = () => {
     );
   }
   return (
-    <header class="flex flex-wrap border-b custom:justify-start custom:flex-nowrap w-full bg-bg-100 text-text-200 py-4 dark:bg-bg-200">
+    <header class="flex flex-wrap border-b custom:justify-start custom:flex-nowrap w-full bg-bg-100 text-text-200 py-4 dark:bg-primary-100">
       <nav
         class="max-w-screen-xl w-full mx-auto px-4 flex flex-wrap basis-full items-center justify-between "
         aria-label="Global"
@@ -619,13 +619,13 @@ const Navbar = () => {
         <div class="custom:order-3 flex items-center gap-x-2">
           <Link
             to={"/login"}
-            class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-bg-300 bg-bg-100 text-text-200 shadow-sm duration-300 hover:bg-bg-200 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
+            class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-bg-300 bg-bg-100 text-text-200 shadow-sm duration-300 hover:bg-bg-200 disabled:opacity-50 disabled:pointer-events-none dark:bg-white dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
           >
             Iniciar Sesión
           </Link>
           <Link
             to={"/registro"}
-            class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-accent-200 bg-accent-200 text-white shadow-sm hover:bg-accent-100 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
+            class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-accent-200 bg-accent-200 text-white shadow-sm hover:bg-accent-100 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-primaryDark-100 dark:border-bg-200 dark:text-textDark-100 dark:hover:bg-primaryDark-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
           >
             Registrarse
           </Link>
