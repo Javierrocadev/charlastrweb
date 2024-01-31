@@ -12,13 +12,16 @@ const NotificacionesAdmin = () => {
   const [charlasResponse, setCharlasResponse] = useState([]);
   const [provinciasResponse, setProvinciasResponse] = useState([]);
   const [tecnologiasResponse, setTecnologiasResponse] = useState([]);
-  const [tecnologiasCharlasResponse, setTecnologiasCharlasResponse] = useState(
-    []
-  );
+  const [tecnologiasCharlasResponse, setTecnologiasCharlasResponse] = useState([]);
   const [centroEmpresaResponse, setEmpresasCentrosResponse] = useState([]);
+  const [peticionCentroEmpresaResponse, setPeticionCentroEmpresaResponse] = useState([]);
   const [usuariosResponse, SetUsuariosResponse] = useState([]);
   const [rolesResponse, SetRolesResponse] = useState([]);
+  const [peticionesResponse, SetRpeticionesResponse] = useState([]);
+  const [solicitudAcreditacionResponse, SetsolicitudAcreditacionResponse] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [nombreTecnologia, setNombreTecnologia] = useState("");
+
 
   const handleClick = async (idusuario, idestado) => {
     const responseUpdateUser = axiosApi.usuarios.updateEstadoUsuario(
@@ -27,6 +30,51 @@ const NotificacionesAdmin = () => {
     );
     console.log("Algo: ", responseUpdateUser);
   };
+
+  const handleAlta = async (idempresacentro,estado,idpeticion) => {
+    console.log(idempresacentro)
+    const altaEmpresaResponse = axiosApi.empresasCentros.updateEstadoCentroEmpresa(
+      idempresacentro,
+      estado
+    );
+    const eliminarPeticionResponse = await axiosApi.peticionesCentroEmpresa.deletePeticionCentroEmpresa(idpeticion)
+
+    loadPeticiones()
+    console.log("alta: ", altaEmpresaResponse);
+    console.log("eliminarPeticion", eliminarPeticionResponse)
+
+  };
+
+  const handleBaja = async (idpeticion) => {
+    const DenegadaEmpresaResponse = axiosApi.peticionesCentroEmpresa.deleteAllPeticionCategoria(
+      idpeticion
+    );
+
+    loadPeticiones()
+    console.log("Algo: ", DenegadaEmpresaResponse);
+  
+  };
+  const handleNombreChange = (e) => {
+    setNombreTecnologia(e.target.value);
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Llamar al método en otro componente y pasar el valor del input
+   axiosApi.tecnologias.postTecnologia(nombreTecnologia);
+  };
+
+  const loadPeticiones = async ()=>{
+    try{
+       const peticionCentroEmpresaResponse =
+        await axiosApi.peticionesCentroEmpresa.getPeticionesCentroEmpresa();
+      console.log("Centros:", peticionCentroEmpresaResponse);
+      setPeticionCentroEmpresaResponse(peticionCentroEmpresaResponse);
+    }catch(error){
+      console.log(error)
+    }
+   
+  }
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -34,10 +82,24 @@ const NotificacionesAdmin = () => {
         console.log("Users:", responseUsuarios);
         SetUsuariosResponse(responseUsuarios);
 
+        const charlasResponse = await axiosApi.charlas.getCharlas();
+        console.log("Users:", charlasResponse);
+        setCharlasResponse(charlasResponse);
+
+        const peticionesResponse = await axiosApi.peticionesTecnologias.getPeticionesTecnologias();
+        console.log("Users:", peticionesResponse);
+        SetRpeticionesResponse(peticionesResponse);
+
+        const solicitudAcreditacionResponse = await axiosApi.solicitudesAcreditacion.getSolicitudesAcreditacion();
+        console.log("Users:", solicitudAcreditacionResponse);
+        SetsolicitudAcreditacionResponse(solicitudAcreditacionResponse);
+
         const centroEmpresaResponse =
           await axiosApi.empresasCentros.getEmpresasCentros();
         console.log("Centros:", centroEmpresaResponse);
         setEmpresasCentrosResponse(centroEmpresaResponse);
+
+        loadPeticiones()
 
         const responseRoles = await axiosApi.roles.getRoles();
         console.log("Roles:", responseRoles);
@@ -60,6 +122,20 @@ const NotificacionesAdmin = () => {
       (p) => p.idProvincia === idProvincia
     );
     return provincia ? provincia.nombreProvincia : "Desconocido";
+  };
+
+  // const handleAcreditar = async (idcharla) => {
+  //   const responseAcreditarCharla =  axiosApi.charlas.acreditarCharla(idcharla);
+  //   console.log("Algo: ", responseAcreditarCharla);
+  // };
+
+  const handleAcreditar = async (idcharla,idpeticion) => {
+    try {
+      const responseAcreditarCharla = await axiosApi.charlas.acreditarCharla(idcharla,idpeticion);
+      console.log("Algo: ", responseAcreditarCharla);
+    } catch (error) {
+      console.error("Error al acreditar charla:", error);
+    }
   };
 
   const [seccion, setSeccion] = useState('altauser'); // Estado para controlar la sección
@@ -120,6 +196,22 @@ const NotificacionesAdmin = () => {
                     onClick={() => cargarDatos('altacentroempresa')}
                   >
                     Alta centro-empresa
+                  </button>
+
+                  <button
+                    type="button"
+                    class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-green-600 bg-green-600 text-white shadow-sm hover:bg-green-800 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
+                    onClick={() => cargarDatos('altatecnologia')}
+                  >
+                    Alta Tecnologia
+                  </button>
+                  
+                  <button
+                    type="button"
+                    class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-green-600 bg-green-600 text-white shadow-sm hover:bg-green-800 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
+                    onClick={() => cargarDatos('altaacreditacion')}
+                  >
+                    Alta Acreditacion Charla
                   </button>
 
                   <div class="sm:col-span-2 md:grow">
@@ -297,6 +389,7 @@ const NotificacionesAdmin = () => {
                               </div>
                             </div>
                           </td>
+                          
                           <td class="h-px w-px whitespace-nowrap align-top">
                             <div class="block p-6">
                               <div class="flex items-center gap-x-4">
@@ -401,68 +494,67 @@ const NotificacionesAdmin = () => {
 
                 {/* <!-- Table  MOSTAR ALTA CENTROS EMPRESAS  --> */}
                 {seccion === 'altacentroempresa' &&(
+
                 <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                   <thead class="bg-gray-50 dark:bg-slate-800">
                     <tr>
                       <th scope="col" class="px-6 py-3 text-start">
                         <div class="flex items-center gap-x-2">
                           <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
-                            Nombre
+                            ID EMPRESA
+                          </span>
+                        </div>
+                      </th>
+                      <th scope="col" class="px-6 py-3 text-start">
+                        <div class="flex items-center gap-x-2">
+                          <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
+                           DIRECCION
+                          </span>
+                        </div>
+                      </th>
+                      <th scope="col" class="px-6 py-3 text-start">
+                        <div class="flex items-center gap-x-2">
+                          <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
+                            TELEFONO
+                          </span>
+                        </div>
+                      </th>
+                      <th scope="col" class="px-6 py-3 text-start">
+                        <div class="flex items-center gap-x-2">
+                          <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
+                            PERSONA CONTACTO
+                          </span>
+                        </div>
+                      </th>
+                      <th scope="col" class="px-6 py-3 text-start">
+                        <div class="flex items-center gap-x-2">
+                          <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
+                            CIF
+                          </span>
+                        </div>
+                      </th>
+                      <th scope="col" class="px-6 py-3 text-start">
+                        <div class="flex items-center gap-x-2">
+                          <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
+                           Provincia
+                          </span>
+                        </div>
+                      </th>
+                      <th scope="col" class="px-6 py-3 text-start">
+                        <div class="flex items-center gap-x-2">
+                          <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
+                          Razon Social
+                          </span>
+                        </div>
+                      </th>
+                      <th scope="col" class="px-6 py-3 text-start">
+                        <div class="flex items-center gap-x-2">
+                          <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
+                          Tipo Empresa
                           </span>
                         </div>
                       </th>
 
-                      <th scope="col" class="px-6 py-3 text-start">
-                        <div class="flex items-center gap-x-2">
-                          <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
-                            Direccion
-                          </span>
-                        </div>
-                      </th>
-                      <th scope="col" class="px-6 py-3 text-start">
-                        <div class="flex items-center gap-x-2">
-                          <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
-                            Telefono
-                          </span>
-                        </div>
-                      </th>
-                      <th scope="col" class="px-6 py-3 text-start">
-                        <div class="flex items-center gap-x-2">
-                          <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
-                            PersonaContacto
-                          </span>
-                        </div>
-                      </th>
-
-                      <th scope="col" class="px-6 py-3 text-start">
-                        <div class="flex items-center gap-x-2">
-                          <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
-                            Cif
-                          </span>
-                        </div>
-                      </th>
-
-                      <th scope="col" class="px-6 py-3 text-start">
-                        <div class="flex items-center gap-x-2">
-                          <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
-                            Provincia
-                          </span>
-                        </div>
-                      </th>
-                      <th scope="col" class="px-6 py-3 text-start">
-                        <div class="flex items-center gap-x-2">
-                          <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
-                            Razon Social
-                          </span>
-                        </div>
-                      </th>
-                      <th scope="col" class="px-6 py-3 text-start">
-                        <div class="flex items-center gap-x-2">
-                          <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
-                            Tipo Empresa - Centro o empresa
-                          </span>
-                        </div>
-                      </th>
                       <th scope="col" class="px-6 py-3 text-start">
                         <div class="flex items-center gap-x-2">
                           <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
@@ -470,13 +562,18 @@ const NotificacionesAdmin = () => {
                           </span>
                         </div>
                       </th>
+                      <th scope="col" class="px-6 py-3 text-start">
+                        <div class="flex items-center gap-x-2">
+                          <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
+                           Denegar
+                          </span>
+                        </div>
+                      </th>
                     </tr>
                   </thead>
 
                   <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
-                    {centroEmpresaResponse
-                      .filter((centro) => centro.estadoEmpresa === 0)
-                      .map((centro, index) => (
+                    {peticionCentroEmpresaResponse.map((peticion, index) => (
                         <tr
                           key={index}
                           class="bg-white hover:bg-gray-50 dark:bg-slate-900 dark:hover:bg-slate-800"
@@ -487,13 +584,16 @@ const NotificacionesAdmin = () => {
                                 {/* <div class="inline-block h-[2.375rem] w-[2.375rem] bg-accent-100 rounded-full" src="" alt=""></div> */}
                                 <div class="grow">
                                   <span class="block text-sm font-semibold text-gray-800 dark:text-gray-200">
-                                    {centro.nombre}
+                                    {peticion.idCentroEmpresa}
                                   </span>
                                 </div>
                               </div>
                             </div>
                           </td>
-                          <td class="h-px w-px whitespace-nowrap align-top">
+                          
+                          {centroEmpresaResponse.filter((centro) => centro.idEmpresaCentro === peticion.idCentroEmpresa).map((centro) => (
+                                  <>
+                                    <td key={centro.id} class="h-px w-px whitespace-nowrap align-top">
                             <div class="block p-6">
                               <div class="flex items-center gap-x-4">
                                 <div>
@@ -558,16 +658,140 @@ const NotificacionesAdmin = () => {
 
                           <td class="h-px w-px whitespace-nowrap align-top">
                             <button
+                              onClick={() =>
+                                handleAlta(peticion.idCentroEmpresa,1,peticion.idPeticionCentroEmpresa)
+                              }
                               type="button"
                               class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-green-600 bg-green-600 text-white shadow-sm hover:bg-green-800 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
                             >
                               Alta
                             </button>
                           </td>
+                          <td class="h-px w-px whitespace-nowrap align-top">
+                            <button
+                            onClick={() =>
+                              handleBaja(peticion.idPeticionCentroEmpresa)
+                            }
+                              type="button"
+                              class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-green-600 bg-green-600 text-white shadow-sm hover:bg-green-800 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
+                            >
+                              Denegar
+                            </button>
+                          </td>
+                              
+                            </>
+                                ))}           
                         </tr>
                       ))}
                   </tbody>
                 </table>
+
+                
+                )}
+
+                 {/* <!-- Table  MOSTAR ALTA Tecnologias  --> */}
+                 {seccion === 'altatecnologia' &&(
+                <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                  <thead class="bg-gray-50 dark:bg-slate-800">
+                    <tr>
+                      <th scope="col" class="px-6 py-3 text-start">
+                        <div class="flex items-center gap-x-2">
+                          <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
+                            Nombre
+                          </span>
+                        </div>
+                      </th>
+                    </tr>
+                  </thead>
+
+                  <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
+                    {peticionesResponse.map((peticion, index) => (
+                        <tr
+                          key={index}
+                          class="bg-white hover:bg-gray-50 dark:bg-slate-900 dark:hover:bg-slate-800"
+                        >
+                          <td class="h-px w-px whitespace-nowrap align-top">
+                            <div class="block p-6">
+                              <div class="flex items-center gap-x-3">
+                                {/* <div class="inline-block h-[2.375rem] w-[2.375rem] bg-accent-100 rounded-full" src="" alt=""></div> */}
+                                <div class="grow">
+                                  <span class="block text-sm font-semibold text-gray-800 dark:text-gray-200">
+                                    {peticion.nombreTecnologia}
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          </td>
+                          
+                          <td class="h-px w-px whitespace-nowrap align-top">
+                            <button
+                              type="button"
+                              class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-green-600 bg-green-600 text-white shadow-sm hover:bg-green-800 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
+                              onClick={handleSubmit} 
+                           >
+                              Activar
+                            </button>
+                          </td>
+                        </tr>
+                      ))}
+                  </tbody>
+                </table>             
+                )}
+
+                   {/* <!-- Table  SolicitudesAcreditacionCharlas  --> */}
+                   {seccion === 'altaacreditacion' &&(
+                <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                  <thead class="bg-gray-50 dark:bg-slate-800">
+                    <tr>
+                      <th scope="col" class="px-6 py-3 text-start">
+                        <div class="flex items-center gap-x-2">
+                          <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
+                            Charla
+                          </span>
+                        </div>
+                      </th>
+                    </tr>  
+                  </thead>
+                  
+                  <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
+  {solicitudAcreditacionResponse.map((solicitud, index) => {
+    const charlaFiltrada = charlasResponse.find(charla => solicitud.idCharla === charla.idCharla);
+    return (
+      <tr
+        key={index}
+        class="bg-white hover:bg-gray-50 dark:bg-slate-900 dark:hover:bg-slate-800"
+      >
+        <td class="h-px w-px whitespace-nowrap align-top">
+          <div class="block p-6">
+            <div class="flex items-center gap-x-3">
+              <div class="grow">
+                <span class="block text-sm font-semibold text-gray-800 dark:text-gray-200">
+                  {charlaFiltrada ? charlaFiltrada.descripcion : 'Descripción no encontrada'}
+                </span>
+                {usuariosResponse.filter((usuario) => usuario.idUsuario === charlaFiltrada.idTechRider).map((usuario) => (
+                    <div key={usuario.idUsuario}>
+                      {usuario.nombre}
+                    </div>
+                  ))}
+              </div>
+            </div>
+          </div>
+        </td>
+        <td class="h-px w-px whitespace-nowrap align-top">
+          <button
+            type="button"
+            class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-green-600 bg-green-600 text-white shadow-sm hover:bg-green-800 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
+            onClick={() => handleAcreditar(solicitud.idCharla,solicitud.idPeticionCharla)}
+          >
+            Acreditar Charla
+          </button>
+        </td>
+      </tr>
+    );
+  })}
+</tbody>
+
+                </table>             
                 )}
                 {/* <!-- End Table --> */}
 

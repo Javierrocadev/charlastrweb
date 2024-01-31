@@ -446,7 +446,7 @@ return (
        TODAS LAS CHARLAS DISPONIBLES CON CUALQUIER TECNOLOGIA
       </p>
       <ul class="hs-accordion-group">
-        {charlasResponse.filter((charla)=> charla.idEstadoCharla ===2).map((charla) => (
+        {charlasResponse.filter((charla)=> charla.idEstadoCharla ===2 || charla.idEstadoCharla===1  && charla.idTechrider ==null).map((charla) => (
           <li
             key={charla.idCharla}
             className="hs-accordion active bg-white border -mt-px first:rounded-t-lg last:rounded-b-lg dark:bg-gray-800 dark:border-gray-700"
@@ -583,6 +583,13 @@ return (
                       {/* <dd class="text-xs text-gray-500">{charla.turno}</dd> */}
                     </div>
                   </dl>
+                  <button
+  type="button"
+  onClick={() =>axiosApi.charlas.aceptarCharla(perfilResponse.idUsuario,charla.idCharla)}
+  class="py-2 mt-4 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-green-600 bg-green-600 text-white shadow-sm hover:bg-green-800 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
+>
+  Aceptar Charla
+</button>
                 </div>
               </div>
             </div>
@@ -738,6 +745,13 @@ return (
                       {/* <dd class="text-xs text-gray-500">{charla.turno}</dd> */}
                     </div>
                   </dl>
+                  <button
+  type="button"
+  onClick={() =>axiosApi.charlas.aceptarCharla(perfilResponse.idUsuario,charla.idCharla)}
+  class="py-2 mt-4 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-green-600 bg-green-600 text-white shadow-sm hover:bg-green-800 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
+>
+  Aceptar Charla
+</button>
                 </div>
               </div>
             </div>

@@ -164,6 +164,13 @@ const VerTechRidersAdmin = () => {
                     </span>
                   </div>
                 </th>
+                <th scope="col" class="px-6 py-3 text-start">
+                  <div class="flex items-center gap-x-2">
+                    <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
+                      Eliminar
+                    </span>
+                  </div>
+                </th>
               </tr>
             </thead>
 
@@ -277,9 +284,18 @@ const VerTechRidersAdmin = () => {
     Activar
   </button>
 )}
-                     
                     
                   </div>
+                </td>
+                <td>
+                  <div>          
+                         <button
+    type="button"
+    onClick={() =>axiosApi.usuarios.eliminarUsuario(usuario.idUsuario)}
+    class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-green-600 bg-green-600 text-white shadow-sm hover:bg-green-800 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
+  >
+    Eliminar
+  </button>      </div>
                 </td>
               </tr>
  ))

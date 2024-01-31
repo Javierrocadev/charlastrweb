@@ -190,13 +190,7 @@ const AñadirTecnologia = () => {
                     </span>
                   </div>
                 </th>
-                <th scope="col" class="px-6 py-3 text-start">
-                  <div class="flex items-center gap-x-2">
-                    <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
-                    Modificar
-                    </span>
-                  </div>
-                </th>
+                
               </tr>
             </thead>
 
@@ -241,21 +235,7 @@ const AñadirTecnologia = () => {
                   </div>
                 </td>
 
-                <td class="h-px w-px whitespace-nowrap align-top">
-                  <div class="block p-6" >
-                    <div class="flex items-center gap-x-3">
-                      {/* <div class="inline-block h-[2.375rem] w-[2.375rem] bg-accent-100 rounded-full" src="" alt=""></div> */}
-                      <div class="grow">
-                      <button
-                            type="button"
-                            class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-green-600 bg-green-600 text-white shadow-sm hover:bg-green-800 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
-                            onClick={() => handleModificarClick(tecnologia.idTecnologia,tecnologia.nombreTecnologia,tecnologia.idTipoTecnologia)}>
-                            Aceptar Modificar Tecnologia
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </td>
+               
               </tr>
 )) }
 

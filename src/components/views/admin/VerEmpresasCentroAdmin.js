@@ -19,6 +19,72 @@ const VerEmpresasCentroAdmin = () => {
   const [usuariosResponse, SetUsuariosResponse] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const [nombreCurso, setNombreCurso] = useState("");
+  const [descripcion, setDescripcion] = useState("");
+  const [idCentroCurso, setIdCentroCurso] = useState(null);
+  const [selectedCurso, setSelectedCurso] = useState(null);
+
+
+    const [seccionesVisibles, setSeccionesVisibles] = useState([]);
+  
+    const cargarVisible = (idCentro) => {
+      
+      if (seccionesVisibles.includes(idCentro)) {
+
+        setSeccionesVisibles(seccionesVisibles.filter((id) => id !== idCentro));
+
+      } else {
+        setSeccionesVisibles([...seccionesVisibles, idCentro]);
+        setSeccionesVisiblesEliminar(seccionesVisiblesEliminar.filter((id) => id !== idCentro));
+
+      }
+    };
+  
+    const [seccionesVisiblesEliminar, setSeccionesVisiblesEliminar] = useState([]);
+  
+    const cargarVisibleEliminar = (idCentro) => {
+      
+      if (seccionesVisiblesEliminar.includes(idCentro)) {
+
+        setSeccionesVisiblesEliminar(seccionesVisiblesEliminar.filter((id) => id !== idCentro));
+
+      } else {
+        setSeccionesVisiblesEliminar([...seccionesVisiblesEliminar, idCentro]);
+        setSeccionesVisibles(seccionesVisibles.filter((id) => id !== idCentro));
+
+      }
+    };
+    
+  const handleNombreChange = (e) => {
+    setNombreCurso(e.target.value);
+  };
+  const handleDescripcionChange = (e) => {
+    setDescripcion(e.target.value);
+  };
+  const handleSubmitCurso = (e) => {
+    e.preventDefault();
+    // Llamar al método en otro componente y pasar el valor del input
+    console.log(idCentroCurso,nombreCurso,descripcion)
+   axiosApi.cursos.postCurso(idCentroCurso,nombreCurso,descripcion);
+  };
+
+  const handleEliminarCurso = async (e) => {
+    e.preventDefault();
+    try {
+      if (selectedCurso) {
+        await axiosApi.cursos.eliminarCurso(selectedCurso);
+      console.log('Curso eliminado con éxito');
+      // Puedes realizar alguna acción adicional después de eliminar la charla
+      } else {
+        // Handle the case when no technology is selected
+        console.error("Please select a technology");
+      }
+   
+    } catch (error) {
+      console.error('Error al intentar eliminar la charla:', error);
+      // Puedes manejar el error de alguna manera, por ejemplo, mostrar un mensaje al usuario
+    }
+  };
   useEffect(() => {
     const fetchData = async () => {
         try {
@@ -53,7 +119,13 @@ const VerEmpresasCentroAdmin = () => {
     return nombreRepresentante ? nombreRepresentante.nombre : "Desconocido";
   };
 
-
+  const getProvinciaNombre = (idProvincia) => {
+    console.log("dentro" + idProvincia);
+    const provincia = provinciasResponse.find(
+      (p) => p.idProvincia === idProvincia
+    );
+    return provincia ? provincia.nombreProvincia : "Desconocido";
+  };
   return (
     <main>
        <section class="text-gray-600 body-font mt-6">
@@ -120,7 +192,7 @@ const VerEmpresasCentroAdmin = () => {
                 <th scope="col" class="px-6 py-3 text-start">
                   <div class="flex items-center gap-x-2">
                     <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
-                      Nombre/Apellidos
+                      Nombre
                     </span>
                   </div>
                 </th>
@@ -128,7 +200,7 @@ const VerEmpresasCentroAdmin = () => {
                 <th scope="col" class="px-6 py-3 text-start">
                   <div class="flex items-center gap-x-2">
                     <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
-                      Correo
+                     Direccion
                     </span>
                   </div>
                 </th>
@@ -143,7 +215,7 @@ const VerEmpresasCentroAdmin = () => {
                 <th scope="col" class="px-6 py-3 text-start">
                   <div class="flex items-center gap-x-2">
                     <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
-                      LinkedIn
+                      personaContacto
                     </span>
                   </div>
                 </th>
@@ -151,14 +223,63 @@ const VerEmpresasCentroAdmin = () => {
                 <th scope="col" class="px-6 py-3 text-start">
                   <div class="flex items-center gap-x-2">
                     <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
-                      Status
+                    Cif
                     </span>
                   </div>
                 </th>
                 <th scope="col" class="px-6 py-3 text-start">
                   <div class="flex items-center gap-x-2">
                     <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
-                      Alta/Baja
+                      Provincia
+                    </span>
+                  </div>
+                </th>
+                <th scope="col" class="px-6 py-3 text-start">
+                  <div class="flex items-center gap-x-2">
+                    <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
+                    Razon Social
+                    </span>
+                  </div>
+                </th>
+                <th scope="col" class="px-6 py-3 text-start">
+                  <div class="flex items-center gap-x-2">
+                    <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
+                   Tipo
+                    </span>
+                  </div>
+                </th>
+                <th scope="col" class="px-6 py-3 text-start">
+                  <div class="flex items-center gap-x-2">
+                    <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
+                   Cursos
+                    </span>
+                  </div>
+                </th>
+                <th scope="col" class="px-6 py-3 text-start">
+                  <div class="flex items-center gap-x-2">
+                    <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
+                   Desactivar/Activar
+                    </span>
+                  </div>
+                </th>
+                <th scope="col" class="px-6 py-3 text-start">
+                  <div class="flex items-center gap-x-2">
+                    <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
+               Eliminar
+                    </span>
+                  </div>
+                </th>
+                <th scope="col" class="px-6 py-3 text-start">
+                  <div class="flex items-center gap-x-2">
+                    <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
+               Crear Curso
+                    </span>
+                  </div>
+                </th>
+                <th scope="col" class="px-6 py-3 text-start">
+                  <div class="flex items-center gap-x-2">
+                    <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
+               Eliminar Curso
                     </span>
                   </div>
                 </th>
@@ -166,22 +287,137 @@ const VerEmpresasCentroAdmin = () => {
             </thead>
 
             <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
-            {centroEmpresaResponse.map((centro, index)=>(
-              <tr key={index} class="bg-white hover:bg-gray-50 dark:bg-slate-900 dark:hover:bg-slate-800">
-                 <td class="h-px w-px whitespace-nowrap align-top">
-                  <div class="block p-6" >
-                    <div class="flex items-center gap-x-3">
-                      {/* <div class="inline-block h-[2.375rem] w-[2.375rem] bg-accent-100 rounded-full" src="" alt=""></div> */}
-                      <div class="grow">
-                      <span class="block text-sm font-semibold text-gray-800 dark:text-gray-200">{centro.nombre}</span>
-                     <span class="block text-sm text-gray-500">{centro.direccion}</span>
-                        <span>{getRepresentantesEmpresas(centro.idEmpresaCentro)}</span> 
-                        {centro.idTipoEmpresa ===2 ?(
+              {centroEmpresaResponse.map((centro, index)=>(
+                        <tr
+                          key={index}
+                          class="bg-white hover:bg-gray-50 dark:bg-slate-900 dark:hover:bg-slate-800"
+                        >
+                          <td class="h-px w-px whitespace-nowrap align-top">
+                            <div class="block p-6">
+                              <div class="flex items-center gap-x-3">
+                                {/* <div class="inline-block h-[2.375rem] w-[2.375rem] bg-accent-100 rounded-full" src="" alt=""></div> */}
+                                <div class="grow">
+                                  <span class="block text-sm font-semibold text-gray-800 dark:text-gray-200">
+                                    {centro.nombre}
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          </td>
+                          
+                          <td class="h-px w-px whitespace-nowrap align-top">
+                            <div class="block p-6">
+                              <div class="flex items-center gap-x-4">
+                                <div>
+                                  <span class="block text-sm font-semibold text-gray-800 dark:text-gray-200">
+                                    {centro.direccion}
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          </td>
+
+                          <td class="h-px w-px whitespace-nowrap align-top">
+                            <div class="block p-6">
+                              <div class="flex items-center gap-x-4">
+                                <div>
+                                  <span class="block text-sm font-semibold text-gray-800 dark:text-gray-200">
+                                    {centro.telefono}
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          </td>
+
+                          <td class="h-px w-px whitespace-nowrap align-top">
+                            <div class="block p-6">
+                              <div class="flex items-center gap-x-4">
+                                <div>
+                                  <span class="block text-sm font-semibold text-gray-800 dark:text-gray-200">
+                                    {centro.personaContacto}
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          </td>
+
+                          <td class="h-px w-px whitespace-nowrap align-top">
+                            <div class="block p-6">
+                              <div class="flex items-center gap-x-4">
+                                <div>
+                                  <span class="block text-sm font-semibold text-gray-800 dark:text-gray-200">
+                                    {centro.cif}
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          </td>
+
+                          <td
+                            className="h-px w-72 max-w-[2rem] align-top"
+                            key={centro.id}
+                          >
+                            <div className="block p-6">
+                              <span className="block text-sm text-gray-500">
+                                {getProvinciaNombre(centro.idProvincia)}
+                              </span>
+                            </div>
+                          </td>
+                          
+                          
+                          <td class="h-px w-px whitespace-nowrap align-top">
+                            <div class="block p-6">
+                              <div class="flex items-center gap-x-4">
+                                <div>
+                                  <span class="block text-sm font-semibold text-gray-800 dark:text-gray-200">
+                                    {centro.razonSocial}
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          </td>
+
+                          <td class="h-px w-px whitespace-nowrap align-top">
+                            <div class="block p-6">
+                              <div class="flex items-center gap-x-4">
+                                <div>
+                                  <span class="block text-sm font-semibold text-gray-800 dark:text-gray-200">
+                                  {centro.idTipoEmpresa ===2 ?(
                           <span class="block text-sm text-gray-500">Centro</span>
                         ):(
                           <span class="block text-sm text-gray-500">Empresa</span>
                         )}
-                        <div>
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          </td>
+
+                          <td class="h-px w-px whitespace-nowrap align-top">
+                            <div class="block p-6">
+                              <div class="flex items-center gap-x-4">
+                                {centro.idTipoEmpresa === 2 && (
+                                  <div>
+                                    {cursosResponse
+                                      .filter((curso) => centro.idTipoEmpresa === 2 && centro.idEmpresaCentro === curso.idCentro)
+                                      .map((curso, index) => (
+                                        <div key={index}>
+                                          {curso.nombreCurso}
+                                        </div>
+                                      ))}
+                                    {cursosResponse.filter((curso) => centro.idTipoEmpresa === 2 && centro.idEmpresaCentro === curso.idCentro).length === 0 && (
+                                      <div>
+                                        Sin cursos
+                                      </div>
+                                    )}
+                                  </div>
+                                )}
+                              </div>
+                            </div>
+                          </td>
+
+                          <td class="h-px w-px whitespace-nowrap align-top">                         
+                            <div>
                         {centro.estadoEmpresa === 1 ? (
                     <button
             type="button"
@@ -198,36 +434,128 @@ const VerEmpresasCentroAdmin = () => {
               >
                 Activar
               </button>
-            )}   
-             
-            <button
+            )}                                                        
+                            </div>
+                          </td>
+                          <td class="h-px w-px whitespace-nowrap align-top">                         
+                          <button
                 type="button"
                  onClick={() =>axiosApi.empresasCentros.eliminarEmpresaCentro(centro.idEmpresaCentro)}
                 class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-green-600 bg-red-600 text-white shadow-sm hover:bg-green-800 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
               >
                 Eliminar
               </button>
-             <h1>Cursos del centro: {centro.nombre}</h1>
-                  {cursosResponse.filter((curso)=> centro.idTipoEmpresa ===2 && centro.idEmpresaCentro===curso.idCentro).map((curso,index)=>(
-                    <div key={index}>
-                      {curso.nombreCurso}
-                    </div>
-                  ))}
-                         </div>
-                      </div>
-                    </div>
-                  </div>
-                  
-                </td>
+
+                          </td>
+
+                          <td class="h-px w-px whitespace-nowrap align-top">                         
+                          <button
+                type="button"
+                onClick={() => cargarVisible(centro.idEmpresaCentro)}
+                class="py-2 mt-3 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-green-600 bg-red-600 text-white shadow-sm hover:bg-green-800 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
+              >
+                Crear Curso
+              </button>
+                          </td>
+
+                          
+                          <td class="h-px w-px whitespace-nowrap align-top">                         
+                          <button
+                type="button"
+                onClick={() => cargarVisibleEliminar(centro.idEmpresaCentro)}
+                class="py-2 mt-3 ml-3 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-green-600 bg-red-600 text-white shadow-sm hover:bg-green-800 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
+              >
+               Eliminar Curso
+              </button>
                 
-              </tr>
+              </td>  
+                <div>
+                  {/* Crear Curso */}
+                  {seccionesVisibles.includes(centro.idEmpresaCentro) && centro.idTipoEmpresa === 2 && (
+                    <form>
+          
+                    <div class="grid sm:grid-cols-12 gap-2 sm:gap-6">
               
+              
+                      <div class="sm:col-span-3">
+                        <label for="af-account-email" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-gray-200">
+                      Nombre del Curso
+                        </label>
+                      </div>
+
+                      <div class="sm:col-span-3">
+                        <input
+                            type="text"
+                            className="form-control"
+                            id="nombre"
+                            style={{ margin: "30px", border: "1px solid black" }}
+                            value={nombreCurso}
+                            onChange={handleNombreChange}/>  
+                      </div>
+
+                      <div class="sm:col-span-3">
+                        <label for="af-account-email" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-gray-200">
+                    Descripcion Del Curso
+                        </label>
+                      </div>
+                    
+                      <div class="sm:col-span-3">
+                        <input
+                            type="text"
+                            className="form-control"
+                            id="desc"
+                            style={{ margin: "30px", border: "1px solid black" }}
+                            value={descripcion}
+                            onChange={handleDescripcionChange}/>  
+                      </div>
+              
+                      <div class="sm:col-span-3">
+                      <button  onClick={handleSubmitCurso} type="submit" class="mt-4 py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-accent-200 bg-accent-200 text-white shadow-sm hover:bg-accent-100 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200">
+                        Añadir Curso
+                      </button>
+                      </div> 
+                    </div>
+                  </form>
+                )}  
+                </div>
+                                
+<div>
+  {/* Eliminar Curso */}   
+                     {seccionesVisiblesEliminar.includes(centro.idEmpresaCentro) && centro.idTipoEmpresa === 2 && (
+                     <form>
+                        <div>
+                        <h1>Selecciona un curso</h1>
+                        <select onChange={(e) => setSelectedCurso(e.target.value)} class="py-2 px-3 pe-9 block w-full sm:w-auto border-gray-200 shadow-sm -mt-px -ms-px rounded sm:mt-0 sm:first:ms-0  text-sm relative focus:z-10  focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 ">
+                        {cursosResponse
+                              .filter((curso) => centro.idTipoEmpresa === 2 && centro.idEmpresaCentro === curso.idCentro)
+                              .map((curso) => (                
+                                  <option key={curso.idCurso} value={curso.idCurso}>
+                                    {curso.nombreCurso}
+                                    </option>              
+                              ))}
+                         </select>
+                <button
+                type="button"
+               onClick={handleEliminarCurso}
+                class="py-2 mt-3 ml-3 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-green-600 bg-red-600 text-white shadow-sm hover:bg-green-800 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
+              >
+               Eliminar 
+              </button>
+                        </div>
+                      </form>  
+                        )}        
+</div>
+                     
+                          
+              </tr>    
             ))}
 
             </tbody>
+
           </table>
           {/* <!-- End Table --> */}
 
+       
           {/* <!-- Footer --> */}
           <div class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-t border-gray-200 dark:border-gray-700">
             

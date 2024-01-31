@@ -243,7 +243,7 @@ const MisCharlasTr = () => {
         CHARLAS QUE TENGO QUE DAR EN LOS PROXIMOS DIAS
         </p>
         <ul class="hs-accordion-group">
-          {charlasTrResponse.filter((charla)=> charla.idEstadoCharla===4).map((charla) => (
+          {charlasTrResponse.filter((charla)=> charla.idEstadoCharla===3).map((charla) => (
             <li
               key={charla.idCharla}
               className="hs-accordion active bg-white border -mt-px first:rounded-t-lg last:rounded-b-lg dark:bg-gray-800 dark:border-gray-700"
@@ -395,6 +395,7 @@ const MisCharlasTr = () => {
         </ul>
       </section>
 
+  {/* TODAS MIS CHARLAS  */}
       <section>
         <h2 class="text-3xl text-center text-gray-800 font-bold lg:text-4xl dark:text-white">
         TODAS MIS CHARLAS
@@ -539,6 +540,16 @@ const MisCharlasTr = () => {
                         </dt>
                         {/* <dd class="text-xs text-gray-500">{charla.turno}</dd> */}
                       </div>
+
+                      {charla.idEstadoCharla === 5&&(
+                          <button
+                          type="button"
+                          onClick={() =>axiosApi.solicitudesAcreditacion.PostSolicitudesAcreditacion(charla.idCharla)}
+                          class="py-2 mt-4 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-green-600 bg-green-600 text-white shadow-sm hover:bg-green-800 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
+                        >
+                          Solicitar Acreditacion Charla
+                        </button>
+                      )}
                     </dl>
                   </div>
                 </div>
