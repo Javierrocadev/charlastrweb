@@ -74,11 +74,11 @@ const CalendarComponent = ({ charlas }) => {
   };
 
   return (
-    <div className="calendar-container md:flex-row flex flex-col   gap-4 bg-accent-100 p-4 border border-bg-300 rounded">
+    <div className="calendar-container md:flex-row flex flex-col  items-start  gap-4 bg-accent-100 p-4 border border-bg-300 rounded">
       <Calendar
         onChange={setDate}
         value={date}
-        className="rounded h-[325px] px-4 flex flex-col m-auto md:min-w-0 justify-evenly  bg-green-100 border-none text-accent-100 flex flex-col"
+        className="rounded h-[325px] px-4 m-auto md:m-0  md:min-w-0 justify-evenly  bg-green-100 border-none text-accent-100 flex flex-col"
         calendarClassName="bg-green-100"
         tileContent={tileContent}
       />
@@ -89,7 +89,7 @@ const CalendarComponent = ({ charlas }) => {
           {charlasEnDia.map((charla) => (
             <li
             key={charla.idCharla}
-            className="hs-accordion active h-[325px] bg-white border -mt-px first:rounded-t-lg last:rounded-b-lg dark:bg-gray-800 dark:border-gray-700"
+            className=" h-[325px] hs-accordion active bg-white dark:text-gray-800 border -mt-px first:rounded-t-lg last:rounded-b-lg dark:bg-accent-200 dark:border-gray-700"
             id="hs-bordered-heading-one"
           >
             <div className="flex flex-row">
@@ -130,7 +130,7 @@ const CalendarComponent = ({ charlas }) => {
               </button>
               <button
                 type="button"
-                class="py-2 px-3 m-2 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-accent-200 bg-accent-200 text-white shadow-sm hover:bg-accent-100 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
+                class="py-2 px-3 sm:shrink-0 m-5 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-accent-200 bg-accent-200 text-white shadow-sm hover:bg-accent-100 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-white dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
               >
                 Solicitar charla
               </button>
@@ -138,33 +138,33 @@ const CalendarComponent = ({ charlas }) => {
 
             <div
               id="hs-basic-bordered-collapse-one"
-              className="hs-accordion-content w-full overflow-hidden transition-[height] duration-300"
+              className="hs-accordion-content -mt-2 w-full overflow-hidden transition-[height] duration-300"
               aria-labelledby="hs-bordered-heading-one"
             >
-              <div className="pb-4 px-5">
+              <div className="pb-4 px-5 ">
                 {/* <p className="text-gray-800 dark:text-gray-200">
              {charla.observaciones}
              </p> */}
-                <div class="relative block overflow-hidden rounded-lg border border-gray-100 p-4 sm:p-6 lg:p-8">
-                  <div class="sm:flex sm:justify-between sm:gap-4">
+                <div className="relative block overflow-hidden rounded-lg border  border-gray-100 p-4 sm:p-6 lg:p-8">
+                  <div className="sm:flex sm:justify-between sm:gap-4">
                     <div>
-                      <h3 class="text-lg font-bold text-gray-900 sm:text-xl mb-4">
+                      <h3 className="text-lg font-bold text-gray-900 sm:text-xl mb-4">
                         {getTecnologiaCharlas(charla.idCharla)}
                       </h3>
 
-                      <p class="mt-1 text-xs font-medium text-gray-600">
+                      <p className="mt-1 text-xs font-medium ">
                         Modalidad:
-                        <span class="text-sm m-1 font-medium p-2 rounded-xl bg-bg-300 text-gray-600">
+                        <span className="text-sm m-1 font-medium p-2 rounded-xl bg-primary-100 ">
                           {charla.modalidad}
                         </span>{" "}
                         /
-                        <span class="text-sm m-1 font-medium p-2 rounded-xl bg-bg-300 text-gray-600">
+                        <span className="text-sm m-1 font-medium p-2 rounded-xl bg-primary-100 ">
                           {charla.turno}
                         </span>
                       </p>
                     </div>
 
-                    <div class="hidden sm:block sm:shrink-0">
+                    <div className="hidden sm:block sm:shrink-0">
                       {(() => {
                         switch (charla.acreditacionLinkedIn) {
                           case null:
@@ -174,7 +174,7 @@ const CalendarComponent = ({ charlas }) => {
                               <a href={charla.acreditacionLinkedIn}>
                                 <img
                                   alt="imagen tech riders"
-                                  class="h-16 w-16 bg-accent-200 rounded-lg object-cover shadow-sm"
+                                  className="h-16 w-16 bg-accent-200 rounded-lg object-cover shadow-sm"
                                 />
                               </a>
                             );
@@ -183,49 +183,60 @@ const CalendarComponent = ({ charlas }) => {
                     </div>
                   </div>
 
-                  <div class="mt-4">
-                    <p class="max-w-[40ch] text-sm text-gray-500">
-                      {charla.observaciones}
-                    </p>
+                  <div className="mt-4">
+
+
+                                     {(() => {
+                        switch (charla.observaciones) {
+                          case null:
+                            return <></>;
+                          default:
+                            return (
+                              <p className="max-w-[40ch] text-sm text-gray-500 bg-primary-100 p-2 rounded">
+                              {charla.observaciones}
+                            </p>
+                            );
+                        }
+                      })()}
                   </div>
 
-                  <dl class="mt-6 flex gap-4 sm:gap-6">
-                    <div class="flex flex-col-reverse">
+                  <dl className="mt-6 flex gap-4 sm:gap-6">
+                    <div className="flex flex-col-reverse">
                       {(() => {
                         switch (charla.idEstadoCharla) {
                           case 1:
                             return (
-                              <dt class="text-sm my-1 font-medium p-2 rounded-xl bg-red-500 text-gray-600">
+                              <dt className="text-sm my-1 font-medium p-2 rounded-xl bg-red-500 ">
                                 Cancelada
                               </dt>
                             );
                           case 2:
                             return (
-                              <dt class="text-sm my-1 font-medium p-2 rounded-xl bg-gray-200 text-gray-600">
+                              <dt className="text-sm my-1 font-medium p-2 rounded-xl bg-gray-200 ">
                                 Pendiente
                               </dt>
                             );
                           case 3:
                             return (
-                              <dt class="text-sm my-1 font-medium p-2 rounded-xl bg-green-200 text-gray-600">
+                              <dt className="text-sm my-1 font-medium p-2 rounded-xl bg-green-200 ">
                                 Proceso
                               </dt>
                             );
                           case 4:
                             return (
-                              <dt class="text-sm my-1 font-medium p-2 rounded-xl bg-amber-200 text-gray-600">
+                              <dt className="text-sm my-1 font-medium p-2 rounded-xl bg-amber-200 ">
                                 Ocupada
                               </dt>
                             );
                           case 5:
                             return (
-                              <dt class="text-sm my-1 font-medium p-2 rounded-xl bg-accent-100 text-gray-600">
+                              <dt className="text-sm my-1 font-medium p-2 rounded-xl bg-accent-100 ">
                                 Completada
                               </dt>
                             );
                           case 6:
                             return (
-                              <dt class="text-sm my-1 font-medium p-2 rounded-xl bg-ambar-200 text-gray-600">
+                              <dt className="text-sm my-1 font-medium p-2 rounded-xl bg-ambar-200 ">
                                 Acreditada
                               </dt>
                             );
@@ -234,16 +245,19 @@ const CalendarComponent = ({ charlas }) => {
                         }
                       })()}
 
-                     
+                      
                     </div>
 
-                    <div class="flex flex-col-reverse">
-                      <dt class="text-sm my-1 font-medium p-2 rounded-xl text-gray-600">
+                    <div className="flex flex-col-reverse">
+                      <dt className="text-sm my-1 font-medium p-2 rounded-xl ">
                         {getProvinciaNombre(charla.idProvincia)}
                       </dt>
-                      {/* <dd class="text-xs text-gray-500">{charla.turno}</dd> */}
+                      
+                      {/* <dd className="text-xs text-gray-500">{charla.turno}</dd> */}
                     </div>
+                   
                   </dl>
+
                 </div>
               </div>
             </div>
