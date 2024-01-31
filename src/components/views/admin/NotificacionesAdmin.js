@@ -389,6 +389,7 @@ const NotificacionesAdmin = () => {
                               </div>
                             </div>
                           </td>
+                          
                           <td class="h-px w-px whitespace-nowrap align-top">
                             <div class="block p-6">
                               <div class="flex items-center gap-x-4">
