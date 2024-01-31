@@ -22,10 +22,9 @@ const VerEmpresasCentroAdmin = () => {
   const [nombreCurso, setNombreCurso] = useState("");
   const [descripcion, setDescripcion] = useState("");
   const [idCentroCurso, setIdCentroCurso] = useState(null);
+  const [selectedCurso, setSelectedCurso] = useState(null);
 
-  
 
-  
     const [seccionesVisibles, setSeccionesVisibles] = useState([]);
   
     const cargarVisible = (idCentro) => {
@@ -33,11 +32,29 @@ const VerEmpresasCentroAdmin = () => {
       if (seccionesVisibles.includes(idCentro)) {
 
         setSeccionesVisibles(seccionesVisibles.filter((id) => id !== idCentro));
+
       } else {
         setSeccionesVisibles([...seccionesVisibles, idCentro]);
+        setSeccionesVisiblesEliminar(seccionesVisiblesEliminar.filter((id) => id !== idCentro));
+
       }
     };
   
+    const [seccionesVisiblesEliminar, setSeccionesVisiblesEliminar] = useState([]);
+  
+    const cargarVisibleEliminar = (idCentro) => {
+      
+      if (seccionesVisiblesEliminar.includes(idCentro)) {
+
+        setSeccionesVisiblesEliminar(seccionesVisiblesEliminar.filter((id) => id !== idCentro));
+
+      } else {
+        setSeccionesVisiblesEliminar([...seccionesVisiblesEliminar, idCentro]);
+        setSeccionesVisibles(seccionesVisibles.filter((id) => id !== idCentro));
+
+      }
+    };
+    
   const handleNombreChange = (e) => {
     setNombreCurso(e.target.value);
   };
@@ -51,6 +68,23 @@ const VerEmpresasCentroAdmin = () => {
    axiosApi.cursos.postCurso(idCentroCurso,nombreCurso,descripcion);
   };
 
+  const handleEliminarCurso = async (e) => {
+    e.preventDefault();
+    try {
+      if (selectedCurso) {
+        await axiosApi.cursos.eliminarCurso(selectedCurso);
+      console.log('Curso eliminado con éxito');
+      // Puedes realizar alguna acción adicional después de eliminar la charla
+      } else {
+        // Handle the case when no technology is selected
+        console.error("Please select a technology");
+      }
+   
+    } catch (error) {
+      console.error('Error al intentar eliminar la charla:', error);
+      // Puedes manejar el error de alguna manera, por ejemplo, mostrar un mensaje al usuario
+    }
+  };
   useEffect(() => {
     const fetchData = async () => {
         try {
@@ -152,7 +186,7 @@ const VerEmpresasCentroAdmin = () => {
                 <th scope="col" class="px-6 py-3 text-start">
                   <div class="flex items-center gap-x-2">
                     <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
-                      Nombre/Apellidos
+                      Nombre
                     </span>
                   </div>
                 </th>
@@ -160,7 +194,7 @@ const VerEmpresasCentroAdmin = () => {
                 <th scope="col" class="px-6 py-3 text-start">
                   <div class="flex items-center gap-x-2">
                     <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
-                      Correo
+                     Direccion
                     </span>
                   </div>
                 </th>
@@ -175,7 +209,7 @@ const VerEmpresasCentroAdmin = () => {
                 <th scope="col" class="px-6 py-3 text-start">
                   <div class="flex items-center gap-x-2">
                     <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
-                      LinkedIn
+                      personaContacto
                     </span>
                   </div>
                 </th>
@@ -183,14 +217,42 @@ const VerEmpresasCentroAdmin = () => {
                 <th scope="col" class="px-6 py-3 text-start">
                   <div class="flex items-center gap-x-2">
                     <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
-                      Status
+                    Cif
                     </span>
                   </div>
                 </th>
                 <th scope="col" class="px-6 py-3 text-start">
                   <div class="flex items-center gap-x-2">
                     <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
-                      Alta/Baja
+                      Provincia
+                    </span>
+                  </div>
+                </th>
+                <th scope="col" class="px-6 py-3 text-start">
+                  <div class="flex items-center gap-x-2">
+                    <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
+                    Razon Social
+                    </span>
+                  </div>
+                </th>
+                <th scope="col" class="px-6 py-3 text-start">
+                  <div class="flex items-center gap-x-2">
+                    <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
+                   Tipo
+                    </span>
+                  </div>
+                </th>
+                <th scope="col" class="px-6 py-3 text-start">
+                  <div class="flex items-center gap-x-2">
+                    <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
+                   Desactivar
+                    </span>
+                  </div>
+                </th>
+                <th scope="col" class="px-6 py-3 text-start">
+                  <div class="flex items-center gap-x-2">
+                    <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
+               Eliminar
                     </span>
                   </div>
                 </th>
@@ -257,6 +319,14 @@ const VerEmpresasCentroAdmin = () => {
               >
                 Crear Curso
               </button>
+
+              <button
+                type="button"
+                onClick={() => cargarVisibleEliminar(centro.idEmpresaCentro)}
+                class="py-2 mt-3 ml-3 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-green-600 bg-red-600 text-white shadow-sm hover:bg-green-800 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
+              >
+               Eliminar Curso
+              </button>
                           </div>
                         )}
                        </div>
@@ -309,7 +379,32 @@ const VerEmpresasCentroAdmin = () => {
                       </div> 
                     </div>
                   </form>
-                )}           
+                )}  
+
+                     {/* Eliminar Curso */}   
+                     {seccionesVisiblesEliminar.includes(centro.idEmpresaCentro) && centro.idTipoEmpresa === 2 && (
+                     <form>
+                        <div>
+                        <h1>Selecciona un curso</h1>
+                        <select onChange={(e) => setSelectedCurso(e.target.value)} class="py-2 px-3 pe-9 block w-full sm:w-auto border-gray-200 shadow-sm -mt-px -ms-px rounded sm:mt-0 sm:first:ms-0  text-sm relative focus:z-10  focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 ">
+                        {cursosResponse
+                              .filter((curso) => centro.idTipoEmpresa === 2 && centro.idEmpresaCentro === curso.idCentro)
+                              .map((curso) => (                
+                                  <option key={curso.idCurso} value={curso.idCurso}>
+                                    {curso.nombreCurso}
+                                    </option>              
+                              ))}
+                         </select>
+                <button
+                type="button"
+               onClick={handleEliminarCurso}
+                class="py-2 mt-3 ml-3 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-green-600 bg-red-600 text-white shadow-sm hover:bg-green-800 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
+              >
+               Eliminar 
+              </button>
+                        </div>
+                      </form>  
+                   )}  
                 </td>               
               </tr>    
               

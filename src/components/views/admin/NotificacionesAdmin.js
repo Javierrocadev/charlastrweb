@@ -129,9 +129,9 @@ const NotificacionesAdmin = () => {
   //   console.log("Algo: ", responseAcreditarCharla);
   // };
 
-  const handleAcreditar = async (idcharla) => {
+  const handleAcreditar = async (idcharla,idpeticion) => {
     try {
-      const responseAcreditarCharla = await axiosApi.charlas.acreditarCharla(idcharla);
+      const responseAcreditarCharla = await axiosApi.charlas.acreditarCharla(idcharla,idpeticion);
       console.log("Algo: ", responseAcreditarCharla);
     } catch (error) {
       console.error("Error al acreditar charla:", error);
@@ -493,6 +493,7 @@ const NotificacionesAdmin = () => {
 
                 {/* <!-- Table  MOSTAR ALTA CENTROS EMPRESAS  --> */}
                 {seccion === 'altacentroempresa' &&(
+
                 <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                   <thead class="bg-gray-50 dark:bg-slate-800">
                     <tr>
@@ -588,9 +589,10 @@ const NotificacionesAdmin = () => {
                               </div>
                             </div>
                           </td>
+                          
                           {centroEmpresaResponse.filter((centro) => centro.idEmpresaCentro === peticion.idCentroEmpresa).map((centro) => (
-                                  <tr key={centro.id}>
-                                    <td class="h-px w-px whitespace-nowrap align-top">
+                                  <>
+                                    <td key={centro.id} class="h-px w-px whitespace-nowrap align-top">
                             <div class="block p-6">
                               <div class="flex items-center gap-x-4">
                                 <div>
@@ -676,15 +678,14 @@ const NotificacionesAdmin = () => {
                             </button>
                           </td>
                               
-                            </tr>
-                                ))}
-                          
-
-                         
+                            </>
+                                ))}           
                         </tr>
                       ))}
                   </tbody>
                 </table>
+
+                
                 )}
 
                  {/* <!-- Table  MOSTAR ALTA Tecnologias  --> */}
@@ -779,7 +780,7 @@ const NotificacionesAdmin = () => {
           <button
             type="button"
             class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-green-600 bg-green-600 text-white shadow-sm hover:bg-green-800 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
-            onClick={() => handleAcreditar(solicitud.idCharla)}
+            onClick={() => handleAcreditar(solicitud.idCharla,solicitud.idPeticionCharla)}
           >
             Acreditar Charla
           </button>

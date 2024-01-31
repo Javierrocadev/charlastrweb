@@ -139,10 +139,10 @@ const axiosApi = {
         throw error;
       }
     },
-    acreditarCharla: async (idcharla) => {
+    acreditarCharla: async (idcharla,idpeticion) => {
       try {
         var token = localStorage.getItem("token");
-        console.log(idcharla)
+        console.log(idcharla + idpeticion)
         var idestadocharla = 6;
         var request = "api/charlas/UpdateEstadoCharla/" + idcharla + "/" + idestadocharla;
         var api = "https://apitechriders.azurewebsites.net/";
@@ -152,7 +152,15 @@ const axiosApi = {
           headers: {
             Authorization: `Bearer ${token}`
           }
-        });
+        }).then(response=>{
+          var requestEliminarPeticion = "api/solicitudacreditacionescharlas/"+idpeticion
+          var url = api+requestEliminarPeticion
+          axios.delete(url,{
+            headers:{
+              Authorization: `Bearer ${token}`
+            }
+          })
+        })
         window.location.reload();
         alert("Charla Acreditada");
       } catch (error) {
@@ -312,25 +320,32 @@ const axiosApi = {
 
     eliminarEmpresaCentro: async (idEmpresaCentro) => {
       try {
-        var token = localStorage.getItem("token");
-
+        const token = localStorage.getItem("token");
+        console.log("token de axios: " + token);
         const response = await axios.delete(
-          `${API_URL}/api/EmpresasCentros/${idEmpresaCentro}`,
+          `${API_URL}/api/EmpresasCentros/` + idEmpresaCentro,
           {
             headers: {
               Authorization: `Bearer ${token}`,
             },
           }
         );
-        window.location.reload();
-        alert("Empresa-Centro Eliminada");
+        console.log("API Response:", response);
         return response.data;
-        
       } catch (error) {
-        console.log(error);
+        console.error("Error getting usuarios:", error);
+
+        // Si la respuesta es 401, redirigir a la página de inicio de sesión
+        if (error.response && error.response.status === 401) {
+          console.log("Unauthorized access. Redirecting to login...");
+          return <Navigate to="/login" />; // Volvemos al login si el token no funciona
+        }
+
         throw error;
       }
     },
+
+    
 
     updateEstadoCentroEmpresa: async (id, estado) => {
       console.log(id);
@@ -618,6 +633,34 @@ const axiosApi = {
         throw error;
       }
     },
+    eliminarUsuario: async (idusuario) => {
+      try {
+        const token = localStorage.getItem("token");
+        console.log("token de axios: " + token);
+        const response = await axios.delete(
+          `${API_URL}/api/Usuarios/` + idusuario,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        window.location.reload();
+        alert("Usuario Eliminado");
+        console.log("API Response:", response);
+        return response.data;
+      } catch (error) {
+        console.error("Error getting usuarios:", error);
+
+        // Si la respuesta es 401, redirigir a la página de inicio de sesión
+        if (error.response && error.response.status === 401) {
+          console.log("Unauthorized access. Redirecting to login...");
+          return <Navigate to="/login" />; // Volvemos al login si el token no funciona
+        }
+
+        throw error;
+      }
+    },
   },
 
   profesores: {
@@ -726,6 +769,7 @@ const axiosApi = {
         console.log("Error: ", error);
       }
     },
+    
   },
   empresas: {
     getCharlasByEmpresa: async () => {
@@ -1225,6 +1269,32 @@ cursos:{
         });
     } catch (error) {
       console.error("Error getting provincias:", error);
+      throw error;
+    }
+  },
+  eliminarCurso: async (idcurso) => {
+    try {
+      const token = localStorage.getItem("token");
+      console.log("token de axios: " + token);
+      const response = await axios.delete(
+        `${API_URL}/api/cursos/` + idcurso,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log("API Response:", response);
+      return response.data;
+    } catch (error) {
+      console.error("Error getting usuarios:", error);
+
+      // Si la respuesta es 401, redirigir a la página de inicio de sesión
+      if (error.response && error.response.status === 401) {
+        console.log("Unauthorized access. Redirecting to login...");
+        return <Navigate to="/login" />; // Volvemos al login si el token no funciona
+      }
+
       throw error;
     }
   },
