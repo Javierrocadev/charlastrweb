@@ -88,6 +88,28 @@ const MenuEmpresa = () => {
       </section>
     );
   };
+
+  const Loading = () => {
+    const [dots, setDots] = useState("");
+
+    useEffect(() => {
+      const loading = async () => {
+        await new Promise((resolve) => setTimeout(resolve, 500));
+
+        setDots((prevDots) => (prevDots.length < 3 ? prevDots + "." : "."));
+      };
+      const intervalId = setInterval(loading, 500);
+
+      return () => clearInterval(intervalId);
+    });
+
+    return (
+      <div>
+        <span className="ml-2">{dots}</span>
+      </div>
+    );
+  };
+
   useEffect(() => {
     const fechData = async () => {
       try {
@@ -143,7 +165,14 @@ const MenuEmpresa = () => {
                 </svg>
               </div>
             </div>
-          ) : empresa.length === 0 ? (
+          ) : !isEmpresa ? (
+            <p className="text-white py-2 px-3 flex">
+              Loading{" "}
+              <span className="">
+                <Loading />
+              </span>
+            </p>
+          ) : (
             <NavLink
               to="/inscripcionempresa"
               className=" text-white py-2 px-3 rounded-md flex float-end items-center space-x-2
@@ -166,8 +195,6 @@ const MenuEmpresa = () => {
                 ></path>
               </svg>
             </NavLink>
-          ) : (
-            <p className="hidden">Loading...</p>
           )}
         </header>
         {isEmpresa ? (

@@ -77,6 +77,27 @@ const MenuCentro = () => {
     );
   };
 
+  const Loading = () => {
+    const [dots, setDots] = useState("");
+
+    useEffect(() => {
+      const loading = async () => {
+        await new Promise((resolve) => setTimeout(resolve, 500));
+
+        setDots((prevDots) => (prevDots.length < 3 ? prevDots + "." : "."));
+      };
+      const intervalId = setInterval(loading, 500);
+
+      return () => clearInterval(intervalId);
+    });
+
+    return (
+      <div>
+        <span className="ml-2">{dots}</span>
+      </div>
+    );
+  };
+
   useEffect(() => {
     const fechData = async () => {
       try {
@@ -93,12 +114,6 @@ const MenuCentro = () => {
         });
 
         setCentro(filteredResponse);
-        // console.log(
-        //   "usuario: " +
-        //     responsable.idEmpresaCentro +
-        //     ", Centro: " +
-        //     filteredResponse
-        // );
         setIsCentro(true);
       } catch (error) {
         console.log(error);
@@ -134,7 +149,14 @@ const MenuCentro = () => {
                 </svg>
               </div>
             </div>
-          ) : centro.length === 0 ? (
+          ) : !isCentro ? (
+            <p className="text-white py-2 px-3 flex">
+              Loading{" "}
+              <span className="">
+                <Loading />
+              </span>
+            </p>
+          ) : (
             <NavLink
               to="/inscripcioncentro"
               className=" text-white py-2 px-3 rounded-md flex float-end items-center space-x-2
@@ -157,8 +179,6 @@ const MenuCentro = () => {
                 ></path>
               </svg>
             </NavLink>
-          ) : (
-            <p className="hidden">Loading...</p>
           )}
         </header>
 

@@ -5,9 +5,11 @@ import banner from "../../../assets/images/imgcurso.jpeg";
 
 const VistaCursosCentrto = () => {
   const [cursos, setCursos] = useState([]);
+  const [cursosProfesor, setCursosProfesor] = useState([]);
   const [selectedOption, setSelectedOption] = useState(null);
   const [open, setOpen] = useState(false);
   const [selectedComponent, setSelectedComponent] = useState("cursos");
+  const [loaded, setLoaded] = useState(false);
 
   const handleComponentChange = (selected) => {
     setSelectedComponent(selected);
@@ -23,7 +25,7 @@ const VistaCursosCentrto = () => {
   const renderIcon = () => {
     return (
       <svg
-        className="w-4 h-4 text-gray-800 dark:text-white"
+        className="w-4 h-4 pt-2 text-gray-800 dark:text-white"
         aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
@@ -44,11 +46,43 @@ const VistaCursosCentrto = () => {
     );
   };
 
-  const Cursos = () => {
+  const ModalAlerta = ({ exitosa, onClose }) => {
+    useEffect(() => {
+      const timerId = setTimeout(() => {
+        onClose();
+      }, 5000);
+
+      return () => clearTimeout(timerId);
+    }, [exitosa, onClose]);
+
     return (
-      <div>
-        {cursos.map((curso, index) => (
+      exitosa !== null && (
+        <div
+          className={`p-4 ${
+            exitosa ? "bg-green-500" : "bg-red-500"
+          } text-white transition-opacity duration-500 ease-in-out opacity-100`}
+        >
+          {exitosa ? "Curso creado exitosamente" : "Error al crear el curso"}
+        </div>
+      )
+    );
+  };
+
+  const ModalAlertaEliminar = ({ exitosa, onClose }) => {
+    useEffect(() => {
+      const timerId = setTimeout(() => {
+        onClose();
+      }, 5000);
+
+      return () => clearTimeout(timerId);
+    }, [exitosa, onClose]);
+
+    return (
+      exitosa !== null && (
+        
+        <div className="relative w-[90%] h-[250px] mx-auto">
           <div
+<<<<<<< HEAD
             key={index}
             className="relative md:max-w-full mx-auto p-6 mb-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-accent-200 dark:border-gray-700"
           >
@@ -91,9 +125,184 @@ const VistaCursosCentrto = () => {
               idCurso={curso.idCurso}
               idCentro={curso.idCentro}
             />
+=======
+            className={`z-80 py-4 px-5 mt-3 absolute top-10 mx-auto ${
+              exitosa
+                ? "bg-green-500 transform translate-y-0 opacity-100 transition-transform ease-in-out duration-500"
+                : "bg-red-500 transform translate-y-full opacity-100 transition-transform ease-in-out duration-500"
+            } text-white w-[90%] mx-auto`}
+          >
+            {exitosa
+              ? "Curso eliminado exitosamente"
+              : "Error al eliminar el curso"}
+>>>>>>> c88d0a5d8af09e68aed0076b44f475de028a3adb
           </div>
-        ))}
+        </div>
+      )
+    );
+  };
+
+  const Cursos = ({ loaded }) => {
+    return (
+      <div className="">
+        {loaded ? (
+          cursos.map((curso, index) => (
+            <div
+              key={index}
+              className="relative w-full min-w-[400px] sm:w-2/2 md:w-3/3 lg:w-4/4 xl:w-6/6 mx-auto p-6 mb-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+            >
+              <p className="mb-4 text-lg font-semibold text-gray-900 dark:text-white">
+                <span className="text-accent-200">Curso: </span>
+                {" " + curso.nombreCurso} {"(" + curso.descripcionCurso + ")"}
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4">
+                <div>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">
+                    <span className="font-semibold">Profesor/a: </span>
+                    {" " + curso.profesor}
+                  </p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">
+                    <span className="font-semibold">Centro: </span>
+                    {curso.centro}
+                  </p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">
+                    <span className="font-semibold">Provincia: </span>
+                    {curso.provinciaCentro}
+                  </p>
+                </div>
+              </div>
+
+              <div
+                className={`py-5 inline-flex max-w-[130px]
+                 items-center hover:translate-x-5 transition-transform ease-in-out duration-300 cursor-pointer`}
+                onClick={() => handleClick(curso)}
+              >
+                <span className="font-semibold mr-2 ">Solicitar charla</span>
+
+                {renderIcon()}
+              </div>
+              <SolicitudCharla
+                isOpen={selectedOption === curso}
+                idCurso={curso.idCurso}
+                idCentro={curso.idCentro}
+              />
+            </div>
+          ))
+        ) : (
+          <h3 className="mt-8">No hay cursos disponibles en este momento.</h3>
+        )}
       </div>
+    );
+  };
+
+  const AlumnosProfesor = () => {
+    const [exitosa, setExitosa] = useState(null);
+
+    const handleClick = async (curso) => {
+      try {
+        console.log("Curso a eliminado: ", curso);
+        const responsedelete = await axiosApi.profesores.EliminarCurso(
+          curso.idCurso
+        );
+        //console.log("Curso eliminado exitosamente: ", responsedelete);
+        if (responsedelete.response && responsedelete.response.status !== 200) {
+          setExitosa(false);
+        } else {
+          setExitosa(true);
+        }
+      } catch (error) {
+        console.log(error);
+        setExitosa(false);
+      }
+    };
+
+    const handleClickSolicitarCharla = async (curso) => {
+      setSelectedOption((prevSelected) => {
+        return prevSelected === curso ? null : curso;
+      });
+      setOpen((prev) => !prev);
+    };
+
+    const handleClose = () => {
+      setExitosa(null);
+    };
+
+    return (
+      <section className="pt-10">
+        <div className="w-full h-full relative">
+          {cursosProfesor.map((curso) => (
+            <div
+              key={curso.idCurso}
+              className="relative md:max-w-full mx-auto p-6 mb-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+            >
+              <p className="mb-4 text-lg font-semibold text-gray-900 dark:text-white flex justify-between">
+                <span className="text-accent-200">
+                  {curso.descripcionCurso} {"(" + curso.nombreCurso + ")"}
+                </span>
+                <div
+                  className=" top-5 right-5 ml-10
+            flex items-center hover:scale-110 transition-transform cursor-pointer"
+                  onClick={() => handleClick(curso)}
+                >
+                  <span className="font-semibold mr-2 text-sm ">
+                    Eliminar curso
+                  </span>
+                </div>
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4">
+                <div>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">
+                    <span className="font-semibold">Centro: </span>
+                    {curso.centro}
+                  </p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">
+                    <span className="font-semibold">Email: </span>
+                    {curso.emailProfesor}
+                  </p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">
+                    <span className="font-semibold">Telefono: </span>
+                    {curso.telefonoProfesor}
+                  </p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">
+                    <span className="font-semibold">Provincia: </span>
+                    {curso.provinciaCentro}
+                  </p>
+                </div>
+              </div>
+
+              <div
+                className={`py-5 inline-flex max-w-[130px]
+                items-center hover:translate-x-5 transition-transform ease-in-out duration-300 cursor-pointer`}
+                onClick={() => handleClickSolicitarCharla(curso)}
+              >
+                <span className="font-semibold mr-1 text-sm">
+                  Solicitar charla
+                </span>
+
+                {renderIcon()}
+              </div>
+              <SolicitudCharla
+                isOpen={selectedOption === curso}
+                idCurso={curso.idCurso}
+                idCentro={curso.idCentro}
+              />
+            </div>
+          ))}
+          <div className="absolute top-14 left-12 w-[90%] mx-auto">
+            <ModalAlertaEliminar exitosa={exitosa} onClose={handleClose} />
+          </div>
+        </div>
+      </section>
     );
   };
 
@@ -101,6 +310,7 @@ const VistaCursosCentrto = () => {
     const [idCentro, setIdCentro] = useState(0);
     const [nombreCurso, setNombreCurso] = useState("");
     const [descripcion, setDescripcion] = useState("");
+    const [exitosa, setExitosa] = useState(null);
 
     const handleInputChangeNombre = (e) => {
       setNombreCurso(e.target.value);
@@ -123,9 +333,23 @@ const VistaCursosCentrto = () => {
 
         const postCurso = axiosApi.profesores.CrearCurso(dataJSON);
         console.log("datos del curso: ", postCurso);
+        if (
+          postCurso &&
+          postCurso.response &&
+          postCurso.response.status === 200
+        ) {
+          setExitosa(true);
+        } else {
+          setExitosa(false);
+        }
       } catch (error) {
         console.log(error);
+        setExitosa(false);
       }
+    };
+
+    const handleClose = () => {
+      setExitosa(null);
     };
 
     useEffect(() => {
@@ -209,6 +433,9 @@ const VistaCursosCentrto = () => {
             <div className="absolute inset-0 bg-black opacity-60 rounded-md"></div>
           </div>
         </div>
+        <div>
+          <ModalAlerta exitosa={exitosa} onClose={handleClose} />
+        </div>
       </section>
     );
   };
@@ -216,11 +443,26 @@ const VistaCursosCentrto = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const responseCursos = await axiosApi.centros.getCursosByCentro();
-        console.log(responseCursos);
-        setCursos(responseCursos);
+        //const responseCursos = await axiosApi.centros.getCursosByCentro();
+        const profesorCentro = await axiosApi.usuarios.getPerfilUsuario();
+        const responseCursos = await axiosApi.centros.getCursos();
+        const cursosFilter = responseCursos.filter(
+          (c) => c.idCentro === profesorCentro.idEmpresaCentro
+        );
+
+        console.log("cursos: ", responseCursos);
+        console.log("cursos del centro: ", cursosFilter);
+
+        const responseAlumnosProfesor =
+          await axiosApi.centros.getCursosByCentro();
+        console.log("Cursos profesor: ", responseAlumnosProfesor);
+        setCursosProfesor(responseAlumnosProfesor);
+
+        setCursos(cursosFilter);
+        setLoaded(true);
       } catch (error) {
         console.log(error);
+        setLoaded(false);
       }
     };
     fetchData();
@@ -240,7 +482,19 @@ const VistaCursosCentrto = () => {
               } inline-block p-4 border-b-2 border-transparent rounded-t-sm focus:outline-none`}
               onClick={() => handleComponentChange("cursos")}
             >
-              Cursos
+              cursos del centro
+            </button>
+          </li>
+          <li className="me-2">
+            <button
+              className={`${
+                selectedComponent === "miscursos"
+                  ? "bg-blue-700  text-white"
+                  : "active bg-blue-400 hover:bg-blue-600  text-white"
+              } inline-block p-4 border-b-2 border-transparent rounded-t-sm focus:outline-none`}
+              onClick={() => handleComponentChange("miscursos")}
+            >
+              mis cursos
             </button>
           </li>
           <li className="me-2">
@@ -252,14 +506,15 @@ const VistaCursosCentrto = () => {
               } inline-block p-4 border-b-2 border-transparent rounded-t-sm focus:outline-none`}
               onClick={() => handleComponentChange("crearcurso")}
             >
-              Crear curso
+              crear curso
             </button>
           </li>
         </ul>
       </div>
       <div className="pt-5">
-        {selectedComponent === "cursos" && <Cursos />}
+        {selectedComponent === "cursos" && <Cursos loaded={loaded} />}
         {selectedComponent === "crearcurso" && <CrearCurso />}
+        {selectedComponent === "miscursos" && <AlumnosProfesor />}
       </div>
     </section>
     </main>

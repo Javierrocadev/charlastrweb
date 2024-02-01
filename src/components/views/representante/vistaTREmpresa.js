@@ -61,7 +61,7 @@ const VistaTechridersEmpresa = () => {
             charlas.map((ch, index) => (
               <div
                 key={index}
-                className="relative md:max-w-full mx-auto p-6 mb-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-accent-200 dark:border-gray-700"
+                className="relative w-full min-w-[400px] sm:w-2/2 md:w-3/3 lg:w-4/4 xl:w-6/6 mx-auto p-6 mb-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
               >
                 <p className="mb-4 text-lg font-semibold text-gray-900 dark:text-white">
                   <span className="text-accent-200 dark:text-primary-100">Descripcion: </span>
@@ -74,16 +74,12 @@ const VistaTechridersEmpresa = () => {
                       {" " + ch.nombreCurso}
                     </p>
                   </div>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4">
                   <div>
                     <p className="text-sm text-accent-200 dark:text-primary-100">
                       <span className="font-semibold">Modalidad: </span>
                       {ch.modalidad}
                     </p>
                   </div>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4">
                   <div>
                     <p className="text-sm text-accent-200 dark:text-primary-100">
                       <span className="font-semibold">Fecha: </span>
@@ -130,13 +126,14 @@ const VistaTechridersEmpresa = () => {
       try {
         const userloged = await axiosApi.usuarios.getPerfilUsuario();
         const responseTr = await axiosApi.empresas.getTRByEmpresa();
-
+        //const responseTr = await axiosApi.empresas.getTREmpresasAll();
+        //const usuariosresponse = await axiosApi.usuarios.getUsuarios();
         const trFilter = responseTr.filter(
           (tr) => tr.email !== userloged.email
         ); //tr.idTechRider //email > porque es el único campo comun
 
         setTechriders(trFilter);
-        // console.log("TR EMPRESA: ",responseTr);
+        console.log("TR EMPRESA: ", trFilter);
         // console.log("TR EMPRESA FILTRADOS: ",trFilter);
       } catch (error) {
         console.log(error);
@@ -158,7 +155,7 @@ const VistaTechridersEmpresa = () => {
         {techriders.map((tr, index) => (
           <div
             key={index}
-            className="relative md:max-w-full mx-auto p-6 mb-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-accent-200 dark:border-gray-700"
+            className="relative w-full min-w-[400px] sm:w-2/2 md:w-3/3 lg:w-4/4 xl:w-6/6 mx-auto p-6 mb-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
           >
             <p className="flex items-center gap-3 mb-4 text-lg font-semibold text-gray-900 dark:text-white">
               <span className="text-accent-200">
@@ -206,13 +203,10 @@ const VistaTechridersEmpresa = () => {
                 </p>
               </div>
             </div>
-            <div className="absolute top-5 right-10 flex items-center hover:scale-110 transition-transform cursor-pointer">
-              <button
-                className="mr-3"
-                onClick={() => handleClickTr(tr)}
-              >
+            <div className={`absolute top-5 right-5 py-5 inline-flex max-w-[130px]
+                items-center hover:translate-x-2 transition-transform ease-in-out duration-300 cursor-pointer`}>
+              <button className="mr-3" onClick={() => handleClickTr(tr)}>
                 ver sus charlas
-                
               </button>
               <RenderIcon isTrSelected={selectedTr === tr} />
             </div>

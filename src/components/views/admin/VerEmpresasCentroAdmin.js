@@ -74,6 +74,7 @@ const VerEmpresasCentroAdmin = () => {
       if (selectedCurso) {
         await axiosApi.cursos.eliminarCurso(selectedCurso);
       console.log('Curso eliminado con éxito');
+       await axiosApi.centros.getCursos();
       // Puedes realizar alguna acción adicional después de eliminar la charla
       } else {
         // Handle the case when no technology is selected
@@ -124,7 +125,6 @@ const VerEmpresasCentroAdmin = () => {
   };
 
   const getProvinciaNombre = (idProvincia) => {
-    console.log("dentro" + idProvincia);
     const provincia = provinciasResponse.find(
       (p) => p.idProvincia === idProvincia
     );
@@ -378,8 +378,11 @@ const VerEmpresasCentroAdmin = () => {
                           <td class="h-px w-px whitespace-nowrap align-top">                         
                           <button
                 type="button"
-                onClick={() => cargarVisible(centro.idEmpresaCentro)}
-                class="py-2 mt-3 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-red-600 bg-red-600 text-white shadow-sm hover:bg-red-800 duration-300 disabled:opacity-50 disabled:pointer-events-none"
+                onClick={() => {
+                  cargarVisible(centro.idEmpresaCentro);
+                  setIdCentroCurso(centro.idEmpresaCentro);
+                }}
+                class="py-2 mt-3 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-green-600 bg-red-600 text-white shadow-sm hover:bg-green-800 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
               >
                 Crear Curso
               </button>
@@ -458,8 +461,11 @@ const VerEmpresasCentroAdmin = () => {
                               .map((curso) => (                
                                   <option key={curso.idCurso} value={curso.idCurso}>
                                     {curso.nombreCurso}
-                                    </option>              
-                              ))}
+                                    </option> 
+                                       
+                              )  
+                              )}
+    
                          </select>
                 <button
                 type="button"
