@@ -534,8 +534,11 @@ const VerEmpresasCentroAdmin = () => {
                               .map((curso) => (                
                                   <option key={curso.idCurso} value={curso.idCurso}>
                                     {curso.nombreCurso}
-                                    </option>              
-                              ))}
+                                    </option> 
+                                       
+                              )  
+                              )}
+    
                          </select>
                 <button
                 type="button"
