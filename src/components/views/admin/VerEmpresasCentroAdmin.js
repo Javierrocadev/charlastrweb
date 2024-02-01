@@ -28,7 +28,7 @@ const VerEmpresasCentroAdmin = () => {
     const [seccionesVisibles, setSeccionesVisibles] = useState([]);
   
     const cargarVisible = (idCentro) => {
-      
+    
       if (seccionesVisibles.includes(idCentro)) {
 
         setSeccionesVisibles(seccionesVisibles.filter((id) => id !== idCentro));
@@ -399,7 +399,7 @@ const VerEmpresasCentroAdmin = () => {
               </button>
                 
               </tr>  
-                <tr className="flex-inline">
+                <td className="flex-inline">
                   {/* Crear Curso */}
                   {seccionesVisibles.includes(centro.idEmpresaCentro) && centro.idTipoEmpresa === 2 && (
                     <form>
@@ -447,7 +447,7 @@ const VerEmpresasCentroAdmin = () => {
                     </div>
                   </form>
                 )}  
-                </tr>
+                </td>
                                 
 <div>
   {/* Eliminar Curso */}   

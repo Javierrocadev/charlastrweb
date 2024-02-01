@@ -90,7 +90,7 @@ const MisCharlasTr = () => {
     };
   
 return (
-  <main className="bg-white rounded-xl shadow dark:bg-primary-100 p-2">
+  <main>
     {/* no borrar */}
     <div class="hs-accordion-group hidden ">
       <div class="hs-accordion active" id="hs-basic-heading-one">
@@ -247,10 +247,10 @@ return (
       </div>
     </div>
 
-     <div className="flex gap-2">
+     <div>
      <button
         type="button"
-        className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-green-600 bg-green-600 text-white shadow-sm hover:bg-green-800 duration-300 disabled:opacity-50 disabled:pointer-events-none "
+        className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-green-600 bg-green-600 text-white shadow-sm hover:bg-green-800 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
         onClick={() => cargarDatos('miTecnologia')}
       >
         Mi tecnologia
@@ -258,7 +258,7 @@ return (
 
     <button
       type="button"
-      className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-green-600 bg-green-600 text-white shadow-sm hover:bg-green-800 duration-300 disabled:opacity-50 disabled:pointer-events-none "
+      className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-green-600 bg-green-600 text-white shadow-sm hover:bg-green-800 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
       onClick={() => cargarDatos('todos')}
     >
       Todas
@@ -266,7 +266,7 @@ return (
 
     <button
       type="button"
-      className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-green-600 bg-green-600 text-white shadow-sm hover:bg-green-800 duration-300 disabled:opacity-50 disabled:pointer-events-none "
+      className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-green-600 bg-green-600 text-white shadow-sm hover:bg-green-800 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
       onClick={() => cargarDatos('conTecnologiaPendiente')}
     >
       Con tecnologia pendiente
@@ -286,7 +286,7 @@ return (
         {charlasDisponiblesTrResponse.map((charla) => (
           <li
             key={charla.idCharla}
-            className="hs-accordion active bg-white border -mt-px first:rounded-t-lg last:rounded-b-lg dark:bg-accent-200 dark:border-gray-700"
+            className="hs-accordion active bg-white border -mt-px first:rounded-t-lg last:rounded-b-lg dark:bg-gray-800 dark:border-gray-700"
             id="hs-bordered-heading-one"
           >
             <div className="flex flex-row">
@@ -358,7 +358,7 @@ return (
                   </div>
 
                   <div class="mt-4">
-                    <p class="max-w-[40ch] text-sm text-accent-100">
+                    <p class="max-w-[40ch] text-sm text-gray-500">
                       {charla.observaciones}
                     </p>
                   </div>
@@ -408,7 +408,7 @@ return (
                         }
                       })()}
 
-                      <dt class="text-xs text-accent-100">
+                      <dt class="text-xs text-gray-500">
                         {formatFecha(charla.fechaCharla)}
                       </dt>
                     </div>
@@ -417,13 +417,13 @@ return (
                       <dt class="text-sm my-1 font-medium p-2 rounded-xl text-gray-600">
                         {getProvinciaNombre(charla.idProvincia)}
                       </dt>
-                      {/* <dd class="text-xs text-accent-100">{charla.turno}</dd> */}
+                      {/* <dd class="text-xs text-gray-500">{charla.turno}</dd> */}
                     </div>
                   </dl>
                   <button
   type="button"
   onClick={() =>axiosApi.charlas.aceptarCharla(perfilResponse.idUsuario,charla.idCharla)}
-  class="py-2 mt-4 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-green-600 bg-green-600 text-white shadow-sm hover:bg-green-800 duration-300 disabled:opacity-50 disabled:pointer-events-none "
+  class="py-2 mt-4 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-green-600 bg-green-600 text-white shadow-sm hover:bg-green-800 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
 >
   Aceptar Charla
 </button>
@@ -449,7 +449,7 @@ return (
         {charlasResponse.filter((charla)=> charla.idEstadoCharla ===2 || charla.idEstadoCharla===1  && charla.idTechrider ==null).map((charla) => (
           <li
             key={charla.idCharla}
-            className="hs-accordion active bg-white border -mt-px first:rounded-t-lg last:rounded-b-lg dark:bg-accent-200 dark:border-gray-700"
+            className="hs-accordion active bg-white border -mt-px first:rounded-t-lg last:rounded-b-lg dark:bg-gray-800 dark:border-gray-700"
             id="hs-bordered-heading-one"
           >
             <div className="flex flex-row">
@@ -521,7 +521,7 @@ return (
                   </div>
 
                   <div class="mt-4">
-                    <p class="max-w-[40ch] text-sm text-accent-100">
+                    <p class="max-w-[40ch] text-sm text-gray-500">
                       {charla.observaciones}
                     </p>
                   </div>
@@ -571,7 +571,7 @@ return (
                         }
                       })()}
 
-                      <dt class="text-xs text-accent-100">
+                      <dt class="text-xs text-gray-500">
                         {formatFecha(charla.fechaCharla)}
                       </dt>
                     </div>
@@ -580,13 +580,13 @@ return (
                       <dt class="text-sm my-1 font-medium p-2 rounded-xl text-gray-600">
                         {getProvinciaNombre(charla.idProvincia)}
                       </dt>
-                      {/* <dd class="text-xs text-accent-100">{charla.turno}</dd> */}
+                      {/* <dd class="text-xs text-gray-500">{charla.turno}</dd> */}
                     </div>
                   </dl>
                   <button
   type="button"
   onClick={() =>axiosApi.charlas.aceptarCharla(perfilResponse.idUsuario,charla.idCharla)}
-  class="py-2 mt-4 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-green-600 bg-green-600 text-white shadow-sm hover:bg-green-800 duration-300 disabled:opacity-50 disabled:pointer-events-none "
+  class="py-2 mt-4 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-green-600 bg-green-600 text-white shadow-sm hover:bg-green-800 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
 >
   Aceptar Charla
 </button>
@@ -611,7 +611,7 @@ return (
         {charlasTecnologiaPendienteResponse.map((charla) => (
           <li
             key={charla.idCharla}
-            className="hs-accordion active bg-white border -mt-px first:rounded-t-lg last:rounded-b-lg dark:bg-accent-200 dark:border-gray-700"
+            className="hs-accordion active bg-white border -mt-px first:rounded-t-lg last:rounded-b-lg dark:bg-gray-800 dark:border-gray-700"
             id="hs-bordered-heading-one"
           >
             <div className="flex flex-row">
@@ -671,21 +671,14 @@ return (
                       <p class="mt-1 text-xs font-medium text-gray-600">
                         Modalidad:
                         <span class="text-sm m-1 font-medium p-2 rounded-xl bg-bg-300 text-gray-600">
-                          {charla.modalidad}
+                          {charla.nombreTecnologia}
                         </span>{" "}
                         /
                         <span class="text-sm m-1 font-medium p-2 rounded-xl bg-bg-300 text-gray-600">
-                          {charla.turno}
+                          {charla.tipoTecnologia}
                         </span>
                       </p>
                     </div>
-
-                  </div>
-
-                  <div class="mt-4">
-                    <p class="max-w-[40ch] text-sm text-accent-100">
-                      {charla.observaciones}
-                    </p>
                   </div>
 
                   <dl class="mt-6 flex gap-4 sm:gap-6">
@@ -733,7 +726,7 @@ return (
                         }
                       })()}
 
-                      <dt class="text-xs text-accent-100">
+                      <dt class="text-xs text-gray-500">
                         {formatFecha(charla.fechaCharla)}
                       </dt>
                     </div>
@@ -742,13 +735,13 @@ return (
                       <dt class="text-sm my-1 font-medium p-2 rounded-xl text-gray-600">
                         {getProvinciaNombre(charla.idProvincia)}
                       </dt>
-                      {/* <dd class="text-xs text-accent-100">{charla.turno}</dd> */}
+                      {/* <dd class="text-xs text-gray-500">{charla.turno}</dd> */}
                     </div>
                   </dl>
                   <button
   type="button"
   onClick={() =>axiosApi.charlas.aceptarCharla(perfilResponse.idUsuario,charla.idCharla)}
-  class="py-2 mt-4 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-green-600 bg-green-600 text-white shadow-sm hover:bg-green-800 duration-300 disabled:opacity-50 disabled:pointer-events-none "
+  class="py-2 mt-4 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-green-600 bg-green-600 text-white shadow-sm hover:bg-green-800 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
 >
   Aceptar Charla
 </button>
