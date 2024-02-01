@@ -44,6 +44,27 @@ const VistaCursosCentrto = () => {
     );
   };
 
+  const ModalAlerta = ({ exitosa, onClose }) => {
+
+    useEffect(() => {
+      const timerId = setTimeout(() => {
+        onClose(); 
+      }, 5000);
+  
+      return () => clearTimeout(timerId);
+    }, [exitosa, onClose]);
+
+    return (
+      exitosa !== null && (
+        <div
+          className={`p-4 ${exitosa ? "bg-green-500" : "bg-red-500"} text-white transition-opacity duration-500 ease-in-out opacity-100`}
+        >
+          {exitosa ? "Curso creado exitosamente" : "Error al crear el curso"}
+        </div>
+      )
+    );
+  };
+
   const Cursos = () => {
     return (
       <div>
@@ -101,6 +122,7 @@ const VistaCursosCentrto = () => {
     const [idCentro, setIdCentro] = useState(0);
     const [nombreCurso, setNombreCurso] = useState("");
     const [descripcion, setDescripcion] = useState("");
+    const [exitosa, setExitosa] = useState(null);
 
     const handleInputChangeNombre = (e) => {
       setNombreCurso(e.target.value);
@@ -123,10 +145,24 @@ const VistaCursosCentrto = () => {
 
         const postCurso = axiosApi.profesores.CrearCurso(dataJSON);
         console.log("datos del curso: ", postCurso);
+        if (
+          postCurso &&
+          postCurso.response &&
+          postCurso.response.status === 200
+        ) {
+          setExitosa(true);
+        } else {
+          setExitosa(false);
+        }
       } catch (error) {
         console.log(error);
+        setExitosa(false)
       }
     };
+
+    const handleClose =()=>{
+      setExitosa(null);
+    }
 
     useEffect(() => {
       const fetchData = async () => {
@@ -208,6 +244,9 @@ const VistaCursosCentrto = () => {
             />
             <div className="absolute inset-0 bg-black opacity-60 rounded-md"></div>
           </div>
+        </div>
+        <div>
+          <ModalAlerta exitosa={exitosa} onClose={handleClose}/>
         </div>
       </section>
     );

@@ -130,13 +130,14 @@ const VistaTechridersEmpresa = () => {
       try {
         const userloged = await axiosApi.usuarios.getPerfilUsuario();
         const responseTr = await axiosApi.empresas.getTRByEmpresa();
-
+        //const responseTr = await axiosApi.empresas.getTREmpresasAll();
+        //const usuariosresponse = await axiosApi.usuarios.getUsuarios();
         const trFilter = responseTr.filter(
           (tr) => tr.email !== userloged.email
         ); //tr.idTechRider //email > porque es el único campo comun
 
         setTechriders(trFilter);
-        // console.log("TR EMPRESA: ",responseTr);
+         console.log("TR EMPRESA: ",trFilter);
         // console.log("TR EMPRESA FILTRADOS: ",trFilter);
       } catch (error) {
         console.log(error);

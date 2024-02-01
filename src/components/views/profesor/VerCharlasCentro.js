@@ -3,24 +3,15 @@ import axiosApi from "../../../api/axiosApi";
 import SolicitudCharla from "../user/formularios/SolicitudCharla";
 
 const VistaCharlasCentrto = () => {
-  const [charla, setCharla] = useState([]);
+  const [charlas, setCharlas] = useState([]);
   const [misCharlas, setMisCharlas] = useState([]);
+  const [provincias, setProvincias] = useState([]);
   const [selected, setSelected] = useState(null);
   const [selectedSolicitar, setSelectedSolicitar] = useState(null);
   const [estadoCharla, setEstadoCharla] = useState([]);
   const [open, setOpen] = useState(false);
   const [selectedComponent, setSelectedComponent] = useState("posiblescharlas");
-
-  /*const handleClickDetailCharla = (detail) => {
-    setSelected((previous) => {
-      return previous === detail ? null : detail;
-    });
-    setOpen((prev) => (prev && prev !== detail ? false : !prev));
-
-    if (selectedSolicitar) {
-      setSelectedSolicitar(null);
-    }
-  };*/
+  const [loading, setLoading] = useState(false);
 
   const handleComponentChange = (selected) => {
     setSelectedComponent(selected);
@@ -80,6 +71,11 @@ const VistaCharlasCentrto = () => {
     const [cursos, setCursos] = useState([]);
     const [loading, setLoading] = useState(false);
 
+    const getProvinciaNombre = (idProvincia) => {
+      const provincia = provincias.find((p) => p.idProvincia === idProvincia);
+      return provincia ? provincia.nombreProvincia : "Desconocido";
+    };
+
     useEffect(() => {
       const fetchData = async () => {
         try {
@@ -87,21 +83,10 @@ const VistaCharlasCentrto = () => {
           const responseTr = await axiosApi.usuarios.getUsuarios();
           const responseCursos = await axiosApi.centros.getCursos();
 
-          const tr = responseTr.filter((tr) => {
-            if (tr.idUsuario === ch.idTechRider) {
-              return tr;
-            } else {
-              return null;
-            }
-          });
-
-          const cursos = responseCursos.filter((curso) => {
-            if (curso.idCurso === ch.idCurso) {
-              return curso;
-            } else {
-              return null;
-            }
-          });
+          const tr = responseTr.filter((tr) => tr.idUsuario === ch.idTechRider);
+          const cursos = responseCursos.filter(
+            (curso) => curso.idCurso === ch.idCurso
+          );
 
           console.log("Tr que ha impartido la charla: ", tr);
           console.log("Curso al que va dirigido la charla: ", cursos);
@@ -115,7 +100,7 @@ const VistaCharlasCentrto = () => {
         }
       };
       fetchData();
-    }, [isOpen, ch, misCharlas]);
+    }, [misCharlas, isOpen, ch.idCharla]);
 
     return (
       <div className={`${isOpen ? "" : "hidden"} pt-5 mt-10 border-t-2`}>
@@ -131,16 +116,32 @@ const VistaCharlasCentrto = () => {
                 <p>No hay TechRiders asignado.</p>
               ) : (
                 tr.map((techRider, index) => (
-                  <div key={index} className="w-full h-full p-4 md:flex-1">
+                  <div key={index} className="w-full h-full md:flex-1">
                     <div
-                      className="relative md:max-w-full h-[150px] mx-auto p-6 mb-4 bg-white border 
+                      className="relative md:max-w-full h-[150px] mx-auto p-4 mb-4 bg-white border 
                     border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
                     >
-                      <p className="mb-4 text-lg font-semibold text-gray-900 dark:text-white">
-                        <span className="text-indigo-500">Rider: </span>
+                      <p className="flex items-center gap-3 mb-2 text-lg font-semibold text-gray-900 dark:text-white">
+                        <span className="text-accent-200">
+                          <svg
+                            className="w-10 h-10 text-gray-800 dark:text-white"
+                            aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              stroke="currentColor"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="1"
+                              d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Zm0 0a9 9 0 0 0 5-1.5 4 4 0 0 0-4-3.5h-2a4 4 0 0 0-4 3.5 9 9 0 0 0 5 1.5Zm3-11a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                            />
+                          </svg>
+                        </span>
                         {" " + techRider.nombre + "  " + techRider.apellidos}
                       </p>
-                      <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4">
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
                         <div>
                           <p className="text-sm text-gray-500 dark:text-gray-400">
                             <span className="font-semibold">Email: </span>
@@ -153,10 +154,18 @@ const VistaCharlasCentrto = () => {
                             {techRider.linkedIn}
                           </p>
                         </div>
+                      </div>
+                      <div children="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
                         <div>
                           <p className="text-sm text-gray-500 dark:text-gray-400">
                             <span className="font-semibold">Teléfono: </span>
                             {techRider.telefono}
+                          </p>
+                        </div>
+                        <div>
+                          <p className="text-sm text-gray-500 dark:text-gray-400">
+                            <span className="font-semibold">Localidad: </span>
+                            {getProvinciaNombre(techRider.idProvincia)}
                           </p>
                         </div>
                       </div>
@@ -225,7 +234,7 @@ const VistaCharlasCentrto = () => {
           {" "}
           Posibles Charlas
         </h1>
-        {charla.length === 0 ? (
+        {charlas.length === 0 ? (
           <h5 className="text-center text-2xl font-semibold py-4 flex">
             Posibles charlas
             <span>
@@ -234,7 +243,7 @@ const VistaCharlasCentrto = () => {
           </h5>
         ) : (
           <div>
-            {charla.map((charla) => (
+            {charlas.map((charla) => (
               <div
                 key={charla.idCharla}
                 className="relative md:max-w-full mx-auto p-6 mb-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
@@ -271,7 +280,7 @@ const VistaCharlasCentrto = () => {
                     <span className="font-semibold mr-2 ">
                       Solicitar charla
                     </span>
-                    <RenderIcon isSelected={selected === charla} />
+                    <RenderIcon isSelected={selectedSolicitar === charla} />
                   </div>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4">
@@ -303,8 +312,8 @@ const VistaCharlasCentrto = () => {
                 <div>
                   <SolicitudCharla
                     isOpen={selectedSolicitar === charla}
-                    idCurso={charla.idCurso}
-                    idCentro={charla.idCentro}
+                    idCurso={charla}
+                    idCentro={charla}
                   />
                 </div>
               </div>
@@ -421,21 +430,21 @@ const VistaCharlasCentrto = () => {
           await axiosApi.centros.getPosiblesCharlasCentro();
 
         // filtrar por estado pendiente
-        const responseFiltered = responseCharlas.filter(
+        const responseFiltered = await responseCharlas.filter(
           (ch) => ch.idEstadoCharla === 2
         );
         // filtrar charlas si tiene TR
-        const filteredWithTR = responseFiltered.filter(
+        const filteredWithTR = await responseFiltered.filter(
           (chwtr) => chwtr.idTechRider != null
         );
 
         if (!filteredWithTR.length) {
           return <Loading />;
         } else {
-          setCharla(filteredWithTR);
+          setCharlas(filteredWithTR);
         }
 
-        const responseEstado = axiosApi.charlas.getEstadoCharlas();
+        const responseEstado = await axiosApi.charlas.getEstadoCharlas();
         setEstadoCharla(await responseEstado);
 
         const profesor = await axiosApi.usuarios.getPerfilUsuario();
@@ -443,6 +452,9 @@ const VistaCharlasCentrto = () => {
           profesor.idUsuario
         );
         setMisCharlas(resp);
+
+        const responseProvincias = await axiosApi.provincias.getProvincias();
+        setProvincias(responseProvincias);
       } catch (error) {
         console.log(error);
       }
