@@ -100,6 +100,10 @@ const VerEmpresasCentroAdmin = () => {
             const cursosResponse = await axiosApi.centros.getCursos();
             console.log("Cursos:", cursosResponse);
             setCursosResponse(cursosResponse);
+
+            const responseProvincias = await axiosApi.provincias.getProvincias();
+            console.log("Charlas responseProvincias:", responseProvincias);
+            setProvinciasResponse(responseProvincias);
           
             setLoading(false);
           } catch (error) {
@@ -192,41 +196,11 @@ const VerEmpresasCentroAdmin = () => {
                 <th scope="col" class="px-6 py-3 text-start">
                   <div class="flex items-center gap-x-2">
                     <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
-                      Nombre
+                      Datos
                     </span>
                   </div>
                 </th>
 
-                <th scope="col" class="px-6 py-3 text-start">
-                  <div class="flex items-center gap-x-2">
-                    <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
-                     Direccion
-                    </span>
-                  </div>
-                </th>
-                <th scope="col" class="px-6 py-3 text-start">
-                  <div class="flex items-center gap-x-2">
-                    <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
-                      Telefono
-                    </span>
-                  </div>
-                </th>
-
-                <th scope="col" class="px-6 py-3 text-start">
-                  <div class="flex items-center gap-x-2">
-                    <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
-                      personaContacto
-                    </span>
-                  </div>
-                </th>
-
-                <th scope="col" class="px-6 py-3 text-start">
-                  <div class="flex items-center gap-x-2">
-                    <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
-                    Cif
-                    </span>
-                  </div>
-                </th>
                 <th scope="col" class="px-6 py-3 text-start">
                   <div class="flex items-center gap-x-2">
                     <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
@@ -234,13 +208,7 @@ const VerEmpresasCentroAdmin = () => {
                     </span>
                   </div>
                 </th>
-                <th scope="col" class="px-6 py-3 text-start">
-                  <div class="flex items-center gap-x-2">
-                    <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
-                    Razon Social
-                    </span>
-                  </div>
-                </th>
+
                 <th scope="col" class="px-6 py-3 text-start">
                   <div class="flex items-center gap-x-2">
                     <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
@@ -300,58 +268,27 @@ const VerEmpresasCentroAdmin = () => {
                                   <span class="block text-sm font-semibold text-gray-800 dark:text-gray-200">
                                     {centro.nombre}
                                   </span>
+                                  <span class="block text-sm font-semibold text-gray-800 dark:text-gray-200">
+                                    {centro.direccion}
+                                  </span>
+                                  <span class="block text-sm font-semibold text-gray-800 dark:text-gray-200">
+                                    {centro.telefono}
+                                  </span>
+                                  <span class="block text-sm font-semibold text-gray-800 dark:text-gray-200">
+                                    {centro.personaContacto}
+                                  </span>
+                                  <span class="block text-sm font-semibold text-gray-800 dark:text-gray-200">
+                                    {centro.cif}
+                                  </span>
+                                  <span class="block text-sm font-semibold text-gray-800 dark:text-gray-200">
+                                    {centro.razonSocial}
+                                  </span>
                                 </div>
                               </div>
                             </div>
                           </td>
                           
-                          <td class="h-px w-px whitespace-nowrap align-top">
-                            <div class="block p-6">
-                              <div class="flex items-center gap-x-4">
-                                <div>
-                                  <span class="block text-sm font-semibold text-gray-800 dark:text-gray-200">
-                                    {centro.direccion}
-                                  </span>
-                                </div>
-                              </div>
-                            </div>
-                          </td>
 
-                          <td class="h-px w-px whitespace-nowrap align-top">
-                            <div class="block p-6">
-                              <div class="flex items-center gap-x-4">
-                                <div>
-                                  <span class="block text-sm font-semibold text-gray-800 dark:text-gray-200">
-                                    {centro.telefono}
-                                  </span>
-                                </div>
-                              </div>
-                            </div>
-                          </td>
-
-                          <td class="h-px w-px whitespace-nowrap align-top">
-                            <div class="block p-6">
-                              <div class="flex items-center gap-x-4">
-                                <div>
-                                  <span class="block text-sm font-semibold text-gray-800 dark:text-gray-200">
-                                    {centro.personaContacto}
-                                  </span>
-                                </div>
-                              </div>
-                            </div>
-                          </td>
-
-                          <td class="h-px w-px whitespace-nowrap align-top">
-                            <div class="block p-6">
-                              <div class="flex items-center gap-x-4">
-                                <div>
-                                  <span class="block text-sm font-semibold text-gray-800 dark:text-gray-200">
-                                    {centro.cif}
-                                  </span>
-                                </div>
-                              </div>
-                            </div>
-                          </td>
 
                           <td
                             className="h-px w-72 max-w-[2rem] align-top"
@@ -365,17 +302,7 @@ const VerEmpresasCentroAdmin = () => {
                           </td>
                           
                           
-                          <td class="h-px w-px whitespace-nowrap align-top">
-                            <div class="block p-6">
-                              <div class="flex items-center gap-x-4">
-                                <div>
-                                  <span class="block text-sm font-semibold text-gray-800 dark:text-gray-200">
-                                    {centro.razonSocial}
-                                  </span>
-                                </div>
-                              </div>
-                            </div>
-                          </td>
+
 
                           <td class="h-px w-px whitespace-nowrap align-top">
                             <div class="block p-6">
@@ -422,7 +349,7 @@ const VerEmpresasCentroAdmin = () => {
                     <button
             type="button"
             onClick={() =>axiosApi.empresasCentros.updateEstadoCentroEmpresa(centro.idEmpresaCentro,0)}
-            class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-red-600 bg-red-600 text-white shadow-sm hover:bg-red-800 duration-300 disabled:opacity-50 disabled:pointer-events-none "
+            class="py-2 mt-3 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-red-600 bg-red-600 text-white shadow-sm hover:bg-red-800 duration-300 disabled:opacity-50 disabled:pointer-events-none "
           >
             Desactivar
           </button>
@@ -441,7 +368,7 @@ const VerEmpresasCentroAdmin = () => {
                           <button
                 type="button"
                  onClick={() =>axiosApi.empresasCentros.eliminarEmpresaCentro(centro.idEmpresaCentro)}
-                class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-green-600 bg-red-600 text-white shadow-sm hover:bg-green-800 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
+                class="py-2 px-3 mt-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-green-600 bg-red-600 text-white shadow-sm hover:bg-green-800 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
               >
                 Eliminar
               </button>
@@ -459,7 +386,7 @@ const VerEmpresasCentroAdmin = () => {
                           </td>
 
                           
-                          <td class="h-px w-px whitespace-nowrap align-top">                         
+                          <tr class="h-px w-px whitespace-nowrap align-top">                         
                           <button
                 type="button"
                 onClick={() => cargarVisibleEliminar(centro.idEmpresaCentro)}
@@ -468,8 +395,8 @@ const VerEmpresasCentroAdmin = () => {
                Eliminar Curso
               </button>
                 
-              </td>  
-                <div>
+              </tr>  
+                <tr className="flex-inline">
                   {/* Crear Curso */}
                   {seccionesVisibles.includes(centro.idEmpresaCentro) && centro.idTipoEmpresa === 2 && (
                     <form>
@@ -517,7 +444,7 @@ const VerEmpresasCentroAdmin = () => {
                     </div>
                   </form>
                 )}  
-                </div>
+                </tr>
                                 
 <div>
   {/* Eliminar Curso */}   
