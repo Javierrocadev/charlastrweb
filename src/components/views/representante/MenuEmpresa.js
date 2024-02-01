@@ -17,7 +17,7 @@ const MenuEmpresa = () => {
             className="relative md:max-w-full mx-auto p-6 mb-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-accent-200 dark:border-gray-700"
           >
             <p className="mb-4 text-lg font-semibold text-gray-900 dark:text-white">
-              <span className="text-accent-200">Empresa: </span>
+              <span className="text-accent-100">Empresa: </span>
               {empresa.nombre}
             </p>
             <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4">
@@ -115,9 +115,9 @@ const MenuEmpresa = () => {
   }, []);
 
   return (
-    <section className="w-full h-[100vh] mx-auto relative">
-      <div className="w-full h-full md:h-[100vh] bg-slate-300">
-        <header className="bg-black w-full h-[80px] px-5">
+    <section className="w-full h-[100vh] mx-auto relative ">
+      <div className="w-full h-full md:h-[100vh] rounded bg-white dark:bg-accent-100">
+        <header className="bg-accent-200 w-full h-[80px] px-5">
           {empresa.length ? (
             <div className="flex justify-between items-center p-5">
               <span className=" float-left text-2xl text-white uppercase">

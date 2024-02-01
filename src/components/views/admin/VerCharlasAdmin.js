@@ -88,7 +88,7 @@ const VerCharlasAdmin = () => {
   };
 
   return (
-    <main className="bg-white rounded-xl shadow dark:bg-primary-100">
+    <main className="bg-white rounded-xl shadow dark:bg-primary-100 p-2">
       {/* no borrar */}
       <div class="hs-accordion-group hidden ">
         <div class="hs-accordion active" id="hs-basic-heading-one">
@@ -247,7 +247,7 @@ const VerCharlasAdmin = () => {
 
    
       <section>
-        <h2 class="text-3xl text-center text-gray-800 font-bold lg:text-4xl dark:text-white">
+          <h2 class="text-3xl text-center text-gray-800 font-bold lg:text-4xl ">
           Nuestras charlas
         </h2>
         <p class="mt-3 mb-8 text-center text-gray-800 dark:text-gray-400">
@@ -299,7 +299,7 @@ const VerCharlasAdmin = () => {
                 <button
                 onClick={() => handleEliminarCharla(charla.idCharla)}
                   type="button"
-                  class="py-2 px-3 m-2 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-accent-200 bg-accent-200 text-white shadow-sm hover:bg-accent-100 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
+                  class="py-2 px-3 m-2 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-accent-200 bg-accent-200 text-white shadow-sm hover:bg-accent-100 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-primary-200 dark:text-black"
                 >
                  Eliminar Charla
                 </button>
@@ -415,7 +415,7 @@ const VerCharlasAdmin = () => {
                         </dt>
                         {/* <dd class="text-xs text-accent-100">{charla.turno}</dd> */}
                       </div>
-                        <div>
+                        <div className="bg-primary-100 p-2 rounded">
                           <h2>Valoraciones de la charla</h2>
                           {valoracionesResponse.filter((valoracion)=> valoracion.idCharla === charla.idCharla).map((valoracion)=>{
                            return valoracion.comentario

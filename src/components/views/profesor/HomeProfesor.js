@@ -451,8 +451,8 @@ primary     Enviar Mensaje
                   <button
                     className={`${
                       selectedComponent === "perfil"
-                        ? "bg-accent-100 text-white"
-                        : "active  text-primary-200"
+                      ? "bg-accent-200 dark:bg-primary-300 text-white"
+                      : "active  text-primary-300 bg-accent-100 "
                     } inline-block p-4 border-b-2 border-transparent rounded-t-sm focus:outline-none`}
                     onClick={() => handleComponentChange("perfil")}
                   >
@@ -463,8 +463,8 @@ primary     Enviar Mensaje
                   <button
                     className={`${
                       selectedComponent === "contacto"
-                        ? "bg-accent-100 text-white"
-                        : "active text-accentprimary200"
+                      ? "bg-accent-200 dark:bg-primary-300 text-white"
+                      : "active  text-primary-300 bg-accent-100 "
                     } inline-block p-4 border-b-2 border-transparent rounded-t-sm focus:outline-none`}
                     onClick={() => handleComponentChange("contacto")}
                   >

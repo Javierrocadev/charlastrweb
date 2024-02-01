@@ -87,7 +87,7 @@ const InscripcionCentro = () => {
   const FormularioInscripcion = () => {
     return (
       <form className="max-w-full m-5" onSubmit={insertarCentro}>
-        <h2 class="text-3xl font-bold mb-7 text-gray-800 dark:text-gray-200">
+        <h2 class="text-3xl font-bold mb-7 text-gray-800">
           Inscribe tu centro
         </h2>
         <div className="relative z-0 w-full mb-5 group">
@@ -248,7 +248,7 @@ const InscripcionCentro = () => {
       fechData();
     }, []);
     return (
-      <div className="w-full md:w-[95%] mx-auto p-6 bg-gray-100 shadow-md rounded-md">
+      <div className="w-full md:w-[95%] mx-auto p-6 bg-accent-100 shadow-md rounded-md">
         <h1 className="text-3xl font-bold text-gray-800 mb-4">
           Busca tu centro
         </h1>

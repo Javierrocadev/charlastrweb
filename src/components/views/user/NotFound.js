@@ -15,12 +15,7 @@ const NotFound = () => {
 
         <p class="mb-8 text-center text-accent-100 sm:text-left md:text-lg">La página que buscas no existe o se ha movido.</p>
 
-        <Link
-              to={"/"}
-              class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-accent-200 bg-accent-200 text-white shadow-sm hover:bg-accent-100 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
-            >
-              Home
-            </Link> </div>
+       </div>
   
       <div class="relative h-80 overflow-hidden rounded-lg bg-gray-100 shadow-lg md:h-auto">
         <img src={logo} loading="lazy" alt="Photo by @heydevn" class="absolute inset-0 h-full w-full object-cover object-center" />

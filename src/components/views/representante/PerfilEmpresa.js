@@ -337,7 +337,7 @@ const PerfilEmpresa = () => {
           />
           <button
             type="submit"
-            className="py-2 mt-4 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-accent-200 bg-accent-200 text-white shadow-sm hover:bg-accent-100 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
+            className="py-2 mt-4 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-accent-200 bg-accent-200 text-white shadow-sm hover:bg-accent-100 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-accent-100"
           >
             Enviar Mensaje
           </button>
@@ -400,8 +400,8 @@ const PerfilEmpresa = () => {
                   <button
                     className={`${
                       selectedComponent === "perfil"
-                        ? "bg-accent-200 text-white"
-                        : "active  text-accent-200"
+                        ? "bg-accent-200 dark:bg-primary-300 text-white"
+                        : "active  text-primary-300 bg-accent-100 "
                     } inline-block p-4 border-b-2 border-transparent rounded-t-sm focus:outline-none`}
                     onClick={() => handleComponentChange("perfil")}
                   >
@@ -412,8 +412,8 @@ const PerfilEmpresa = () => {
                   <button
                     className={`${
                       selectedComponent === "contacto"
-                        ? "bg-accent-200 text-white"
-                        : "active text-accent-200"
+                        ? "bg-accent-200  dark:bg-primary-300  text-white"
+                        : "active  text-primary-300 bg-accent-100 "
                     } inline-block p-4 border-b-2 border-transparent rounded-t-sm focus:outline-none`}
                     onClick={() => handleComponentChange("contacto")}
                   >

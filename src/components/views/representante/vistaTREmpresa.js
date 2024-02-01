@@ -64,12 +64,12 @@ const VistaTechridersEmpresa = () => {
                 className="relative md:max-w-full mx-auto p-6 mb-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-accent-200 dark:border-gray-700"
               >
                 <p className="mb-4 text-lg font-semibold text-gray-900 dark:text-white">
-                  <span className="text-accent-200">Descripcion: </span>
+                  <span className="text-accent-200 dark:text-primary-100">Descripcion: </span>
                   {" " + ch.descripcionCharla}
                 </p>
                 <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4">
                   <div>
-                    <p className="text-sm text-accent-100 dark:text-gray-400">
+                    <p className="text-sm text-accent-200 dark:text-primary-100">
                       <span className="font-semibold">Curso: </span>
                       {" " + ch.nombreCurso}
                     </p>
@@ -77,7 +77,7 @@ const VistaTechridersEmpresa = () => {
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4">
                   <div>
-                    <p className="text-sm text-accent-100 dark:text-gray-400">
+                    <p className="text-sm text-accent-200 dark:text-primary-100">
                       <span className="font-semibold">Modalidad: </span>
                       {ch.modalidad}
                     </p>
@@ -85,7 +85,7 @@ const VistaTechridersEmpresa = () => {
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4">
                   <div>
-                    <p className="text-sm text-accent-100 dark:text-gray-400">
+                    <p className="text-sm text-accent-200 dark:text-primary-100">
                       <span className="font-semibold">Fecha: </span>
                       {ch.fechaCharla}
                     </p>
@@ -146,7 +146,14 @@ const VistaTechridersEmpresa = () => {
   }, []);
 
   return (
+    <main className="bg-white rounded-xl shadow dark:bg-primary-100 p-2">
+             
     <section className="max-w-[80%] mx-auto">
+    <div class="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
+            <h1 class="title-font text-4xl  my-4 font-bold text-gray-900">
+            Tech Riders empresa
+            </h1>
+            </div>
       <div>
         {techriders.map((tr, index) => (
           <div
@@ -175,25 +182,25 @@ const VistaTechridersEmpresa = () => {
             </p>
             <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-3">
               <div>
-                <p className="text-sm text-accent-100 dark:text-gray-400">
+                <p className="text-sm text-accent-200 dark:text-primary-100">
                   <span className="font-semibold">Email: </span>
                   {" " + tr.email}
                 </p>
               </div>
               <div>
-                <p className="text-sm text-accent-100 dark:text-gray-400">
+                <p className="text-sm text-accent-200 dark:text-primary-100">
                   <span className="font-semibold">Teléfono: </span>
                   {tr.telefonoTechRider}
                 </p>
               </div>
               <div>
-                <p className="text-sm text-accent-100 dark:text-gray-400">
+                <p className="text-sm text-accent-200 dark:text-primary-100">
                   <span className="font-semibold">Linkedin: </span>
                   {tr.linkedIn}
                 </p>
               </div>
               <div>
-                <p className="text-sm text-accent-100 dark:text-gray-400">
+                <p className="text-sm text-accent-200 dark:text-primary-100">
                   <span className="font-semibold">Empresa: </span>
                   {tr.empresa}
                 </p>
@@ -218,6 +225,7 @@ const VistaTechridersEmpresa = () => {
         ))}
       </div>
     </section>
+    </main>
   );
 };
 export default VistaTechridersEmpresa;
