@@ -11,7 +11,7 @@ const SolicitudCharla = (props) => {
   const [exitosa, setExitosa] = useState(null);
 
   const handleInputChangeDescripcion = async (e) => {
-   await setDescripcion(e.target.value);
+    await setDescripcion(e.target.value);
   };
 
   const handleInputChangeModalidad = async (e) => {
@@ -30,23 +30,26 @@ const SolicitudCharla = (props) => {
     async (centro) => centro.idEmpresaCentro === (await props.idCentro)
   );
   //console.log(centro);
-  
-  const ModalAlerta = ({ exitosa, onClose }) => {
 
+  const ModalAlerta = ({ exitosa, onClose }) => {
     useEffect(() => {
       const timerId = setTimeout(() => {
-        onClose(); 
+        onClose();
       }, 5000);
-  
+
       return () => clearTimeout(timerId);
     }, [exitosa, onClose]);
 
     return (
       exitosa !== null && (
         <div
-          className={`p-4 mt-3 ${exitosa ? "bg-green-500" : "bg-red-500"} text-white transition-opacity duration-500 ease-in-out opacity-100`}
+          className={`p-4 mt-3 ${
+            exitosa ? "bg-green-500" : "bg-red-500"
+          } text-white transition-opacity duration-500 ease-in-out opacity-100`}
         >
-          {exitosa ? "Charla solicitada exitosamente" : "Error al solicitar la charla "}
+          {exitosa
+            ? "Charla solicitada exitosamente"
+            : "Error al solicitar la charla "}
         </div>
       )
     );
@@ -69,15 +72,12 @@ const SolicitudCharla = (props) => {
         idProvincia: centro.idProvincia, // dato capturado del centro pasados por props
       };
 
-      console.log(dataJSON)
+      console.log(dataJSON);
 
       const postSolicitud = await axiosApi.charlas.createCharla(dataJSON);
       console.log("datos de charla: ", postSolicitud);
 
-      if (
-        postSolicitud.response &&
-        postSolicitud.response.status !== 200
-      ) {
+      if (postSolicitud.response && postSolicitud.response.status !== 200) {
         setExitosa(false);
       } else {
         setExitosa(true);
@@ -90,13 +90,13 @@ const SolicitudCharla = (props) => {
       //   console.error("Respuesta del servidor:", error.response);
       //   setExitosa(false);
       // }
-      console.log(error)
+      console.log(error);
     }
   };
 
-  const handleClose =()=>{
+  const handleClose = () => {
     setExitosa(null);
-  }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -121,10 +121,16 @@ const SolicitudCharla = (props) => {
   }, []);
 
   return (
-    <div className={`${props.isOpen ? "" : "hidden"} pt-5 mt-10 border-t-2`}>
+    <div
+      className={`${
+        props.isOpen ? "" : "hidden"
+      } pt-5 mt-10 border-t-2 min-w-[30vw]`}
+    >
       <div className=" w-full items-center">
-        <div className="flex justify-between items-center mb-5">
-          <div className="w-full mt-5 mr-3">
+        <div
+          className={`flex flex-col lg:justify-between lg:items-center mb-5 lg:flex-row`}
+        >
+          <div className="w-1/2 mt-5 mr-3">
             <label
               htmlFor="comentario"
               className="block text-gray-700 text-sm font-bold mb-2"
@@ -154,7 +160,7 @@ const SolicitudCharla = (props) => {
               id="modalidad"
               value={modalidad}
               className="shadow appearance-none border rounded 
-            md:w-full py-2 px-3 mr-10 text-gray-700 leading-tight 
+            w-full py-2 px-3 mr-10 text-gray-700 leading-tight 
           focus:outline-none focus:shadow-outline resize-none"
               onChange={handleInputChangeModalidad}
             >
@@ -203,7 +209,7 @@ const SolicitudCharla = (props) => {
               id="fechaCharla"
               value={fechaCharla}
               className="shadow appearance-none border rounded 
-            md:w-full py-2 px-3 mr-10 text-gray-700 leading-tight 
+            w-full py-2 px-3 mr-10 text-gray-700 leading-tight 
           focus:outline-none focus:shadow-outline resize-none"
               onChange={handleInputChangeFechaCharla}
             />
@@ -217,8 +223,8 @@ const SolicitudCharla = (props) => {
         </button>
       </div>
       <div>
-          <ModalAlerta exitosa={exitosa} onClose={handleClose}/>
-        </div>
+        <ModalAlerta exitosa={exitosa} onClose={handleClose} />
+      </div>
     </div>
   );
 };
