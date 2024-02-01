@@ -118,7 +118,7 @@ const VistaCharlasCentrto = () => {
                 tr.map((techRider, index) => (
                   <div key={index} className="w-full h-full md:flex-1">
                     <div
-                      className="relative md:max-w-full h-[150px] mx-auto p-4 mb-4 bg-white border 
+                      className="relative md:max-w-full h-[150px] mx-auto md:p-7 p-4 mb-4 bg-white border 
                     border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
                     >
                       <p className="flex items-center gap-3 mb-2 text-lg font-semibold text-gray-900 dark:text-white">
@@ -141,7 +141,7 @@ const VistaCharlasCentrto = () => {
                         </span>
                         {" " + techRider.nombre + "  " + techRider.apellidos}
                       </p>
-                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-3 gap-2">
                         <div>
                           <p className="text-sm text-gray-500 dark:text-gray-400">
                             <span className="font-semibold">Email: </span>
@@ -246,14 +246,14 @@ const VistaCharlasCentrto = () => {
             {charlas.map((charla) => (
               <div
                 key={charla.idCharla}
-                className="relative md:max-w-full mx-auto p-6 mb-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+                className="relative w-full min-w-[400px] sm:w-2/2 md:w-3/3 lg:w-4/4 xl:w-6/6 mx-auto p-6 mb-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
               >
                 <div className="flex items-center">
                   <div className="flex-1">
                     <p className="flex items-center gap-2 mb-4 text-lg font-semibold text-gray-900 dark:text-white">
-                      <span className="text-indigo-500">Descripción: </span>
-                      {charla.descripcion}
-
+                      <span className="text-blue-500">
+                        {charla.descripcion}
+                      </span>
                       <span>
                         <svg
                           class="w-8 h-8 text-gray-800 dark:text-white"
@@ -309,7 +309,7 @@ const VistaCharlasCentrto = () => {
                     </p>
                   </div>
                 </div>
-                <div>
+                <div className="w-auto">
                   <SolicitudCharla
                     isOpen={selectedSolicitar === charla}
                     idCurso={charla}
@@ -348,35 +348,40 @@ const VistaCharlasCentrto = () => {
             {misCharlas.map((charla) => (
               <div
                 key={charla.idCharla}
-                className="relative md:max-w-full mx-auto p-6 mb-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+                className="relative w-full min-w-[400px] sm:w-2/2 md:w-3/3 lg:w-4/4 xl:w-6/6 mx-auto p-6 mb-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
               >
                 <div className="flex items-center">
                   <div className="flex-1">
-                    <p className="flex items-center gap-2 mb-4 text-lg font-semibold text-gray-900 dark:text-white">
-                      <span className="text-indigo-500">Descripción: </span>
-                      {charla.descripcionCharla}
+                    <p className="gap-2 mb-4 text-lg font-semibold text-gray-900 dark:text-white">
+                      <span className="text-blue-500 flex items-center">
+                        {charla.descripcionCharla}
 
-                      <span>
-                        <svg
-                          class="w-8 h-8 text-gray-800 dark:text-white"
-                          aria-hidden="true"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            stroke="currentColor"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="0.4"
-                            d="M7.6 8.5h8m-8 3.5H12m7.1-7H5c-.2 0-.5 0-.6.3-.2.1-.3.3-.3.6V15c0 .3 0 .5.3.6.1.2.4.3.6.3h4l3 4 3-4h4.1c.2 0 .5 0 .6-.3.2-.1.3-.3.3-.6V6c0-.3 0-.5-.3-.6a.9.9 0 0 0-.6-.3Z"
-                          />
-                        </svg>
+                        {/* <span>
+                          <svg
+                            class="w-8 h-8 text-gray-800 dark:text-white"
+                            aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              stroke="currentColor"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="0.4"
+                              d="M7.6 8.5h8m-8 3.5H12m7.1-7H5c-.2 0-.5 0-.6.3-.2.1-.3.3-.3.6V15c0 .3 0 .5.3.6.1.2.4.3.6.3h4l3 4 3-4h4.1c.2 0 .5 0 .6-.3.2-.1.3-.3.3-.6V6c0-.3 0-.5-.3-.6a.9.9 0 0 0-.6-.3Z"
+                            />
+                          </svg>
+                        </span> */}
                       </span>
                     </p>
                   </div>
                   <div
-                    className=" mr-5  flex items-center hover:scale-95 transition-transform cursor-pointer"
+                    className={`${
+                      charla.descripcionCharla.length < 10
+                        ? "absolute bottom-5 right-5"
+                        : "mr-2"
+                    } flex items-center hover:scale-95 transition-transform cursor-pointer`}
                     onClick={() => handleClickDetailCharlaProfesor(charla)}
                   >
                     <span className="font-semibold mr-2 ">detalles</span>

@@ -121,9 +121,9 @@ const SolicitudCharla = (props) => {
   }, []);
 
   return (
-    <div className={`${props.isOpen ? "" : "hidden"} pt-5 mt-10 border-t-2`}>
+    <div className={`${props.isOpen ? "" : "hidden"} pt-5 mt-10 border-t-2 min-w-[30vw]`}>
       <div className=" w-full items-center">
-        <div className="flex justify-between items-center mb-5">
+        <div className="flex flex-col sm:justify-between items-center mb-5">
           <div className="w-full mt-5 mr-3">
             <label
               htmlFor="comentario"
