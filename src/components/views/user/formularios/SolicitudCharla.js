@@ -8,27 +8,49 @@ const SolicitudCharla = (props) => {
   const [fechaCharla, setFechaCharla] = useState("");
   const [fechaSolicitud, setFechaSolicitud] = useState("");
   const [provincia, setProvincia] = useState([]);
+  const [exitosa, setExitosa] = useState(null);
 
-  const handleInputChangeDescripcion = (e) => {
-    setDescripcion(e.target.value);
+  const handleInputChangeDescripcion = async (e) => {
+   await setDescripcion(e.target.value);
   };
 
-  const handleInputChangeModalidad = (e) => {
-    setModalidad(e.target.value);
+  const handleInputChangeModalidad = async (e) => {
+    await setModalidad(e.target.value);
   };
 
-  const handleInputChangeTurno = (e) => {
-    setTurno(e.target.value);
+  const handleInputChangeTurno = async (e) => {
+    await setTurno(e.target.value);
   };
 
-  const handleInputChangeFechaCharla = (e) => {
-    setFechaCharla(e.target.value);
+  const handleInputChangeFechaCharla = async (e) => {
+    await setFechaCharla(e.target.value);
   };
 
   const centro = provincia.find(
-    (centro) => centro.idEmpresaCentro === props.idCentro
+    async (centro) => centro.idEmpresaCentro === (await props.idCentro)
   );
   //console.log(centro);
+  
+  const ModalAlerta = ({ exitosa, onClose }) => {
+
+    useEffect(() => {
+      const timerId = setTimeout(() => {
+        onClose(); 
+      }, 5000);
+  
+      return () => clearTimeout(timerId);
+    }, [exitosa, onClose]);
+
+    return (
+      exitosa !== null && (
+        <div
+          className={`p-4 mt-3 ${exitosa ? "bg-green-500" : "bg-red-500"} text-white transition-opacity duration-500 ease-in-out opacity-100`}
+        >
+          {exitosa ? "Charla solicitada exitosamente" : "Error al solicitar la charla "}
+        </div>
+      )
+    );
+  };
 
   const insertarCharla = async () => {
     try {
@@ -43,16 +65,38 @@ const SolicitudCharla = (props) => {
         turno: turno, // turno
         modalidad: modalidad, // modalidad
         acreditacionLinkedIn: null,
-        idCurso: props.idCurso, // curso seleccionado del centro pasados por props
+        idCurso: props.idCurso.idCurso, // curso seleccionado del centro pasados por props
         idProvincia: centro.idProvincia, // dato capturado del centro pasados por props
       };
 
-      const postSolicitud = axiosApi.charlas.createCharla(dataJSON);
+      console.log(dataJSON)
+
+      const postSolicitud = await axiosApi.charlas.createCharla(dataJSON);
       console.log("datos de charla: ", postSolicitud);
+
+      if (
+        postSolicitud.response &&
+        postSolicitud.response.status !== 200
+      ) {
+        setExitosa(false);
+      } else {
+        setExitosa(true);
+      }
     } catch (error) {
-      console.log(error);
+      // if (error.response && error.response.status === 200) {
+      //   // Si hay una respuesta del servidor con un estado 200, considera que la solicitud fue exitosa
+      //   setExitosa(true);
+      // } else {
+      //   console.error("Respuesta del servidor:", error.response);
+      //   setExitosa(false);
+      // }
+      console.log(error)
     }
   };
+
+  const handleClose =()=>{
+    setExitosa(null);
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -172,6 +216,9 @@ const SolicitudCharla = (props) => {
           Enviar solicitar
         </button>
       </div>
+      <div>
+          <ModalAlerta exitosa={exitosa} onClose={handleClose}/>
+        </div>
     </div>
   );
 };

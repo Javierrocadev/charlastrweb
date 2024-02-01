@@ -396,22 +396,22 @@ const axiosApi = {
       }
     },
 
-    putResponsableEmpresa: async(idempresacentro, idresponsable)=>{
-      try{
+    putResponsableEmpresa: async (idempresacentro, idresponsable) => {
+      try {
         const token = localStorage.getItem("token");
-        const response = await axios.put(`${API_URL}/api/usuarios/updateresponsableempresacentro/${idempresacentro}/${idresponsable}`,{},
-        {
-          headers:{
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-
+        const response = await axios.put(
+          `${API_URL}/api/usuarios/updateresponsableempresacentro/${idempresacentro}/${idresponsable}`,
+          {},
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
           }
-        },
         );
 
         return response.data;
-        
-      }catch(error){
+      } catch (error) {
         console.log(error);
       }
     },
@@ -432,14 +432,14 @@ const axiosApi = {
       try {
         const token = localStorage.getItem("token");
         const response = await axios.post(
-          `${API_URL}/api/PeticionesCentroEmpresa?idcentroempresa=`+idCentroEmpresa,
+          `${API_URL}/api/PeticionesCentroEmpresa?idcentroempresa=` +
+            idCentroEmpresa,
           {},
           {
             headers: {
               Authorization: `Bearer ${token}`,
             },
-          },
-          
+          }
         );
 
         return response.data;
@@ -718,7 +718,7 @@ const axiosApi = {
 
     CrearCurso: async (dataCurso) => {
       try {
-        var token = localStorage.getItem("token");
+        const token = localStorage.getItem("token");
 
         const response = await axios.post(`${API_URL}/api/cursos`, dataCurso, {
           headers: {
@@ -730,6 +730,23 @@ const axiosApi = {
       } catch (error) {
         console.log(error);
         throw error;
+      }
+    },
+
+    EliminarCurso: async (idCurso) => {
+      try {
+        const token = localStorage.getItem("token");
+        //const response = await axios.delete(`${API_URL}/api/Cursos/${idCurso}`,
+        console.log("IDCURSO: ", idCurso);
+        const responsedelete = await axios.delete(`${API_URL}/api/cursos/${idCurso}`,
+          { 
+            headers: { 
+              Authorization: `Bearer ${token}` 
+            } 
+         });
+        return responsedelete.data;
+      } catch (error) {
+        console.log(error);
       }
     },
   },
@@ -837,6 +854,22 @@ const axiosApi = {
           }
         );
 
+        return response.data;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+    getTREmpresasAll: async () => {
+      try {
+        const token = localStorage.getItem("token");
+
+        const response = await axios.get(
+          `${API_URL}/api/QueryTools/TechRidersEmpresasAll`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
         return response.data;
       } catch (error) {
         console.log(error);

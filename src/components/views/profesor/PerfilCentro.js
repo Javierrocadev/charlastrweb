@@ -352,47 +352,106 @@ const PerfilCentro = () => {
     );
   };
 
+  const ModalAlerta = ({ exitosa, onClose }) => {
+    useEffect(() => {
+      const timerId = setTimeout(() => {
+        onClose();
+      }, 5000);
+
+      return () => clearTimeout(timerId);
+    }, [exitosa, onClose]);
+
+    return (
+      exitosa !== null && (
+        <div
+          className={`z-80 py-4 px-5 mt-3 ${
+            exitosa
+              ? "bg-green-500 transform translate-y-0 opacity-100 transition-transform ease-in-out duration-500"
+              : "bg-red-500 transform translate-y-full opacity-100 transition-transform ease-in-out duration-500"
+          } text-white w-[90%] mx-auto`}
+        >
+          {exitosa
+            ? "Curso eliminado exitosamente"
+            : "Error al eliminar el curso"}
+        </div>
+      )
+    );
+  };
+
   const AlumnosProfesor = () => {
-    // console.log(props);
+    const [exitosa, setExitosa] = useState(null);
+
+    const handleClick = async (curso) => {
+      try {
+        console.log("Curso a eliminado: ", curso);
+        const responsedelete = await axiosApi.profesores.EliminarCurso(curso);
+        //console.log("Curso eliminado exitosamente: ", responsedelete);
+        if (responsedelete.response && responsedelete.response.status !== 200) {
+          setExitosa(false);
+        } else {
+          setExitosa(true);
+        }
+      } catch (error) {
+        console.log(error);
+        setExitosa(false);
+      }
+    };
+
+    const handleClose = () => {
+      setExitosa(null);
+    };
+
     return (
       <section className="pt-10">
-        {cursosProfesor.map((curso) => (
-          <div
-            key={curso.idCurso}
-            className="relative md:max-w-full mx-auto p-6 mb-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
-          >
-            <p className="mb-4 text-lg font-semibold text-gray-900 dark:text-white">
-              <span className="text-accent-200">Curso: </span>
-              {curso.descripcionCurso} {"(" + curso.nombreCurso + ")"}
-            </p>
-            <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4">
-              <div>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
-                  <span className="font-semibold">Centro: </span>
-                  {curso.centro}
-                </p>
+        <div className="w-full h-full">
+          {cursosProfesor.map((curso) => (
+            <div
+              key={curso.idCurso}
+              className="relative md:max-w-full mx-auto p-6 mb-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+            >
+              <p className="mb-4 text-lg font-semibold text-gray-900 dark:text-white">
+                <span className="text-accent-200">Curso: </span>
+                {curso.descripcionCurso} {"(" + curso.nombreCurso + ")"}
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4">
+                <div>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">
+                    <span className="font-semibold">Centro: </span>
+                    {curso.centro}
+                  </p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">
+                    <span className="font-semibold">Email: </span>
+                    {curso.emailProfesor}
+                  </p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">
+                    <span className="font-semibold">Telefono: </span>
+                    {curso.telefonoProfesor}
+                  </p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">
+                    <span className="font-semibold">Provincia: </span>
+                    {curso.provinciaCentro}
+                  </p>
+                </div>
               </div>
-              <div>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
-                  <span className="font-semibold">Email: </span>
-                  {curso.emailProfesor}
-                </p>
-              </div>
-              <div>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
-                  <span className="font-semibold">Telefono: </span>
-                  {curso.telefonoProfesor}
-                </p>
-              </div>
-              <div>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
-                  <span className="font-semibold">Provincia: </span>
-                  {curso.provinciaCentro}
-                </p>
+              <div
+                className="absolute top-5 right-10 
+            flex items-center hover:scale-110 transition-transform cursor-pointer"
+                onClick={() => handleClick(curso.idCurso)}
+              >
+                <span className="font-semibold mr-2 ">Eliminar curso</span>
               </div>
             </div>
+          ))}
+          <div>
+            <ModalAlerta exitosa={exitosa} onClose={handleClose} />
           </div>
-        ))}
+        </div>
       </section>
     );
   };
@@ -432,6 +491,7 @@ const PerfilCentro = () => {
       clearTimeout(timeoutId);
     };
   }, [mostrarAlerta]);
+
   const getProvinciaNombre = (idProvincia) => {
     const provincia = provinciasResponse.find(
       (p) => p.idProvincia === idProvincia
