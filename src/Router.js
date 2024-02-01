@@ -21,6 +21,7 @@ import Comentarios from "./components/views/user/Comentarios";
 import CharlasCalendario from "./components/views/user/CharlasCalendario";
 import NotFound from "./components/views/user/NotFound"
 import Charlas from "./components/views/user/Charlas"
+import TechRidersView from "./components/views/user/TechRidersView";
 //admin pages
 import HomeAdmin from "./components/views/admin/HomeAdmin";
 import EjemploAdmin from "./components/views/admin/EjemploAdmin";
@@ -81,6 +82,7 @@ const App = () => {
             <Route path="/calendario" element={<CharlasCalendario />} />
             <Route path="/formulariosolicitudcharla" element={<FormularioCharla />} />
             <Route path="/charlatodas" element={<Charlas />} />
+            <Route path="/publictr" element={<TechRidersView />} />
             <Route path="/*" element={<NotFound />} />
 
             {/* rutas de admin */}

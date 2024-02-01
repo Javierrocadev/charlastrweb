@@ -35,8 +35,8 @@ const Empresas = () => {
   };
 
   return (
-    <main>
-      <h2 className="text-3xl mt-8 text-center text-gray-800 font-bold lg:text-4xl dark:text-white">
+    <main className="bg-white rounded-xl shadow dark:bg-primary-100 pt-4">
+      <h2 className="text-3xl mt-8 text-center text-gray-800 font-bold lg:text-4xl ">
             Nuestras empresas colaboradoras
           </h2>
           <p className="mt-4 mb-8 text-center text-gray-800 dark:text-gray-400">
@@ -165,7 +165,7 @@ const Empresas = () => {
               {empresasCentrosResponse
                 .filter((empresa) => empresa.idTipoEmpresa === 1)
                 .map((empresa) => (
-                  <div key={empresa.idEmpresa} className="h-36 sm:h-56 flex flex-col justify-center bg-bg-100 border border-gray-200 rounded-xl text-center p-4 md:p-5 dark:border-gray-700">
+                  <div key={empresa.idEmpresa} className="h-36 sm:h-56 flex flex-col justify-center bg-primary-100 dark:bg-accent-200 border border-gray-200 rounded-xl text-center p-4 md:p-5 dark:border-gray-700">
                     <div className="flex justify-center items-center w-12 h-12 bg-gradient-to-br from-gray-100 via-accent-100 via-20% to-accent-200 to-90% rounded-lg mx-auto">
                       <svg
                         className="flex-shrink-0 w-7 h-7 text-white"

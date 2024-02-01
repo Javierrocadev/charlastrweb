@@ -62,7 +62,7 @@ const Login = () => {
     //   )} */}
     //    <button onClick={logout}>Logout</button>
     // </div>
-
+<main className="bg-white rounded-xl shadow dark:bg-primary-100">
     <div
       class="relative flex flex-row
      justify-center overflow-hidden"
@@ -70,7 +70,7 @@ const Login = () => {
       <div class="mx-auto text-center max-w-screen-md py-12 px-4 sm:px-6 md:max-w-screen-xl md:py-20 lg:py-32 md:px-8">
         <div class="md:pe-8 md:w-1/2 xl:pe-0 xl:w-5/12">
           {/* <!-- Title --> */}
-          <h1 class="text-3xl  text-gray-800 font-bold md:text-4xl md:leading-tight  lg:text-5xl lg:leading-tight dark:text-gray-200">
+          <h1 class="text-3xl  text-gray-800 font-bold md:text-4xl md:leading-tight  lg:text-5xl lg:leading-tight dark:text-accent-200">
             Si necesitas actualizarte, hay una{" "}
             <span class="text-accent-100 dark:text-accent-100">charla</span>{" "}
             para ti.
@@ -93,7 +93,7 @@ const Login = () => {
               <input
                 type="email" name="email"
                 id="hs-hero-email-2"
-                class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 "
+                class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:bg-accent-100 dark:border-gray-700 dark:placeholder:text-white"
                 placeholder="Email address"
               />
             </div>
@@ -108,7 +108,7 @@ const Login = () => {
               <input
                 type="password" name="password"
                 id="hs-hero-password-2"
-                class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 "
+                class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:bg-accent-100 dark:border-gray-700 dark:placeholder:text-white "
                 placeholder="Password"
                 
               />
@@ -117,7 +117,7 @@ const Login = () => {
             <div class="grid">
               <button
                 type="submit"
-                class="py-2 px-3 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-accent-200 bg-accent-200 text-white shadow-sm hover:bg-accent-100 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
+                class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-accent-200 bg-accent-200 text-white shadow-sm hover:bg-accent-100 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-primaryDark-100 dark:border-bg-200 dark:text-textDark-100 dark:hover:bg-primaryDark-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
               >
                 Inicia Sesión
               </button>
@@ -125,23 +125,23 @@ const Login = () => {
           </form>
           {/* <!-- End Form --> */}
 
-          <div class="py-6 flex items-center text-sm text-gray-400 uppercase before:flex-[1_1_0%] before:border-t before:me-6 after:flex-[1_1_0%] after:border-t after:ms-6 dark:text-gray-500 dark:before:border-gray-600 dark:after:border-gray-600">
-            O
+          <div class="py-6 flex items-center text-sm text-gray-400  before:flex-[1_1_0%] before:border-t before:me-6 after:flex-[1_1_0%] after:border-t after:ms-6 dark:text-gray-500 dark:before:border-gray-600 dark:after:border-gray-600">
+            O si no...
           </div>
           <div class="mt-2 grid">
             <Link
               to={"/login"}
-              class="py-2 px-3 text-center justify-center inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-bg-300 bg-bg-100 text-text-200 shadow-sm duration-300 hover:bg-bg-200 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
+              class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-bg-300 bg-bg-100 text-text-200 shadow-sm duration-300 hover:bg-bg-200 disabled:opacity-50 disabled:pointer-events-none dark:bg-white dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
             >
               ¡Regístrate!
             </Link>
-            <button
+            {/* <button
             type="button"
             onClick={logout}
             class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-red-600 bg-red-600 text-white shadow-sm hover:bg-red-800 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
           >
             Cerrar Sesión
-          </button>
+          </button> */}
           </div>
         </div>
       </div>
@@ -151,6 +151,7 @@ const Login = () => {
       </div>
       {/* <!-- End Col --> */}
     </div>
+    </main>
   );
 };
 

@@ -989,6 +989,15 @@ const axiosApi = {
     },
   },
   techriders: {
+      getTr: async () => {
+        try {
+          const response = await axios.get(`${API_URL}/api/QueryTools/TodosTechRidersActivos`);
+          return response.data;
+        } catch (error) {
+          console.error("Error getting charlas:", error);
+          throw error;
+        }
+      },
     getcharlastechrider: async (idtechrider) => {
       try {
         const token = localStorage.getItem("token");
@@ -1096,30 +1105,7 @@ const axiosApi = {
         throw error;
       }
     },
-    getEmpresaTr: async (idtechrider) => {
-      try {
-        const token = localStorage.getItem("token");
 
-        console.log("token de axios: " + token);
-        const response = await axios.get(`${API_URL}/api/QueryTools/findempresatechrider/` +idtechrider, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        console.log("API Response:", response);
-        return response.data;
-      } catch (error) {
-        console.error("Error getting usuarios:", error);
-
-        // Si la respuesta es 401, redirigir a la página de inicio de sesión
-        if (error.response && error.response.status === 401) {
-          console.log("Unauthorized access. Redirecting to login...");
-          return <Navigate to="/login" />; // Volvemos al login si el token no funciona
-        }
-
-        throw error;
-      }
-    },
   },
   tecnologiasTechriders: {
     getTecnologiasTechriders: async () => {

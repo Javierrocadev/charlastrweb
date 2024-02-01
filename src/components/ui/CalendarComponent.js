@@ -83,7 +83,7 @@ const CalendarComponent = ({ charlas }) => {
         tileContent={tileContent}
       />
       {charlasEnDia.length === 0 ? (
-        <p className="text-accent-200 w-full  font-bold text-xl rounded border sm:h-auto h-64 border-gray-400 flex justify-center items-center bg-white">No hay charlas en este día.</p>
+        <p className="text-accent-200 w-full  font-bold text-xl rounded border  h-80 border-gray-400 flex justify-center items-center bg-white">No hay charlas en este día.</p>
       ) : (
         <ul className="w-full list-none p-0">
           {charlasEnDia.map((charla) => (
