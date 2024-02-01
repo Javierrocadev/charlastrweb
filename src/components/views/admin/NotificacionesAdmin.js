@@ -83,7 +83,7 @@ const NotificacionesAdmin = () => {
         SetUsuariosResponse(responseUsuarios);
 
         const charlasResponse = await axiosApi.charlas.getCharlas();
-        console.log("Users:", charlasResponse);
+        console.log("Charlas:", charlasResponse);
         setCharlasResponse(charlasResponse);
 
         const peticionesResponse = await axiosApi.peticionesTecnologias.getPeticionesTecnologias();
@@ -91,7 +91,7 @@ const NotificacionesAdmin = () => {
         SetRpeticionesResponse(peticionesResponse);
 
         const solicitudAcreditacionResponse = await axiosApi.solicitudesAcreditacion.getSolicitudesAcreditacion();
-        console.log("Users:", solicitudAcreditacionResponse);
+        console.log("PETICIONES:", solicitudAcreditacionResponse);
         SetsolicitudAcreditacionResponse(solicitudAcreditacionResponse);
 
         const centroEmpresaResponse =
@@ -770,6 +770,7 @@ const NotificacionesAdmin = () => {
                 </span>
                 {usuariosResponse.filter((usuario) => usuario.idUsuario === charlaFiltrada.idTechRider).map((usuario) => (
                     <div key={usuario.idUsuario}>
+                      {charlaFiltrada.idTechRider}
                       {usuario.nombre}
                     </div>
                   ))}

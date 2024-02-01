@@ -1443,6 +1443,8 @@ cursos:{
           },
         }
       );
+      window.location.reload();
+      alert("Curso Eliminado");
       console.log("API Response:", response);
       return response.data;
     } catch (error) {
