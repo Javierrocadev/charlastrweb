@@ -323,7 +323,7 @@ const VerEmpresasCentroAdmin = () => {
 
                           <td class="h-px w-px whitespace-nowrap align-top">
                             <div class="block p-6">
-                              <div class="flex items-center gap-x-4">
+                              <div class="flex items-center gap-x-4 text-black">
                                 {centro.idTipoEmpresa === 2 && (
                                   <div>
                                     {cursosResponse
@@ -383,7 +383,7 @@ const VerEmpresasCentroAdmin = () => {
                   cargarVisible(centro.idEmpresaCentro);
                   setIdCentroCurso(centro.idEmpresaCentro);
                 }}
-                class="py-2 mt-3 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-green-600 bg-red-600 text-white shadow-sm hover:bg-green-800 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
+                class="py-2 mt-3 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-green-600 bg-red-600 text-white shadow-sm hover:bg-green-800 duration-300 disabled:opacity-50 disabled:pointer-events-none "
               >
                 Crear Curso
               </button>
@@ -409,7 +409,7 @@ const VerEmpresasCentroAdmin = () => {
               
               
                       <div class="">
-                        <label for="af-account-email" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-gray-200">
+                        <label for="af-account-email" class="inline-block text-sm text-gray-800 mt-2.5 ">
                       Nombre del Curso
                         </label>
                       </div>
@@ -425,7 +425,7 @@ const VerEmpresasCentroAdmin = () => {
                       </div>
 
                       <div class="sm:col-span-3">
-                        <label for="af-account-email" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-gray-200">
+                        <label for="af-account-email" class="inline-block text-sm text-gray-800 mt-2.5 ">
                     Descripcion Del Curso
                         </label>
                       </div>
