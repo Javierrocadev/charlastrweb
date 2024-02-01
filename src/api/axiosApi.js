@@ -822,7 +822,7 @@ const axiosApi = {
         const responseCursos = await axios.get(
           `${API_URL}/api/QueryTools/FindCursosProfesor/${idUsuario}`
         );
-
+        console.log("cursos del profesor: ",responseCursos);
         return responseCursos.data;
       } catch (error) {
         console.log("Error: ", error);
@@ -859,7 +859,7 @@ const axiosApi = {
     },
     getCursos: async () => {
       try {
-        const responseCursos = await axios.get(`${API_URL}/api/Cursos`);
+        const responseCursos = await axios.get(`${API_URL}/api/QueryTools/CursosProfesorAll`);
         return responseCursos.data;
       } catch (error) {
         console.log(error);

@@ -5,6 +5,7 @@ import banner from "../../../assets/images/imgcurso.jpeg";
 
 const VistaCursosCentrto = () => {
   const [cursos, setCursos] = useState([]);
+  const [cursosProfesor, setCursosProfesor] = useState([]);
   const [selectedOption, setSelectedOption] = useState(null);
   const [open, setOpen] = useState(false);
   const [selectedComponent, setSelectedComponent] = useState("cursos");
@@ -23,7 +24,7 @@ const VistaCursosCentrto = () => {
   const renderIcon = () => {
     return (
       <svg
-        className="w-4 h-4 text-gray-800 dark:text-white"
+        className="w-4 h-4 pt-2 text-gray-800 dark:text-white"
         aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
@@ -45,21 +46,50 @@ const VistaCursosCentrto = () => {
   };
 
   const ModalAlerta = ({ exitosa, onClose }) => {
-
     useEffect(() => {
       const timerId = setTimeout(() => {
-        onClose(); 
+        onClose();
       }, 5000);
-  
+
       return () => clearTimeout(timerId);
     }, [exitosa, onClose]);
 
     return (
       exitosa !== null && (
         <div
-          className={`p-4 ${exitosa ? "bg-green-500" : "bg-red-500"} text-white transition-opacity duration-500 ease-in-out opacity-100`}
+          className={`p-4 ${
+            exitosa ? "bg-green-500" : "bg-red-500"
+          } text-white transition-opacity duration-500 ease-in-out opacity-100`}
         >
           {exitosa ? "Curso creado exitosamente" : "Error al crear el curso"}
+        </div>
+      )
+    );
+  };
+
+  const ModalAlertaEliminar = ({ exitosa, onClose }) => {
+    useEffect(() => {
+      const timerId = setTimeout(() => {
+        onClose();
+      }, 5000);
+
+      return () => clearTimeout(timerId);
+    }, [exitosa, onClose]);
+
+    return (
+      exitosa !== null && (
+        <div className="relative w-[90%] h-[250px] mx-auto">
+          <div
+            className={`z-80 py-4 px-5 mt-3 absolute top-10 mx-auto ${
+              exitosa
+                ? "bg-green-500 transform translate-y-0 opacity-100 transition-transform ease-in-out duration-500"
+                : "bg-red-500 transform translate-y-full opacity-100 transition-transform ease-in-out duration-500"
+            } text-white w-[90%] mx-auto`}
+          >
+            {exitosa
+              ? "Curso eliminado exitosamente"
+              : "Error al eliminar el curso"}
+          </div>
         </div>
       )
     );
@@ -118,6 +148,109 @@ const VistaCursosCentrto = () => {
     );
   };
 
+  const AlumnosProfesor = () => {
+    const [exitosa, setExitosa] = useState(null);
+
+    const handleClick = async (curso) => {
+      try {
+        console.log("Curso a eliminado: ", curso);
+        const responsedelete = await axiosApi.profesores.EliminarCurso(curso.idCurso);
+        //console.log("Curso eliminado exitosamente: ", responsedelete);
+        if (responsedelete.response && responsedelete.response.status !== 200) {
+          setExitosa(false);
+        } else {
+          setExitosa(true);
+        }
+      } catch (error) {
+        console.log(error);
+        setExitosa(false);
+      }
+    };
+
+    const handleClickSolicitarCharla = async (curso) => {
+      setSelectedOption((prevSelected) => {
+        return prevSelected === curso ? null : curso;
+      });
+      setOpen((prev) => !prev);
+    };
+
+    const handleClose = () => {
+      setExitosa(null);
+    };
+
+    return (
+      <section className="pt-10">
+        <div className="w-full h-full relative">
+          {cursosProfesor.map((curso) => (
+            <div
+              key={curso.idCurso}
+              className="relative md:max-w-full mx-auto p-6 mb-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+            >
+              <p className="mb-4 text-lg font-semibold text-gray-900 dark:text-white">
+                <span className="text-accent-200">Curso: </span>
+                {curso.descripcionCurso} {"(" + curso.nombreCurso + ")"}
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4">
+                <div>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">
+                    <span className="font-semibold">Centro: </span>
+                    {curso.centro}
+                  </p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">
+                    <span className="font-semibold">Email: </span>
+                    {curso.emailProfesor}
+                  </p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">
+                    <span className="font-semibold">Telefono: </span>
+                    {curso.telefonoProfesor}
+                  </p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">
+                    <span className="font-semibold">Provincia: </span>
+                    {curso.provinciaCentro}
+                  </p>
+                </div>
+              </div>
+              <div
+                className="absolute top-5 right-28 mr-10
+            flex items-center hover:scale-110 transition-transform cursor-pointer"
+                onClick={() => handleClick(curso)}
+              >
+                <span className="font-semibold mr-2 text-xs ">
+                  Eliminar curso
+                </span>
+              </div>
+              <div
+                className="absolute top-5 right-5 
+            flex items-center hover:scale-110 transition-transform cursor-pointer"
+                onClick={() => handleClickSolicitarCharla(curso)}
+              >
+                <span className="font-semibold mr-1 text-xs">
+                  Solicitar charla
+                </span>
+
+                {renderIcon()}
+              </div>
+              <SolicitudCharla
+                isOpen={selectedOption === curso}
+                idCurso={curso.idCurso}
+                idCentro={curso.idCentro}
+              />
+            </div>
+          ))}
+          <div className="absolute top-14 left-12 w-[90%] mx-auto">
+            <ModalAlertaEliminar exitosa={exitosa} onClose={handleClose} />
+          </div>
+        </div>
+      </section>
+    );
+  };
+
   const CrearCurso = () => {
     const [idCentro, setIdCentro] = useState(0);
     const [nombreCurso, setNombreCurso] = useState("");
@@ -156,13 +289,13 @@ const VistaCursosCentrto = () => {
         }
       } catch (error) {
         console.log(error);
-        setExitosa(false)
+        setExitosa(false);
       }
     };
 
-    const handleClose =()=>{
+    const handleClose = () => {
       setExitosa(null);
-    }
+    };
 
     useEffect(() => {
       const fetchData = async () => {
@@ -246,7 +379,7 @@ const VistaCursosCentrto = () => {
           </div>
         </div>
         <div>
-          <ModalAlerta exitosa={exitosa} onClose={handleClose}/>
+          <ModalAlerta exitosa={exitosa} onClose={handleClose} />
         </div>
       </section>
     );
@@ -255,9 +388,22 @@ const VistaCursosCentrto = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const responseCursos = await axiosApi.centros.getCursosByCentro();
-        console.log(responseCursos);
-        setCursos(responseCursos);
+        //const responseCursos = await axiosApi.centros.getCursosByCentro();
+        const profesorCentro = await axiosApi.usuarios.getPerfilUsuario();
+        const responseCursos = await axiosApi.centros.getCursos();
+        const cursosFilter = responseCursos.filter(
+          (c) => c.idCentro === profesorCentro.idEmpresaCentro
+        );
+
+        console.log("cursos: ", responseCursos);
+        console.log("cursos del centro: ", cursosFilter);
+
+        const responseAlumnosProfesor =
+          await axiosApi.centros.getCursosByCentro();
+        console.log("Cursos profesor: ", responseAlumnosProfesor);
+        setCursosProfesor(responseAlumnosProfesor);
+
+        setCursos(cursosFilter);
       } catch (error) {
         console.log(error);
       }
@@ -278,7 +424,19 @@ const VistaCursosCentrto = () => {
               } inline-block p-4 border-b-2 border-transparent rounded-t-sm focus:outline-none`}
               onClick={() => handleComponentChange("cursos")}
             >
-              Cursos
+              cursos del centro
+            </button>
+          </li>
+          <li className="me-2">
+            <button
+              className={`${
+                selectedComponent === "miscursos"
+                  ? "bg-blue-700  text-white"
+                  : "active bg-blue-400 hover:bg-blue-600  text-white"
+              } inline-block p-4 border-b-2 border-transparent rounded-t-sm focus:outline-none`}
+              onClick={() => handleComponentChange("miscursos")}
+            >
+              mis cursos
             </button>
           </li>
           <li className="me-2">
@@ -290,7 +448,7 @@ const VistaCursosCentrto = () => {
               } inline-block p-4 border-b-2 border-transparent rounded-t-sm focus:outline-none`}
               onClick={() => handleComponentChange("crearcurso")}
             >
-              Crear curso
+              crear curso
             </button>
           </li>
         </ul>
@@ -298,6 +456,7 @@ const VistaCursosCentrto = () => {
       <div className="pt-5">
         {selectedComponent === "cursos" && <Cursos />}
         {selectedComponent === "crearcurso" && <CrearCurso />}
+        {selectedComponent === "miscursos" && <AlumnosProfesor />}
       </div>
     </section>
   );
