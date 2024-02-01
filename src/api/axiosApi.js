@@ -363,6 +363,8 @@ const axiosApi = {
             },
           }
         );
+        window.location.reload();
+        alert("Empresa/Centro Eliminado");
         console.log("API Response:", response);
         return response.data;
       } catch (error) {

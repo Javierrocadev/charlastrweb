@@ -773,8 +773,14 @@ const NotificacionesAdmin = () => {
           <div class="block p-6">
             <div class="flex items-center gap-x-3">
               <div class="grow">
-                <span class="block text-sm font-semibold text-gray-800 dark:text-gray-200">
+              <span class="block text-sm font-semibold text-gray-800 dark:text-gray-200">
                   {charlaFiltrada ? charlaFiltrada.descripcion : 'Descripción no encontrada'}
+                </span>
+                <span class="block text-sm font-semibold text-gray-800 dark:text-gray-200">
+                  {charlaFiltrada ? charlaFiltrada.fechaCharla : 'Sin Fecha'}
+                </span>
+                <span class="block text-sm font-semibold text-gray-800 dark:text-gray-200">
+                  {charlaFiltrada ? charlaFiltrada.observaciones : 'Sin Observaciones'}
                 </span>
                 {usuariosResponse.filter((usuario) => usuario.idUsuario === charlaFiltrada.idTechRider).map((usuario) => (
                     <div key={usuario.idUsuario}>
