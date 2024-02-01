@@ -126,7 +126,7 @@ const MenuCentro = () => {
   return (
     <section className="w-full h-[100vh] mx-auto">
       <div className="w-full h-full  bg-slate-100">
-        <header className="bg-black w-full h-[80px] px-5">
+        <header className="bg-accent-200  text-whitew-full h-[80px] px-5">
           {centro.length ? (
             <div className="flex justify-between items-center p-5">
               <span className=" float-left text-2xl text-white uppercase">
