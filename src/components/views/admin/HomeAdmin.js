@@ -143,10 +143,10 @@ const estado = parseInt(e.target.elements.estado.value, 10);
   };
 
   return (
-    <main>
+    <main className="bg-white rounded-xl shadow dark:bg-primary-100">
         {usuarioResponse && (
   <div class="max-w-4xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
-  <div class="bg-white rounded-xl shadow p-4 sm:p-7 dark:bg-slate-900">
+  <div class="bg-white rounded-xl shadow p-4 sm:p-7 dark:bg-accent-200">
     <div class="mb-8">
       <h2 class="text-xl font-bold text-gray-800 dark:text-gray-200">
         Perfil Administrador
@@ -198,9 +198,9 @@ const estado = parseInt(e.target.elements.estado.value, 10);
         </div>
   
         <div class="sm:col-span-9">
-          <div class="sm:flex">
-            <input id="af-account-full-name" type="text" class="py-3 px-4 sm:mb-0 mb-4 block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 "onChange={(e) => setNewNombre(e.target.value)} placeholder={usuarioResponse.nombre}/>
-            <input type="text" class="py-3 px-4  block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 " onChange={(e) => setNewApellidos(e.target.value)} placeholder={usuarioResponse.apellidos}/>
+          <div class="sm:flex gap-2">
+            <input id="af-account-full-name" type="text" class="py-3 px-4 sm:mb-0 mb-4 block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-accent-200 dark:border-gray-700 dark:text-gray-400 "onChange={(e) => setNewNombre(e.target.value)} placeholder={usuarioResponse.nombre}/>
+            <input type="text" class="py-3 px-4  block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-accent-200 dark:border-gray-700 dark:text-gray-400 " onChange={(e) => setNewApellidos(e.target.value)} placeholder={usuarioResponse.apellidos}/>
           </div>
         </div>
   
@@ -211,7 +211,7 @@ const estado = parseInt(e.target.elements.estado.value, 10);
         </div>
   
         <div class="sm:col-span-9">
-          <input id="af-account-email" type="email" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 " onChange={(e) => setNewEmail(e.target.value)}   placeholder={usuarioResponse.email}/>
+          <input id="af-account-email" type="email" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-accent-200 dark:border-gray-700 dark:text-gray-400 " onChange={(e) => setNewEmail(e.target.value)}   placeholder={usuarioResponse.email}/>
         </div>
         <div class="sm:col-span-3">
           <label for="af-account-email" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-gray-200">
@@ -220,7 +220,7 @@ const estado = parseInt(e.target.elements.estado.value, 10);
         </div>
   
         <div class="sm:col-span-9">
-          <input  type="text" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 "  onChange={(e) => setNewLinkedin(e.target.value)} placeholder={usuarioResponse.linkedIn} />
+          <input  type="text" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-accent-200 dark:border-gray-700 dark:text-gray-400 "  onChange={(e) => setNewLinkedin(e.target.value)} placeholder={usuarioResponse.linkedIn} />
         </div>
   
         <div class="sm:col-span-3">
@@ -232,7 +232,7 @@ const estado = parseInt(e.target.elements.estado.value, 10);
         <div class="sm:col-span-9">
           <div class="space-y-2">
 
-            <input   onChange={(e) => setNewPassword(e.target.value)} type="text" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 " placeholder={usuarioResponse.password}/>
+            <input   onChange={(e) => setNewPassword(e.target.value)} type="text" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-accent-200 dark:border-gray-700 dark:text-gray-400 " placeholder={usuarioResponse.password}/>
           </div>
         </div>
   
@@ -246,9 +246,9 @@ const estado = parseInt(e.target.elements.estado.value, 10);
         </div>
   
         <div class="sm:col-span-9">
-          <div class="sm:flex ">
-            <input id="af-account-phone" type="text" class="py-3 mr-4 sm:mb-0 mb-4 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 " onChange={(e) => setNewTelefono(e.target.value)} placeholder={usuarioResponse.telefono}/>
-            <select onChange={(e) => setNewProvincia(e.target.value)} class="py-2 px-3 pe-9 block w-full sm:w-auto border-gray-200 shadow-sm -mt-px -ms-px rounded sm:mt-0 sm:first:ms-0  text-sm relative focus:z-10  focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 ">
+          <div class="sm:flex gap-2">
+            <input id="af-account-phone" type="text" class="py-3 mr-4 sm:mb-0 mb-4 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-accent-200 dark:border-gray-700 dark:text-gray-400 " onChange={(e) => setNewTelefono(e.target.value)} placeholder={usuarioResponse.telefono}/>
+            <select onChange={(e) => setNewProvincia(e.target.value)} class="py-2 px-3 pe-9 block w-full sm:w-auto border-gray-200 shadow-sm -mt-px -ms-px rounded sm:mt-0 sm:first:ms-0  text-sm relative focus:z-10  focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-accent-200 dark:border-gray-700 dark:text-gray-400 ">
              
                 {provinciasResponse.map((provincia) => (
                 <option key={provincia.idProvincia} value={provincia.idProvincia}  selected={provincia.idProvincia === usuarioResponse.idProvincia}>
@@ -271,15 +271,13 @@ const estado = parseInt(e.target.elements.estado.value, 10);
        
   
         <div class="sm:col-span-9">
-          <textarea id="af-account-bio" class="py-2 px-3 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" rows="6" placeholder="Type your message..."></textarea>
+          <textarea id="af-account-bio" class="py-2 px-3 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-accent-200 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" rows="6" placeholder="Type your message..."></textarea>
         </div> */}
       
       </div>
   
       <div class="mt-5 flex justify-end gap-x-2">
-        <button type="submit" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-accent-200 bg-accent-200 text-white shadow-sm hover:bg-accent-100 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200">
-          Guardar cambios
-        </button>
+      <button type="submit" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-accent-200 bg-accent-200 text-white shadow-sm hover:bg-accent-100 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-accent-100 hover:dark:bg-primary-300">Guardar cambios</button>
       </div>
     </form>
   </div>

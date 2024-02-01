@@ -625,6 +625,36 @@ const axiosApi = {
         throw error;
       }
     },
+    postUsuarios: async (userData) => {
+      try {
+        var token = localStorage.getItem("token");
+
+        console.log(userData);
+        var request =
+          "api/Usuarios"
+        var api = "https://apitechriders.azurewebsites.net/";
+        var url = api + request;
+        console.log(url);
+        axios
+          .post(
+            url,
+            {},
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          )
+          .then((response) => {
+            console.log(response);
+            window.location.reload();
+            alert("Solicitud Enviada", "Sera revisada por el admin");
+          });
+      } catch (error) {
+        console.error("Error getting provincias:", error);
+        throw error;
+      }
+    },
     getPerfilUsuario: async () => {
       try {
         const token = localStorage.getItem("token");

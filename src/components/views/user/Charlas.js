@@ -80,7 +80,7 @@ const Home = () => {
   };
 
   return (
-    <main>
+    <main className="bg-white rounded-xl shadow dark:bg-primary-100">
 
       <section>
         <h2 class="text-3xl text-center text-gray-800 font-bold lg:text-4xl dark:text-white">
@@ -94,7 +94,7 @@ const Home = () => {
   
 <div >
   <p>Provincia:</p>
-      <select onChange={(e) => handleProvinciaFilter(e.target.value)} className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600">
+      <select onChange={(e) => handleProvinciaFilter(e.target.value)} className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-accent-200 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600">
         <option value={null}>Todos</option>
         {provinciasResponse.map((provincia) => (
           <option key={provincia.idProvincia} value={provincia.idProvincia} >
@@ -172,7 +172,7 @@ const Home = () => {
       .map((charla) => (
             <li
               key={charla.idCharla}
-              className="hs-accordion active bg-white border -mt-px first:rounded-t-lg last:rounded-b-lg dark:bg-gray-800 dark:border-gray-700"
+              className="hs-accordion active bg-white border -mt-px first:rounded-t-lg last:rounded-b-lg dark:bg-accent-200 dark:border-gray-700"
               id="hs-bordered-heading-one"
             >
               <div className="flex flex-row">
@@ -267,7 +267,7 @@ const Home = () => {
                     </div>
 
                     <div class="mt-4">
-                      <p class="max-w-[40ch] text-sm text-gray-500">
+                      <p class="max-w-[40ch] text-sm text-accent-100">
                         {charla.observaciones}
                       </p>
                     </div>
@@ -317,7 +317,7 @@ const Home = () => {
                           }
                         })()}
 
-                        <dt class="text-xs text-gray-500">
+                        <dt class="text-xs text-accent-100">
                           {formatFecha(charla.fechaCharla)}
                         </dt>
                       </div>
@@ -326,7 +326,7 @@ const Home = () => {
                         <dt class="text-sm my-1 font-medium p-2 rounded-xl text-gray-600">
                           {getProvinciaNombre(charla.idProvincia)}
                         </dt>
-                        {/* <dd class="text-xs text-gray-500">{charla.turno}</dd> */}
+                        {/* <dd class="text-xs text-accent-100">{charla.turno}</dd> */}
                       </div>
                     </dl>
                   </div>

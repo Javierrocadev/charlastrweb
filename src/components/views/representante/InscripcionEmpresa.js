@@ -90,7 +90,7 @@ const InscripcionEmpresa = () => {
   const FormularioInscripcion = () => {
     return (
       <form className="max-w-full m-5" onSubmit={insertarCentro}>
-        <h2 class="text-3xl font-bold mb-7 text-gray-800 dark:text-gray-200">
+        <h2 class="text-3xl font-bold mb-7 text-gray-800">
           Inscribe tu centro
         </h2>
         <div className="relative z-0 w-full mb-5 group">
@@ -99,7 +99,7 @@ const InscripcionEmpresa = () => {
             name="nombre"
             id="nombre"
             value={nombre}
-            className="py-2 px-3 pe-11 block w-full border-gray-200 shadow text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
+            className="py-2 px-3 pe-11 block w-full border-gray-200 shadow text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-accent-200 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
             placeholder="nombre "
             required
             onChange={handleInputChangeNombre}
@@ -111,7 +111,7 @@ const InscripcionEmpresa = () => {
             name="direccion"
             id="direccion"
             value={direccion}
-            className="py-2 px-3 pe-11 block w-full border-gray-200 shadow text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
+            className="py-2 px-3 pe-11 block w-full border-gray-200 shadow text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-accent-200 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
             placeholder="direccion "
             required
             onChange={handleInputChangeDireccion}
@@ -124,7 +124,7 @@ const InscripcionEmpresa = () => {
             name="telefono"
             id="telefono"
             value={telefono}
-            className="py-2 px-3 pe-11 block w-full border-gray-200 shadow text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
+            className="py-2 px-3 pe-11 block w-full border-gray-200 shadow text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-accent-200 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
             placeholder=" telefono "
             required
             onChange={handleInputChangeTelefono}
@@ -136,7 +136,7 @@ const InscripcionEmpresa = () => {
             name="persona_contacto"
             id="persona_contacto"
             value={personaContacto}
-            className="py-2 px-3 pe-11 block w-full border-gray-200 shadow text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
+            className="py-2 px-3 pe-11 block w-full border-gray-200 shadow text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-accent-200 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
             placeholder=" Persona de contacto "
             required
             onChange={handleInputChangePersonaContacto}
@@ -149,7 +149,7 @@ const InscripcionEmpresa = () => {
               name="cif"
               id="cif"
               value={cif}
-              className="py-2 px-3 pe-11 block w-full border-gray-200 shadow text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
+              className="py-2 px-3 pe-11 block w-full border-gray-200 shadow text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-accent-200 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
               placeholder="CIF "
               required
               onChange={handleInputChangeCief}
@@ -160,7 +160,7 @@ const InscripcionEmpresa = () => {
               id="provincias"
               value={provincia}
               required
-              className="py-2 px-3 pe-11 block w-full border-gray-200 shadow text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
+              className="py-2 px-3 pe-11 block w-full border-gray-200 shadow text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-accent-200 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
               onChange={handleInputChangeProvincia}
             >
               <option selected disabled>
@@ -183,7 +183,7 @@ const InscripcionEmpresa = () => {
               name="razon_social"
               id="razon_social"
               value={razonSocial}
-              className="py-2 px-3 pe-11 block w-full border-gray-200 shadow text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
+              className="py-2 px-3 pe-11 block w-full border-gray-200 shadow text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-accent-200 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
               placeholder="razón social "
               onChange={handleInputChangeRazonSocial}
             />
@@ -193,7 +193,7 @@ const InscripcionEmpresa = () => {
               id="tiposEmpresas"
               value={tipoEmpresa}
               required
-              className="py-2 px-3 pe-11 block w-full border-gray-200 shadow text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
+              className="py-2 px-3 pe-11 block w-full border-gray-200 shadow text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-accent-200 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
               onChange={handleInputChangeTipoEmpresa}
             >
               <option selected disabled>
@@ -256,7 +256,7 @@ const InscripcionEmpresa = () => {
       fechData();
     }, []);
     return (
-      <div className="w-full md:w-[95%] mx-auto p-6 bg-gray-100 shadow-md rounded-md">
+      <div className="w-full md:w-[95%] mx-auto p-6 bg-accent-100 shadow-md rounded-md">
         <h1 className="text-3xl font-bold text-gray-800 mb-4">
           Busca tu centro
         </h1>
@@ -317,14 +317,14 @@ const InscripcionEmpresa = () => {
 
   return (
     <section className="container bg-white py-4 rounded mx-auto">
-      <div className="text-sm font-medium text-center text-gray-500 border-b border-gray-400 dark:text-gray-400 dark:border-gray-700">
+      <div className="text-sm font-medium text-center text-accent-100 border-b border-gray-400 dark:text-gray-400 dark:border-gray-700">
         <ul className="flex flex-wrap -mb-px">
           <li className="me-2">
             <button
               className={`${
                 selectedComponent === "inscripcion"
-                  ? "bg-blue-700  text-white"
-                  : "active bg-blue-400 hover:bg-blue-600  text-white"
+                  ? "bg-accent-200  text-white"
+                  : "active bg-accent-100 hover:bg-blue-600  text-white"
               } inline-block p-4 border-b-2 border-transparent rounded-t-sm focus:outline-none`}
               onClick={() => handleComponentChange("inscripcion")}
             >
@@ -335,8 +335,8 @@ const InscripcionEmpresa = () => {
             <button
               className={`${
                 selectedComponent === "buscarempresa"
-                  ? "bg-blue-700  text-white"
-                  : "active bg-blue-400 hover:bg-blue-600  text-white"
+                  ? "bg-accent-200  text-white"
+                  : "active bg-accent-100 hover:bg-blue-600  text-white"
               } inline-block p-4 border-b-2 border-transparent rounded-t-sm focus:outline-none`}
               onClick={() => handleComponentChange("buscarempresa")}
             >

@@ -253,10 +253,10 @@ const handleSubmitTecnologia = (e) => {
     setSeccionVisible(false);
   };
   return (
-    <main>
+    <main className="bg-white rounded-xl shadow dark:bg-primary-100">
         {usuarioResponse && (
   <div class="max-w-4xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
-  <div class="bg-white rounded-xl shadow p-4 sm:p-7 dark:bg-slate-900">
+  <div class="bg-white rounded-xl shadow p-4 sm:p-7 dark:bg-accent-200">
     <div class="mb-8">
     <button
      type="button"
@@ -328,8 +328,8 @@ const handleSubmitTecnologia = (e) => {
   
         <div class="sm:col-span-9">
           <div class="sm:flex">
-            <input id="af-account-full-name" type="text" class="py-3 px-4 sm:mb-0 mb-4 block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 "onChange={(e) => setNewNombre(e.target.value)} placeholder={usuarioResponse.nombre}/>
-            <input type="text" class="py-3 px-4  block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 " onChange={(e) => setNewApellidos(e.target.value)} placeholder={usuarioResponse.apellidos}/>
+            <input id="af-account-full-name" type="text" class="py-3 px-4 sm:mb-0 mb-4 block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-accent-200 dark:border-gray-700 dark:text-gray-400 "onChange={(e) => setNewNombre(e.target.value)} placeholder={usuarioResponse.nombre}/>
+            <input type="text" class="py-3 px-4  block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-accent-200 dark:border-gray-700 dark:text-gray-400 " onChange={(e) => setNewApellidos(e.target.value)} placeholder={usuarioResponse.apellidos}/>
           </div>
         </div>
   
@@ -340,7 +340,7 @@ const handleSubmitTecnologia = (e) => {
         </div>
   
         <div class="sm:col-span-9">
-          <input id="af-account-email" type="email" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 " onChange={(e) => setNewEmail(e.target.value)}   placeholder={usuarioResponse.email}/>
+          <input id="af-account-email" type="email" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-accent-200 dark:border-gray-700 dark:text-gray-400 " onChange={(e) => setNewEmail(e.target.value)}   placeholder={usuarioResponse.email}/>
         </div>
         <div class="sm:col-span-3">
           <label for="af-account-email" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-gray-200">
@@ -349,7 +349,7 @@ const handleSubmitTecnologia = (e) => {
         </div>
   
         <div class="sm:col-span-9">
-          <input  type="text" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 "  onChange={(e) => setNewLinkedin(e.target.value)} placeholder={usuarioResponse.linkedIn} />
+          <input  type="text" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-accent-200 dark:border-gray-700 dark:text-gray-400 "  onChange={(e) => setNewLinkedin(e.target.value)} placeholder={usuarioResponse.linkedIn} />
         </div>
   
         <div class="sm:col-span-3">
@@ -360,7 +360,7 @@ const handleSubmitTecnologia = (e) => {
   
         <div class="sm:col-span-9">
           <div class="space-y-2">
-            <input    type="text" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 "  placeholder={getCentroNombre(usuarioResponse.idEmpresaCentro)} disabled/>
+            <input    type="text" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-accent-200 dark:border-gray-700 dark:text-gray-400 "  placeholder={getCentroNombre(usuarioResponse.idEmpresaCentro)} disabled/>
           </div>
           {/* <button onClick={() => cargarVisibleEmpresa()} type="button" class="mt-4 py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-accent-200 bg-accent-200 text-white shadow-sm hover:bg-accent-100 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200">
           Añadir Empresa
@@ -368,7 +368,7 @@ const handleSubmitTecnologia = (e) => {
 
         {seccionVisibleEmpresa &&(
         <form>
-        <select onChange={(e) => setSelectedEmpresa(e.target.value)} class="py-2 px-3 pe-9 block w-full sm:w-auto border-gray-200 shadow-sm -mt-px -ms-px rounded sm:mt-0 sm:first:ms-0  text-sm relative focus:z-10  focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 ">
+        <select onChange={(e) => setSelectedEmpresa(e.target.value)} class="py-2 px-3 pe-9 block w-full sm:w-auto border-gray-200 shadow-sm -mt-px -ms-px rounded sm:mt-0 sm:first:ms-0  text-sm relative focus:z-10  focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-accent-200 dark:border-gray-700 dark:text-gray-400 ">
              
                 {empresaCentroResponse.map((empresa) => (
                 <option key={empresa.idEmpresaCentro} value={empresa.idEmpresaCentro} >
@@ -392,7 +392,7 @@ const handleSubmitTecnologia = (e) => {
         <div class="sm:col-span-9">
           <div class="space-y-2">
 
-            <input   onChange={(e) => setNewPassword(e.target.value)} type="text" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 " placeholder={usuarioResponse.password}/>
+            <input   onChange={(e) => setNewPassword(e.target.value)} type="text" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-accent-200 dark:border-gray-700 dark:text-gray-400 " placeholder={usuarioResponse.password}/>
           </div>
         </div>
   
@@ -406,9 +406,9 @@ const handleSubmitTecnologia = (e) => {
         </div>
 
         <div class="sm:col-span-9">
-          <div class="sm:flex ">
-            <input id="af-account-phone" type="text" class="py-3 mr-4 sm:mb-0 mb-4 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 " onChange={(e) => setNewTelefono(e.target.value)} placeholder={usuarioResponse.telefono}/>
-            <select onChange={(e) => setNewProvincia(e.target.value)} class="py-2 px-3 pe-9 block w-full sm:w-auto border-gray-200 shadow-sm -mt-px -ms-px rounded sm:mt-0 sm:first:ms-0  text-sm relative focus:z-10  focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 ">
+          <div class="sm:flex gap-2">
+            <input id="af-account-phone" type="text" class="py-3 mr-4 sm:mb-0 mb-4 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-accent-200 dark:border-gray-700 dark:text-gray-400 " onChange={(e) => setNewTelefono(e.target.value)} placeholder={usuarioResponse.telefono}/>
+            <select onChange={(e) => setNewProvincia(e.target.value)} class="py-2 px-3 pe-9 block w-full sm:w-auto border-gray-200 shadow-sm -mt-px -ms-px rounded sm:mt-0 sm:first:ms-0  text-sm relative focus:z-10  focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-accent-200 dark:border-gray-700 dark:text-gray-400 ">
              
                 {provinciasResponse.map((provincia) => (
                 <option key={provincia.idProvincia} value={provincia.idProvincia}  selected={provincia.idProvincia === usuarioResponse.idProvincia}>
@@ -452,7 +452,7 @@ const handleSubmitTecnologia = (e) => {
        
   
         <div class="sm:col-span-9">
-          <textarea id="af-account-bio" class="py-2 px-3 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" rows="6" placeholder="Type your message..."></textarea>
+          <textarea id="af-account-bio" class="py-2 px-3 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-accent-200 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" rows="6" placeholder="Type your message..."></textarea>
         </div> */}
       
       </div>
@@ -497,7 +497,7 @@ const handleSubmitTecnologia = (e) => {
       
             <div class="sm:col-span-9">
               <div class="space-y-2">
-                <input    type="text" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 "  placeholder={getCentroNombre(usuarioResponse.idEmpresaCentro)} disabled/>
+                <input    type="text" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-accent-200 dark:border-gray-700 dark:text-gray-400 "  placeholder={getCentroNombre(usuarioResponse.idEmpresaCentro)} disabled/>
               </div>
             </div>
 
@@ -510,7 +510,7 @@ const handleSubmitTecnologia = (e) => {
             
             <div class="sm:col-span-9">
               <div class="space-y-2">
-                <p  class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 " >{getCentroDireccion(usuarioResponse.idEmpresaCentro)}</p>
+                <p  class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-accent-200 dark:border-gray-700 dark:text-gray-400 " >{getCentroDireccion(usuarioResponse.idEmpresaCentro)}</p>
               </div>
             </div>
 
@@ -524,7 +524,7 @@ const handleSubmitTecnologia = (e) => {
 
             <div class="sm:col-span-9">
               <div class="space-y-2">
-                <p  class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 " >{getCentroTelefono(usuarioResponse.idEmpresaCentro)}</p>
+                <p  class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-accent-200 dark:border-gray-700 dark:text-gray-400 " >{getCentroTelefono(usuarioResponse.idEmpresaCentro)}</p>
               </div>
             </div>
 
@@ -538,7 +538,7 @@ const handleSubmitTecnologia = (e) => {
 
             <div class="sm:col-span-9">
               <div class="space-y-2">
-              <p  class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 " >{getCentroPersonaContacto(usuarioResponse.idEmpresaCentro)}</p>
+              <p  class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-accent-200 dark:border-gray-700 dark:text-gray-400 " >{getCentroPersonaContacto(usuarioResponse.idEmpresaCentro)}</p>
               </div>
             </div>
 
@@ -551,7 +551,7 @@ const handleSubmitTecnologia = (e) => {
             </div>
 
                         <div class="sm:col-span-9">
-              <div  class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 ">
+              <div  class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-accent-200 dark:border-gray-700 dark:text-gray-400 ">
                 {provinciasResponse.filter((provincia) => provincia.idProvincia === usuarioResponse.idProvincia).map((provincia) => (
                 <span key={provincia.idProvincia}>
                   {getProvinciaNombre(provincia.idProvincia)}
@@ -571,7 +571,7 @@ const handleSubmitTecnologia = (e) => {
           
             <div class="sm:col-span-9">
               <div class="space-y-2">
-                <input  class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 " placeholder={getCentroCif(usuarioResponse.idEmpresaCentro)}/>
+                <input  class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-accent-200 dark:border-gray-700 dark:text-gray-400 " placeholder={getCentroCif(usuarioResponse.idEmpresaCentro)}/>
               </div>
             </div>
 
@@ -585,7 +585,7 @@ const handleSubmitTecnologia = (e) => {
             
             <div class="sm:col-span-9">
               <div class="space-y-2">
-              <p  class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 " >{getCentroRazonSocial(usuarioResponse.idEmpresaCentro)}</p>
+              <p  class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-accent-200 dark:border-gray-700 dark:text-gray-400 " >{getCentroRazonSocial(usuarioResponse.idEmpresaCentro)}</p>
               </div>
             </div>
     {/*  
@@ -597,7 +597,7 @@ const handleSubmitTecnologia = (e) => {
           
       
             <div class="sm:col-span-9">
-              <textarea id="af-account-bio" class="py-2 px-3 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" rows="6" placeholder="Type your message..."></textarea>
+              <textarea id="af-account-bio" class="py-2 px-3 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-accent-200 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" rows="6" placeholder="Type your message..."></textarea>
             </div> */}
           
           </div>
@@ -617,7 +617,7 @@ const handleSubmitTecnologia = (e) => {
         </div>
        
         <div className="sm:col-span-3">
-        <select onChange={(e) => setSelectedTecnologia(e.target.value)} className="py-2 px-3 pe-9 block w-full sm:w-auto border-gray-200 shadow-sm -mt-px -ms-px rounded sm:mt-0 sm:first:ms-0 text-sm relative focus:z-10 focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2 ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400">
+        <select onChange={(e) => setSelectedTecnologia(e.target.value)} className="py-2 px-3 pe-9 block w-full sm:w-auto border-gray-200 shadow-sm -mt-px -ms-px rounded sm:mt-0 sm:first:ms-0 text-sm relative focus:z-10 focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2 ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-accent-200 dark:border-gray-700 dark:text-gray-400">
           {TecnologiasResposne.filter((tecnologia) => {
             // Filtro para no añadir la tecnologia que ya tiene 
             const hasTechnology = TecnologiasIdResponse.some((techId) => techId.idTecnologia === tecnologia.idTecnologia);
@@ -668,7 +668,7 @@ const handleSubmitTecnologia = (e) => {
        
   
         <div class="sm:col-span-9">
-          <textarea id="af-account-bio" class="py-2 px-3 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" rows="6" placeholder="Type your message..."></textarea>
+          <textarea id="af-account-bio" class="py-2 px-3 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-accent-200 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" rows="6" placeholder="Type your message..."></textarea>
         </div> */}
       
       </div>

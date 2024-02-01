@@ -1,319 +1,260 @@
 import React, { useState, useEffect } from "react";
 import axiosApi from "../../../../api/axiosApi";
-import { Link } from "react-router-dom";
+import axios from "axios";
 
-const FormCentros = () => {
-  const [empresasCentrosResponse, setEmpresasCentrosResponse] = useState([]);
+const FormCentro = () => {
   const [provinciasResponse, setProvinciasResponse] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  const [formData, setFormData] = useState({
-    nombre:"",
-    apellidos:"",
-    email:"",
-    telefono:"",
-    linkedIn:"",
-    password:"",
-    idRole:"",
-    idProvincia:"",
-    idEmpresaCentro:"",
-    estado:"",
-    billingContact: {
-      firstName: '',
-      lastName: '',
-      phoneNumber: '',
-    },
-    billingAddress: {
-      streetAddress: '',
-      aptSuiteBuilding: '',
-      zipCode: '',
-      city: 'City',
-      state: 'State',
-    },
-    paymentMethod: {
-      nameOnCard: '',
-      cardNumber: '',
-      expirationDate: '',
-      cvvCode: '',
-    },
+  const [empresaCentroResponse, setEmpresaCentroResponse] = useState([]);
+  const [formulario, setFormulario] = useState({
+    idUsuario: 0,
+    nombre: "",
+    apellidos: "",
+    email: "",
+    telefono: "",
+    linkedIn: "",
+    password: "",
+    idRole: 2,
+    idProvincia: 0,
+    idEmpresaCentro: null,
+    estado: 2,
+    linkedInVisible: 0,
   });
 
-  const handleInputChange = (section, field, value) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      [section]: {
-        ...prevData[section],
-        [field]: value,
-      },
-    }));
-  };
-  const handleSaveChanges = () => {
-    // Handle saving the data or perform any other action here
-    console.log('Form Data:', formData);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    const newValue =
+      name === "idProvincia" ||
+      name === "idEmpresaCentro" ||
+      name === "estado" ||
+      name === "idRole" ||
+      name === "linkedInVisible"
+        ? parseInt(value)
+        : value;
+    setFormulario({ ...formulario, [name]: newValue });
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      console.log(formulario);
+      const token = localStorage.getItem("token");
+      const response = await axios.post(
+        "https://apitechriders.azurewebsites.net/api/Usuarios",
+        formulario,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log("Respuesta del servidor:", response.data);
+      // Aquí podrías manejar la respuesta del servidor según tus necesidades
+    } catch (error) {
+      console.error("Error al enviar solicitud:", error);
+      // Aquí podrías manejar el error según tus necesidades
+    }
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchProvincias = async () => {
       try {
-        const response = await axiosApi.empresasCentros.getEmpresasCentros();
-        console.log("Charlas response:", response);
-        setEmpresasCentrosResponse(response);
-
         const responseProvincias = await axiosApi.provincias.getProvincias();
         console.log("Charlas responseProvincias:", responseProvincias);
         setProvinciasResponse(responseProvincias);
 
-        setLoading(false);
+        const responseEmpresaCentro =
+          await axiosApi.empresasCentros.getEmpresasCentros();
+        console.log("Charlas responseEmpresaCentro:", responseEmpresaCentro);
+        setEmpresaCentroResponse(responseEmpresaCentro);
       } catch (error) {
-        console.error("Error:", error);
+        console.error("Error al obtener provincias:", error);
       }
     };
-
-    fetchData();
+    fetchProvincias();
   }, []);
 
-  const getProvinciaNombre = (idProvincia) => {
-    const provincia = provinciasResponse.find(
-      (p) => p.idProvincia === idProvincia
-    );
-    return provincia ? provincia.nombreProvincia : "Desconocido";
-  };
-
   return (
-    <main>
- <div className="max-w-2xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
-      {/* Card */}
-      <div className="bg-bg-100 rounded-xl shadow p-4 sm:p-7 dark:bg-slate-900">
-        <div className="text-center mb-8">
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-gray-200">
-            Form Centros
-          </h2>
-          <p className="text-sm text-gray-600 dark:text-gray-400">
-            Rellena los siguientes datos
-          </p>
-        </div>
-
-        <form>
-          {/* Billing contact section */}
-          <div className="py-6 first:pt-0 last:pb-0 border-t first:border-transparent border-gray-200 dark:border-gray-700 dark:first:border-transparent">
-            <label htmlFor="af-payment-billing-contact" className="inline-block text-sm font-medium dark:text-white">
-              Tus datos
-            </label>
-
-            <div className="mt-2 space-y-3">
-              <input
-                id="af-payment-billing-contact"
-                type="text"
-                value={formData.billingContact.firstName}
-                onChange={(e) => handleInputChange('nombre', e.target.value)}
-                className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
-                placeholder="Nombre"
-              />
-              <input
-                type="text"
-                value={formData.billingContact.lastName}
-                onChange={(e) => handleInputChange('apellidos', e.target.value)}
-                className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
-                placeholder="Apellidos"
-              />
-              <input
-                type="text"
-                value={formData.billingContact.phoneNumber}
-                onChange={(e) => handleInputChange('telefono', e.target.value)}
-                className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
-                placeholder="Telefono"
-              />
-            </div>
-          </div>
-          <div className="py-6 first:pt-0 last:pb-0 border-t first:border-transparent border-gray-200 dark:border-gray-700 dark:first:border-transparent">
-            <label htmlFor="af-payment-billing-contact" className="inline-block text-sm font-medium dark:text-white">
-              Datos de acceso
-            </label>
-
-            <div className="mt-2 space-y-3">
-              <input
-                id="af-payment-billing-contact"
-                type="text"
-                value={formData.billingContact.firstName}
-                onChange={(e) => handleInputChange('email', e.target.value)}
-                className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
-                placeholder="Correo"
-              />
-              <input
-                type="text"
-                value={formData.billingContact.lastName}
-                onChange={(e) => handleInputChange('contraseña', e.target.value)}
-                className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
-                placeholder="Contraseña"
-              />
-              <input
-                type="text"
-                value={formData.billingContact.phoneNumber}
-                onChange={(e) => handleInputChange('billingContact', 'phoneNumber', e.target.value)}
-                className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
-                placeholder="Repite la contraseña"
-              />
-          <select
-        value={formData.billingAddress.city}
-        onChange={(e) => handleInputChange('billingAddress', 'city', e.target.value)}
-        className="py-2 px-3 pe-9 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
-      >
-        <option value="">Select City</option>
-        {provinciasResponse.map((provincia) => (
-          <option key={provincia.id} value={provincia.nombreProvincia}>
-            {provincia.nombreProvincia}
-          </option>
-        ))}
-      </select>
-            </div>
-          </div>
-          <div className="py-6 first:pt-0 last:pb-0 border-t first:border-transparent border-gray-200 dark:border-gray-700 dark:first:border-transparent">
-            <label htmlFor="af-payment-billing-contact" className="inline-block text-sm font-medium dark:text-white">
-              Tus datos
-            </label>
-
-            <div className="mt-2 space-y-3">
-              <input
-                id="af-payment-billing-contact"
-                type="text"
-                value={formData.billingContact.firstName}
-                onChange={(e) => handleInputChange('billingContact', 'firstName', e.target.value)}
-                className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
-                placeholder="First Name"
-              />
-              <input
-                type="text"
-                value={formData.billingContact.lastName}
-                onChange={(e) => handleInputChange('billingContact', 'lastName', e.target.value)}
-                className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
-                placeholder="Last Name"
-              />
-              <input
-                type="text"
-                value={formData.billingContact.phoneNumber}
-                onChange={(e) => handleInputChange('billingContact', 'phoneNumber', e.target.value)}
-                className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
-                placeholder="Phone Number"
-              />
-            </div>
-          </div>
-          {/* End Billing contact section */}
-
-          {/* Billing address section */}
-          <div className="py-6 first:pt-0 last:pb-0 border-t first:border-transparent border-gray-200 dark:border-gray-700 dark:first:border-transparent">
-            <label htmlFor="af-payment-billing-address" className="inline-block text-sm font-medium dark:text-white">
-              Billing address
-            </label>
-
-            <div className="mt-2 space-y-3">
-              <input
-                id="af-payment-billing-address"
-                type="text"
-                value={formData.billingAddress.streetAddress}
-                onChange={(e) => handleInputChange('billingAddress', 'streetAddress', e.target.value)}
-                className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
-                placeholder="Street Address"
-              />
-              <input
-                type="text"
-                value={formData.billingAddress.aptSuiteBuilding}
-                onChange={(e) => handleInputChange('billingAddress', 'aptSuiteBuilding', e.target.value)}
-                className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
-                placeholder="Apt, Suite, Building (Optional)"
-              />
-              <div className="grid sm:flex gap-3">
-                <input
-                  type="text"
-                  value={formData.billingAddress.zipCode}
-                  onChange={(e) => handleInputChange('billingAddress', 'zipCode', e.target.value)}
-                  className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
-                  placeholder="Zip Code"
-                />
-                <select
-                  value={formData.billingAddress.city}
-                  onChange={(e) => handleInputChange('billingAddress', 'city', e.target.value)}
-                  className="py-2 px-3 pe-9 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
-                >
-                  <option>Select City</option>
-                  <option>City 1</option>
-                  <option>City 2</option>
-                  <option>City 3</option>
-                </select>
-                <select
-                  value={formData.billingAddress.state}
-                  onChange={(e) => handleInputChange('billingAddress', 'state', e.target.value)}
-                  className="py-2 px-3 pe-9 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
-                >
-                  <option>Select State</option>
-                  <option>State 1</option>
-                  <option>State 2</option>
-                  <option>State 3</option>
-                </select>
-              </div>
-            </div>
-          </div>
-          {/* End Billing address section */}
-
-          {/* Payment method section */}
-          <div className="py-6 first:pt-0 last:pb-0 border-t first:border-transparent border-gray-200 dark:border-gray-700 dark:first:border-transparent">
-            <label htmlFor="af-payment-payment-method" className="inline-block text-sm font-medium dark:text-white">
-              Payment method
-            </label>
-
-            <div className="mt-2 space-y-3">
-              <input
-                id="af-payment-payment-method"
-                type="text"
-                value={formData.paymentMethod.nameOnCard}
-                onChange={(e) => handleInputChange('paymentMethod', 'nameOnCard', e.target.value)}
-                className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
-                placeholder="Name on Card"
-              />
-              <input
-                type="text"
-                value={formData.paymentMethod.cardNumber}
-                onChange={(e) => handleInputChange('paymentMethod', 'cardNumber', e.target.value)}
-                className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
-                placeholder="Card Number"
-              />
-              <div className="grid sm:flex gap-3">
-                <input
-                  type="text"
-                  value={formData.paymentMethod.expirationDate}
-                  onChange={(e) => handleInputChange('paymentMethod', 'expirationDate', e.target.value)}
-                  className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
-                  placeholder="Expiration Date"
-                />
-                <input
-                  type="text"
-                  value={formData.paymentMethod.cvvCode}
-                  onChange={(e) => handleInputChange('paymentMethod', 'cvvCode', e.target.value)}
-                  className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
-                  placeholder="CVV Code"
-                />
-              </div>
-            </div>
-          </div>
-          {/* End Payment method section */}
-        </form>
-
-        <div className="mt-5 flex justify-end gap-x-2">
-        
-          <button
-            type="button"
-            onClick={handleSaveChanges}
-            className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-accent-200 bg-accent-200 text-white shadow-sm hover:bg-accent-100 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
-          >
-            Solicitar</button>
-     
-     
-        </div>
+    <main className="bg-white w-[40em]  rounded-xl shadow dark:bg-primary-100">
+    <div className=" py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+    <div className=" p-4 flex flex-col">
+      {" "}
+      <div className="text-center mb-8">
+        <h2 className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-gray-200">
+          Form Profesor
+        </h2>
+        <p className="text-sm text-gray-600 dark:text-gray-400">
+          Rellena los siguientes datos
+        </p>
       </div>
-      {/* End Card */}
+      <form className="w-full" onSubmit={handleSubmit}>
+        <label
+          for="af-account-phone"
+          class="inline-block text-sm  text-gray-800 mt-2.5 dark:text-gray-200"
+        >
+          Nombre
+        </label>
+        <input
+          type="text"
+          name="nombre"
+          className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-accent-200 dark:border-gray-700 dark:text-gray-400 "
+          value={formulario.nombre}
+          onChange={handleChange}
+          placeholder="Nombre"
+        />
+        <label
+          for="af-account-phone"
+          class="inline-block text-sm  text-gray-800 mt-2.5 dark:text-gray-200"
+        >
+          Apellidos
+        </label>
+        <input
+          type="text"
+          name="apellidos"
+          className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-accent-200 dark:border-gray-700 dark:text-gray-400 "
+          value={formulario.apellidos}
+          onChange={handleChange}
+          placeholder="Apellidos"
+        />
+        <label
+          for="af-account-phone"
+          class="inline-block text-sm  text-gray-800 mt-2.5 dark:text-gray-200"
+        >
+          Telefono
+        </label>
+        <input
+          type="text"
+          name="telefono"
+          value={formulario.telefono}
+          onChange={handleChange}
+          className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-accent-200 dark:border-gray-700 dark:text-gray-400 "
+          placeholder="Teléfono"
+        />
+        <label
+          for="af-account-phone"
+          class="inline-block text-sm  text-gray-800 mt-2.5 dark:text-gray-200"
+        >
+          LinkedIn
+        </label>
+        <input
+          type="text"
+          name="linkedIn"
+          value={formulario.linkedIn}
+          onChange={handleChange}
+          className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-accent-200 dark:border-gray-700 dark:text-gray-400 "
+          placeholder="LinkedIn"
+        />
+        <label
+          for="af-account-phone"
+          class="inline-block text-sm  text-gray-800 mt-2.5 dark:text-gray-200"
+        >
+          Correo
+        </label>
+        <input
+          type="email"
+          name="email"
+          value={formulario.email}
+          onChange={handleChange}
+          className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-accent-200 dark:border-gray-700 dark:text-gray-400 "
+          placeholder="Email"
+        />
+        <label
+          for="af-account-phone"
+          class="inline-block text-sm  text-gray-800 mt-2.5 dark:text-gray-200"
+        >
+          Contraseña
+        </label>
+        <input
+          type="password"
+          name="password"
+          value={formulario.password}
+          onChange={handleChange}
+          className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-accent-200 dark:border-gray-700 dark:text-gray-400 "
+          placeholder="Contraseña"
+        />
+        <label
+          for="af-account-phone"
+          class="inline-block text-sm  text-gray-800 mt-2.5 dark:text-gray-200"
+        >
+          Provincia
+        </label>
+        <div>
+          <select
+            id="idProvincia"
+            name="idProvincia"
+            className="py-2 px-3 pe-9 block w-full sm:w-auto border-gray-200 shadow-sm -mt-px -ms-px rounded sm:mt-0 sm:first:ms-0 text-sm relative focus:z-10 focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2 ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-accent-200 dark:border-gray-700 dark:text-gray-400"
+            value={formulario.idProvincia}
+            onChange={handleChange}
+          >
+            <option value="">Seleccione una provincia</option>
+            {provinciasResponse.map((provincia) => (
+              <option key={provincia.idProvincia} value={provincia.idProvincia}>
+                {provincia.nombreProvincia}
+              </option>
+            ))}
+          </select>
+        </div>
+        <label
+          for="af-account-phone"
+          class="inline-block text-sm  text-gray-800 mt-2.5 dark:text-gray-200"
+        >
+          Empresa
+        </label>
+        <div>
+          <select
+            id="idEmpresaCentro"
+            name="idEmpresaCentro"
+            className="py-2 px-3 pe-9 block w-full sm:w-auto border-gray-200 shadow-sm -mt-px -ms-px rounded sm:mt-0 sm:first:ms-0 text-sm relative focus:z-10 focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2 ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-accent-200 dark:border-gray-700 dark:text-gray-400"
+            value={formulario.idEmpresaCentro}
+            onChange={handleChange}
+          >
+            <option value="null">Sin empresa</option>
+            {empresaCentroResponse.map((empresacentro) => (
+              <option
+                key={empresacentro.idEmpresaCentro}
+                value={empresacentro.idEmpresaCentro}
+              >
+                {empresacentro.nombre}
+              </option>
+            ))}
+          </select>
+        </div>
+        <label
+          for="af-account-phone"
+          class="inline-block text-sm  text-gray-800 mt-2.5 dark:text-gray-200"
+        >
+          ¿Tu linkedIn será visible para el resto?
+        </label>
+        <div>
+          <div>
+            <input
+              type="checkbox"
+              id="linkedInVisible"
+              name="linkedInVisible"
+              value={formulario.linkedInVisible}
+              checked={formulario.linkedInVisible === 1}
+              onChange={() =>
+                setFormulario({
+                  ...formulario,
+                  linkedInVisible: formulario.linkedInVisible === 1 ? 0 : 1,
+                })
+              }
+            />
+            <label htmlFor="linkedInVisible" className="ml-2">
+              {formulario.linkedInVisible === 1 ? "Sí" : "No"}
+            </label>
+          </div>
+        </div>
+        <button
+          type="submit"
+          className="mt-4 py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-accent-200 bg-accent-200 text-white shadow-sm hover:bg-accent-100 duration-300 disabled:opacity-50 disabled:pointer-events-none"
+        >
+          Enviar
+        </button>
+      </form>
+    </div>
     </div>
     </main>
   );
 };
 
-export default FormCentros;
+export default FormCentro;

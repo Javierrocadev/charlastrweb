@@ -75,7 +75,7 @@ const Login = () => {
             <span class="text-accent-100 dark:text-accent-100">charla</span>{" "}
             para ti.
           </h1>
-          <p class="mt-3 mb-3 text-base text-gray-500">
+          <p class="mt-3 mb-3 text-base text-accent-100">
             Inscríbite ahora y empieza a pedir charlas para tu centro o si te
             atreves, a impartirlas tú mismo.
           </p>
@@ -130,7 +130,7 @@ const Login = () => {
           </div>
           <div class="mt-2 grid">
             <Link
-              to={"/login"}
+              to={"/registro"}
               class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-bg-300 bg-bg-100 text-text-200 shadow-sm duration-300 hover:bg-bg-200 disabled:opacity-50 disabled:pointer-events-none dark:bg-white dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
             >
               ¡Regístrate!
