@@ -291,7 +291,7 @@ const VerEmpresasCentroAdmin = () => {
 
 
                           <td
-                            className="h-px w-72 max-w-[2rem] align-top"
+                            className="h-px w-72 align-top"
                             key={centro.id}
                           >
                             <div className="block p-6">
