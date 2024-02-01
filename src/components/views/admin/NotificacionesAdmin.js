@@ -144,12 +144,20 @@ const NotificacionesAdmin = () => {
       setSeccion(seccion); // Actualiza el estado con la nueva sección
     };
   return (
-    <main>
+    <main className="bg-white rounded-xl shadow dark:bg-primary-100 p-2">
+               <div class="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
+            <h1 class="title-font text-7xl  mb-4 font-bold text-gray-900">
+            Notificaciones
+            </h1>
+            </div>
+      
+            
+       
       <section class="text-gray-600 body-font mt-6">
         <div class="flex flex-col">
           <div class="-m-1.5 overflow-x-auto">
             <div class="p-1.5 min-w-full inline-block align-middle">
-              <div class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden dark:bg-slate-900 dark:border-gray-700">
+              <div class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden dark:bg-accent-200 dark:border-gray-700">
                 {/* <!-- Header --> */}
                 <div class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-gray-200 dark:border-gray-700">
                   {/* <!-- Input --> */}
@@ -165,7 +173,7 @@ const NotificacionesAdmin = () => {
                         type="text"
                         id="hs-as-table-product-review-search"
                         name="hs-as-table-product-review-search"
-                        class="py-2 px-3 ps-11 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
+                        class="py-2 px-3 ps-11 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-accent-200 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
                         placeholder="Search"
                       />
                       <div class="absolute inset-y-0 start-0 flex items-center pointer-events-none ps-4">
@@ -185,14 +193,14 @@ const NotificacionesAdmin = () => {
                   {/* <!-- End Input --> */}
                   <button
                     type="button"
-                    class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-green-600 bg-green-600 text-white shadow-sm hover:bg-green-800 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
+                    class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-green-600 bg-green-600 text-white shadow-sm hover:bg-green-800 duration-300 disabled:opacity-50 disabled:pointer-events-none "
                     onClick={() => cargarDatos('altauser')}
                   >
                     Alta Usuarios
                   </button>
                   <button
                     type="button"
-                    class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-green-600 bg-green-600 text-white shadow-sm hover:bg-green-800 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
+                    class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-green-600 bg-green-600 text-white shadow-sm hover:bg-green-800 duration-300 disabled:opacity-50 disabled:pointer-events-none "
                     onClick={() => cargarDatos('altacentroempresa')}
                   >
                     Alta centro-empresa
@@ -200,7 +208,7 @@ const NotificacionesAdmin = () => {
 
                   <button
                     type="button"
-                    class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-green-600 bg-green-600 text-white shadow-sm hover:bg-green-800 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
+                    class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-green-600 bg-green-600 text-white shadow-sm hover:bg-green-800 duration-300 disabled:opacity-50 disabled:pointer-events-none "
                     onClick={() => cargarDatos('altatecnologia')}
                   >
                     Alta Tecnologia
@@ -208,7 +216,7 @@ const NotificacionesAdmin = () => {
                   
                   <button
                     type="button"
-                    class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-green-600 bg-green-600 text-white shadow-sm hover:bg-green-800 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
+                    class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-green-600 bg-green-600 text-white shadow-sm hover:bg-green-800 duration-300 disabled:opacity-50 disabled:pointer-events-none "
                     onClick={() => cargarDatos('altaacreditacion')}
                   >
                     Alta Acreditacion Charla
@@ -223,7 +231,7 @@ const NotificacionesAdmin = () => {
                         <button
                           id="hs-as-table-table-filter-dropdown"
                           type="button"
-                          class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                          class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-accent-200 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
                         >
                           <svg
                             class="flex-shrink-0 w-3.5 h-3.5"
@@ -247,7 +255,7 @@ const NotificacionesAdmin = () => {
                           </span>
                         </button>
                         <div
-                          class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden mt-2 divide-y divide-gray-200 min-w-[12rem] z-10 bg-white shadow-md rounded-lg mt-2 dark:divide-gray-700 dark:bg-gray-800 dark:border dark:border-gray-700"
+                          class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden mt-2 divide-y divide-gray-200 min-w-[12rem] z-10 bg-white shadow-md rounded-lg mt-2 dark:divide-gray-700 dark:bg-accent-200 dark:border dark:border-gray-700"
                           aria-labelledby="hs-as-table-table-filter-dropdown"
                         >
                           <div class="divide-y divide-gray-200 dark:divide-gray-700">
@@ -257,7 +265,7 @@ const NotificacionesAdmin = () => {
                             >
                               <input
                                 type="checkbox"
-                                class="shrink-0 mt-0.5 border-gray-300 rounded text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800"
+                                class="shrink-0 mt-0.5 border-gray-300 rounded text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-accent-200 dark:border-gray-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800"
                                 id="hs-as-filters-dropdown-all"
                                 checked
                               />
@@ -271,7 +279,7 @@ const NotificacionesAdmin = () => {
                             >
                               <input
                                 type="checkbox"
-                                class="shrink-0 mt-0.5 border-gray-300 rounded text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800"
+                                class="shrink-0 mt-0.5 border-gray-300 rounded text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-accent-200 dark:border-gray-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800"
                                 id="hs-as-filters-dropdown-published"
                               />
                               <span class="ms-3 text-sm text-gray-800 dark:text-gray-200">
@@ -284,7 +292,7 @@ const NotificacionesAdmin = () => {
                             >
                               <input
                                 type="checkbox"
-                                class="shrink-0 mt-0.5 border-gray-300 rounded text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800"
+                                class="shrink-0 mt-0.5 border-gray-300 rounded text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-accent-200 dark:border-gray-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800"
                                 id="hs-as-filters-dropdown-pending"
                               />
                               <span class="ms-3 text-sm text-gray-800 dark:text-gray-200">
@@ -372,7 +380,7 @@ const NotificacionesAdmin = () => {
                       .map((usuario, index) => (
                         <tr
                           key={index}
-                          class="bg-white hover:bg-gray-50 dark:bg-slate-900 dark:hover:bg-slate-800"
+                          class="bg-white hover:bg-gray-50 dark:bg-accent-200 dark:hover:bg-slate-800"
                         >
                           <td class="h-px w-px whitespace-nowrap align-top">
                             <div class="block p-6">
@@ -382,7 +390,7 @@ const NotificacionesAdmin = () => {
                                   <span class="block text-sm font-semibold text-gray-800 dark:text-gray-200">
                                     {usuario.nombre}
                                   </span>
-                                  <span class="block text-sm text-gray-500">
+                                  <span class="block text-sm text-accent-100">
                                     {usuario.apellidos}
                                   </span>
                                 </div>
@@ -405,9 +413,9 @@ const NotificacionesAdmin = () => {
                   {centroEmpresaResponse
                     .filter((centro) => usuario.idEmpresaCentro === centro.idEmpresaCentro)
                     .map((centro, index) => (
-                      <td class="h-px w-72 max-w-[2rem] align-top">
+                      <td class="h-px w-72 align-top">
                         <div class="block p-6">
-                          <span class="block text-sm text-gray-500">
+                          <span class="block text-sm text-accent-100">
                             {centro.nombre}
                           </span>
                         </div>
@@ -416,9 +424,9 @@ const NotificacionesAdmin = () => {
                   {centroEmpresaResponse
                     .filter((centro) => usuario.idEmpresaCentro === centro.idEmpresaCentro)
                     .length === 0 && (
-                    <td class="h-px w-72 max-w-[2rem] align-top">
+                    <td class="h-px w-72 align-top">
                       <div class="block p-6">
-                        <span class="block text-sm text-gray-500">
+                        <span class="block text-sm text-accent-100">
                           Ninguna
                         </span>
                       </div>
@@ -428,17 +436,17 @@ const NotificacionesAdmin = () => {
                           {rolesResponse
                             .filter((rol) => usuario.idRole === rol.idRole)
                             .map((rol, index) => (
-                              <td class="h-px w-72 max-w-[2rem] align-top">
+                              <td class="h-px w-72 align-top">
                                 <div class="block p-6">
-                                  <span class="block text-sm text-gray-500">
+                                  <span class="block text-sm text-accent-100">
                                     {rol.tipoRole}
                                   </span>
                                 </div>
                               </td>
                             ))}
-                          <td class="h-px w-72 max-w-[2rem] align-top">
+                          <td class="h-px w-72 align-top">
                             <div class="block p-6">
-                              <span class="block text-sm text-gray-500">
+                              <span class="block text-sm text-accent-100">
                                 {usuario.telefono}
                               </span>
                             </div>
@@ -453,7 +461,7 @@ const NotificacionesAdmin = () => {
                                 viewBox="0 0 100 100"
                                 preserveAspectRatio="xMidYMid meet"
                                 height="100"
-                                class="w-8 h-8 shrink-0 fill-accent-200"
+                                class="w-8 h-8 shrink-0 dark:fill-accent-100 fill-accent-200"
                               >
                                 <path d="M92.86,0H7.12A7.17,7.17,0,0,0,0,7.21V92.79A7.17,7.17,0,0,0,7.12,100H92.86A7.19,7.19,0,0,0,100,92.79V7.21A7.19,7.19,0,0,0,92.86,0ZM30.22,85.71H15.4V38H30.25V85.71ZM22.81,31.47a8.59,8.59,0,1,1,8.6-8.59A8.6,8.6,0,0,1,22.81,31.47Zm63,54.24H71V62.5c0-5.54-.11-12.66-7.7-12.66s-8.91,6-8.91,12.26V85.71H39.53V38H53.75v6.52H54c2-3.75,6.83-7.7,14-7.7,15,0,17.79,9.89,17.79,22.74Z"></path>
                               </svg>
@@ -479,7 +487,7 @@ const NotificacionesAdmin = () => {
                                   onClick={() =>
                                     handleClick(usuario.idUsuario, 1)
                                   }
-                                  class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-green-600 bg-green-600 text-white shadow-sm hover:bg-green-800 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
+                                  class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-green-600 bg-green-600 text-white shadow-sm hover:bg-green-800 duration-300 disabled:opacity-50 disabled:pointer-events-none "
                                 >
                                   Activar
                                 </button>                             
@@ -576,7 +584,7 @@ const NotificacionesAdmin = () => {
                     {peticionCentroEmpresaResponse.map((peticion, index) => (
                         <tr
                           key={index}
-                          class="bg-white hover:bg-gray-50 dark:bg-slate-900 dark:hover:bg-slate-800"
+                          class="bg-white hover:bg-gray-50 dark:bg-accent-200 dark:hover:bg-slate-800"
                         >
                           <td class="h-px w-px whitespace-nowrap align-top">
                             <div class="block p-6">
@@ -605,52 +613,52 @@ const NotificacionesAdmin = () => {
                             </div>
                           </td>
 
-                          <td class="h-px w-72 max-w-[2rem] align-top">
+                          <td class="h-px w-72 align-top">
                             <div class="block p-6">
-                              <span class="block text-sm text-gray-500">
+                              <span class="block text-sm text-accent-100">
                                 {centro.telefono}
                               </span>
                             </div>
                           </td>
 
-                          <td class="h-px w-72 max-w-[2rem] align-top">
+                          <td class="h-px w-72 align-top">
                             <div class="block p-6">
-                              <span class="block text-sm text-gray-500">
+                              <span class="block text-sm text-accent-100">
                                 {centro.personaContacto}
                               </span>
                             </div>
                           </td>
 
-                          <td class="h-px w-72 max-w-[2rem] align-top">
+                          <td class="h-px w-72 align-top">
                             <div class="block p-6">
-                              <span class="block text-sm text-gray-500">
+                              <span class="block text-sm text-accent-100">
                                 {centro.cif}
                               </span>
                             </div>
                           </td>
 
                           <td
-                            className="h-px w-72 max-w-[2rem] align-top"
+                            className="h-px w-72 align-top"
                             key={centro.id}
                           >
                             <div className="block p-6">
-                              <span className="block text-sm text-gray-500">
+                              <span className="block text-sm text-accent-100">
                                 {getProvinciaNombre(centro.idProvincia)}
                               </span>
                             </div>
                           </td>
 
-                          <td class="h-px w-72 max-w-[2rem] align-top">
+                          <td class="h-px w-72 align-top">
                             <div class="block p-6">
-                              <span class="block text-sm text-gray-500">
+                              <span class="block text-sm text-accent-100">
                                 {centro.razonSocial}
                               </span>
                             </div>
                           </td>
 
-                          <td class="h-px w-72 max-w-[2rem] align-top">
+                          <td class="h-px w-72 align-top">
                             <div class="block p-6">
-                              <span class="block text-sm text-gray-500">
+                              <span class="block text-sm text-accent-100">
                                 {centro.idTipoEmpresa}
                               </span>
                             </div>
@@ -662,7 +670,7 @@ const NotificacionesAdmin = () => {
                                 handleAlta(peticion.idCentroEmpresa,1,peticion.idPeticionCentroEmpresa)
                               }
                               type="button"
-                              class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-green-600 bg-green-600 text-white shadow-sm hover:bg-green-800 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
+                              class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-green-600 bg-green-600 text-white shadow-sm hover:bg-green-800 duration-300 disabled:opacity-50 disabled:pointer-events-none "
                             >
                               Alta
                             </button>
@@ -673,7 +681,7 @@ const NotificacionesAdmin = () => {
                               handleBaja(peticion.idPeticionCentroEmpresa)
                             }
                               type="button"
-                              class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-green-600 bg-green-600 text-white shadow-sm hover:bg-green-800 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
+                              class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-green-600 bg-green-600 text-white shadow-sm hover:bg-green-800 duration-300 disabled:opacity-50 disabled:pointer-events-none "
                             >
                               Denegar
                             </button>
@@ -708,7 +716,7 @@ const NotificacionesAdmin = () => {
                     {peticionesResponse.map((peticion, index) => (
                         <tr
                           key={index}
-                          class="bg-white hover:bg-gray-50 dark:bg-slate-900 dark:hover:bg-slate-800"
+                          class="bg-white hover:bg-gray-50 dark:bg-accent-200 dark:hover:bg-slate-800"
                         >
                           <td class="h-px w-px whitespace-nowrap align-top">
                             <div class="block p-6">
@@ -726,7 +734,7 @@ const NotificacionesAdmin = () => {
                           <td class="h-px w-px whitespace-nowrap align-top">
                             <button
                               type="button"
-                              class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-green-600 bg-green-600 text-white shadow-sm hover:bg-green-800 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
+                              class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-green-600 bg-green-600 text-white shadow-sm hover:bg-green-800 duration-300 disabled:opacity-50 disabled:pointer-events-none "
                               onClick={handleSubmit} 
                            >
                               Activar
@@ -759,7 +767,7 @@ const NotificacionesAdmin = () => {
     return (
       <tr
         key={index}
-        class="bg-white hover:bg-gray-50 dark:bg-slate-900 dark:hover:bg-slate-800"
+        class="bg-white hover:bg-gray-50 dark:bg-accent-200 dark:hover:bg-slate-800"
       >
         <td class="h-px w-px whitespace-nowrap align-top">
           <div class="block p-6">
@@ -780,7 +788,7 @@ const NotificacionesAdmin = () => {
         <td class="h-px w-px whitespace-nowrap align-top">
           <button
             type="button"
-            class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-green-600 bg-green-600 text-white shadow-sm hover:bg-green-800 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
+            class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-green-600 bg-green-600 text-white shadow-sm hover:bg-green-800 duration-300 disabled:opacity-50 disabled:pointer-events-none "
             onClick={() => handleAcreditar(solicitud.idCharla,solicitud.idPeticionCharla)}
           >
             Acreditar Charla
@@ -801,7 +809,7 @@ const NotificacionesAdmin = () => {
                     <div class="inline-flex gap-x-2">
                       <button
                         type="button"
-                        class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                        class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-accent-200 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
                       >
                         <svg
                           class="flex-shrink-0 w-4 h-4"
@@ -822,7 +830,7 @@ const NotificacionesAdmin = () => {
 
                       <button
                         type="button"
-                        class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                        class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-accent-200 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
                       >
                         Next
                         <svg

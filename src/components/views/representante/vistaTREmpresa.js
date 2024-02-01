@@ -61,7 +61,7 @@ const VistaTechridersEmpresa = () => {
             charlas.map((ch, index) => (
               <div
                 key={index}
-                className="relative md:max-w-full mx-auto p-6 mb-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+                className="relative md:max-w-full mx-auto p-6 mb-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-accent-200 dark:border-gray-700"
               >
                 <p className="mb-4 text-lg font-semibold text-gray-900 dark:text-white">
                   <span className="text-accent-200">Descripcion: </span>
@@ -69,7 +69,7 @@ const VistaTechridersEmpresa = () => {
                 </p>
                 <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4">
                   <div>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                    <p className="text-sm text-accent-100 dark:text-gray-400">
                       <span className="font-semibold">Curso: </span>
                       {" " + ch.nombreCurso}
                     </p>
@@ -77,7 +77,7 @@ const VistaTechridersEmpresa = () => {
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4">
                   <div>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                    <p className="text-sm text-accent-100 dark:text-gray-400">
                       <span className="font-semibold">Modalidad: </span>
                       {ch.modalidad}
                     </p>
@@ -85,7 +85,7 @@ const VistaTechridersEmpresa = () => {
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4">
                   <div>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                    <p className="text-sm text-accent-100 dark:text-gray-400">
                       <span className="font-semibold">Fecha: </span>
                       {ch.fechaCharla}
                     </p>
@@ -151,7 +151,7 @@ const VistaTechridersEmpresa = () => {
         {techriders.map((tr, index) => (
           <div
             key={index}
-            className="relative md:max-w-full mx-auto p-6 mb-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+            className="relative md:max-w-full mx-auto p-6 mb-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-accent-200 dark:border-gray-700"
           >
             <p className="flex items-center gap-3 mb-4 text-lg font-semibold text-gray-900 dark:text-white">
               <span className="text-accent-200">
@@ -175,25 +175,25 @@ const VistaTechridersEmpresa = () => {
             </p>
             <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-3">
               <div>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
+                <p className="text-sm text-accent-100 dark:text-gray-400">
                   <span className="font-semibold">Email: </span>
                   {" " + tr.email}
                 </p>
               </div>
               <div>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
+                <p className="text-sm text-accent-100 dark:text-gray-400">
                   <span className="font-semibold">Teléfono: </span>
                   {tr.telefonoTechRider}
                 </p>
               </div>
               <div>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
+                <p className="text-sm text-accent-100 dark:text-gray-400">
                   <span className="font-semibold">Linkedin: </span>
                   {tr.linkedIn}
                 </p>
               </div>
               <div>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
+                <p className="text-sm text-accent-100 dark:text-gray-400">
                   <span className="font-semibold">Empresa: </span>
                   {tr.empresa}
                 </p>

@@ -50,7 +50,7 @@ const VistaCursosCentrto = () => {
         {cursos.map((curso, index) => (
           <div
             key={index}
-            className="relative md:max-w-full mx-auto p-6 mb-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+            className="relative md:max-w-full mx-auto p-6 mb-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-accent-200 dark:border-gray-700"
           >
             <p className="mb-4 text-lg font-semibold text-gray-900 dark:text-white">
               <span className="text-accent-200">Curso: </span>
@@ -58,19 +58,19 @@ const VistaCursosCentrto = () => {
             </p>
             <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4">
               <div>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
+                <p className="text-sm text-accent-100 dark:text-gray-400">
                   <span className="font-semibold">Profesor/a: </span>
                   {" " + curso.profesor}
                 </p>
               </div>
               <div>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
+                <p className="text-sm text-accent-100 dark:text-gray-400">
                   <span className="font-semibold">Centro: </span>
                   {curso.centro}
                 </p>
               </div>
               <div>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
+                <p className="text-sm text-accent-100 dark:text-gray-400">
                   <span className="font-semibold">Provincia: </span>
                   {curso.provinciaCentro}
                 </p>
@@ -227,15 +227,16 @@ const VistaCursosCentrto = () => {
   }, []);
 
   return (
+    <main className="bg-white rounded-xl shadow dark:bg-primary-100 p-2">
     <section className="container mx-auto">
-      <div className="text-sm font-medium text-center text-gray-500 border-b border-gray-400 dark:text-gray-400 dark:border-gray-700">
+      <div className="text-sm font-medium text-center text-accent-100 border-b border-gray-400 dark:text-gray-400 dark:border-gray-700">
         <ul className="flex flex-wrap -mb-px">
           <li className="me-2">
             <button
               className={`${
                 selectedComponent === "cursos"
-                  ? "bg-blue-700  text-white"
-                  : "active bg-blue-400 hover:bg-blue-600  text-white"
+                  ? "bg-accent-200  text-white"
+                  : "active bg-accent-100 hover:bg-blue-600  text-white"
               } inline-block p-4 border-b-2 border-transparent rounded-t-sm focus:outline-none`}
               onClick={() => handleComponentChange("cursos")}
             >
@@ -246,8 +247,8 @@ const VistaCursosCentrto = () => {
             <button
               className={`${
                 selectedComponent === "crearcurso"
-                  ? "bg-blue-700  text-white"
-                  : "active bg-blue-400 hover:bg-blue-600  text-white"
+                  ? "bg-accent-200  text-white"
+                  : "active bg-accent-100 hover:bg-blue-600  text-white"
               } inline-block p-4 border-b-2 border-transparent rounded-t-sm focus:outline-none`}
               onClick={() => handleComponentChange("crearcurso")}
             >
@@ -261,6 +262,7 @@ const VistaCursosCentrto = () => {
         {selectedComponent === "crearcurso" && <CrearCurso />}
       </div>
     </section>
+    </main>
   );
 };
 export default VistaCursosCentrto;

@@ -13,7 +13,7 @@ const NotFound = () => {
         <p class="mb-4 text-sm font-semibold uppercase text-accent-200 md:text-base">Error 404</p>
         <h1 class="mb-2 text-center text-2xl font-bold text-gray-800 sm:text-left md:text-3xl">Página no encontrada</h1>
 
-        <p class="mb-8 text-center text-gray-500 sm:text-left md:text-lg">La página que buscas no existe o se ha movido.</p>
+        <p class="mb-8 text-center text-accent-100 sm:text-left md:text-lg">La página que buscas no existe o se ha movido.</p>
 
         <Link
               to={"/"}

@@ -88,7 +88,7 @@ const VerCharlasAdmin = () => {
   };
 
   return (
-    <main>
+    <main className="bg-white rounded-xl shadow dark:bg-primary-100">
       {/* no borrar */}
       <div class="hs-accordion-group hidden ">
         <div class="hs-accordion active" id="hs-basic-heading-one">
@@ -257,7 +257,7 @@ const VerCharlasAdmin = () => {
           {charlasResponse.map((charla) => (
             <li
               key={charla.idCharla}
-              className="hs-accordion active bg-white border -mt-px first:rounded-t-lg last:rounded-b-lg dark:bg-gray-800 dark:border-gray-700"
+              className="hs-accordion active bg-white border -mt-px first:rounded-t-lg last:rounded-b-lg dark:bg-accent-200 dark:border-gray-700"
               id="hs-bordered-heading-one"
             >
               <div className="flex flex-row">
@@ -354,7 +354,7 @@ const VerCharlasAdmin = () => {
                     </div>
 
                     <div class="mt-4">
-                      <p class="max-w-[40ch] text-sm text-gray-500">
+                      <p class="max-w-[40ch] text-sm text-accent-100">
                         {charla.observaciones}
                       </p>
                     </div>
@@ -404,7 +404,7 @@ const VerCharlasAdmin = () => {
                           }
                         })()}
 
-                        <dt class="text-xs text-gray-500">
+                        <dt class="text-xs text-accent-100">
                           {formatFecha(charla.fechaCharla)}
                         </dt>
                       </div>
@@ -413,7 +413,7 @@ const VerCharlasAdmin = () => {
                         <dt class="text-sm my-1 font-medium p-2 rounded-xl text-gray-600">
                           {getProvinciaNombre(charla.idProvincia)}
                         </dt>
-                        {/* <dd class="text-xs text-gray-500">{charla.turno}</dd> */}
+                        {/* <dd class="text-xs text-accent-100">{charla.turno}</dd> */}
                       </div>
                         <div>
                           <h2>Valoraciones de la charla</h2>

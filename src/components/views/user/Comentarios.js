@@ -19,7 +19,7 @@ const Comentarios = () => {
   }, []);
 
   return (
-    <main>
+    <main className="bg-white rounded-xl shadow dark:bg-primary-100">
       <h1>Comentarios</h1>
       <ul>
         {charlasResponse.map((charla) => (

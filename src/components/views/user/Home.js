@@ -385,7 +385,7 @@ const Home = () => {
                             return <></>;
                           default:
                             return (
-                              <p className="max-w-[40ch] text-sm text-gray-500 bg-primary-100 p-2 rounded">
+                              <p className="max-w-[40ch] text-sm text-accent-100 bg-primary-100 p-2 rounded">
                               {charla.observaciones}
                             </p>
                             );
@@ -446,11 +446,11 @@ const Home = () => {
                         {getProvinciaNombre(charla.idProvincia)}
                       </dt>
                       
-                      {/* <dd className="text-xs text-gray-500">{charla.turno}</dd> */}
+                      {/* <dd className="text-xs text-accent-100">{charla.turno}</dd> */}
                     </div>
                    
                   </dl>
-                  <dt className="text-xs text-gray-500 dark:text-black mt-1">
+                  <dt className="text-xs text-accent-100 dark:text-black mt-1">
                        Creada: {formatFecha(charla.fechaCharla)}
                       </dt>
                 </div>

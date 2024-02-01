@@ -192,7 +192,7 @@ const CalendarComponent = ({ charlas }) => {
                             return <></>;
                           default:
                             return (
-                              <p className="max-w-[40ch] text-sm text-gray-500 bg-primary-100 p-2 rounded">
+                              <p className="max-w-[40ch] text-sm text-accent-100 bg-primary-100 p-2 rounded">
                               {charla.observaciones}
                             </p>
                             );
@@ -253,7 +253,7 @@ const CalendarComponent = ({ charlas }) => {
                         {getProvinciaNombre(charla.idProvincia)}
                       </dt>
                       
-                      {/* <dd className="text-xs text-gray-500">{charla.turno}</dd> */}
+                      {/* <dd className="text-xs text-accent-100">{charla.turno}</dd> */}
                     </div>
                    
                   </dl>

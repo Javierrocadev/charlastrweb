@@ -169,13 +169,13 @@ const HomeProfesor = () => {
                 <input
                   id="af-account-full-name"
                   type="text"
-                  class="py-3 px-4 sm:mb-0 mb-4 block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 "
+                  class="py-3 px-4 sm:mb-0 mb-4 block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-accent-200 dark:border-gray-700 dark:text-gray-400 "
                   onChange={(e) => setNewNombre(e.target.value)}
                   placeholder={props.nombre}
                 />
                 <input
                   type="text"
-                  class="py-3 px-4  block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 "
+                  class="py-3 px-4  block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-accent-200 dark:border-gray-700 dark:text-gray-400 "
                   onChange={(e) => setNewApellidos(e.target.value)}
                   placeholder={props.apellidos}
                 />
@@ -195,7 +195,7 @@ const HomeProfesor = () => {
               <input
                 id="af-account-email"
                 type="email"
-                class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 "
+                class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-accent-200 dark:border-gray-700 dark:text-gray-400 "
                 onChange={(e) => setNewEmail(e.target.value)}
                 placeholder={props.email}
               />
@@ -212,7 +212,7 @@ const HomeProfesor = () => {
             <div class="sm:col-span-9">
               <input
                 type="text"
-                class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 "
+                class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-accent-200 dark:border-gray-700 dark:text-gray-400 "
                 onChange={(e) => setNewLinkedin(e.target.value)}
                 placeholder={props.linkedIn}
               />
@@ -231,7 +231,7 @@ const HomeProfesor = () => {
               <div class="space-y-2">
                 <input
                   type="text"
-                  class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 "
+                  class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-accent-200 dark:border-gray-700 dark:text-gray-400 "
                   placeholder={getCentroNombre(props.idEmpresaCentro)}
                   disabled
                 />
@@ -251,7 +251,7 @@ const HomeProfesor = () => {
                 <input
                   onChange={(e) => setNewPassword(e.target.value)}
                   type="text"
-                  class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 "
+                  class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-accent-200 dark:border-gray-700 dark:text-gray-400 "
                   placeholder={props.password}
                 />
               </div>
@@ -269,17 +269,17 @@ const HomeProfesor = () => {
             </div>
 
             <div class="sm:col-span-9">
-              <div class="sm:flex ">
+              <div class="sm:flex gap-2">
                 <input
                   id="af-account-phone"
                   type="text"
-                  class="py-3 mr-4 sm:mb-0 mb-4 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 "
+                  class="py-3 mr-4 sm:mb-0 mb-4 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-accent-200 dark:border-gray-700 dark:text-gray-400 "
                   onChange={(e) => setNewTelefono(e.target.value)}
                   placeholder={props.telefono}
                 />
                 <select
                   onChange={(e) => setNewProvincia(e.target.value)}
-                  class="py-2 px-3 pe-9 block w-full sm:w-auto border-gray-200 shadow-sm -mt-px -ms-px rounded sm:mt-0 sm:first:ms-0  text-sm relative focus:z-10  focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 "
+                  class="py-2 px-3 pe-9 block w-full sm:w-auto border-gray-200 shadow-sm -mt-px -ms-px rounded sm:mt-0 sm:first:ms-0  text-sm relative focus:z-10  focus:border-accent-100 focus:ring-accent-100 focus:ring-2 ring-offset-2  ring-accent-100 outline-0 disabled:opacity-50 disabled:pointer-events-none dark:bg-accent-200 dark:border-gray-700 dark:text-gray-400 "
                 >
                   {provinciasResponse.map((provincia) => (
                     <option
@@ -296,14 +296,9 @@ const HomeProfesor = () => {
           </div>
 
           <div class="mt-5 flex justify-end gap-x-2">
-            <button
-              type="submit"
-              class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-accent-200 bg-accent-200 text-white shadow-sm hover:bg-accent-100 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
-            >
-              Guardar cambios
-            </button>
+   <button type="submit" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-accent-200 bg-accent-100 text-white shadow-sm hover:bg-accent-100 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-accent-100 hover:dark:bg-primary-300">Guardar cambios</button>
           </div>
-        </form>
+primary </form>
       </section>
     );
   };
@@ -343,9 +338,9 @@ const HomeProfesor = () => {
           />
           <button
             type="submit"
-            className="py-2 mt-4 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-accent-200 bg-accent-200 text-white shadow-sm hover:bg-accent-100 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
+            className="py-2 mt-4 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-accent-200 bg-accent-100 text-white shadow-sm hover:bg-accent-100 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
           >
-            Enviar Mensaje
+primary     Enviar Mensaje
           </button>
         </form>
       </section>
@@ -359,7 +354,7 @@ const HomeProfesor = () => {
         {cursosProfesor.map((curso) => (
           <div
             key={curso.idCurso}
-            className="relative md:max-w-full mx-auto p-6 mb-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+            className="relative md:max-w-full mx-auto p-6 mb-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-accent-200 dark:border-gray-700"
           >
             <p className="mb-4 text-lg font-semibold text-gray-900 dark:text-white">
               <span className="text-accent-200">Curso: </span>
@@ -367,25 +362,25 @@ const HomeProfesor = () => {
             </p>
             <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4">
               <div>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
+                <p className="text-sm text-accent-100 dark:text-gray-400">
                   <span className="font-semibold">Centro: </span>
                   {curso.centro}
                 </p>
               </div>
               <div>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
+                <p className="text-sm text-accent-100 dark:text-gray-400">
                   <span className="font-semibold">Email: </span>
                   {curso.emailProfesor}
                 </p>
               </div>
               <div>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
+                <p className="text-sm text-accent-100 dark:text-gray-400">
                   <span className="font-semibold">Telefono: </span>
                   {curso.telefonoProfesor}
                 </p>
               </div>
               <div>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
+                <p className="text-sm text-accent-100 dark:text-gray-400">
                   <span className="font-semibold">Provincia: </span>
                   {curso.provinciaCentro}
                 </p>
@@ -449,15 +444,15 @@ const HomeProfesor = () => {
     <main className="w-full mx-auto">
       {usuarioResponse && (
         <div className="px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
-          <div className="bg-white rounded-xl shadow p-4 sm:p-7 dark:bg-slate-900">
-            <div className="text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
+          <div className="bg-white rounded-xl shadow p-4 sm:p-7 dark:bg-accent-200">
+            <div className="text-sm font-medium text-center text-accent-100 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
               <ul className="flex flex-wrap -mb-px">
                 <li className="me-2">
                   <button
                     className={`${
                       selectedComponent === "perfil"
-                        ? "bg-accent-200 text-white"
-                        : "active  text-accent-200"
+                        ? "bg-accent-100 text-white"
+                        : "active  text-primary-200"
                     } inline-block p-4 border-b-2 border-transparent rounded-t-sm focus:outline-none`}
                     onClick={() => handleComponentChange("perfil")}
                   >
@@ -468,8 +463,8 @@ const HomeProfesor = () => {
                   <button
                     className={`${
                       selectedComponent === "contacto"
-                        ? "bg-accent-200 text-white"
-                        : "active text-accent-200"
+                        ? "bg-accent-100 text-white"
+                        : "active text-accentprimary200"
                     } inline-block p-4 border-b-2 border-transparent rounded-t-sm focus:outline-none`}
                     onClick={() => handleComponentChange("contacto")}
                   >
@@ -480,8 +475,8 @@ const HomeProfesor = () => {
                   <button
                     className={`${
                       selectedComponent === "alumnos"
-                        ? "bg-accent-200 text-white"
-                        : "active text-accent-200"
+                        ? "bg-accent-100 text-white"
+                        : "active text-accentprimary200"
                     } inline-block p-4 border-b-2 border-transparent rounded-t-sm focus:outline-none`}
                     onClick={() => handleComponentChange("alumnos")}
                   >

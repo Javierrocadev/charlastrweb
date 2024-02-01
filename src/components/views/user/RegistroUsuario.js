@@ -79,13 +79,13 @@ const RegistroUsuario = () => {
   };
 
   return (
-    <main>
+    <main className="bg-white rounded-xl shadow dark:bg-primary-100 p-2">
        <section class="text-gray-600 body-font mt-6">
         <div class="flex flex-wrap w-full mb-12 flex-col items-center text-center">
           <h2 class="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-900">
             Registrate ahora
           </h2>
-          <p class="lg:w-1/2 w-full leading-relaxed text-gray-500">
+          <p class="lg:w-1/2 w-full leading-relaxed text-accent-100">
             Sigue los siguientes pasos
           </p>
         </div>
@@ -156,7 +156,7 @@ const RegistroUsuario = () => {
             </h2>
           </div>
           <div class="flex flex-wrap justify-center -m-4">
-            <ul class="flex flex-wrap w-full justify-center gap-6 ">
+            <ul class="flex flex-wrap w-full justify-center gap-6 mb-4">
               <li className="">
                 <input
                   type="radio"
@@ -169,7 +169,7 @@ const RegistroUsuario = () => {
                 />
                 <label
                   for="hosting-small"
-                  class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-primary-500 peer-checked:bg-accent-200 peer-checked:border-primary-600 peer-checked:text-white hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="inline-flex items-center justify-between w-full p-5 text-accent-100 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-primary-500 peer-checked:bg-accent-200 peer-checked:border-primary-600 peer-checked:text-white hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-accent-200 dark:hover:bg-gray-700"
                 >
                   <div class="block">
                     <div class="w-full text-lg font-semibold">Tech Riders</div>
@@ -203,7 +203,7 @@ const RegistroUsuario = () => {
                 />
                 <label
                   for="hosting-big"
-                  class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-primary-500 peer-checked:bg-accent-200 peer-checked:border-primary-600 peer-checked:text-white hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="inline-flex items-center justify-between w-full p-5 text-accent-100 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-primary-500 peer-checked:bg-accent-200 peer-checked:border-primary-600 peer-checked:text-white hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-accent-200 dark:hover:bg-gray-700"
                 >
                   <div class="block">
                     <div class="w-full text-lg font-semibold">Empresas</div>
@@ -238,7 +238,7 @@ const RegistroUsuario = () => {
                 />
                 <label
                   for="hosting-medium"
-                  class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-primary-500 peer-checked:bg-accent-200 peer-checked:border-primary-600 peer-checked:text-white hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="inline-flex items-center justify-between w-full p-5 text-accent-100 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-primary-500 peer-checked:bg-accent-200 peer-checked:border-primary-600 peer-checked:text-white hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-accent-200 dark:hover:bg-gray-700"
                 >
                   <div class="block">
                     <div class="w-full text-lg font-semibold">

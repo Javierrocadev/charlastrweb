@@ -134,27 +134,27 @@ const VistaCharlasCentrto = () => {
                   <div key={index} className="w-full h-full p-4 md:flex-1">
                     <div
                       className="relative md:max-w-full h-[150px] mx-auto p-6 mb-4 bg-white border 
-                    border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+                    border-gray-200 rounded-lg shadow dark:bg-accent-200 dark:border-gray-700"
                     >
                       <p className="mb-4 text-lg font-semibold text-gray-900 dark:text-white">
-                        <span className="text-indigo-500">Rider: </span>
+                        <span className="text-accent-100">Rider: </span>
                         {" " + techRider.nombre + "  " + techRider.apellidos}
                       </p>
                       <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4">
                         <div>
-                          <p className="text-sm text-gray-500 dark:text-gray-400">
+                          <p className="text-sm text-accent-100 dark:text-gray-400">
                             <span className="font-semibold">Email: </span>
                             {" " + techRider.email}
                           </p>
                         </div>
                         <div>
-                          <p className="text-sm text-gray-500 dark:text-gray-400">
+                          <p className="text-sm text-accent-100 dark:text-gray-400">
                             <span className="font-semibold">Linkedin: </span>
                             {techRider.linkedIn}
                           </p>
                         </div>
                         <div>
-                          <p className="text-sm text-gray-500 dark:text-gray-400">
+                          <p className="text-sm text-accent-100 dark:text-gray-400">
                             <span className="font-semibold">Teléfono: </span>
                             {techRider.telefono}
                           </p>
@@ -175,15 +175,15 @@ const VistaCharlasCentrto = () => {
                   >
                     <div
                       className="relative md:max-w-full h-[150px] mx-auto p-6 mb-4
-                    bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+                    bg-white border border-gray-200 rounded-lg shadow dark:bg-accent-200 dark:border-gray-700"
                     >
                       <p className="mb-4 text-lg font-semibold text-gray-900 dark:text-white">
-                        <span className="text-indigo-500">Curso: </span>
+                        <span className="text-accent-100">Curso: </span>
                         {" " + curso.nombreCurso + " "}
                       </p>
                       <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4">
                         <div>
-                          <p className="text-sm text-gray-500 dark:text-gray-400">
+                          <p className="text-sm text-accent-100 dark:text-gray-400">
                             <span className="font-semibold">Descripción: </span>
                             {" " + curso.descripcion}
                           </p>
@@ -237,12 +237,12 @@ const VistaCharlasCentrto = () => {
             {charla.map((charla) => (
               <div
                 key={charla.idCharla}
-                className="relative md:max-w-full mx-auto p-6 mb-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+                className="relative md:max-w-full mx-auto p-6 mb-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-accent-200 dark:border-gray-700"
               >
                 <div className="flex items-center">
                   <div className="flex-1">
                     <p className="flex items-center gap-2 mb-4 text-lg font-semibold text-gray-900 dark:text-white">
-                      <span className="text-indigo-500">Descripción: </span>
+                      <span className="text-accent-100">Descripción: </span>
                       {charla.descripcion}
 
                       <span>
@@ -276,25 +276,25 @@ const VistaCharlasCentrto = () => {
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4">
                   <div>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                    <p className="text-sm text-accent-100 dark:text-gray-400">
                       <span className="font-semibold">Fecha: </span>
                       {charla.fechaCharla}
                     </p>
                   </div>
                   <div>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                    <p className="text-sm text-accent-100 dark:text-gray-400">
                       <span className="font-semibold">Turno: </span>
                       {charla.turno}
                     </p>
                   </div>
                   <div>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                    <p className="text-sm text-accent-100 dark:text-gray-400">
                       <span className="font-semibold">Modalidad: </span>
                       {charla.modalidad}
                     </p>
                   </div>
                   <div>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                    <p className="text-sm text-accent-100 dark:text-gray-400">
                       <span className="font-semibold">Estado: </span>
                       {getEstadoNombre(charla.idEstadoCharla)}
                     </p>
@@ -339,12 +339,12 @@ const VistaCharlasCentrto = () => {
             {misCharlas.map((charla) => (
               <div
                 key={charla.idCharla}
-                className="relative md:max-w-full mx-auto p-6 mb-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+                className="relative md:max-w-full mx-auto p-6 mb-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-accent-200 dark:border-gray-700"
               >
                 <div className="flex items-center">
                   <div className="flex-1">
                     <p className="flex items-center gap-2 mb-4 text-lg font-semibold text-gray-900 dark:text-white">
-                      <span className="text-indigo-500">Descripción: </span>
+                      <span className="text-accent-100">Descripción: </span>
                       {charla.descripcionCharla}
 
                       <span>
@@ -376,25 +376,25 @@ const VistaCharlasCentrto = () => {
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4">
                   <div>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                    <p className="text-sm text-accent-100 dark:text-gray-400">
                       <span className="font-semibold">Fecha: </span>
                       {charla.fechaCharla}
                     </p>
                   </div>
                   <div>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                    <p className="text-sm text-accent-100 dark:text-gray-400">
                       <span className="font-semibold">Observaciones: </span>
                       {charla.observacionesCharla}
                     </p>
                   </div>
                   <div>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                    <p className="text-sm text-accent-100 dark:text-gray-400">
                       <span className="font-semibold">Modalidad: </span>
                       {charla.modalidad}
                     </p>
                   </div>
                   <div>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                    <p className="text-sm text-accent-100 dark:text-gray-400">
                       <span className="font-semibold">Estado: </span>
                       {getEstadoNombre(charla.idEstadoCharla)}
                     </p>
@@ -451,6 +451,7 @@ const VistaCharlasCentrto = () => {
   }, []);
 
   return (
+    <main className="bg-white rounded-xl shadow dark:bg-primary-100 p-2">
     <section className="container mx-auto">
       <div className="text-sm font-medium text-center border-b border-blue-400">
         <ul className="flex flex-wrap -mb-px">
@@ -458,8 +459,8 @@ const VistaCharlasCentrto = () => {
             <button
               className={`${
                 selectedComponent === "posiblescharlas"
-                  ? "bg-blue-700  text-white"
-                  : "active bg-blue-400 hover:bg-blue-600  text-white"
+                  ? "bg-accent-200  text-white"
+                  : "active bg-accent-100 hover:bg-blue-600  text-white"
               } inline-block p-4 border-b-2 border-transparent rounded-t-sm focus:outline-none`}
               onClick={() => handleComponentChange("posiblescharlas")}
             >
@@ -470,8 +471,8 @@ const VistaCharlasCentrto = () => {
             <button
               className={`${
                 selectedComponent === "mischarlas"
-                  ? "bg-blue-700 text-white"
-                  : "active bg-blue-400 hover:bg-blue-600 text-white"
+                  ? "bg-accent-200 text-white"
+                  : "active bg-accent-100 hover:bg-blue-600 text-white"
               } inline-block p-4 border-b-2 border-transparent rounded-t-sm focus:outline-none`}
               onClick={() => handleComponentChange("mischarlas")}
             >
@@ -485,6 +486,7 @@ const VistaCharlasCentrto = () => {
         {selectedComponent === "mischarlas" && <MisCharlas />}
       </div>
     </section>
+    </main>
   );
 };
 export default VistaCharlasCentrto;

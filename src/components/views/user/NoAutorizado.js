@@ -13,7 +13,7 @@ const NoAutorizado = () => {
         <p class="mb-4 text-sm font-semibold uppercase text-red-700 md:text-base">Error 403</p>
         <h1 class="mb-2 text-center text-2xl font-bold text-gray-800 sm:text-left md:text-3xl">Sin acceso</h1>
 
-        <p class="mb-8 text-center text-gray-500 sm:text-left md:text-lg">Careces de los permisos para acceder a la siguiente página. Si crees que se trata de un error contacta con los administradores.</p>
+        <p class="mb-8 text-center text-accent-100 sm:text-left md:text-lg">Careces de los permisos para acceder a la siguiente página. Si crees que se trata de un error contacta con los administradores.</p>
 
         <Link
               to={"/"}

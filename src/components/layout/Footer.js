@@ -54,7 +54,7 @@ const Footer = () => {
              <img src={logoTr} class="h-8 me-3 invert" alt="logo Tech Riders" />
             </div>
 
-            <p className="mx-auto mt-6 max-w-sm text-center leading-relaxed text-gray-500 lg:text-left">
+            <p className="mx-auto mt-6 max-w-sm text-center leading-relaxed text-accent-100 lg:text-left">
             Conectando Futuros: Charlas Tecnológicas para la Excelencia en
                 la Formación Profesional.
             </p>
@@ -107,7 +107,7 @@ const Footer = () => {
           </ul>
         </div>
 
-        <p className="mt-12 text-center text-sm text-gray-500 lg:text-right">
+        <p className="mt-12 text-center text-sm text-accent-100 lg:text-right">
           Copyright &copy; 2024. Tajamar, todos los derechos reservados.
         </p>
       </div>

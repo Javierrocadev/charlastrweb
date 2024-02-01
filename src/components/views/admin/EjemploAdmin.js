@@ -35,13 +35,13 @@ const EjemploAdmin = () => {
 
 
   return (
-    <main>
+    <main className="bg-white rounded-xl shadow dark:bg-primary-100">
        <section class="text-gray-600 body-font mt-6">
         <div class="flex flex-wrap w-full mb-12 flex-col items-center text-center">
           <h2 class="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-900">
             eejmplo
           </h2>
-          <p class="lg:w-1/2 w-full leading-relaxed text-gray-500">
+          <p class="lg:w-1/2 w-full leading-relaxed text-accent-100">
             dddddddddd
           </p>
         </div>
