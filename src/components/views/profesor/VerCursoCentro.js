@@ -79,53 +79,8 @@ const VistaCursosCentrto = () => {
 
     return (
       exitosa !== null && (
-        
         <div className="relative w-[90%] h-[250px] mx-auto">
           <div
-<<<<<<< HEAD
-            key={index}
-            className="relative md:max-w-full mx-auto p-6 mb-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-accent-200 dark:border-gray-700"
-          >
-            <p className="mb-4 text-lg font-semibold text-gray-900 dark:text-white">
-              <span className="text-accent-200">Curso: </span>
-              {" " + curso.nombreCurso} {"(" + curso.descripcionCurso + ")"}
-            </p>
-            <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4">
-              <div>
-                <p className="text-sm text-accent-100 dark:text-gray-400">
-                  <span className="font-semibold">Profesor/a: </span>
-                  {" " + curso.profesor}
-                </p>
-              </div>
-              <div>
-                <p className="text-sm text-accent-100 dark:text-gray-400">
-                  <span className="font-semibold">Centro: </span>
-                  {curso.centro}
-                </p>
-              </div>
-              <div>
-                <p className="text-sm text-accent-100 dark:text-gray-400">
-                  <span className="font-semibold">Provincia: </span>
-                  {curso.provinciaCentro}
-                </p>
-              </div>
-            </div>
-
-            <div
-              className="absolute top-5 right-10 
-            flex items-center hover:scale-110 transition-transform cursor-pointer"
-              onClick={() => handleClick(curso)}
-            >
-              <span className="font-semibold mr-2 ">Solicitar charla</span>
-
-              {renderIcon()}
-            </div>
-            <SolicitudCharla
-              isOpen={selectedOption === curso}
-              idCurso={curso.idCurso}
-              idCentro={curso.idCentro}
-            />
-=======
             className={`z-80 py-4 px-5 mt-3 absolute top-10 mx-auto ${
               exitosa
                 ? "bg-green-500 transform translate-y-0 opacity-100 transition-transform ease-in-out duration-500"
@@ -135,7 +90,6 @@ const VistaCursosCentrto = () => {
             {exitosa
               ? "Curso eliminado exitosamente"
               : "Error al eliminar el curso"}
->>>>>>> c88d0a5d8af09e68aed0076b44f475de028a3adb
           </div>
         </div>
       )
@@ -469,16 +423,15 @@ const VistaCursosCentrto = () => {
   }, []);
 
   return (
-    <main className="bg-white rounded-xl shadow dark:bg-primary-100 p-2">
     <section className="container mx-auto">
-      <div className="text-sm font-medium text-center text-accent-100 border-b border-gray-400 dark:text-gray-400 dark:border-gray-700">
+      <div className="text-sm font-medium text-center text-gray-500 border-b border-gray-400 dark:text-gray-400 dark:border-gray-700">
         <ul className="flex flex-wrap -mb-px">
           <li className="me-2">
             <button
               className={`${
                 selectedComponent === "cursos"
-                  ? "bg-accent-200  text-white"
-                  : "active bg-accent-100 hover:bg-blue-600  text-white"
+                  ? "bg-blue-700  text-white"
+                  : "active bg-blue-400 hover:bg-blue-600  text-white"
               } inline-block p-4 border-b-2 border-transparent rounded-t-sm focus:outline-none`}
               onClick={() => handleComponentChange("cursos")}
             >
@@ -501,8 +454,8 @@ const VistaCursosCentrto = () => {
             <button
               className={`${
                 selectedComponent === "crearcurso"
-                  ? "bg-accent-200  text-white"
-                  : "active bg-accent-100 hover:bg-blue-600  text-white"
+                  ? "bg-blue-700  text-white"
+                  : "active bg-blue-400 hover:bg-blue-600  text-white"
               } inline-block p-4 border-b-2 border-transparent rounded-t-sm focus:outline-none`}
               onClick={() => handleComponentChange("crearcurso")}
             >
@@ -517,7 +470,6 @@ const VistaCursosCentrto = () => {
         {selectedComponent === "miscursos" && <AlumnosProfesor />}
       </div>
     </section>
-    </main>
   );
 };
 export default VistaCursosCentrto;
