@@ -198,16 +198,16 @@ const VistaCursosCentrto = () => {
                   {curso.descripcionCurso} {"(" + curso.nombreCurso + ")"}
                 </span>
                 <div
-                className={`top-5 right-10 ml-10 inline-flex
+                  className={`top-5 right-10 ml-10 inline-flex
                 items-center hover:translate-x-2 transition-transform ease-in-out duration-300 cursor-pointer`}
-                onClick={() => handleClickSolicitarCharla(curso)}
-              >
-                <span className="font-semibold mr-2 text-sm">
-                  Solicitar charla
-                </span>
+                  onClick={() => handleClickSolicitarCharla(curso)}
+                >
+                  <span className="font-semibold mr-2 text-sm">
+                    Solicitar charla
+                  </span>
 
-                {renderIcon()}
-              </div>
+                  {renderIcon()}
+                </div>
                 {/* <div
                   className=" top-5 right-5 ml-10
             flex items-center hover:scale-110 transition-transform cursor-pointer"
@@ -244,7 +244,6 @@ const VistaCursosCentrto = () => {
                   </p>
                 </div>
               </div>
-
 
               <SolicitudCharla
                 isOpen={selectedOption === curso}
@@ -323,7 +322,7 @@ const VistaCursosCentrto = () => {
       <section className="pt-10 px-10">
         <div className="flex flex-col md:flex-row items-stretch justify-center gap-5">
           <div className="bg-white text-black rounded-md shadow-md md:flex-1">
-            <header className="w-full h-20 flex justify-center items-center bg-black text-white">
+            <header className="w-full h-20 flex justify-center items-center bg-accent-200  text-white">
               <h2 className="text-4xl font-bold mb-4">crear un curso</h2>
             </header>
 
@@ -370,7 +369,7 @@ const VistaCursosCentrto = () => {
               <div className="w-[100%] inline-block mx-auto px-5">
                 <button
                   type="submit"
-                  className="w-full transition duration-300 bg-black text-white font-bold hover:bg-gray-950 py-3"
+                  className="w-full transition duration-300 bg-accent-200  text-white font-bold hover:bg-accentDark-200 py-3"
                   //onClick={() => handleSubmit()}
                 >
                   Crear curso
@@ -424,53 +423,55 @@ const VistaCursosCentrto = () => {
   }, []);
 
   return (
-    <section className="container mx-auto">
-      <div className="text-sm font-medium text-center text-gray-500 border-b border-gray-400 dark:text-gray-400 dark:border-gray-700">
-        <ul className="flex flex-wrap -mb-px">
-          <li className="me-2">
-            <button
-              className={`${
-                selectedComponent === "cursos"
-                  ? "bg-blue-700  text-white"
-                  : "active bg-blue-400 hover:bg-blue-600  text-white"
-              } inline-block p-4 border-b-2 border-transparent rounded-t-sm focus:outline-none`}
-              onClick={() => handleComponentChange("cursos")}
-            >
-              cursos del centro
-            </button>
-          </li>
-          <li className="me-2">
-            <button
-              className={`${
-                selectedComponent === "miscursos"
-                  ? "bg-blue-700  text-white"
-                  : "active bg-blue-400 hover:bg-blue-600  text-white"
-              } inline-block p-4 border-b-2 border-transparent rounded-t-sm focus:outline-none`}
-              onClick={() => handleComponentChange("miscursos")}
-            >
-              mis cursos
-            </button>
-          </li>
-          <li className="me-2">
-            <button
-              className={`${
-                selectedComponent === "crearcurso"
-                  ? "bg-blue-700  text-white"
-                  : "active bg-blue-400 hover:bg-blue-600  text-white"
-              } inline-block p-4 border-b-2 border-transparent rounded-t-sm focus:outline-none`}
-              onClick={() => handleComponentChange("crearcurso")}
-            >
-              crear curso
-            </button>
-          </li>
-        </ul>
-      </div>
-      <div className="pt-5">
-        {selectedComponent === "cursos" && <Cursos loaded={loaded} />}
-        {selectedComponent === "crearcurso" && <CrearCurso />}
-        {selectedComponent === "miscursos" && <AlumnosProfesor />}
-      </div>
-    </section>
+    <main className="bg-white rounded-xl shadow dark:bg-primary-100 p-2">
+      <section className="container mx-auto">
+        <div className="text-sm font-medium text-center border-b border-blue-400">
+          <ul className="flex flex-wrap -mb-px">
+            <li className="me-2">
+              <button
+                className={`${
+                  selectedComponent === "cursos"
+                    ? "bg-blue-700  text-white"
+                    : "active bg-blue-400 hover:bg-blue-600  text-white"
+                } inline-block p-4 border-b-2 border-transparent rounded-t-sm focus:outline-none`}
+                onClick={() => handleComponentChange("cursos")}
+              >
+                cursos del centro
+              </button>
+            </li>
+            <li className="me-2">
+              <button
+                className={`${
+                  selectedComponent === "miscursos"
+                    ? "bg-accent-200  text-white"
+                    : "active bg-accent-100 hover:bg-blue-600  text-white"
+                } inline-block p-4 border-b-2 border-transparent rounded-t-sm focus:outline-none`}
+                onClick={() => handleComponentChange("miscursos")}
+              >
+                mis cursos
+              </button>
+            </li>
+            <li className="me-2">
+              <button
+                className={`${
+                  selectedComponent === "crearcurso"
+                    ? "bg-accent-200  text-white"
+                    : "active bg-accent-100 hover:bg-blue-600  text-white"
+                } inline-block p-4 border-b-2 border-transparent rounded-t-sm focus:outline-none`}
+                onClick={() => handleComponentChange("crearcurso")}
+              >
+                crear curso
+              </button>
+            </li>
+          </ul>
+        </div>
+        <div className="pt-5">
+          {selectedComponent === "cursos" && <Cursos loaded={loaded} />}
+          {selectedComponent === "crearcurso" && <CrearCurso />}
+          {selectedComponent === "miscursos" && <AlumnosProfesor />}
+        </div>
+      </section>
+    </main>
   );
 };
 export default VistaCursosCentrto;
