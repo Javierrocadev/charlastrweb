@@ -314,6 +314,16 @@ const PerfilEmpresa = () => {
 
     const handleSendeMessage = async (e) => {
       e.preventDefault();
+
+      const dataJSON = {
+        idPeticionTecnologia: 0,
+        nombreTecnologia: mensage,
+        idTipoPeticionCategoria: 4,
+      };
+      console.log(dataJSON)
+
+      const response = await axiosApi.peticionesTecnologias.PostPeticionTecnologia(mensage);
+      console.log(response);
     };
 
     return (

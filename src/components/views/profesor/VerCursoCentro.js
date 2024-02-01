@@ -198,6 +198,17 @@ const VistaCursosCentrto = () => {
                   {curso.descripcionCurso} {"(" + curso.nombreCurso + ")"}
                 </span>
                 <div
+                className={`top-5 right-10 ml-10 inline-flex
+                items-center hover:translate-x-2 transition-transform ease-in-out duration-300 cursor-pointer`}
+                onClick={() => handleClickSolicitarCharla(curso)}
+              >
+                <span className="font-semibold mr-2 text-sm">
+                  Solicitar charla
+                </span>
+
+                {renderIcon()}
+              </div>
+                {/* <div
                   className=" top-5 right-5 ml-10
             flex items-center hover:scale-110 transition-transform cursor-pointer"
                   onClick={() => handleClick(curso)}
@@ -205,7 +216,7 @@ const VistaCursosCentrto = () => {
                   <span className="font-semibold mr-2 text-sm ">
                     Eliminar curso
                   </span>
-                </div>
+                </div> */}
               </p>
               <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4">
                 <div>
@@ -234,17 +245,7 @@ const VistaCursosCentrto = () => {
                 </div>
               </div>
 
-              <div
-                className={`py-5 inline-flex max-w-[130px]
-                items-center hover:translate-x-5 transition-transform ease-in-out duration-300 cursor-pointer`}
-                onClick={() => handleClickSolicitarCharla(curso)}
-              >
-                <span className="font-semibold mr-1 text-sm">
-                  Solicitar charla
-                </span>
 
-                {renderIcon()}
-              </div>
               <SolicitudCharla
                 isOpen={selectedOption === curso}
                 idCurso={curso.idCurso}

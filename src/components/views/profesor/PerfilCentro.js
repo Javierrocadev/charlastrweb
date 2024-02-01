@@ -295,7 +295,12 @@ const PerfilCentro = () => {
           </div>
 
           <div class="mt-5 flex justify-end gap-x-2">
-   <button type="submit" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-accent-200 bg-accent-200 text-white shadow-sm hover:bg-accent-100 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-accent-100 hover:dark:bg-primary-300">Guardar cambios</button>
+            <button
+              type="submit"
+              class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-accent-200 bg-accent-200 text-white shadow-sm hover:bg-accent-100 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-accent-100 hover:dark:bg-primary-300"
+            >
+              Guardar cambios
+            </button>
           </div>
         </form>
       </section>
@@ -314,6 +319,16 @@ const PerfilCentro = () => {
 
     const handleSendeMessage = async (e) => {
       e.preventDefault();
+
+      const dataJSON = {
+        idPeticionTecnologia: 0,
+        nombreTecnologia: mensage,
+        idTipoPeticionCategoria: 4,
+      };
+      console.log(dataJSON)
+
+      const response = await axiosApi.peticionesTecnologias.PostPeticionTecnologia(mensage);
+      console.log(response);
     };
 
     return (
@@ -345,8 +360,6 @@ const PerfilCentro = () => {
       </section>
     );
   };
-
-
 
   useEffect(() => {
     const fetchData = async () => {
@@ -403,8 +416,8 @@ const PerfilCentro = () => {
                   <button
                     className={`${
                       selectedComponent === "perfil"
-                      ? "bg-accent-200 dark:bg-primary-300 text-white"
-                      : "active  text-primary-300 bg-accent-100 "
+                        ? "bg-accent-200 dark:bg-primary-300 text-white"
+                        : "active  text-primary-300 bg-accent-100 "
                     } inline-block p-4 border-b-2 border-transparent rounded-t-sm focus:outline-none`}
                     onClick={() => handleComponentChange("perfil")}
                   >
@@ -415,8 +428,8 @@ const PerfilCentro = () => {
                   <button
                     className={`${
                       selectedComponent === "contacto"
-                      ? "bg-accent-200 dark:bg-primary-300 text-white"
-                      : "active  text-primary-300 bg-accent-100 "
+                        ? "bg-accent-200 dark:bg-primary-300 text-white"
+                        : "active  text-primary-300 bg-accent-100 "
                     } inline-block p-4 border-b-2 border-transparent rounded-t-sm focus:outline-none`}
                     onClick={() => handleComponentChange("contacto")}
                   >
