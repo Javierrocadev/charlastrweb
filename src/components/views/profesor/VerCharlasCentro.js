@@ -118,8 +118,8 @@ const VistaCharlasCentrto = () => {
                 tr.map((techRider, index) => (
                   <div key={index} className="w-full h-full md:flex-1">
                     <div
-                      className="relative md:max-w-full h-[150px] mx-auto md:p-7 p-4 mb-4 bg-white border 
-                    border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+                      className="relative md:max-w-full h-[160px] mx-auto px-4 py-5 mb-4 bg-white border 
+                      border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
                     >
                       <p className="flex items-center gap-3 mb-2 text-lg font-semibold text-gray-900 dark:text-white">
                         <span className="text-accent-200">
@@ -183,7 +183,7 @@ const VistaCharlasCentrto = () => {
                     className="w-full h-full p-4 md:block md:flex-1"
                   >
                     <div
-                      className="relative md:max-w-full h-[150px] mx-auto p-6 mb-4
+                      className="relative md:max-w-full h-[160px] mx-auto px-4 py-5 mb-4
                     bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
                     >
                       <p className="mb-4 text-lg font-semibold text-gray-900 dark:text-white">
@@ -378,9 +378,9 @@ const VistaCharlasCentrto = () => {
                   </div>
                   <div
                     className={`${
-                      charla.descripcionCharla.length < 10
+                      charla.descripcionCharla.length > 100
                         ? "absolute bottom-5 right-5"
-                        : "mr-2"
+                        : "absolute top-5 right-5"
                     } flex items-center hover:scale-95 transition-transform cursor-pointer`}
                     onClick={() => handleClickDetailCharlaProfesor(charla)}
                   >

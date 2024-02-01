@@ -103,7 +103,7 @@ const VistaCursosCentrto = () => {
           cursos.map((curso, index) => (
             <div
               key={index}
-              className="transition-transform relative md:max-w-full mx-auto p-6 mb-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+              className="relative w-full min-w-[400px] sm:w-2/2 md:w-3/3 lg:w-4/4 xl:w-6/6 mx-auto p-6 mb-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
             >
               <p className="mb-4 text-lg font-semibold text-gray-900 dark:text-white">
                 <span className="text-accent-200">Curso: </span>
@@ -131,8 +131,8 @@ const VistaCursosCentrto = () => {
               </div>
 
               <div
-                className="absolute top-5 right-10 
-            flex items-center hover:scale-110 transition-transform cursor-pointer"
+                className={`py-5 inline-flex max-w-[130px]
+                 items-center hover:translate-x-5 transition-transform ease-in-out duration-300 cursor-pointer`}
                 onClick={() => handleClick(curso)}
               >
                 <span className="font-semibold mr-2 ">Solicitar charla</span>
@@ -193,9 +193,19 @@ const VistaCursosCentrto = () => {
               key={curso.idCurso}
               className="relative md:max-w-full mx-auto p-6 mb-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
             >
-              <p className="mb-4 text-lg font-semibold text-gray-900 dark:text-white">
-                <span className="text-accent-200">Curso: </span>
-                {curso.descripcionCurso} {"(" + curso.nombreCurso + ")"}
+              <p className="mb-4 text-lg font-semibold text-gray-900 dark:text-white flex justify-between">
+                <span className="text-accent-200">
+                  {curso.descripcionCurso} {"(" + curso.nombreCurso + ")"}
+                </span>
+                <div
+                  className=" top-5 right-5 ml-10
+            flex items-center hover:scale-110 transition-transform cursor-pointer"
+                  onClick={() => handleClick(curso)}
+                >
+                  <span className="font-semibold mr-2 text-sm ">
+                    Eliminar curso
+                  </span>
+                </div>
               </p>
               <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4">
                 <div>
@@ -223,21 +233,13 @@ const VistaCursosCentrto = () => {
                   </p>
                 </div>
               </div>
+
               <div
-                className="absolute top-5 right-28 mr-10
-            flex items-center hover:scale-110 transition-transform cursor-pointer"
-                onClick={() => handleClick(curso)}
-              >
-                <span className="font-semibold mr-2 text-xs ">
-                  Eliminar curso
-                </span>
-              </div>
-              <div
-                className="absolute top-5 right-5 
-            flex items-center hover:scale-110 transition-transform cursor-pointer"
+                className={`py-5 inline-flex max-w-[130px]
+                items-center hover:translate-x-5 transition-transform ease-in-out duration-300 cursor-pointer`}
                 onClick={() => handleClickSolicitarCharla(curso)}
               >
-                <span className="font-semibold mr-1 text-xs">
+                <span className="font-semibold mr-1 text-sm">
                   Solicitar charla
                 </span>
 
