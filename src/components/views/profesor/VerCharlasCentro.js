@@ -6,12 +6,14 @@ const VistaCharlasCentrto = () => {
   const [charlas, setCharlas] = useState([]);
   const [misCharlas, setMisCharlas] = useState([]);
   const [provincias, setProvincias] = useState([]);
+  const [responseTr, setResponseTr] = useState([]);
+  const [responseCursos, setResponseCursos] = useState([]);
   const [selected, setSelected] = useState(null);
   const [selectedSolicitar, setSelectedSolicitar] = useState(null);
   const [estadoCharla, setEstadoCharla] = useState([]);
-  const [open, setOpen] = useState(false);
+  //const [open, setOpen] = useState(false);
   const [selectedComponent, setSelectedComponent] = useState("posiblescharlas");
-  const [loading, setLoading] = useState(false);
+  //const [loading, setLoading] = useState(false);
 
   const handleComponentChange = (selected) => {
     setSelectedComponent(selected);
@@ -25,7 +27,7 @@ const VistaCharlasCentrto = () => {
       return previous === charla ? null : charla;
     });
 
-    setOpen((prev) => (prev && prev !== charla ? false : !prev));
+    //setOpen((prev) => (prev && prev !== charla ? false : !prev));
 
     if (selected && setSelectedSolicitar) {
       setSelected(null);
@@ -80,8 +82,6 @@ const VistaCharlasCentrto = () => {
       const fetchData = async () => {
         try {
           setLoading(true);
-          const responseTr = await axiosApi.usuarios.getUsuarios();
-          const responseCursos = await axiosApi.centros.getCursos();
 
           const tr = responseTr.filter((tr) => tr.idUsuario === ch.idTechRider);
           const cursos = responseCursos.filter(
@@ -100,7 +100,7 @@ const VistaCharlasCentrto = () => {
         }
       };
       fetchData();
-    }, [misCharlas, isOpen, ch.idCharla]);
+    }, [misCharlas, isOpen, ch]);
 
     return (
       <div className={`${isOpen ? "" : "hidden"} pt-5 mt-10 border-t-2`}>
@@ -194,7 +194,7 @@ const VistaCharlasCentrto = () => {
                         <div>
                           <p className="text-sm text-gray-500 dark:text-gray-400">
                             <span className="font-semibold">Descripción: </span>
-                            {" " + curso.descripcion}
+                            {" " + curso.descripcionCurso}
                           </p>
                         </div>
                       </div>
@@ -455,6 +455,11 @@ const VistaCharlasCentrto = () => {
 
         const responseProvincias = await axiosApi.provincias.getProvincias();
         setProvincias(responseProvincias);
+
+        const responseTr = await axiosApi.usuarios.getUsuarios();
+        setResponseTr(responseTr);
+        const responseCursos = await axiosApi.centros.getCursos();
+        setResponseCursos(responseCursos);
       } catch (error) {
         console.log(error);
       }
