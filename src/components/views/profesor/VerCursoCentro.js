@@ -9,6 +9,7 @@ const VistaCursosCentrto = () => {
   const [selectedOption, setSelectedOption] = useState(null);
   const [open, setOpen] = useState(false);
   const [selectedComponent, setSelectedComponent] = useState("cursos");
+  const [loaded, setLoaded] = useState(false);
 
   const handleComponentChange = (selected) => {
     setSelectedComponent(selected);
@@ -95,55 +96,59 @@ const VistaCursosCentrto = () => {
     );
   };
 
-  const Cursos = () => {
+  const Cursos = ({ loaded }) => {
     return (
-      <div>
-        {cursos.map((curso, index) => (
-          <div
-            key={index}
-            className="relative md:max-w-full mx-auto p-6 mb-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
-          >
-            <p className="mb-4 text-lg font-semibold text-gray-900 dark:text-white">
-              <span className="text-accent-200">Curso: </span>
-              {" " + curso.nombreCurso} {"(" + curso.descripcionCurso + ")"}
-            </p>
-            <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4">
-              <div>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
-                  <span className="font-semibold">Profesor/a: </span>
-                  {" " + curso.profesor}
-                </p>
-              </div>
-              <div>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
-                  <span className="font-semibold">Centro: </span>
-                  {curso.centro}
-                </p>
-              </div>
-              <div>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
-                  <span className="font-semibold">Provincia: </span>
-                  {curso.provinciaCentro}
-                </p>
-              </div>
-            </div>
-
+      <div className="">
+        {loaded ? (
+          cursos.map((curso, index) => (
             <div
-              className="absolute top-5 right-10 
-            flex items-center hover:scale-110 transition-transform cursor-pointer"
-              onClick={() => handleClick(curso)}
+              key={index}
+              className="transition-transform relative md:max-w-full mx-auto p-6 mb-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
             >
-              <span className="font-semibold mr-2 ">Solicitar charla</span>
+              <p className="mb-4 text-lg font-semibold text-gray-900 dark:text-white">
+                <span className="text-accent-200">Curso: </span>
+                {" " + curso.nombreCurso} {"(" + curso.descripcionCurso + ")"}
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4">
+                <div>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">
+                    <span className="font-semibold">Profesor/a: </span>
+                    {" " + curso.profesor}
+                  </p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">
+                    <span className="font-semibold">Centro: </span>
+                    {curso.centro}
+                  </p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">
+                    <span className="font-semibold">Provincia: </span>
+                    {curso.provinciaCentro}
+                  </p>
+                </div>
+              </div>
 
-              {renderIcon()}
+              <div
+                className="absolute top-5 right-10 
+            flex items-center hover:scale-110 transition-transform cursor-pointer"
+                onClick={() => handleClick(curso)}
+              >
+                <span className="font-semibold mr-2 ">Solicitar charla</span>
+
+                {renderIcon()}
+              </div>
+              <SolicitudCharla
+                isOpen={selectedOption === curso}
+                idCurso={curso.idCurso}
+                idCentro={curso.idCentro}
+              />
             </div>
-            <SolicitudCharla
-              isOpen={selectedOption === curso}
-              idCurso={curso.idCurso}
-              idCentro={curso.idCentro}
-            />
-          </div>
-        ))}
+          ))
+        ) : (
+          <h3 className="mt-8">No hay cursos disponibles en este momento.</h3>
+        )}
       </div>
     );
   };
@@ -154,7 +159,9 @@ const VistaCursosCentrto = () => {
     const handleClick = async (curso) => {
       try {
         console.log("Curso a eliminado: ", curso);
-        const responsedelete = await axiosApi.profesores.EliminarCurso(curso.idCurso);
+        const responsedelete = await axiosApi.profesores.EliminarCurso(
+          curso.idCurso
+        );
         //console.log("Curso eliminado exitosamente: ", responsedelete);
         if (responsedelete.response && responsedelete.response.status !== 200) {
           setExitosa(false);
@@ -404,8 +411,10 @@ const VistaCursosCentrto = () => {
         setCursosProfesor(responseAlumnosProfesor);
 
         setCursos(cursosFilter);
+        setLoaded(true);
       } catch (error) {
         console.log(error);
+        setLoaded(false);
       }
     };
     fetchData();
@@ -454,7 +463,7 @@ const VistaCursosCentrto = () => {
         </ul>
       </div>
       <div className="pt-5">
-        {selectedComponent === "cursos" && <Cursos />}
+        {selectedComponent === "cursos" && <Cursos loaded={loaded} />}
         {selectedComponent === "crearcurso" && <CrearCurso />}
         {selectedComponent === "miscursos" && <AlumnosProfesor />}
       </div>
