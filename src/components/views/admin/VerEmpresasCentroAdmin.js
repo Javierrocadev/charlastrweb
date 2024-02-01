@@ -201,13 +201,6 @@ const VerEmpresasCentroAdmin = () => {
                   </div>
                 </th>
 
-                <th scope="col" class="px-6 py-3 text-start">
-                  <div class="flex items-center gap-x-2">
-                    <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
-                      Provincia
-                    </span>
-                  </div>
-                </th>
 
                 <th scope="col" class="px-6 py-3 text-start">
                   <div class="flex items-center gap-x-2">
@@ -251,6 +244,20 @@ const VerEmpresasCentroAdmin = () => {
                     </span>
                   </div>
                 </th>
+                <th scope="col" class="px-6 py-3 text-start">
+                  <div class="flex items-center gap-x-2">
+                    <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
+               Creando Curso
+                    </span>
+                  </div>
+                </th>
+                <th scope="col" class="px-6 py-3 text-start">
+                  <div class="flex items-center gap-x-2">
+                    <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
+               Eliminando Curso
+                    </span>
+                  </div>
+                </th>
               </tr>
             </thead>
 
@@ -283,6 +290,9 @@ const VerEmpresasCentroAdmin = () => {
                                   <span class="block text-sm font-semibold text-gray-800 dark:text-gray-200">
                                     {centro.razonSocial}
                                   </span>
+                                  <span className="block text-sm text-accent-100">
+                                {getProvinciaNombre(centro.idProvincia)}
+                              </span>
                                 </div>
                               </div>
                             </div>
@@ -290,16 +300,7 @@ const VerEmpresasCentroAdmin = () => {
                           
 
 
-                          <td
-                            className="h-px w-72 align-top"
-                            key={centro.id}
-                          >
-                            <div className="block p-6">
-                              <span className="block text-sm text-accent-100">
-                                {getProvinciaNombre(centro.idProvincia)}
-                              </span>
-                            </div>
-                          </td>
+
                           
                           
 
@@ -399,21 +400,21 @@ const VerEmpresasCentroAdmin = () => {
               </button>
                 
               </tr>  
-                <td className="flex-inline">
+                <td className="flex-inline ">
                   {/* Crear Curso */}
                   {seccionesVisibles.includes(centro.idEmpresaCentro) && centro.idTipoEmpresa === 2 && (
                     <form>
           
-                    <div class="grid sm:grid-cols-12 gap-2 sm:gap-6">
+                    <div class=" flex flex-col bg-primary-100 rounded m-1 p-1">
               
               
-                      <div class="sm:col-span-3">
+                      <div class="">
                         <label for="af-account-email" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-gray-200">
                       Nombre del Curso
                         </label>
                       </div>
 
-                      <div class="sm:col-span-3">
+                      <div class="">
                         <input
                             type="text"
                             className="form-control"
