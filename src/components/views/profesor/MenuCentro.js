@@ -68,7 +68,7 @@ const MenuCentro = () => {
       fechData();
     }, []);
     return (
-      <section className="border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
+      <section className="w-[100%] h-auto border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
         <h3 className="my-6 text-xl font-semibold text-gray-900 dark:text-white">
           Calendario centro
         </h3>
@@ -124,7 +124,7 @@ const MenuCentro = () => {
   }, []);
 
   return (
-    <section className="w-full h-[100vh] mx-auto">
+    <section className="w-full h-[100%] mx-auto">
       <div className="w-full h-full  bg-slate-100">
         <header className="bg-accent-200  text-whitew-full h-[80px] px-5">
           {centro.length ? (

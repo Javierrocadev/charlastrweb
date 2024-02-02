@@ -80,7 +80,7 @@ const MenuEmpresa = () => {
     }, []);
 
     return (
-      <section className="border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
+      <section className="w-[100%] h-auto border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
         <h3 className="my-6 text-xl font-semibold text-gray-900 dark:text-white">
           Calendario empresa
         </h3>
@@ -137,8 +137,8 @@ const MenuEmpresa = () => {
   }, []);
 
   return (
-    <section className="w-full h-[100vh] mx-auto relative ">
-      <div className="w-full h-full md:h-[100vh] rounded bg-white dark:bg-accent-100">
+    <section className="w-full h-[100%] mx-auto relative ">
+      <div className="w-full h-full rounded bg-white dark:bg-accent-100">
         <header className="bg-accent-200 w-full h-[80px] px-5">
           {empresa.length ? (
             <div className="flex justify-between items-center p-5">
@@ -198,7 +198,7 @@ const MenuEmpresa = () => {
           )}
         </header>
         {isEmpresa ? (
-          <div className="w-[90%] mx-auto">
+          <div className="w-[90%] h-[100%] mx-auto">
             <PanelEmpresa empresa={empresa} />
             <PanelCalendario />
           </div>
