@@ -290,7 +290,7 @@ const Home = () => {
                 className="hs-accordion-toggle hs-accordion-active:text-accent-200 inline-flex items-center gap-x-3 w-full font-semibold text-start text-gray-800 py-4 px-5 hover:text-gray-500 disabled:opacity-50 disabled:pointer-events-none dark:hs-accordion-active:text-accent-200 dark:text-gray-100 dark:hover:text-gray-400 dark:focus:outline-none dark:focus:text-accent-100"
                 aria-controls="hs-basic-bordered-collapse-one"
               >
-                <svg
+                {/* <svg
                   className="hs-accordion-active:hidden block w-4 h-4"
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
@@ -318,15 +318,15 @@ const Home = () => {
                   stroke-linejoin="round"
                 >
                   <path d="M5 12h14" />
-                </svg>
+                </svg> */}
                 {charla.descripcion}
               </button>
-              <button
+              {/* <button
                 type="button"
                 className="py-2 px-3 sm:shrink-0 m-5 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-accent-200 bg-accent-200 text-white shadow-sm hover:bg-accent-100 duration-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-white dark:border-bg-200 dark:text-text-100 dark:hover:bg-bg-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-bg-200"
               >
                 Solicitar charla
-              </button>
+              </button> */}
             </div>
 
             <div
@@ -357,7 +357,7 @@ const Home = () => {
                       </p>
                     </div>
 
-                    <div className="hidden sm:block sm:shrink-0">
+                    {/* <div className="hidden sm:block sm:shrink-0">
                       {(() => {
                         switch (charla.acreditacionLinkedIn) {
                           case null:
@@ -373,7 +373,7 @@ const Home = () => {
                             );
                         }
                       })()}
-                    </div>
+                    </div> */}
                   </div>
 
                   <div className="mt-4">
