@@ -79,7 +79,7 @@ const FormTechRiders = () => {
     <div className=" p-4 flex flex-col">
       {" "}
       <div className="text-center mb-8">
-        <h2 className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-gray-200">
+        <h2 className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-accent-200">
           Form Tech Riders
         </h2>
         <p className="text-sm text-gray-600 dark:text-gray-400">
@@ -89,7 +89,7 @@ const FormTechRiders = () => {
       <form className="w-full" onSubmit={handleSubmit}>
         <label
           for="af-account-phone"
-          class="inline-block text-sm  text-gray-800 mt-2.5 dark:text-gray-200"
+          class="inline-block text-sm  text-gray-800 mt-2.5 dark:text-accent-200"
         >
           Nombre
         </label>
@@ -103,7 +103,7 @@ const FormTechRiders = () => {
         />
         <label
           for="af-account-phone"
-          class="inline-block text-sm  text-gray-800 mt-2.5 dark:text-gray-200"
+          class="inline-block text-sm  text-gray-800 mt-2.5 dark:text-accent-200"
         >
           Apellidos
         </label>
@@ -117,7 +117,7 @@ const FormTechRiders = () => {
         />
         <label
           for="af-account-phone"
-          class="inline-block text-sm  text-gray-800 mt-2.5 dark:text-gray-200"
+          class="inline-block text-sm  text-gray-800 mt-2.5 dark:text-accent-200"
         >
           Telefono
         </label>
@@ -131,7 +131,7 @@ const FormTechRiders = () => {
         />
         <label
           for="af-account-phone"
-          class="inline-block text-sm  text-gray-800 mt-2.5 dark:text-gray-200"
+          class="inline-block text-sm  text-gray-800 mt-2.5 dark:text-accent-200"
         >
           LinkedIn
         </label>
@@ -145,7 +145,7 @@ const FormTechRiders = () => {
         />
         <label
           for="af-account-phone"
-          class="inline-block text-sm  text-gray-800 mt-2.5 dark:text-gray-200"
+          class="inline-block text-sm  text-gray-800 mt-2.5 dark:text-accent-200"
         >
           Correo
         </label>
@@ -159,7 +159,7 @@ const FormTechRiders = () => {
         />
         <label
           for="af-account-phone"
-          class="inline-block text-sm  text-gray-800 mt-2.5 dark:text-gray-200"
+          class="inline-block text-sm  text-gray-800 mt-2.5 dark:text-accent-200"
         >
           Contraseña
         </label>
@@ -173,7 +173,7 @@ const FormTechRiders = () => {
         />
         <label
           for="af-account-phone"
-          class="inline-block text-sm  text-gray-800 mt-2.5 dark:text-gray-200"
+          class="inline-block text-sm  text-gray-800 mt-2.5 dark:text-accent-200"
         >
           Provincia
         </label>
@@ -195,7 +195,7 @@ const FormTechRiders = () => {
         </div>
         <label
           for="af-account-phone"
-          class="inline-block text-sm  text-gray-800 mt-2.5 dark:text-gray-200"
+          class="inline-block text-sm  text-gray-800 mt-2.5 dark:text-accent-200"
         >
           Empresa
         </label>
@@ -220,7 +220,7 @@ const FormTechRiders = () => {
         </div>
         <label
           for="af-account-phone"
-          class="inline-block text-sm  text-gray-800 mt-2.5 dark:text-gray-200"
+          class="inline-block text-sm  text-gray-800 mt-2.5 dark:text-accent-200"
         >
           ¿Tu linkedIn será visible para el resto?
         </label>
