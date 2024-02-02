@@ -48,6 +48,7 @@ const FormCentro = () => {
         }
       );
       console.log("Respuesta del servidor:", response.data);
+      alert("Solicitud Enviada", "Sera revisada por el admin");
       // Aquí podrías manejar la respuesta del servidor según tus necesidades
     } catch (error) {
       console.error("Error al enviar solicitud:", error);
