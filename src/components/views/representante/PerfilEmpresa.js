@@ -333,9 +333,9 @@ const PerfilEmpresa = () => {
             className="block text-gray-700 text-sm font-semibold mb-2"
             htmlFor="mensaje"
           >
-            Mensaje para el administrador:
+            Petición tecnologías:
           </label>
-          <textarea
+          <input
             id="mensaje"
             name="mensaje"
             value={mensage}
@@ -344,6 +344,7 @@ const PerfilEmpresa = () => {
             className="shadow appearance-none border rounded 
             md:w-full py-2 px-3 mr-10 text-gray-700 leading-tight 
           focus:outline-none focus:shadow-outline resize-none"
+          placeholder="peticion tecnologías"
           />
           <button
             type="submit"

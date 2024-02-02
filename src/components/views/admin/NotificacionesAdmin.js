@@ -784,7 +784,7 @@ const NotificacionesAdmin = () => {
                 </span>
                 {usuariosResponse.filter((usuario) => usuario.idUsuario === charlaFiltrada.idTechRider).map((usuario) => (
                     <div key={usuario.idUsuario}>
-                      {charlaFiltrada.idTechRider}
+                      {/* {charlaFiltrada.idTechRider} */}
                       {usuario.nombre}
                     </div>
                   ))}

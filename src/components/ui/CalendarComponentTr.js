@@ -4,7 +4,7 @@ import axiosApi from "../../api/axiosApi";
 import "react-calendar/dist/Calendar.css";
 import { isSameDay } from "date-fns";
 
-const CalendarComponent = ({ charlas }) => {
+const CalendarComponentTr = ({ charlas }) => {
   const [date, setDate] = useState(new Date());
   const [provinciasResponse, setProvinciasResponse] = useState([]);
   const [tecnologiasResponse, setTecnologiasResponse] = useState([]);
@@ -108,7 +108,7 @@ const CalendarComponent = ({ charlas }) => {
             {charlasEnDia.map((charla) => (
               <li
                 key={charla.idCharla}
-                className=" h-[300px] hs-accordion active bg-white dark:text-gray-800 border -mt-px first:rounded-t-lg last:rounded-b-lg dark:bg-accent-200 dark:border-gray-700"
+                className=" h-[250px] hs-accordion active bg-white dark:text-gray-800 border -mt-px first:rounded-t-lg last:rounded-b-lg dark:bg-accent-200 dark:border-gray-700"
                 id="hs-bordered-heading-one"
               >
                 <div className="flex flex-row">
@@ -146,7 +146,7 @@ const CalendarComponent = ({ charlas }) => {
                     >
                       <path d="M5 12h14" />
                     </svg>
-                    {charla.descripcion}
+                    {charla.descripcionCharla}
                   </button>
                   {/* <button
                     type="button"
@@ -163,7 +163,7 @@ const CalendarComponent = ({ charlas }) => {
                 >
                   <div className="pb-4 px-5 ">
                     {/* <p className="text-gray-800 dark:text-gray-200">
-             {charla.observaciones}
+             {charla.observacionesCharla}
              </p> */}
                     <div className="relative block overflow-hidden rounded-lg border  border-gray-100 p-4 sm:p-6 lg:p-8">
                       <div className="sm:flex sm:justify-between sm:gap-4">
@@ -179,7 +179,7 @@ const CalendarComponent = ({ charlas }) => {
                             </span>{" "}
                             /
                             <span className="text-sm m-1 font-medium p-2 rounded-xl bg-primary-100 ">
-                              {charla.turno}
+                              {charla.nombreCurso}
                             </span>
                           </p>
                         </div>
@@ -205,13 +205,13 @@ const CalendarComponent = ({ charlas }) => {
 
                       <div className="mt-4">
                         {(() => {
-                          switch (charla.observaciones) {
+                          switch (charla.observacionesCharla) {
                             case null:
                               return <></>;
                             default:
                               return (
-                                <p className="max-w-[40ch] text-sm text-accent-200 bg-primary-100 p-2 rounded">
-                                  {charla.observaciones}
+                                <p className="max-w-[40ch] text-sm text-accent-100 bg-primary-100 p-2 rounded">
+                                  {charla.observacionesCharla}
                                 </p>
                               );
                           }
@@ -284,4 +284,5 @@ const CalendarComponent = ({ charlas }) => {
   );
 };
 
-export default CalendarComponent;
+export default CalendarComponentTr
+;

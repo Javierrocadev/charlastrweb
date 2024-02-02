@@ -237,7 +237,7 @@ const MisCharlasTr = () => {
      {/* CHARLAS QUE TIENE QUE DAR EN LOS PROXIMOS DIAS  */}
      <section>
         <h2 class="text-3xl text-center text-gray-800 font-bold lg:text-4xl dark:text-white">
-        CHARLAS CERRADA
+        CHARLAS EN PROCESO
         </h2>
         <p class="mt-3 mb-8 text-center text-gray-800 dark:text-gray-400">
         CHARLAS QUE TENGO QUE DAR EN LOS PROXIMOS DIAS
@@ -254,7 +254,7 @@ const MisCharlasTr = () => {
                   className="hs-accordion-toggle hs-accordion-active:text-accent-200 inline-flex items-center gap-x-3 w-full font-semibold text-start text-gray-800 py-4 px-5 hover:text-gray-500 disabled:opacity-50 disabled:pointer-events-none dark:hs-accordion-active:text-accent-200 dark:text-gray-200 dark:hover:text-gray-400 dark:focus:outline-none dark:focus:text-gray-400"
                   aria-controls="hs-basic-bordered-collapse-one"
                 >
-                  <svg
+                  {/* <svg
                     className="hs-accordion-active:hidden block w-4 h-4"
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
@@ -282,8 +282,8 @@ const MisCharlasTr = () => {
                     stroke-linejoin="round"
                   >
                     <path d="M5 12h14" />
-                  </svg>
-                  {charla.descripcion}
+                  </svg> */}
+                  {charla.descripcionCharla}
                 </button>
               </div>
 
@@ -415,8 +415,8 @@ const MisCharlasTr = () => {
                   className="hs-accordion-toggle hs-accordion-active:text-accent-200 inline-flex items-center gap-x-3 w-full font-semibold text-start text-gray-800 py-4 px-5 hover:text-gray-500 disabled:opacity-50 disabled:pointer-events-none dark:hs-accordion-active:text-accent-200 dark:text-gray-200 dark:hover:text-gray-400 dark:focus:outline-none dark:focus:text-gray-400"
                   aria-controls="hs-basic-bordered-collapse-one"
                 >
-                  <svg
-                    className="hs-accordion-active:hidden block w-4 h-4"
+                  {/* <svg
+                    className="hidden hs-accordion-active:hidden w-4 h-4"
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
                     height="24"
@@ -431,7 +431,7 @@ const MisCharlasTr = () => {
                     <path d="M12 5v14" />
                   </svg>
                   <svg
-                    className="hs-accordion-active:block hidden w-4 h-4"
+                    className="hidden hs-accordion-active:block w-4 h-4"
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
                     height="24"
@@ -443,8 +443,8 @@ const MisCharlasTr = () => {
                     stroke-linejoin="round"
                   >
                     <path d="M5 12h14" />
-                  </svg>
-                  {charla.descripcion}
+                  </svg> */}
+                  {charla.descripcionCharla}
                 </button>
               </div>
 

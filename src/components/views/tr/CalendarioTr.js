@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
-import CalendarComponent from "../../ui/CalendarComponent"
+//import CalendarComponent from "../../ui/CalendarComponent"
 import axiosApi from "../../../api/axiosApi";
+import CalendarComponentTr from "../../ui/CalendarComponentTr";
 
 
 const CalendarioTr = ()=>{
@@ -27,7 +28,7 @@ const CalendarioTr = ()=>{
 
     return(
         <div>
-          <CalendarComponent charlas={charlasTrResponse} />
+          <CalendarComponentTr charlas={charlasTrResponse} />
 
         </div>
     )
